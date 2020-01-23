@@ -2,7 +2,7 @@
 # Переработано 23.01.20
 # Сделать поддержку английского языка
 import random
-
+import os
 import discord
 from discord.ext import commands
 
@@ -124,5 +124,5 @@ async def com(ctx):
                    )
 
 
-token = os.environ.get("BOT_TOKEN")
+token = os.environ.get('BOT_TOKEN')
 client.run(str(token))
