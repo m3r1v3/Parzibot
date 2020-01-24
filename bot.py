@@ -63,7 +63,7 @@ async def clear(ctx, amount=6):
 async def spam(ctx, time=1):
     """Команда спамер (По приколу)"""
     for i in range(time):
-        await ctx.send("Я саша сенцов и я дебил")
+        await ctx.send("Спамим, Спамим...")
 
 
 # Нужно протестить
