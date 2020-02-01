@@ -1,6 +1,6 @@
 # bot.py
 # Переработано 23.01.20
-# Сделать поддержку английского языка
+# Язык поддержку английского не делать, бессмысленно
 import random
 import os
 import discord
@@ -13,6 +13,7 @@ client = commands.Bot(command_prefix='/')
 async def on_ready():
     """Функция проверки работы бота."""
     print("Bot is ready.")
+
 
 @client.event
 async def on_member_remove(ctx, member):
