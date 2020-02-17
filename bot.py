@@ -1,11 +1,11 @@
 # bot.py
-# Переработано 23.01.20
+# Переработано 17.02.20
 # Язык поддержку английского не делать, бессмысленно
 import random
 import os
 import discord
 from discord.ext import commands
-
+# Нужно решить проблему с префиксом, какой выбрать?
 client = commands.Bot(command_prefix='/')
 
 
@@ -19,7 +19,6 @@ async def on_ready():
 async def on_member_remove(ctx, member):
     """Ввывод информации об выходе пользователя."""
     print(f'{member} вышел c сервера.')
-    await ctx.send(f'{member} вышел c сервера.')
 
 
 @client.command()
@@ -124,6 +123,6 @@ async def com(ctx):
                    f'\nКоманды бота переодически обнавляются, из-за этого советуем проверять список команд.'
                    )
 
-
+# Токена тут нету он на *******.
 token = os.environ.get('BOT_TOKEN')
 client.run(str(token))
