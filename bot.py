@@ -72,8 +72,8 @@ async def spam(ctx, time=1):
 @client.command()
 async def users(ctx):
     """Вывод пользователей в сети"""
-    for i in range(1, len(client.User.name)):
-        await ctx.send(f'{client.User.name[i]}')
+    for i in range(1, len(client.name)):
+        await ctx.send(f'{client.name[i]}')
 
 
 @client.command()
