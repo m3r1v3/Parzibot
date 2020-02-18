@@ -1,13 +1,13 @@
 # bot.py
 # Переработано 17.02.20
 # Язык поддержку английского не делать, бессмысленно
-# UPD: Может сделать сайт боту?
+# UPD: Может сделать сайт боту? Я хз...
 import random
 import os
 import discord
 from discord.ext import commands
 # Нужно решить проблему с префиксом, какой выбрать?
-client = commands.Bot(command_prefix='/')
+client = commands.Bot(command_prefix='.')
 
 
 @client.event
@@ -72,7 +72,7 @@ async def spam(ctx, time=1):
 async def users(ctx):
     """Вывод пользователей в сети"""
     for i in range(1, len(client.users)):
-        await ctx.send(f'{client.users[-i]}')
+        await ctx.send(f'{client.users[i]}')
 
 
 @client.command()
