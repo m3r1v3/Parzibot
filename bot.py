@@ -7,7 +7,7 @@ import os
 import discord
 from discord.ext import commands
 # Нужно решить проблему с префиксом, какой выбрать?
-client = commands.Bot(command_prefix='.')
+client = commands.Bot(command_prefix='/')
 
 
 @client.event
