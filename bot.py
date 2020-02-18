@@ -14,6 +14,7 @@ client = commands.Bot(command_prefix='/')
 async def on_ready():
     """Функция проверки работы бота."""
     print("Bot is ready.")
+    client.say("Для вывода команд: /com")
 
 
 @client.event
