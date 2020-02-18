@@ -14,7 +14,6 @@ client = commands.Bot(command_prefix='/')
 async def on_ready():
     """Функция проверки работы бота."""
     print("Bot is ready.")
-    client.say("Для вывода команд: /com")
 
 
 @client.event
@@ -72,8 +71,8 @@ async def spam(ctx, time=1):
 @client.command()
 async def users(ctx):
     """Вывод пользователей в сети"""
-    for i in range(1, len(client.name)):
-        await ctx.send(f'{client.name[i]}')
+    for i in range(1, len(client.users)):
+        await ctx.send(f'{client.users[i]}')
 
 
 @client.command()
@@ -128,3 +127,4 @@ async def com(ctx):
 # Токена тут нету он на *******.
 token = os.environ.get('BOT_TOKEN')
 client.run(str(token))
+
