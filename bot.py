@@ -2,10 +2,12 @@
 # Переработано 17.02.20
 # Язык поддержку английского не делать, бессмысленно
 # UPD: Может сделать сайт боту? Я хз...
-import random
 import os
+import random
+
 import discord
 from discord.ext import commands
+
 # Нужно решить проблему с префиксом, какой выбрать?
 client = commands.Bot(command_prefix='/')
 
@@ -71,8 +73,8 @@ async def spam(ctx, time=1):
 @client.command()
 async def users(ctx):
     """Вывод пользователей в сети"""
-    for i in range(1, len(client.user)):
-        await ctx.send(f'{client.user[i]}')
+    for i in range(1, len(client.users)):
+        await ctx.send(f'{client.users[i]}')
 
 
 @client.command()
@@ -123,6 +125,7 @@ async def com(ctx):
                    f' \n\t/users -- Пользователи чата,'
                    f'\nКоманды бота переодически обнавляются, из-за этого советуем проверять список команд.'
                    )
+
 
 # Токена тут нету он на *******.
 token = os.environ.get('BOT_TOKEN')
