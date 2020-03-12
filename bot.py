@@ -1,6 +1,6 @@
 # bot.py
-# Переработано 17.02.20
-# Язык поддержку английского не делать, бессмысленно
+# Переработано 12.03.20
+# Не менять структуру кода
 # Может сделать аннонимную почту???
 import os
 import random
@@ -8,7 +8,7 @@ import random
 import discord
 from discord.ext import commands
 
-# Нужно решить проблему с префиксом, какой выбрать?
+# Оставить данный префикс
 client = commands.Bot(command_prefix='/')
 
 
