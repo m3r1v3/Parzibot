@@ -12,23 +12,23 @@ ___
 
 ___
 #### Bot Commands:
-*  ! ping is your ping
+*  !ping is your ping
 
-*  ! 8ball "question" - Ball of predictions
+*  !8ball "question" - Ball of predictions
 
-* ! clear "Qty" - Clear chat;
+*   !clear "Qty" - Clear chat
 
-*  ! ban "@ nickname" - Block user;
+*  !ban "@nickname" - Block user
 
-* ! unban "nickname # personal tag" - Unblock users;
+*  !unban "nickname # personal tag" - Unblock users
 
-* ! wb "color white / black" - The game is white / black;
+*  !wb "color white / black" - The game is white / black
 
-* ! com - Bot commands;
+*  !com - Bot commands
 
-* ! users - Chat users;
+*  !users - Chat users
 
-* ! spam + count - Spam from the bot;
+*  !spam + count - Spam from the bot
 
-* ! users - Chat users;
+*  !users - Chat users
 ___
