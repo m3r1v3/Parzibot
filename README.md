@@ -4,7 +4,7 @@ The source code of the bot, which was made a couple of months ago, and from Janu
 This is free open source software and if anyone wants to change things forward. Just before using my code, please unsubscribe to me on Twitter: 
 ---
  ### https://twitter.com/MZaytsevCode.
- ___
+___
  I will be pleased to know that someone uses my work)
  
  #### PS: What do you think, should I make a website for the bot, if so, write to me on Twitter (Link above), and if you want, suggest what to add to me.
@@ -12,23 +12,23 @@ This is free open source software and if anyone wants to change things forward. 
 
 ___
 #### Bot Commands:
- *  ! ping is your ping
+*  ! ping is your ping
 
- *  ! 8ball "question" - Ball of predictions
+*  ! 8ball "question" - Ball of predictions
 
- * ! clear "Qty" - Clear chat;
+* ! clear "Qty" - Clear chat;
 
- *  ! ban "@ nickname" - Block user;
+*  ! ban "@ nickname" - Block user;
 
- * ! unban "nickname # personal tag" - Unblock users;
+* ! unban "nickname # personal tag" - Unblock users;
 
- * ! wb "color white / black" - The game is white / black;
+* ! wb "color white / black" - The game is white / black;
 
- * ! com - Bot commands;
+* ! com - Bot commands;
 
- * ! users - Chat users;
+* ! users - Chat users;
 
- * ! spam + count - Spam from the bot;
+* ! spam + count - Spam from the bot;
 
- * ! users - Chat users;
+* ! users - Chat users;
 ___
