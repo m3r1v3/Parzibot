@@ -16,7 +16,7 @@ ___
 
 *  !8ball "question" - Ball of predictions
 
-*   !clear "Qty" - Clear chat
+*  !clear "Qty" - Clear chat
 
 *  !ban "@nickname" - Block user
 
