@@ -1,3 +1,4 @@
+discord
 aiohttp==3.5.4
 chardet==3.0.4
 discord.py==1.2.3
