@@ -10,13 +10,23 @@ This is free open source software and if anyone wants to change things forward. 
  #### PS: What do you think, should I make a website for the bot, if so, write to me on Twitter (Link above), and if you want, suggest what to add to me.
  
 #### Bot Commands:
-#####  -  ! ping is your ping,
-#####  -  ! 8ball "question" - Ball of predictions,
-#####  -  ! clear "Qty" - Clear chat,
-#####  -  ! ban "@ nickname" - Block user,
-#####  -  ! unban "nickname # personal tag" - Unblock users,
-#####  -  ! wb "color white / black" - The game is white / black,
-#####  -  ! com - Bot commands,
-#####  -  ! users - Chat users,
-#####  -  ! spam + count - Spam from the bot,
-#####  -  ! users - Chat users,
+#####  -  ! ping is your ping
+
+#####  -  ! 8ball "question" - Ball of predictions
+
+#####  -  ! clear "Qty" - Clear chat;
+
+#####  -  ! ban "@ nickname" - Block user;
+
+#####  -  ! unban "nickname # personal tag" - Unblock users;
+
+#####  -  ! wb "color white / black" - The game is white / black;
+
+#####  -  ! com - Bot commands;
+
+#####  -  ! users - Chat users;
+
+#####  -  ! spam + count - Spam from the bot;
+
+#####  -  ! users - Chat users;
+
