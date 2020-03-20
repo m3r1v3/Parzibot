@@ -1,5 +1,5 @@
 # bot.py
-# Переработано 19.03.20
+# Переработано 20.03.20
 # Не менять структуру кода
 # Может сделать аннонимную почту???
 import os
@@ -69,7 +69,6 @@ async def spam(ctx, mes="Hello", time=1):
         await ctx.send(str(mes))
 
 
-# Нужно протестить
 @client.command()
 async def users(ctx):
     """Вывод пользователей в сети"""
