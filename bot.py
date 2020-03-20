@@ -63,10 +63,10 @@ async def clear(ctx, amount=6):
 
 
 @client.command()
-async def spam(ctx, time=1):
+async def spam(ctx, mes,time=1):
     """Команда спамер (По приколу)"""
     for i in range(time):
-        await ctx.send("Спамим, Спамим...")
+        await ctx.send(str(mes))
 
 
 # Нужно протестить
@@ -121,7 +121,7 @@ async def com(ctx):
                    f'\n\t!wb "цвет white/black" -- Игра белое/черное,'
                    f'\n\t!com -- Команды Бота,'
                    f' \n\t!users -- Пользователи чата,'
-                   f'\n\t!spam + кол-во -- Спам от бота,'
+                   f'\n\t!spam + сообщение + кол-во -- Спам от бота,'
                    f' \n\t!users -- Пользователи чата,'
                    f'\nКоманды бота переодически обнавляются, из-за этого советуем проверять список команд.'
                    )
