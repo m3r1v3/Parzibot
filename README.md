@@ -28,7 +28,7 @@ ___
 
 *  !users - Chat users
 
-*  !spam + count - Spam from the bot
+*  !spam + messege + count - Spam from the bot
 
 *  !users - Chat users
 ___
