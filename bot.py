@@ -14,8 +14,14 @@ client = commands.Bot(command_prefix='!')
 
 @client.event
 async def on_ready():
-    """Функция проверки работы бота."""
-    print("Bot is ready.")
+    """Функция проверка работы бота."""
+    print('{0} подключен.'.format(client.user))
+
+
+@client.event
+async def on_server_join(member):
+    """Ввывод информации об выходе пользователя."""
+    print(f'{member} вошёл на сервер.')
 
 
 @client.event
@@ -103,9 +109,9 @@ async def wb(ctx, *, question):
     color = ['white', 'black']
     color_random = random.choice(color)
     if question == color_random:
-        await ctx.send("Верно, вы угадали. Это " + color_random)
+        await ctx.send("Верно. Это " + color_random)
     else:
-        await ctx.send("Неверно, вы неугадали. Это " + color_random)
+        await ctx.send("Неверно. Это " + color_random)
 
 
 @client.command()
