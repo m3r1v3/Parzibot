@@ -1,5 +1,5 @@
 # bot.py
-# Переработано 20.03.20
+# Переработано 21.03.20
 # Не менять структуру кода
 # Может сделать аннонимную почту???
 import os
@@ -19,9 +19,9 @@ async def on_ready():
 
 
 @client.event
-async def on_server_join(member):
-    """Ввывод информации об выходе пользователя."""
-    print(f'{member} вошёл на сервер.')
+async def on_member_join(member):
+    """Вывод информации об выходе пользователя."""
+    await member.send(f'Добро пожаловать {member}! Напиши !com чтобы узнать мои команды.')
 
 
 @client.event
