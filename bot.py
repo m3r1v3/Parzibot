@@ -22,6 +22,8 @@ async def on_ready():
 async def on_member_join(member):
     """Вывод информации об выходе пользователя."""
     await member.send(f'Добро пожаловать {member}! Напиши !com чтобы узнать мои команды.')
+    role = discord.utils.get(member.guild.roles, id=691321624108073021)
+    await member.add_roles(role)
 
 
 @client.event
