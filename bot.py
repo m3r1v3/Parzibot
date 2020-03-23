@@ -1,7 +1,6 @@
 # bot.py
-# Переработано 21.03.20
+# Переработано 23.03.20
 # Не менять структуру кода
-# Может сделать аннонимную почту???
 import os
 import random
 
@@ -20,7 +19,7 @@ async def on_ready():
 
 @client.event
 async def on_member_join(member):
-    """Вывод информации об выходе пользователя."""
+    """Отправка личного сообщения о работе бота и выдача роли в чате."""
     await member.send(f'Добро пожаловать {member}! Напиши !com чтобы узнать мои команды.')
     role = discord.utils.get(member.guild.roles, id=691321624108073021)
     await member.add_roles(role)
