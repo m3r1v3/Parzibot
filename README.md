@@ -12,7 +12,7 @@ ___
 
 ___
 #### Bot Commands:
-*  !ping is your ping
+*  !ping - your ping
 
 *  !8ball "question" - Ball of predictions
 
@@ -28,7 +28,7 @@ ___
 
 *  !users - Chat users
 
-*  !spam + messege + count - Spam from the bot
+*  !spam + message + count - Spam from the bot
 
-*  !users - Chat users
+*  !users - Bot users
 ___

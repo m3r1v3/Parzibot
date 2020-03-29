@@ -20,7 +20,9 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     """Отправка личного сообщения о работе бота и выдача роли в чате."""
-    await member.send(f'Добро пожаловать {member}! Напиши !com чтобы узнать мои команды.')
+    await member.send(
+        f'Welcome {member}! White !com to find out my command.'
+        f'(Добро пожаловать {member}! Напиши !com чтобы узнать мои команды.)')
     role = discord.utils.get(member.guild.roles, id=691321624108073021)
     await member.add_roles(role)
 
@@ -87,7 +89,7 @@ async def users(ctx):
 async def ban(ctx, member: discord.Member, *, reason=None):
     """Блокировка пользователя."""
     await member.ban(reason=reason)
-    await ctx.send(f'Забанен {member.mention}')
+    await ctx.send(f'Banned {member.mention}')
 
 
 @client.command()
@@ -101,35 +103,33 @@ async def unban(ctx, *, member):
 
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
-            await ctx.send(f'Разбанен {user.mention}')
+            await ctx.send(f'Unbanned{user.mention}')
 
 
 @client.command()
 async def wb(ctx, *, question):
     """Игра угадай цвет White or Black"""
-    color = ['white', 'black']
-    color_random = random.choice(color)
-    if question == color_random:
-        await ctx.send("Верно. Это " + color_random)
+    colors = ['white', 'black']
+    random_color = random.choice(colors)
+    if question == random_color:
+        await ctx.send("Yes, it's " + random_color)
     else:
-        await ctx.send("Неверно. Это " + color_random)
+        await ctx.send("No, it's " + random_color)
 
 
 @client.command()
 async def com(ctx):
     """Команды бота"""
-    await ctx.send(f'Команды бота:'
-                   f'\n\t!ping -- Ваш пинг,'
-                   f'\n\t!8ball "вопрос" -- Шар предсказаний,'
-                   f'\n\t!clear "Кол-во" -- Очистка чата,'
-                   f'\n\t!ban "@ник" -- Блокировка пользователя,'
-                   f'\n\t!unban "ник#персональный тег" -- Разблокировка пользователей,'
-                   f'\n\t!wb "цвет white/black" -- Игра белое/черное,'
-                   f'\n\t!com -- Команды Бота,'
-                   f' \n\t!users -- Пользователи чата,'
-                   f'\n\t!spam + сообщение + кол-во -- Спам от бота,'
-                   f' \n\t!users -- Пользователи чата,'
-                   f'\nКоманды бота переодически обнавляются, из-за этого советуем проверять список команд.'
+    await ctx.send(f'Bot commands(Команды бота):'
+                   f'\n\t!ping -- You ping(Ваш пинг),'
+                   f'\n\t!8ball "question(вопрос)" -- Ball of predictions(Шар предсказаний),'
+                   f'\n\t!clear "Qty(Кол-во)" -- Clear chat(Очистка чата),'
+                   f'\n\t!ban "@nickname(ник)" -- Ban user(Блокировка пользователя),'
+                   f'\n\t!unban "nickname#user tag(ник#персональный тег)" -- Unban user(Разблокировка пользователей),'
+                   f'\n\t!wb "color(цвет)(white/black)" -- Game white or black(Игра белое/черное),'
+                   f'\n\t!com -- Bot command(Команды Бота),'
+                   f' \n\t!users -- Bot users(Пользователи бота),'
+                   f'\n\t!spam + message(сообщение) + Qty(кол-во) -- spam function(Спам от бота),'
                    )
 
 
