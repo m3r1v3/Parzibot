@@ -1,24 +1,24 @@
 # bot.py
-# Переработано 29.03.20
+# Recycled 03/30/20
 import os
 import random
 
 import discord
 from discord.ext import commands
 
-# Оставить данный префикс
+# Leave this prefix
 client = commands.Bot(command_prefix='!')
 
 
 @client.event
 async def on_ready():
-    """Функция проверка работы бота."""
+    """Function check the operation of the bot."""
     print('{0} подключен.'.format(client.user))
 
 
 @client.event
 async def on_member_join(member):
-    """Отправка личного сообщения о работе бота и выдача роли в чате."""
+    """Sending a personal message about the bot and issuing a role in the chat."""
     await member.send(
         f'Welcome {member}! White !com to find out my command.'
         f'(Добро пожаловать {member}! Напиши !com чтобы узнать мои команды.)')
@@ -28,19 +28,19 @@ async def on_member_join(member):
 
 @client.event
 async def on_member_remove(member):
-    """Ввывод информации об выходе пользователя."""
+    """Output information about user exit."""
     print(f'{member} вышел c сервера.')
 
 
 @client.command()
 async def ping(ctx):
-    """Задержка пользователя между сервером."""
+    """Return you latency"""
     await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
 
 
 @client.command(aliases=['8ball'])
 async def _8ball(ctx, *, question):
-    """Мини-игра угадывательный шар."""
+    """8-ball game"""
     responses = ["It is certain (Бесспорно)",
                  "It is decidedly so (Предрешено)",
                  "Without a doubt (Никаких сомнений)",
@@ -66,34 +66,34 @@ async def _8ball(ctx, *, question):
 
 @client.command()
 async def clear(ctx, amount=6):
-    """Очистка чата на определенное кол-во сообщений."""
+    """Clear chat"""
     await ctx.channel.purge(limit=amount)
 
 
 @client.command()
 async def spam(ctx, mes="Hello", time=1):
-    """Команда спамер (По приколу)"""
+    """Spam command"""
     for _ in range(time):
         await ctx.send(str(mes))
 
 
 @client.command()
 async def users(ctx):
-    """Вывод пользователей в сети"""
+    """Return bot users"""
     for i in range(1, len(client.users)):
         await ctx.send(f'{client.users[i]}')
 
 
 @client.command()
 async def ban(ctx, member: discord.Member, *, reason=None):
-    """Блокировка пользователя."""
+    """Ban user."""
     await member.ban(reason=reason)
     await ctx.send(f'Banned {member.mention}')
 
 
 @client.command()
 async def unban(ctx, *, member):
-    """Разблокировка пользователя."""
+    """Unban user."""
     banned_users = await ctx.guild.bans()
     member_name, member_discriminator = member.split('#')
 
@@ -107,13 +107,18 @@ async def unban(ctx, *, member):
 
 @client.command()
 async def wb(ctx, *, question):
-    """Игра угадай цвет White or Black"""
-    colors = ['white', 'black']
-    random_color = random.choice(colors)
-    if question == random_color:
-        await ctx.send("Yes, it's " + random_color)
+    """Game White or Black"""
+    rc = get_random_color()
+    if question == rc:
+        await ctx.send("Yes, it's " + question)
     else:
-        await ctx.send("No, it's " + random_color)
+        await ctx.send("No, it's " + get_random_color())
+
+
+def get_random_color():
+    """Random generate color"""
+    colors = ['white', 'black']
+    return random.choice(colors)
 
 
 @client.command()
