@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 03/30/20
+# Recycled 03/31/20
 import os
 import random
 
@@ -80,8 +80,10 @@ async def spam(ctx, mes="Hello", time=1):
 @client.command()
 async def users(ctx):
     """Return bot users"""
+    question = ""
     for i in range(1, len(client.users)):
-        await ctx.send(f'{client.users[i]}')
+        question += str(client.users[i]) + "\n\t"
+    await ctx.send(f'Bot users:\n\t' + str(question))
 
 
 @client.command()
