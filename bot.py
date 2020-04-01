@@ -127,15 +127,15 @@ def get_random_color():
 async def com(ctx):
     """Команды бота"""
     await ctx.send(f'Bot commands(Команды бота):'
-                   f'\n\t!ping -- You ping(Ваш пинг),'
-                   f'\n\t!8ball "question(вопрос)" -- Ball of predictions(Шар предсказаний),'
-                   f'\n\t!clear "Qty(Кол-во)" -- Clear chat(Очистка чата),'
-                   f'\n\t!ban "@nickname(ник)" -- Ban user(Блокировка пользователя),'
-                   f'\n\t!unban "nickname#user tag(ник#персональный тег)" -- Unban user(Разблокировка пользователей),'
-                   f'\n\t!wb "color(цвет)(white/black)" -- Game white or black(Игра белое/черное),'
-                   f'\n\t!com -- Bot command(Команды Бота),'
-                   f' \n\t!users -- Bot users(Пользователи бота),'
-                   f'\n\t!spam + message(сообщение) + Qty(кол-во) -- spam function(Спам от бота),'
+                   f'\n\n\t - !ping -- You ping(Ваш пинг),'
+                   f'\n\n\t - !8ball "question(вопрос)" -- Ball of predictions(Шар предсказаний),'
+                   f'\n\n\t - !clear "Qty(Кол-во)" -- Clear chat(Очистка чата),'
+                   f'\n\n\t - !ban "@nickname(ник)" -- Ban user(Блокировка пользователя),'
+                   f'\n\n\t - !unban "nickname#user tag(ник#персональный тег)" -- Unban user(Разблокировка пользователей),'
+                   f'\n\n\t - !wb "color(цвет)(white/black)" -- Game white or black(Игра белое/черное),'
+                   f'\n\n\t - !com -- Bot command(Команды Бота),'
+                   f'\n\n\t - !users -- Bot users(Пользователи бота),'
+                   f'\n\n\t - !spam + message(сообщение) + Qty(кол-во) -- spam function(Спам от бота),'
                    )
 
 
