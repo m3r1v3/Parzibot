@@ -9,7 +9,7 @@ ___
  
  #### PS: What do you think, should I make a website for the bot, if so, write to me on Twitter (Link above), and if you want, suggest what to add to me.
  
-#### Also, the license is presented in the License file
+#### Also, the license is presented in the [License file](https://github.com/MZaytsevCode/AssistBOT/blob/master/LICENSE)
 
 ___
 #### Bot Commands:
