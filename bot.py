@@ -71,7 +71,7 @@ async def clear(ctx, amount=6):
 
 
 @client.command()
-async def spam(ctx, mes="WHY?", time=1):
+async def spam(ctx, mes="Why?", time=1):
     """Spam command"""
     for _ in range(time):
         await ctx.send(str(mes))
