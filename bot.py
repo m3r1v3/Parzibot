@@ -123,6 +123,13 @@ def get_random_color():
     return random.choice(colors)
 
 
+@client.command(aliases=['wbg'])
+async def WhatByGame(ctx):
+    responses = ["Fortnite", "CS:GO", "Volorant😂", "GTA:SA",
+                 "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed"]
+    await ctx.send(f'Play to {random.choice(responses)}')
+
+
 @client.command()
 async def com(ctx):
     """Команды бота"""
