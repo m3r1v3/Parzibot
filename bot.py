@@ -144,6 +144,7 @@ async def com(ctx):
                    f'\n\n\t - !com -- Bot command(Команды Бота),'
                    f'\n\n\t - !users -- Bot users(Пользователи бота),'
                    f'\n\n\t - !spam + message(сообщение) + Qty(кол-во) -- spam function(Спам от бота),'
+                   f'\n\n\t - !wbg -- Advice on what to play(Совет во что поиграть)'
                    )
 
 
