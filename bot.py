@@ -125,14 +125,16 @@ def get_random_color():
 
 @client.command(aliases=['wbg'])
 async def WhatByGame(ctx):
-    responses = ["Fortnite", "CS:GO", "Volorant😂", "GTA:SA",
-                 "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed"]
+    """Function for choice game"""
+    responses = ["Fortnite", "CS:GO", "Volorant", "GTA:SA",
+                 "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
+                 "Call of duty:Warzone", ]
     await ctx.send(f'Play to {random.choice(responses)}')
 
 
 @client.command()
 async def com(ctx):
-    """Команды бота"""
+    """Bot commands"""
     await ctx.send(f'Bot commands(Команды бота):'
                    f'\n\n\t - !ping -- You ping(Ваш пинг),'
                    f'\n\n\t - !8ball "question(вопрос)" -- Ball of predictions(Шар предсказаний),'
