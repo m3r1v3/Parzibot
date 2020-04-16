@@ -126,9 +126,9 @@ def get_random_color():
 @client.command(aliases=['wbg'])
 async def WhatByGame(ctx):
     """Function for choice game"""
-    responses = ["Fortnite", "CS:GO", "Volorant", "GTA:SA",
+    responses = ["Fortnite", "CS:GO", "Valorant", "GTA:SA",
                  "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
-                 "Call of duty:Warzone", ]
+                 "Call of duty:Warzone"]
     await ctx.send(f'Play to {random.choice(responses)}')
 
 
