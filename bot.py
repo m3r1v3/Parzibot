@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 03/31/20
+# Recycled 04/16/20
 import os
 import random
 
@@ -150,6 +150,6 @@ async def com(ctx):
                    )
 
 
-# Токена тут нету он на *******.
+# Token in *******.
 token = os.environ.get('BOT_TOKEN')
 client.run(str(token))
