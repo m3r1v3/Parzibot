@@ -152,7 +152,7 @@ async def com(ctx):
                    f'\n\n\t - !users - Bot users(Пользователи бота),'
                    f'\n\n\t - !spam + message(сообщение) + Qty(кол-во) - spam function(Спам от бота),'
                    f'\n\n\t - !wbg - Advice on what to play(Совет во что поиграть)'
-                   f'\n\n\t - !rg - !rg + game1, game2, game3 ... gameN - Randomly chooses a game(Рандомно выбирает игру)'
+                   f'\n\n\t - !rg + game1, game2, game3 ... gameN - Randomly chooses a game(Рандомно выбирает игру)'
                    )
 
 
