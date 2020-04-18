@@ -132,6 +132,12 @@ async def WhatByGame(ctx):
     await ctx.send(f'Play to {random.choice(responses)}')
 
 
+@client.command(aliases=['rg'])
+async def RandomGame(ctx, *, games):
+    """Random choice game"""
+    await ctx.send(f'Play to {random.choice(games.split(", "))}')
+
+
 @client.command()
 async def com(ctx):
     """Bot commands"""
