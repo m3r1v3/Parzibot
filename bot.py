@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 04/16/20
+# Recycled 04/18/20
 import os
 import random
 
@@ -146,13 +146,13 @@ async def com(ctx):
                    f'\n\n\t - !8ball "question(вопрос)" -- Ball of predictions(Шар предсказаний),'
                    f'\n\n\t - !clear "Qty(Кол-во)" -- Clear chat(Очистка чата),'
                    f'\n\n\t - !ban "@nickname(ник)" -- Ban user(Блокировка пользователя),'
-                   f'\n\n\t - !unban "nickname#user tag(ник#персональный тег)"'
-                   f' -- Unban user(Разблокировка пользователей),'
-                   f'\n\n\t - !wb "color(цвет)(white/black)" -- Game white or black(Игра белое/черное),'
-                   f'\n\n\t - !com -- Bot command(Команды Бота),'
-                   f'\n\n\t - !users -- Bot users(Пользователи бота),'
-                   f'\n\n\t - !spam + message(сообщение) + Qty(кол-во) -- spam function(Спам от бота),'
-                   f'\n\n\t - !wbg -- Advice on what to play(Совет во что поиграть)'
+                   f'\n\n\t - !unban "nickname#user tag(ник#персональный тег) - Unban user(Разблокировать пользователя)"'
+                   f'\n\n\t - !wb "color(цвет)(white/black)" - Game white or black(Игра белое/черное),'
+                   f'\n\n\t - !com - Bot command(Команды Бота),'
+                   f'\n\n\t - !users - Bot users(Пользователи бота),'
+                   f'\n\n\t - !spam + message(сообщение) + Qty(кол-во) - spam function(Спам от бота),'
+                   f'\n\n\t - !wbg - Advice on what to play(Совет во что поиграть)'
+                   f'\n\n\t - !rg - !rg + game1, game2, game3 ... gameN - Randomly chooses a game(Рандомно выбирает игру)'
                    )
 
 
