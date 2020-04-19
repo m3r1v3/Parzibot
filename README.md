@@ -34,5 +34,5 @@ ___
 
 *  _!wbg - Advice on what to play_
 
-*  _!rg + game1, game2, game3 ... gameN - Randomly chooses a game_
+*  _!rg + game1 game2 game3 ... gameN - Randomly chooses a game_
 ___
