@@ -1,14 +1,14 @@
 # AssistBOT
 ### _Simple and convenient bot discord for python._
-_The source code of the bot is available to everyone._
-_The bot uses the Russian-English interface._
-_This is free open source software and if anyone wants to change things in advance._
-_Just before using my code, please write to me on [Twitter](https://twitter.com/MZaytsevCode)_
+The source code of the bot is available to everyone.
+The bot uses the Russian-English interface.
+This is free open source software and if anyone wants to change things in advance.
+Just before using my code, please write to me on _[Twitter](https://twitter.com/MZaytsevCode)_.
 ___
-#### _I will be pleased to know that someone uses my work)._
-_PS: What do you think, should I make a website for the bot, if so, write to me on Twitter (Link above), and if you want, suggest what to add to me._
+#### I will be pleased to know that someone uses my work).
+PS: What do you think, should I make a website for the bot, if so, write to me on _Twitter (Link above)_, and if you want, suggest what to add to me.
 
-_Also, the license is presented in the [License file](https://github.com/MZaytsevCode/AssistBOT/blob/master/LICENSE)_
+Also, the license is presented in the _[License file](https://github.com/MZaytsevCode/AssistBOT/blob/master/LICENSE)_.
 
 ___
 #### Bot Commands:
