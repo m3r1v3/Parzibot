@@ -18,7 +18,7 @@ ___
 
 *  _!clear "Qty" - Clear chat_
 
-*  _!ban "@nickname" - Ban user_
+*  _!ban "@nickname" comment - Ban user_
 
 *  _!unban "nickname#personal tag" - Unban users_
 
@@ -28,11 +28,11 @@ ___
 
 *  _!users - Chat users_
 
-*  _!spam + message + count - Spam from the bot_
+*  _!spam message + count - Spam from the bot_
 
 *  _!users - Bot users_
 
 *  _!wbg - Advice on what to play_
 
-*  _!rg + game1 game2 game3 ... gameN - Randomly chooses a game_
+*  _!rg game1 game2 game3 ... gameN - Randomly chooses a game_
 ___
