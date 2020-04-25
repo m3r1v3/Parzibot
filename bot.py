@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 04/18/20
+# Recycled 04/25/20
 import os
 import random
 
@@ -9,11 +9,41 @@ from discord.ext import commands
 # Leave this prefix
 client = commands.Bot(command_prefix='!')
 
+# Constant language
+LANG = 'EN'
+
 
 @client.event
 async def on_ready():
     """Function check the operation of the bot."""
     print('{0} подключен.'.format(client.user))
+
+
+@client.command(aliases=["lang"])
+async def language(ctx, lang):
+    """Set language"""
+    if lang in ['RU', "EN"]:
+        set_lang(lang)
+        if get_lang() == "RU":
+            await ctx.send("Русский язык установлен.")
+        elif get_lang() == "EN":
+            await ctx.send("English set.")
+        else:
+            await ctx.send("Set error.")
+    else:
+        await ctx.send("Set error.")
+
+
+def get_lang():
+    """Return constant LANG"""
+    global LANG
+    return LANG
+
+
+def set_lang(lang):
+    """Set constant LANG"""
+    global LANG
+    LANG = lang
 
 
 @client.event
@@ -61,7 +91,10 @@ async def _8ball(ctx, *, question):
                  "My sources say no (По моим данным — «нет»)",
                  "Outlook not so good (Перспективы не очень хорошие)",
                  "Very doubtful (Весьма сомнительно)"]
-    await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+    if get_lang() == "EN":
+        await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+    elif get_lang() == "RU":
+        await ctx.send(f'Вопрос: {question}\nОтвет: {random.choice(responses)}')
 
 
 @client.command()
@@ -80,17 +113,23 @@ async def spam(ctx, mes="Why?", time=1):
 @client.command()
 async def users(ctx):
     """Return bot users"""
-    question = ""
+    user = ""
     for i in range(1, len(client.users)):
-        question += str(client.users[i]) + "\n\t"
-    await ctx.send(f'Bot users:\n\t' + str(question))
+        user += str(client.users[i]) + "\n\t"
+    if get_lang() == "EN":
+        await ctx.send(f'Bot users:\n\t' + str(user))
+    elif get_lang() == "RU":
+        await ctx.send(f'Пользователи бота:\n\t' + str(user))
 
 
 @client.command()
 async def ban(ctx, member: discord.Member, *, reason=None):
     """Ban user."""
     await member.ban(reason=reason)
-    await ctx.send(f'Banned {member.mention}')
+    if get_lang() == "EN":
+        await ctx.send(f'Banned {member.mention}')
+    elif get_lang() == "RU":
+        await ctx.send(f'Заблокирован {member.mention}')
 
 
 @client.command()
@@ -104,7 +143,10 @@ async def unban(ctx, *, member):
 
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
-            await ctx.send(f'Unbanned{user.mention}')
+            if get_lang() == "EN":
+                await ctx.send(f'Unbanned {member.mention}')
+            elif get_lang() == "RU":
+                await ctx.send(f'Разблокирован {member.mention}')
 
 
 @client.command()
@@ -112,9 +154,15 @@ async def wb(ctx, *, question):
     """Game White or Black"""
     rc = get_random_color()
     if question == rc:
-        await ctx.send("Yes, it's " + question)
+        if get_lang() == "EN":
+            await ctx.send("Yes, it's " + question)
+        elif get_lang() == "RU":
+            await ctx.send("Да, это " + question)
     else:
-        await ctx.send("No, it's " + get_random_color())
+        if get_lang() == "EN":
+            await ctx.send("No, it's " + question)
+        elif get_lang() == "RU":
+            await ctx.send("Нет, это " + question)
 
 
 def get_random_color():
@@ -129,31 +177,54 @@ async def WhatByGame(ctx):
     responses = ["Fortnite", "CS:GO", "Valorant", "GTA:SA",
                  "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                  "Call of duty:Warzone"]
-    await ctx.send(f'Play to {random.choice(responses)}')
+    if get_lang() == "EN":
+        await ctx.send(f'Play to {random.choice(responses)}')
+    elif get_lang() == "RU":
+        await ctx.send(f'Поиграй в {random.choice(responses)}')
 
 
 @client.command(aliases=['rg'])
 async def RandomGame(ctx, *, games):
     """Random choice game"""
-    await ctx.send(f'Play to {random.choice(games.split())}')
+    if get_lang() == "EN":
+        await ctx.send(f'Play to {random.choice(games.split())}')
+    elif get_lang() == "RU":
+        await ctx.send(f'Поиграй {random.choice(games.split())}')
 
 
 @client.command()
 async def com(ctx):
     """Bot commands"""
-    await ctx.send(f'Bot commands(Команды бота):'
-                   f'\n\n\t * !ping - You ping(Ваш пинг),'
-                   f'\n\n\t * !8ball question(вопрос) - Ball of predictions(Шар предсказаний),'
-                   f'\n\n\t * !clear Qty(Кол-во) - Clear chat(Очистка чата),'
-                   f'\n\n\t * !ban @nickname(ник) - Ban user(Блокировка пользователя),'
-                   f'\n\n\t * !unban nickname#user tag(ник#персональный тег) - Unban user(Разблокировать пользователя)'
-                   f'\n\n\t * !wb color(цвет)(white/black) - Game white or black(Игра белое/черное),'
-                   f'\n\n\t * !com - Bot command(Команды Бота),'
-                   f'\n\n\t * !users - Bot users(Пользователи бота),'
-                   f'\n\n\t * !spam + message(сообщение) + Qty(кол-во) - spam function(Спам от бота),'
-                   f'\n\n\t * !wbg - Advice on what to play(Совет во что поиграть)'
-                   f'\n\n\t * !rg + game1 game2 game3 ... gameN - Randomly chooses a game(Рандомно выбирает игру)'
-                   )
+    if get_lang() == "EN":
+        await ctx.send(f'Bot commands:'
+                       f'\n\n\t * !ping - You ping,'
+                       f'\n\n\t * !8ball question - Ball of predictions,'
+                       f'\n\n\t * !clear Qty - Clear chat,'
+                       f'\n\n\t * !ban @nickname - Ban user,'
+                       f'\n\n\t * !unban nickname#user tag - Unban user'
+                       f'\n\n\t * !wb white/black - Game white or black,'
+                       f'\n\n\t * !com - Bot command,'
+                       f'\n\n\t * !users - Bot users,'
+                       f'\n\n\t * !spam message qty - spam function,'
+                       f'\n\n\t * !wbg - Advice on what to play'
+                       f'\n\n\t * !rg game1 game2 game3 ... gameN - Randomly chooses a game'
+                       f'\n\n\t * !lang lang(EN/RU) - Set language'
+                       )
+    elif get_lang() == "RU":
+        await ctx.send(f'Команды бота:'
+                       f'\n\n\t * !ping - Ваш пинг,'
+                       f'\n\n\t * !8ball вопрос - Шар предсказаний,'
+                       f'\n\n\t * !clear Кол-во - Очистка чата,'
+                       f'\n\n\t * !ban @ник - Блокировка пользователя,'
+                       f'\n\n\t * !unban ник#персональный тег - Разблокировать пользователя'
+                       f'\n\n\t * !wb цвет(white/black) - Игра белое/черное,'
+                       f'\n\n\t * !com - Команды Бота,'
+                       f'\n\n\t * !users - Пользователи бота,'
+                       f'\n\n\t * !spam сообщение кол-во - Спам функция,'
+                       f'\n\n\t * !wbg - Совет во что поиграть'
+                       f'\n\n\t * !rg game1 game2 game3 ... gameN - Рандомно выбирает игру'
+                       f'\n\n\t * !lang язык(EN/RU) - Установаить язык'
+                       )
 
 
 # Token in *******.
