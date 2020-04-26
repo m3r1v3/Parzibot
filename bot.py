@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 04/25/20
+# Recycled 04/26/20
 import os
 import random
 
@@ -19,33 +19,6 @@ async def on_ready():
     print('{0} подключен.'.format(client.user))
 
 
-@client.command(aliases=["lang"])
-async def language(ctx, lang):
-    """Set language"""
-    if lang in ['RU', "EN"]:
-        set_lang(lang)
-        if get_lang() == "RU":
-            await ctx.send("Русский язык установлен.")
-        elif get_lang() == "EN":
-            await ctx.send("English set.")
-        else:
-            await ctx.send("Set error.")
-    else:
-        await ctx.send("Set error.")
-
-
-def get_lang():
-    """Return constant LANG"""
-    global LANG
-    return LANG
-
-
-def set_lang(lang):
-    """Set constant LANG"""
-    global LANG
-    LANG = lang
-
-
 @client.event
 async def on_member_join(member):
     """Sending a personal message about the bot and issuing a role in the chat."""
@@ -60,6 +33,24 @@ async def on_member_join(member):
 async def on_member_remove(member):
     """Output information about user exit."""
     print(f'{member} вышел c сервера.')
+
+
+@client.event
+async def on_member_update(before, after):
+    if before.roles != after.roles:
+        if len(before.roles) < len(after.roles):
+            if get_lang() == 'RU':
+                await after.send(f'Вам выдана новая роль!')
+            elif get_lang() == 'EN':
+                await after.send(f'You were given a new role!')
+        if len(before.roles) > len(after.roles):
+            if get_lang() == 'RU':
+                await after.send(f'Вас лишили роли(')
+            elif get_lang() == 'EN':
+                await after.send(f'You were deprived of the role(')
+    else:
+        if before.status != after.status:
+            await after.send(f'Статус был изменен на {after.status}.')
 
 
 @client.command()
@@ -147,6 +138,33 @@ async def unban(ctx, *, member):
                 await ctx.send(f'Unbanned {member.mention}')
             elif get_lang() == "RU":
                 await ctx.send(f'Разблокирован {member.mention}')
+
+
+@client.command(aliases=["lang"])
+async def language(ctx, lang):
+    """Set language"""
+    if lang in ['RU', "EN"]:
+        set_lang(lang)
+        if get_lang() == "RU":
+            await ctx.send("Русский язык установлен.")
+        elif get_lang() == "EN":
+            await ctx.send("English set.")
+        else:
+            await ctx.send("Set error.")
+    else:
+        await ctx.send("Set error.")
+
+
+def set_lang(lang):
+    """Set constant LANG"""
+    global LANG
+    LANG = lang
+
+
+def get_lang():
+    """Return constant LANG"""
+    global LANG
+    return LANG
 
 
 @client.command()
