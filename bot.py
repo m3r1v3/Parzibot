@@ -37,20 +37,18 @@ async def on_member_remove(member):
 
 @client.event
 async def on_member_update(before, after):
-    if before.roles != after.roles:
-        if len(before.roles) < len(after.roles):
-            if get_lang() == 'RU':
+    if get_lang() == 'RU':
+        if before.roles == after.roles:
+            if before.status != after.status:
+                await after.send(f'Статус был изменен на {after.status}.')
+        else:
+            if len(before.roles) < len(after.roles):
                 await after.send(f'Вам выдана новая роль!')
-            elif get_lang() == 'EN':
-                await after.send(f'You were given a new role!')
-        if len(before.roles) > len(after.roles):
-            if get_lang() == 'RU':
+            if len(before.roles) > len(after.roles):
                 await after.send(f'Вас лишили роли(')
-            elif get_lang() == 'EN':
-                await after.send(f'You were deprived of the role(')
-    else:
+    elif get_lang() == 'EN':
         if before.status != after.status:
-            await after.send(f'Статус был изменен на {after.status}.')
+            await after.send(f'Status has been changed to {after.status}')
 
 
 @client.command()
