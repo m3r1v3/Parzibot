@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 04/26/20
+# Recycled 04/27/20
 import os
 import random
 
@@ -35,20 +35,28 @@ async def on_member_remove(member):
     print(f'{member} вышел c сервера.')
 
 
+# Needs improvement
 @client.event
 async def on_member_update(before, after):
+    """Notifies about the issuance and withdrawal of a role from a user"""
     if get_lang() == 'RU':
-        if before.roles == after.roles:
-            if before.status != after.status:
-                await after.send(f'Статус был изменен на {after.status}.')
-        else:
-            if len(before.roles) < len(after.roles):
-                await after.send(f'Вам выдана новая роль!')
-            if len(before.roles) > len(after.roles):
-                await after.send(f'Вас лишили роли(')
+        if len(before.roles) < len(after.roles):
+            for i in after.roles:
+                if i not in before.roles:
+                    await after.send(f'Вам выдана роль {i}!')
+        if len(before.roles) > len(after.roles):
+            for i in before.roles:
+                if i not in after.roles:
+                    await after.send(f'Вас лишили роли {i}')
     elif get_lang() == 'EN':
-        if before.status != after.status:
-            await after.send(f'Status has been changed to {after.status}')
+        if len(before.roles) < len(after.roles):
+            for i in after.roles:
+                if i not in before.roles:
+                    await after.send(f'You have been given a role {i}!')
+        if len(before.roles) > len(after.roles):
+            for i in before.roles:
+                if i not in after.roles:
+                    await after.send(f'You were deprived of the role {i}')
 
 
 @client.command()
