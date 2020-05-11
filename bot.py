@@ -6,11 +6,10 @@ import random
 import discord
 from discord.ext import commands
 
-# Leave this prefix
 client = commands.Bot(command_prefix='!')
 
-# Constant language
-LANG = 'EN'
+# Variable language
+LANG = 'RU'
 
 
 @client.event
