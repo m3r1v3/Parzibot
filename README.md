@@ -1,7 +1,7 @@
 # AssistBOT
 ### _Simple and convenient bot discord for python._
 The source code of the bot is available to everyone.
-The bot uses the Russian-English interface.
+The bot used the Russian and English languages.
 This is free open source software and if anyone wants to change things in advance.
 Just before using my code, please write to me on _[Twitter](https://twitter.com/MZaytsevCode)_.
 ___
