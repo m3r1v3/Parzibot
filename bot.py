@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 05/11/20
+# Recycled 05/15/20
 import os
 import random
 
@@ -34,7 +34,6 @@ async def on_member_remove(member):
     print(f'{member} вышел c сервера.')
 
 
-# Needs improvement
 @client.event
 async def on_member_update(before, after):
     """Notifies about the issuance and withdrawal of a role from a user"""
@@ -119,6 +118,8 @@ async def users(ctx):
 
 
 @client.command()
+@commands.has_role(670599227335770143)
+@commands.has_role(691280575369314345)
 async def ban(ctx, member: discord.Member, *, reason=None):
     """Ban user."""
     await member.ban(reason=reason)
@@ -129,6 +130,20 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
 
 @client.command()
+@commands.has_role(670599227335770143)
+@commands.has_role(691280575369314345)
+async def kick(ctx, member: discord.Member, *, reason=None):
+    """Ban user."""
+    await member.kick(reason=reason)
+    if get_lang() == "EN":
+        await ctx.send(f'Kicked {member.mention}')
+    elif get_lang() == "RU":
+        await ctx.send(f'{member.mention} выгнан.')
+
+
+@client.command()
+@commands.has_role(670599227335770143)
+@commands.has_role(691280575369314345)
 async def unban(ctx, *, member):
     """Unban user."""
     banned_users = await ctx.guild.bans()
@@ -146,6 +161,8 @@ async def unban(ctx, *, member):
 
 
 @client.command(aliases=["lang"])
+@commands.has_role(670599227335770143)
+@commands.has_role(691280575369314345)
 async def language(ctx, lang):
     """Set language"""
     if lang in ['RU', "EN"]:
@@ -197,7 +214,7 @@ def get_random_color():
 @client.command(aliases=['wbg'])
 async def WhatByGame(ctx):
     """Function for choice game"""
-    responses = ["Fortnite", "CS:GO", "Valorant", "GTA:SA",
+    responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
                  "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                  "Call of duty:Warzone"]
     if get_lang() == "EN":
@@ -215,6 +232,25 @@ async def RandomGame(ctx, *, games):
         await ctx.send(f'Поиграй {random.choice(games.split())}')
 
 
+@client.command(aliases=['moa'])
+@commands.has_role(691321624108073021)
+@commands.has_role(703265211888435301)
+async def MuteOrAdmin(ctx, member: discord.Member, *, answer):
+    if answer == get_random_color():
+        await member.add_roles(discord.utils.get(member.guild.roles, id=691280575369314345))
+        if get_lang() == 'EN':
+            await ctx.send(f'You winner!')
+        else:
+            await ctx.send(f'Ты выйграл!')
+    else:
+        await member.add_roles(discord.utils.get(member.guild.roles, id=710841640192835624))
+        await member.remove_roles(discord.utils.get(member.guild.roles, id=691321624108073021))
+        if get_lang() == 'EN':
+            await ctx.send(f'You !')
+        else:
+            await ctx.send(f'Ты выйграл!')
+
+
 @client.command()
 async def com(ctx):
     """Bot commands"""
@@ -224,14 +260,16 @@ async def com(ctx):
                        f'\n\n\t * !8ball question - Ball of predictions,'
                        f'\n\n\t * !clear Qty - Clear chat,'
                        f'\n\n\t * !ban @nickname - Ban user,'
-                       f'\n\n\t * !unban nickname#user tag - Unban user'
+                       f'\n\n\t * !kick @user - Kick user,'
+                       f'\n\n\t * !unban nickname#user tag - Unban user,'
                        f'\n\n\t * !wb white/black - Game white or black,'
-                       f'\n\n\t * !com - Bot command,'
+                       f'\n\n\t * !com - Bot commands,'
                        f'\n\n\t * !users - Bot users,'
                        f'\n\n\t * !spam message qty - spam function,'
-                       f'\n\n\t * !wbg - Advice on what to play'
-                       f'\n\n\t * !rg game1 game2 game3 ... gameN - Randomly chooses a game'
-                       f'\n\n\t * !lang lang(EN/RU) - Set language'
+                       f'\n\n\t * !wbg - Advice on what to play,'
+                       f'\n\n\t * !rg game1 game2 game3 ... gameN - Randomly chooses a game,'
+                       f'\n\n\t * !lang lang(EN/RU) - Set language,'
+                       f'\n\n\t * !moa user color(white/black) - Game Black / White for the role'
                        )
     elif get_lang() == "RU":
         await ctx.send(f'Команды бота:'
@@ -240,13 +278,15 @@ async def com(ctx):
                        f'\n\n\t * !clear Кол-во - Очистка чата,'
                        f'\n\n\t * !ban @ник - Блокировка пользователя,'
                        f'\n\n\t * !unban ник#персональный тег - Разблокировать пользователя'
+                       f'\n\n\t * !kick @ник - Выгнать участника'
                        f'\n\n\t * !wb цвет(white/black) - Игра белое/черное,'
                        f'\n\n\t * !com - Команды Бота,'
                        f'\n\n\t * !users - Пользователи бота,'
                        f'\n\n\t * !spam сообщение кол-во - Спам функция,'
-                       f'\n\n\t * !wbg - Совет во что поиграть'
-                       f'\n\n\t * !rg game1 game2 game3 ... gameN - Рандомно выбирает игру'
-                       f'\n\n\t * !lang язык(EN/RU) - Установаить язык'
+                       f'\n\n\t * !wbg - Совет во что поиграть,'
+                       f'\n\n\t * !rg game1 game2 game3 ... gameN - Рандомно выбирает игру,'
+                       f'\n\n\t * !lang язык(EN/RU) - Установаить язык,'
+                       f'\n\n\t * !moa участник цвет(white/black) - Игра Черное/Белое на роль'
                        )
 
 
