@@ -20,6 +20,8 @@ ___
 
 *  _!ban "@nickname" comment - Ban user_
 
+*  _!kick @user - Kick user_
+
 *  _!unban "nickname#personal tag" - Unban users_
 
 *  _!wb "color white / black" - The game is white / black_
@@ -37,4 +39,6 @@ ___
 *  _!rg game1 game2 game3 ... gameN - Randomly chooses a game_
 
 *  _!lang language(EN/RU) - Set language_
+
+*  _!moa user color(white/black) - Game Black / White for the role_
 ___
