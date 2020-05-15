@@ -118,8 +118,7 @@ async def users(ctx):
 
 
 @client.command()
-@commands.has_role(670599227335770143)
-@commands.has_role(691280575369314345)
+@commands.has_role(691321624108073021)
 async def ban(ctx, member: discord.Member, *, reason=None):
     """Ban user."""
     await member.ban(reason=reason)
@@ -130,8 +129,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
 
 @client.command()
-@commands.has_role(670599227335770143)
-@commands.has_role(691280575369314345)
+@commands.has_role(691321624108073021)
 async def kick(ctx, member: discord.Member, *, reason=None):
     """Ban user."""
     await member.kick(reason=reason)
@@ -142,8 +140,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 
 
 @client.command()
-@commands.has_role(670599227335770143)
-@commands.has_role(691280575369314345)
+@commands.has_role(691321624108073021)
 async def unban(ctx, *, member):
     """Unban user."""
     banned_users = await ctx.guild.bans()
@@ -161,8 +158,7 @@ async def unban(ctx, *, member):
 
 
 @client.command(aliases=["lang"])
-@commands.has_role(670599227335770143)
-@commands.has_role(691280575369314345)
+@commands.has_role(691321624108073021)
 async def language(ctx, lang):
     """Set language"""
     if lang in ['RU', "EN"]:
