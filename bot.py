@@ -129,7 +129,7 @@ async def ban(ctx, member: discord.Member, *, reason=None):
 
 
 @client.command()
-@commands.has_role(691321624108073021)
+@commands.has_role(670599227335770143)
 async def kick(ctx, member: discord.Member, *, reason=None):
     """Ban user."""
     await member.kick(reason=reason)
