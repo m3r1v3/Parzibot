@@ -190,7 +190,7 @@ def get_lang():
 
 
 @client.command()
-async def wb(ctx, *, question):
+async def wb(ctx, question):
     """Game White or Black"""
     rc = get_random_color()
     if question == rc:
@@ -234,9 +234,9 @@ async def RandomGame(ctx, *, games):
 
 @client.command(aliases=['moa'])
 @commands.has_role(691321624108073021)
-@commands.has_role(703265211888435301)
-async def MuteOrAdmin(ctx, member: discord.Member, *, answer):
-    if answer == get_random_color():
+async def MuteOrAdmin(ctx, member: discord.Member, question):
+    rc = get_random_color()
+    if question == rc:
         await member.add_roles(discord.utils.get(member.guild.roles, id=691280575369314345))
         if get_lang() == 'EN':
             await ctx.send(f'You winner!')
@@ -245,10 +245,11 @@ async def MuteOrAdmin(ctx, member: discord.Member, *, answer):
     else:
         await member.add_roles(discord.utils.get(member.guild.roles, id=710841640192835624))
         await member.remove_roles(discord.utils.get(member.guild.roles, id=691321624108073021))
+        await member.remove_roles(discord.utils.get(member.guild.roles, id=703265211888435301))
         if get_lang() == 'EN':
-            await ctx.send(f'You !')
+            await ctx.send(f'You lose(')
         else:
-            await ctx.send(f'Ты выйграл!')
+            await ctx.send(f'Ты проиграл(')
 
 
 @client.command()
