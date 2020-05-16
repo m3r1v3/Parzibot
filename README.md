@@ -1,7 +1,7 @@
 # AssistBOT
 ### _Simple and convenient bot discord for python._
 The source code of the bot is available to everyone.
-The bot used the Russian and English languages.
+The bot used the English language.
 This is free open source software and if anyone wants to change things in advance.
 Just before using my code, please write to me on _[Twitter](https://twitter.com/MZaytsevCode)_.
 ___
@@ -24,8 +24,6 @@ ___
 
 *  _!unban "nickname#personal tag" - Unban users_
 
-*  _!wb "color white / black" - The game is white / black_
-
 *  _!com - Bot commands_
 
 *  _!users - Chat users_
@@ -38,7 +36,7 @@ ___
 
 *  _!rg game1 game2 game3 ... gameN - Randomly chooses a game_
 
-*  _!lang language(EN/RU) - Set language_
+*  _!lang language(EN/RU) - Set language(in-dev)_
 
 *  _!moa user color(white/black) - Game Black / White for the role_
 ___
