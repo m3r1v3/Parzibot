@@ -230,18 +230,17 @@ async def RandomGame(ctx, *, games):
 
 @client.command(aliases=['moa'])
 @commands.has_role(691321624108073021)
-async def MuteOrAdmin(ctx, member: discord.Member, question):
-    rc = get_random_color()
-    if question == rc:
-        await member.add_roles(discord.utils.get(member.guild.roles, id=691280575369314345))
+async def MuteOrAdmin(ctx, question):
+    if question == get_random_color():
+        await ctx.author.add_roles(discord.utils.get(ctx.author.guild.roles, id=691280575369314345))
         if get_lang() == 'EN':
             await ctx.send(f'You winner!')
         else:
             await ctx.send(f'Ты выйграл!')
     else:
-        await member.add_roles(discord.utils.get(member.guild.roles, id=710841640192835624))
-        await member.remove_roles(discord.utils.get(member.guild.roles, id=691321624108073021))
-        await member.remove_roles(discord.utils.get(member.guild.roles, id=703265211888435301))
+        await ctx.author.add_roles(discord.utils.get(ctx.author.guild.roles, id=710841640192835624))
+        await ctx.author.remove_roles(discord.utils.get(ctx.author.guild.roles, id=691321624108073021))
+        await ctx.author.remove_roles(discord.utils.get(ctx.author.guild.roles, id=703265211888435301))
         if get_lang() == 'EN':
             await ctx.send(f'You lose(')
         else:
