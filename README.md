@@ -12,31 +12,30 @@ Also, the license is presented in the _[License file](https://github.com/MZaytse
 
 ___
 #### Bot Commands:
-*  _!ping - your ping_
 
-*  _!8ball "question" - Ball of predictions_
+* _!ping - You ping,_
 
-*  _!clear "Qty" - Clear chat_
+* _!8ball question - Ball of predictions,_
 
-*  _!ban "@nickname" comment - Ban user_
+* _!clear Qty - Clear chat,_
+                       
+* _!kick @user - Kick user,_
 
-*  _!kick @user - Kick user_
+* _!ban @nickname - Ban user,_
 
-*  _!unban "nickname#personal tag" - Unban users_
+* _!unban nickname#user tag - Unban user,_
 
-*  _!com - Bot commands_
+* _!users - Bot users,_
 
-*  _!users - Chat users_
+* _!spam qty message  - spam function,_
 
-*  _!spam message + count - Spam from the bot_
+* _!wbg - Advice on what to play,_
 
-*  _!users - Bot users_
+* _!rg game1 game2 game3 ... gameN - Randomly chooses a game,_
 
-*  _!wbg - Advice on what to play_
+* _!lang lang(EN/RU) - Set language (in-dev),_
 
-*  _!rg game1 game2 game3 ... gameN - Randomly chooses a game_
+* _!moa user color(white/black) - Game Black / White for the role,_
 
-*  _!lang language(EN/RU) - Set language(in-dev)_
-
-*  _!moa user color(white/black) - Game Black / White for the role_
+* _!com - Bot commands._
 ___
