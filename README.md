@@ -33,9 +33,9 @@ ___
 
 * _!rg game1 game2 game3 ... gameN - Randomly chooses a game,_
 
-* _!lang lang(EN/RU) - Set language (in-dev),_
+* _!lang lang(EN/RU) - Set language,_
 
-* _!moa user color(white/black) - Game Black / White for the role,_
+* _!moa color(white/black) - Game Black / White for the role,_
 
 * _!com - Bot commands._
 ___
