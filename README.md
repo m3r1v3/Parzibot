@@ -3,12 +3,12 @@
 The source code of the bot is available to everyone.
 The bot used the English language.
 This is free open source software and if anyone wants to change things in advance.
-Just before using my code, please write to me on _[Twitter](https://twitter.com/MZaytsevCode)_.
+Just before using my code, please write to me on _[Twitter](https://twitter.com/merive_)_.
 ___
 #### I will be pleased to know that someone uses my work).
 PS: What do you think, should I make a website for the bot, if so, write to me on _Twitter (Link above)_, and if you want, suggest what to add to me.
 
-Also, the license is presented in the _[License file](https://github.com/MZaytsevCode/AssistBOT/blob/master/LICENSE)_.
+Also, the license is presented in the _[License file](https://github.com/merive/AssistBOT/blob/master/LICENSE)_.
 
 ___
 #### Bot Commands:
