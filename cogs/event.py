@@ -1,5 +1,5 @@
 # event.py
-# Recycled 05/17/20
+# Recycled 06/03/20
 import discord
 from discord.ext import commands
 
@@ -50,6 +50,14 @@ class Event(commands.Cog):
                         await after.send(f'You were deprived of the role {i}')
                     else:
                         await after.send(f'Вас лишили роли {i}')
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            if get_lang() == "RU":
+                await ctx.send('Команда не распознана.')
+            else:
+                await ctx.send('Command not recognized.')
 
 
 def setup(client):

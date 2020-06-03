@@ -1,16 +1,16 @@
 # language.py
-# Recycled 05/17/20
+# Recycled 06/03/20
 from discord.ext import commands
 
 
 def get_lang():
-    with open('cogs/lang.txt', 'r') as lang:
-        return lang.readline()
+    with open('cogs/lang.json', 'r') as lang:
+        return lang.readline()[2:-2]
 
 
 def set_lang(language):
-    with open('cogs/lang.txt', 'w') as lang:
-        return lang.write(language)
+    with open('cogs/lang.json', 'w') as lang:
+        return lang.write('["' + language + '"]')
 
 
 class Lang(commands.Cog):
