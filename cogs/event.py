@@ -9,6 +9,7 @@ from cogs.language import get_lang
 class Event(commands.Cog):
 
     def __init__(self, client):
+        """Initialisation client"""
         self.client = client
 
     @commands.Cog.listener()
@@ -53,6 +54,7 @@ class Event(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+        """Returns a command error message"""
         if isinstance(error, commands.MissingRequiredArgument):
             if get_lang() == "RU":
                 await ctx.send('Команда не распознана.')

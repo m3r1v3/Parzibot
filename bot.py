@@ -9,11 +9,13 @@ client = commands.Bot(command_prefix='!')
 
 @client.command()
 async def load(extension):
+    """Load cogs"""
     client.load_extension(f'cogs.{extension}')
 
 
 @client.command()
 async def unload(extension):
+    """Unload cogs"""
     client.unload_extension(f'cogs.{extension}')
 
 

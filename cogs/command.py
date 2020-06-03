@@ -17,6 +17,7 @@ def get_random_color():
 class Command(commands.Cog):
 
     def __init__(self, client):
+        """Initialisation client"""
         self.client = client
 
     @commands.command()
@@ -60,7 +61,7 @@ class Command(commands.Cog):
     @commands.command()
     @commands.has_role(670599227335770143)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
-        """Ban user."""
+        """Kick user"""
         await member.kick(reason=reason)
         if get_lang() == "EN":
             await ctx.send(f'Kicked {member.mention}.')
@@ -70,7 +71,7 @@ class Command(commands.Cog):
     @commands.command()
     @commands.has_role(670599227335770143)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
-        """Ban user."""
+        """Ban user"""
         await member.ban(reason=reason)
         if get_lang() == "EN":
             await ctx.send(f'Banned {member.mention}')
@@ -80,7 +81,7 @@ class Command(commands.Cog):
     @commands.command()
     @commands.has_role(691321624108073021)
     async def unban(self, ctx, *, member):
-        """Unban user."""
+        """Unban user"""
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
 
@@ -133,6 +134,7 @@ class Command(commands.Cog):
     @commands.command(aliases=['moa'])
     @commands.has_role(691321624108073021)
     async def MuteOrAdmin(self, ctx, question):
+        """Role play"""
         if question == get_random_color():
             await ctx.author.add_roles(discord.utils.get(ctx.author.guild.roles, id=691280575369314345))
             if get_lang() == "EN":
