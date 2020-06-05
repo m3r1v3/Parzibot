@@ -1,5 +1,5 @@
 # event.py
-# Recycled 06/03/20
+# Recycled 06/05/20
 import discord
 from discord.ext import commands
 
@@ -56,10 +56,7 @@ class Event(commands.Cog):
     async def on_command_error(self, ctx, error):
         """Returns a command error message"""
         if isinstance(error, commands.MissingRequiredArgument):
-            if get_lang() == "RU":
-                await ctx.send('Команда не распознана.')
-            else:
-                await ctx.send('Command not recognized.')
+            await ctx.send('Command error.')
 
 
 def setup(client):
