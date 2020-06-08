@@ -6,7 +6,7 @@ from discord.ext import commands
 from cogs.language import get_lang
 
 
-class Event(commands.Cog):
+class Events(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
@@ -60,4 +60,4 @@ class Event(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Event(client))
+    client.add_cog(Events(client))

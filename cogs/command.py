@@ -14,7 +14,7 @@ def get_random_color():
     return random.choice(colors)
 
 
-class Command(commands.Cog):
+class Commands(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
@@ -186,4 +186,4 @@ class Command(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Command(client))
+    client.add_cog(Commands(client))

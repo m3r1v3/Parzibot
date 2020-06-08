@@ -15,7 +15,7 @@ def set_lang(language):
         return lang.write('["' + language + '"]')
 
 
-class Lang(commands.Cog):
+class Language(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client and LANG"""
@@ -37,4 +37,4 @@ class Lang(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Lang(client))
+    client.add_cog(Language(client))
