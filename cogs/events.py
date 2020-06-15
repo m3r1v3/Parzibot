@@ -1,5 +1,5 @@
-# event.py
-# Recycled 06/05/20
+# events.py
+# Recycled 06/15/20
 import discord
 from discord.ext import commands
 
@@ -22,10 +22,10 @@ class Events(commands.Cog):
         """Sending a personal message about the bot and issuing a role in the chat."""
         if get_lang() == "EN":
             await member.send(
-                f'Welcome {member}! White !com to find out my command.')
+                f'Welcome {member}! White !help to find out my command.')
         else:
             await member.send(
-                f'Добро пожаловать, {member}! Напиши !com чтобы узнать мои команды.')
+                f'Добро пожаловать, {member}! Напиши !help чтобы узнать мои команды.')
         role = discord.utils.get(member.guild.roles, id=691321624108073021)
         await member.add_roles(role)
 

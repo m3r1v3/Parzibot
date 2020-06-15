@@ -1,5 +1,5 @@
-# command.py
-# Recycled 06/03/20
+# commands.py
+# Recycled 06/15/20
 import random
 
 import discord
@@ -151,7 +151,7 @@ class Commands(commands.Cog):
                 await ctx.send(f'Ты проиграл(')
 
     @commands.command()
-    async def com(self, ctx):
+    async def help(self, ctx):
         """Bot commands"""
         if get_lang() == "EN":
             await ctx.send(f'Bot commands:'
@@ -167,7 +167,7 @@ class Commands(commands.Cog):
                            f'\n\t * !rg game1 game2 game3 ... gameN - Randomly chooses a game,'
                            f'\n\t * !lang lang(EN/RU) - Set language,'
                            f'\n\t * !moa color(white/black) - Game Black / White for the role,'
-                           f'\n\t * !com - Bot commands.')
+                           f'\n\t * !help - Bot commands.')
         else:
             await ctx.send(f'Bot commands:'
                            f'\n\t * !ping - Твой ping,'
@@ -182,7 +182,7 @@ class Commands(commands.Cog):
                            f'\n\t * !rg game1 game2 game3 ... gameN - Выбирает случайную игру,'
                            f'\n\t * !lang язык(EN/RU) - Устанавливает язык,'
                            f'\n\t * !moa цвет(white/black) - Игра Черное/Белое на Роль,'
-                           f'\n\t * !com - Команды бота.')
+                           f'\n\t * !help - Команды бота.')
 
 
 def setup(client):
