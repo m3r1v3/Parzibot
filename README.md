@@ -37,5 +37,5 @@ ___
 
 * _!moa color(white/black) - Game Black / White for the role,_
 
-* _!help - Bot commands._
+* _!com - Bot commands._
 ___
