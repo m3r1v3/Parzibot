@@ -56,6 +56,10 @@ class Events(commands.Cog):
     async def on_command_error(self, ctx, error):
         """Returns a command error message"""
         if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send('Command is not finished.')
+        elif isinstance(error, commands.CommandNotFound):
+            await ctx.send('Command does not found.')
+        else:
             await ctx.send('Command error.')
 
 
