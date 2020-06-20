@@ -56,11 +56,17 @@ class Events(commands.Cog):
     async def on_command_error(self, ctx, error):
         """Returns a command error message"""
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send('Command is not finished.')
+            if get_lang() == "EN":
+                await ctx.send('Command is not finished.')
+            else:
+                await ctx.send(f'Команда не дописана')
         elif isinstance(error, commands.CommandNotFound):
-            await ctx.send('Command does not found.')
+            if get_lang() == "EN":
+                await ctx.send('Command does not found.')
+            else:
+                await ctx.send(f'Команда не распознана.')
         else:
-            await ctx.send('Command error.')
+            await ctx.send('Command Error.')
 
 
 def setup(client):
