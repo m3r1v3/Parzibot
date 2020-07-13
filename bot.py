@@ -1,5 +1,5 @@
 # bot.py
-# Recycled 06/15/20
+# Recycled 07/13/20
 import os
 
 from discord.ext import commands
@@ -23,5 +23,8 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+# Get token in server and set bot token
 token = os.environ.get('BOT_TOKEN')
+
+# Run bot
 client.run(str(token))

@@ -1,5 +1,5 @@
 # events.py
-# Recycled 06/15/20
+# Recycled 07/13/20
 import discord
 from discord.ext import commands
 
@@ -70,4 +70,5 @@ class Events(commands.Cog):
 
 
 def setup(client):
+    """Setup function"""
     client.add_cog(Events(client))

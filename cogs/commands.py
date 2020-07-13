@@ -133,7 +133,7 @@ class Commands(commands.Cog):
 
     @commands.command(aliases=['wb'])
     async def WhiteBlack(self, ctx, question):
-        """Role play"""
+        """White/Black game"""
         if question == get_random_color():
             if get_lang() == "EN":
                 await ctx.send(f'You winner!')
@@ -147,7 +147,7 @@ class Commands(commands.Cog):
 
     @commands.command()
     async def com(self, ctx):
-        """Bot commands"""
+        """Return all commands"""
         if get_lang() == "EN":
             await ctx.send(f'Bot commands:'
                            f'\n\t * !ping - You ping,'
@@ -160,7 +160,7 @@ class Commands(commands.Cog):
                            f'\n\t * !spam qty message  - spam function,'
                            f'\n\t * !wbg - Advice on what to play,'
                            f'\n\t * !rg game1 game2 game3 ... gameN - Randomly chooses a game,'
-                           f'\n\t * !lang lang(EN/RU) - Set language,'
+                           f'\n\t * !set_lang lang(EN/RU) - Set language,'
                            f'\n\t * !wb color(white/black) - Game Black/White,'
                            f'\n\t * !com - Bot commands.')
         else:
@@ -175,10 +175,11 @@ class Commands(commands.Cog):
                            f'\n\t * !spam кол-во сообщение  - Спам функция,'
                            f'\n\t * !wbg - Предлагает во что поиграть,'
                            f'\n\t * !rg game1 game2 game3 ... gameN - Выбирает случайную игру,'
-                           f'\n\t * !lang язык(EN/RU) - Устанавливает язык,'
+                           f'\n\t * !set_lang язык(EN/RU) - Устанавливает язык,'
                            f'\n\t * !wb цвет(white/black) - Игра Черное/Белое,'
                            f'\n\t * !com - Команды бота.')
 
 
 def setup(client):
+    """Setup function"""
     client.add_cog(Commands(client))

@@ -1,5 +1,5 @@
 # language.py
-# Recycled 06/15/20
+# Recycled 07/13/20
 from discord.ext import commands
 
 
@@ -22,8 +22,7 @@ class Language(commands.Cog):
         self.client = client
         self.LANG = get_lang()
 
-    @commands.has_role(670599227335770143)
-    @commands.command(aliases=['lang'])
+    @commands.command(aliases=['set_lang'])
     async def set_language(self, ctx, lang):
         """Set language"""
         if lang == "EN":
@@ -37,4 +36,5 @@ class Language(commands.Cog):
 
 
 def setup(client):
+    """Setup function"""
     client.add_cog(Language(client))
