@@ -1,5 +1,5 @@
 # commands.py
-# Recycled 06/15/20
+# Recycled 07/13/20
 import random
 
 import discord
@@ -131,20 +131,15 @@ class Commands(commands.Cog):
         else:
             await ctx.send(f'Поиграй в {random.choice(games.split())}.')
 
-    @commands.command(aliases=['moa'])
-    @commands.has_role(691321624108073021)
-    async def MuteOrAdmin(self, ctx, question):
+    @commands.command(aliases=['wb'])
+    async def WhiteBlack(self, ctx, question):
         """Role play"""
         if question == get_random_color():
-            await ctx.author.add_roles(discord.utils.get(ctx.author.guild.roles, id=691280575369314345))
             if get_lang() == "EN":
                 await ctx.send(f'You winner!')
             else:
                 await ctx.send(f'Ты выйграл!')
         else:
-            await ctx.author.add_roles(discord.utils.get(ctx.author.guild.roles, id=710841640192835624))
-            await ctx.author.remove_roles(discord.utils.get(ctx.author.guild.roles, id=691321624108073021))
-            await ctx.author.remove_roles(discord.utils.get(ctx.author.guild.roles, id=703265211888435301))
             if get_lang() == "EN":
                 await ctx.send(f'You lose(')
             else:
@@ -166,7 +161,7 @@ class Commands(commands.Cog):
                            f'\n\t * !wbg - Advice on what to play,'
                            f'\n\t * !rg game1 game2 game3 ... gameN - Randomly chooses a game,'
                            f'\n\t * !lang lang(EN/RU) - Set language,'
-                           f'\n\t * !moa color(white/black) - Game Black / White for the role,'
+                           f'\n\t * !wb color(white/black) - Game Black/White,'
                            f'\n\t * !com - Bot commands.')
         else:
             await ctx.send(f'Bot commands:'
@@ -181,7 +176,7 @@ class Commands(commands.Cog):
                            f'\n\t * !wbg - Предлагает во что поиграть,'
                            f'\n\t * !rg game1 game2 game3 ... gameN - Выбирает случайную игру,'
                            f'\n\t * !lang язык(EN/RU) - Устанавливает язык,'
-                           f'\n\t * !moa цвет(white/black) - Игра Черное/Белое на Роль,'
+                           f'\n\t * !wb цвет(white/black) - Игра Черное/Белое,'
                            f'\n\t * !com - Команды бота.')
 
 
