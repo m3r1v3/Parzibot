@@ -1,5 +1,3 @@
-# events.py
-# Recycled 07/13/20
 import discord
 from discord.ext import commands
 

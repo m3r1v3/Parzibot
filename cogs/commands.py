@@ -1,5 +1,3 @@
-# commands.py
-# Recycled 07/13/20
 import random
 
 import discord
