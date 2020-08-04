@@ -31,11 +31,11 @@ ___
 
 * _!wbg - Advice on what to play,_
 
-* _!rg game1 game2 game3 ... gameN - Randomly chooses a game,_
+* _!gg [game1 game2 game3 ... gameN] - Randomly chooses a game,_
 
 * _!lang lang(EN/RU) - Set language,_
 
-* _!moa color(white/black) - Game Black / White for the role,_
+* _!wb color(white/black) - Game Black / White for the role,_
 
-* _!com - Bot commands._
+* _!help - Bot commands._
 ___

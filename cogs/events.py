@@ -14,6 +14,7 @@ class Events(commands.Cog):
     async def on_ready(self):
         """Function check the operation of the bot."""
         print('{0} is online.'.format(self.client.user))
+        await self.client.change_presence(status=discord.Status.dnd)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):

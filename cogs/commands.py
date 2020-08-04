@@ -111,7 +111,7 @@ class Commands(commands.Cog):
             await ctx.send(str(mes))
 
     @commands.command(aliases=['wbg'])
-    async def WhatByGame(self, ctx):
+    async def what_by_game(self, ctx):
         """Function for choice game"""
         responses = ["Fortnite", "CS:GO", "GTA-V", "GTA:SA",
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
@@ -121,8 +121,8 @@ class Commands(commands.Cog):
         else:
             await ctx.send(f'Поиграй в {random.choice(responses)}.')
 
-    @commands.command(aliases=['rg'])
-    async def RandomGame(self, ctx, *, games):
+    @commands.command(aliases=['gg'])
+    async def get_game(self, ctx, *, games):
         """Random choice game"""
         if get_lang() == "EN":
             await ctx.send(f'Play to {random.choice(games.split())}.')
@@ -130,7 +130,7 @@ class Commands(commands.Cog):
             await ctx.send(f'Поиграй в {random.choice(games.split())}.')
 
     @commands.command(aliases=['wb'])
-    async def WhiteBlack(self, ctx, question):
+    async def white_black(self, ctx, question):
         """White/Black game"""
         if question == get_random_color():
             if get_lang() == "EN":
@@ -144,7 +144,7 @@ class Commands(commands.Cog):
                 await ctx.send(f'Ты проиграл(')
 
     @commands.command()
-    async def com(self, ctx):
+    async def help(self, ctx):
         """Return all commands"""
         if get_lang() == "EN":
             await ctx.send(f'Bot commands:'
@@ -157,10 +157,10 @@ class Commands(commands.Cog):
                            f'\n\t * !users - Bot users,'
                            f'\n\t * !spam qty message  - spam function,'
                            f'\n\t * !wbg - Advice on what to play,'
-                           f'\n\t * !rg game1 game2 game3 ... gameN - Randomly chooses a game,'
+                           f'\n\t * !gg [game1 game2 ... gameN] - Randomly chooses a game,'
                            f'\n\t * !set_lang lang(EN/RU) - Set language,'
                            f'\n\t * !wb color(white/black) - Game Black/White,'
-                           f'\n\t * !com - Bot commands.')
+                           f'\n\t * !help - Bot commands.')
         else:
             await ctx.send(f'Bot commands:'
                            f'\n\t * !ping - Твой ping,'
@@ -172,10 +172,10 @@ class Commands(commands.Cog):
                            f'\n\t * !users - Пользователи бота,'
                            f'\n\t * !spam кол-во сообщение  - Спам функция,'
                            f'\n\t * !wbg - Предлагает во что поиграть,'
-                           f'\n\t * !rg game1 game2 game3 ... gameN - Выбирает случайную игру,'
+                           f'\n\t * !gg [game1 game2 ... gameN] - Выбирает случайную игру,'
                            f'\n\t * !set_lang язык(EN/RU) - Устанавливает язык,'
                            f'\n\t * !wb цвет(white/black) - Игра Черное/Белое,'
-                           f'\n\t * !com - Команды бота.')
+                           f'\n\t * !help - Команды бота.')
 
 
 def setup(client):
