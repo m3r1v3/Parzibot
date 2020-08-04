@@ -113,9 +113,9 @@ class Commands(commands.Cog):
     @commands.command(aliases=['wbg'])
     async def WhatByGame(self, ctx):
         """Function for choice game"""
-        responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
+        responses = ["Fortnite", "CS:GO", "GTA-V", "GTA:SA",
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
-                     "Call of duty:Warzone"]
+                     "Call of Duty:Warzone", "Minecraft"]
         if get_lang() == "EN":
             await ctx.send(f'Play to {random.choice(responses)}.')
         else:
@@ -168,7 +168,7 @@ class Commands(commands.Cog):
                            f'\n\t * !clear кол-во - Очистить чат,'
                            f'\n\t * !kick @пользователь - Выгнать пользователя,'
                            f'\n\t * !ban @ник - Заблокировать пользователя,'
-                           f'\n\t * !unban ник#тег - Разблокировать пользователя,'
+                           f'\n\t * !unban nickname#tag - Разблокировать пользователя,'
                            f'\n\t * !users - Пользователи бота,'
                            f'\n\t * !spam кол-во сообщение  - Спам функция,'
                            f'\n\t * !wbg - Предлагает во что поиграть,'
