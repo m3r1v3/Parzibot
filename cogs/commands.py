@@ -57,7 +57,6 @@ class Commands(commands.Cog):
         await ctx.channel.purge(limit=amount)
 
     @commands.command()
-    @commands.has_role(670599227335770143)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """Kick user"""
         await member.kick(reason=reason)
@@ -67,7 +66,6 @@ class Commands(commands.Cog):
             await ctx.send(f'{member.mention} был выгнан.')
 
     @commands.command()
-    @commands.has_role(670599227335770143)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
         await member.ban(reason=reason)
@@ -77,7 +75,6 @@ class Commands(commands.Cog):
             await ctx.send(f'{member.mention} забанен.')
 
     @commands.command()
-    @commands.has_role(691321624108073021)
     async def unban(self, ctx, *, member):
         """Unban user"""
         banned_users = await ctx.guild.bans()

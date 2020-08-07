@@ -20,7 +20,7 @@ class Language(commands.Cog):
         self.client = client
         self.LANG = get_lang()
 
-    @commands.command(aliases=['set_lang'])
+    @commands.command(aliases=['set_lang', 'lang', 'set'])
     async def set_language(self, ctx, lang):
         """Set language"""
         if lang == "EN":
