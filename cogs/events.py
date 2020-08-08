@@ -21,7 +21,7 @@ class Events(commands.Cog):
         """Sending a personal message about the bot and issuing a role in the chat."""
         if get_lang() == "EN":
             await member.send(
-                f'Welcome {member}! White !help to find out my command.')
+                f'Welcome {member}! White $help to find out my command.')
         else:
             await member.send(
                 f'Добро пожаловать, {member}! Напиши !help чтобы узнать мои команды.')
