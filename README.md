@@ -15,27 +15,27 @@ ___
 
 * _$ping - You ping,_
 
-* _$8ball question - Ball of predictions,_
+* _$8ball `question` - Ball of predictions,_
 
-* _$clear Qty - Clear chat,_
+* _$clear `qty` - Clear chat,_
                        
-* _$kick @user - Kick user,_
+* _$kick `@user` - Kick user,_
 
-* _$ban @nickname - Ban user,_
+* _$ban `@nickname` - Ban user,_
 
-* _$unban nickname#user tag - Unban user,_
+* _$unban `nickname#user tag` - Unban user,_
 
 * _$users - Bot users,_
 
-* _$spam qty message  - spam function,_
+* _$spam `qty message`  - spam function,_
 
 * _$wbg - Advice on what to play,_
 
-* _$gg [game1 game2 game3 ... gameN] - Randomly chooses a game,_
+* _$gg `[game1 game2 game3 ... gameN]` - Randomly chooses a game,_
 
-* _$lang lang(EN/RU) - Set language,_
+* _$lang `(EN/RU)` - Set language,_
 
-* _$wb color(white/black) - Game Black / White for the role,_
+* _$wb `(white/black)` - Game Black / White for the role,_
 
 * _$help - Bot commands._
 ___

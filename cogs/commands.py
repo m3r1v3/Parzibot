@@ -26,30 +26,50 @@ class Commands(commands.Cog):
     @commands.command(aliases=['8ball'])
     async def _8ball(self, ctx, *, question):
         """8-ball game"""
-        responses = ["It is certain (Бесспорно)",
-                     "It is decidedly so (Предрешено)",
-                     "Without a doubt (Никаких сомнений)",
-                     "Yes — definitely (Определённо да)",
-                     "You may rely on it (Можешь быть уверен в этом)",
-                     "As I see it, yes (Мне кажется — «да»)",
-                     "Most likely (Вероятнее всего)",
-                     "Outlook good (Хорошие перспективы)",
-                     "Signs point to yes (Знаки говорят — «да»)",
-                     "Yes (Да)",
-                     "Reply hazy, try again (Пока не ясно, попробуй снова)",
-                     "Ask again later (Спроси позже)",
-                     "Better not tell you now (Лучше не рассказывать)",
-                     "Cannot predict now (Сейчас нельзя предсказать)",
-                     "Concentrate and ask again (Сконцентрируйся и спроси опять)",
-                     "Don’t count on it (Даже не думай)",
-                     "My reply is no (Мой ответ — «нет»)",
-                     "My sources say no (По моим данным — «нет»)",
-                     "Outlook not so good (Перспективы не очень хорошие)",
-                     "Very doubtful (Весьма сомнительно)"]
         if get_lang() == "EN":
-            await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+            responses_en = ["It is certain...",
+                            "It is decidedly so...",
+                            "Without a doubt...",
+                            "Yes — definitely...",
+                            "You may rely on it...",
+                            "As I see it, yes...",
+                            "Most likely...",
+                            "Outlook good...",
+                            "Signs point to yes...",
+                            "Yes...",
+                            "Reply hazy, try again...",
+                            "Ask again later...",
+                            "Better not tell you now...",
+                            "Cannot predict now...",
+                            "Concentrate and ask again...",
+                            "Don’t count on it...",
+                            "My reply is no...",
+                            "My sources say no...",
+                            "Outlook not so good...",
+                            "Very doubtful..."]
+            await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses_en)}')
         else:
-            await ctx.send(f'Вопрос: {question}\nОтвет: {random.choice(responses)}')
+            responses_ru = ["Бесспорно...",
+                            "Предрешено...",
+                            "Никаких сомнений...",
+                            "Определённо да...",
+                            "Можешь быть уверен в этом...",
+                            "Мне кажется — «да»...",
+                            "Вероятнее всего...",
+                            "Хорошие перспективы...",
+                            "Знаки говорят — «да»...",
+                            "Да...",
+                            "Пока не ясно, попробуй снова...",
+                            "Спроси позже...",
+                            "Лучше не рассказывать...",
+                            "Сейчас нельзя предсказать...",
+                            "Сконцентрируйся и спроси опять...",
+                            "Даже не думай...",
+                            "Мой ответ — «нет»...",
+                            "По моим данным — «нет»...",
+                            "Перспективы не очень хорошие...",
+                            "Весьма сомнительно..."]
+            await ctx.send(f'Вопрос: {question}\nОтвет: {random.choice(responses_ru)}')
 
     @commands.command()
     async def clear(self, ctx, amount=6):
@@ -155,7 +175,7 @@ class Commands(commands.Cog):
                            f'\n\t - $spam qty message  - spam function,'
                            f'\n\t - $wbg - Advice on what to play,'
                            f'\n\t - $gg [game1 game2 ... gameN] - Randomly chooses a game,'
-                           f'\n\t - $set_lang lang(EN/RU) - Set language,'
+                           f'\n\t - $lang `(EN/RU)` - Set language,'
                            f'\n\t - $wb color(white/black) - Game Black/White,'
                            f'\n\t - $help - Bot commands.')
         else:
@@ -170,7 +190,7 @@ class Commands(commands.Cog):
                            f'\n\t - $spam кол-во сообщение  - Спам функция,'
                            f'\n\t - $wbg - Предлагает во что поиграть,'
                            f'\n\t - $gg [game1 game2 ... gameN] - Выбирает случайную игру,'
-                           f'\n\t - $set_lang язык(EN/RU) - Устанавливает язык,'
+                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык,'
                            f'\n\t - $wb цвет(white/black) - Игра Черное/Белое,'
                            f'\n\t - $help - Команды бота.')
 
