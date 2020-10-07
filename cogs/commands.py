@@ -113,13 +113,14 @@ class Commands(commands.Cog):
     @commands.command()
     async def users(self, ctx):
         """Return bot users"""
-        user = ""
-        for i in range(1, len(self.client.users)):
-            user += str(self.client.users[i]) + "\n\t"
-            if get_lang() == "EN":
-                await ctx.send(f'Bot users:\n\t' + str(user))
-            else:
-                await ctx.send(f'Пользователи бота:\n\t' + str(user))
+        members = ""
+        channel = ctx.channel
+        for member in channel.members:
+            members += f'\t*{str(member)}*\n'
+        if get_lang() == "EN":
+            await ctx.send(f'**Channel members:**\n{str(members)}')
+        else:
+            await ctx.send(f'**Участники канала:**\n{str(members)}')
 
     @commands.command()
     async def spam(self, ctx, time=1, mes="..."):
