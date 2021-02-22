@@ -3,13 +3,12 @@ import random
 import discord
 from discord.ext import commands
 
-from cogs.language import get_lang
+from cogs.language import get_language
 
 
 def get_random_color():
     """Random generate color"""
-    colors = ['white', 'black']
-    return random.choice(colors)
+    return random.choice(['white', 'black'])
 
 
 class Commands(commands.Cog):
@@ -25,8 +24,8 @@ class Commands(commands.Cog):
 
     @commands.command(aliases=['8ball'])
     async def _8ball(self, ctx, *, question):
-        """8-ball game"""
-        if get_lang() == "EN":
+        """8ball game"""
+        if get_language() == "EN":
             responses_en = ["It is certain...",
                             "It is decidedly so...",
                             "Without a doubt...",
@@ -80,19 +79,19 @@ class Commands(commands.Cog):
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """Kick user"""
         await member.kick(reason=reason)
-        if get_lang() == "EN":
-            await ctx.send(f'Kicked {member.mention}.')
+        if get_language() == "EN":
+            await ctx.send(f'Kicked {member.mention}')
         else:
-            await ctx.send(f'{member.mention} был выгнан.')
+            await ctx.send(f'{member.mention} был выгнан')
 
     @commands.command()
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
         await member.ban(reason=reason)
-        if get_lang() == "EN":
+        if get_language() == "EN":
             await ctx.send(f'Banned {member.mention}')
         else:
-            await ctx.send(f'{member.mention} забанен.')
+            await ctx.send(f'{member.mention} забанен')
 
     @commands.command()
     async def unban(self, ctx, *, member):
@@ -105,44 +104,36 @@ class Commands(commands.Cog):
 
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
-                if get_lang() == "EN":
+                if get_language() == "EN":
                     await ctx.send(f'Unbanned {member.mention}')
                 else:
-                    await ctx.send(f'{member.mention} разбанен.')
+                    await ctx.send(f'{member.mention} разбанен')
 
     @commands.command()
     async def users(self, ctx):
         """Return bot users"""
-        members = ""
         channel = ctx.channel
-        for member in channel.members:
-            members += f'\t*{str(member)}*\n'
-        if get_lang() == "EN":
+        members = "".join(f'\t*{str(member)}*\n' for member in channel.members)
+        if get_language() == "EN":
             await ctx.send(f'**Channel members:**\n{str(members)}')
         else:
             await ctx.send(f'**Участники канала:**\n{str(members)}')
 
-    @commands.command()
-    async def spam(self, ctx, time=1, mes="..."):
-        """Spam command"""
-        for _ in range(time):
-            await ctx.send(str(mes))
-
     @commands.command(aliases=['wbg'])
     async def what_by_game(self, ctx):
         """Function for choice game"""
-        responses = ["Fortnite", "CS:GO", "GTA-V", "GTA:SA",
+        responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                      "Call of Duty:Warzone", "Minecraft"]
-        if get_lang() == "EN":
+        if get_language() == "EN":
             await ctx.send(f'Play to {random.choice(responses)}.')
         else:
             await ctx.send(f'Поиграй в {random.choice(responses)}.')
 
     @commands.command(aliases=['gg'])
-    async def get_game(self, ctx, *, games):
+    async def good_game(self, ctx, *, games):
         """Random choice game"""
-        if get_lang() == "EN":
+        if get_language() == "EN":
             await ctx.send(f'Play to {random.choice(games.split())}.')
         else:
             await ctx.send(f'Поиграй в {random.choice(games.split())}.')
@@ -151,12 +142,12 @@ class Commands(commands.Cog):
     async def white_black(self, ctx, question):
         """White/Black game"""
         if question == get_random_color():
-            if get_lang() == "EN":
+            if get_language() == "EN":
                 await ctx.send(f'You winner!')
             else:
                 await ctx.send(f'Ты выйграл!')
         else:
-            if get_lang() == "EN":
+            if get_language() == "EN":
                 await ctx.send(f'You lose(')
             else:
                 await ctx.send(f'Ты проиграл(')
@@ -164,7 +155,7 @@ class Commands(commands.Cog):
     @commands.command()
     async def help(self, ctx):
         """Return all commands"""
-        if get_lang() == "EN":
+        if get_language() == "EN":
             await ctx.send(f'Bot commands:'
                            f'\n\t - $ping - You ping,'
                            f'\n\t - $8ball `question` - Ball of predictions,'
@@ -173,7 +164,6 @@ class Commands(commands.Cog):
                            f'\n\t - $ban `@nickname` - Ban user,'
                            f'\n\t - $unban `nickname#tag` - Unban user,'
                            f'\n\t - $users - Bot users,'
-                           f'\n\t - $spam `qty message`  - spam function,'
                            f'\n\t - $wbg - Advice on what to play,'
                            f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game,'
                            f'\n\t - $lang `(EN/RU)` - Set language,'
@@ -188,7 +178,6 @@ class Commands(commands.Cog):
                            f'\n\t - $ban `@nickname` - Заблокировать пользователя,'
                            f'\n\t - $unban `nickname#tag` - Разблокировать пользователя,'
                            f'\n\t - $users - Пользователи бота,'
-                           f'\n\t - $spam `кол-во сообщение` - Спам функция,'
                            f'\n\t - $wbg - Предлагает во что поиграть,'
                            f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру,'
                            f'\n\t - $lang `(EN/RU)` - Устанавливает язык,'
