@@ -14,7 +14,6 @@ def get_language(nickname, server):
 def set_language(nickname, server, language):
     """Set language"""
     session = create_session()
-    print(session.query(UserBase).filter_by(nickname=nickname, server=server).first().language)
     session.query(UserBase).filter_by(nickname=nickname, server=server).first().language = language
     session.commit()
 
@@ -30,13 +29,12 @@ class Language(commands.Cog):
         """Set language"""
         check_user(ctx.message.author.name, ctx.message.guild.id)
         if language == "":
-            if get_language(ctx.message.author.name, ctx.message.guild.id) == "EN":
-                await ctx.send(
-                    f'Installed language: '
-                    f'{get_language(ctx.message.author.name, ctx.message.guild.id)}')
-            else:
+            if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
                 await ctx.send(
                     f'Установленный язык: {get_language(ctx.message.author.name, ctx.message.guild.id)}')
+            else:
+                await ctx.send(
+                    f'Installed language: {get_language(ctx.message.author.name, ctx.message.guild.id)}')
         elif language == "EN":
             await ctx.send("Language set")
             set_language(ctx.message.author.name, ctx.message.guild.id, language)
