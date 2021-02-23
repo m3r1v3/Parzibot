@@ -136,9 +136,9 @@ class Commands(commands.Cog):
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                      "Call of Duty:Warzone", "Minecraft"]
         if get_language(ctx.message.author.name, ctx.message.guild.id) == "EN":
-            await ctx.send(f'Play to {random.choice(responses)}.')
+            await ctx.send(f'Play to {random.choice(responses)}')
         else:
-            await ctx.send(f'Поиграй в {random.choice(responses)}.')
+            await ctx.send(f'Поиграй в {random.choice(responses)}')
 
     @commands.command(aliases=['gg'])
     async def good_game(self, ctx, *, games):
@@ -146,9 +146,9 @@ class Commands(commands.Cog):
         check_user(ctx.message.author.name, ctx.message.guild.id)
 
         if get_language(ctx.message.author.name, ctx.message.guild.id) == "EN":
-            await ctx.send(f'Play to {random.choice(games.split())}.')
+            await ctx.send(f'Play to {random.choice(games.split())}')
         else:
-            await ctx.send(f'Поиграй в {random.choice(games.split())}.')
+            await ctx.send(f'Поиграй в {random.choice(games.split())}')
 
     @commands.command(aliases=['wb'])
     async def white_black(self, ctx, question):
@@ -157,14 +157,14 @@ class Commands(commands.Cog):
 
         if question == get_random_color():
             if get_language(ctx.message.author.name, ctx.message.guild.id) == "EN":
-                await ctx.send(f'You winner!')
+                await ctx.send(f'You winner')
             else:
-                await ctx.send(f'Ты выйграл!')
+                await ctx.send(f'Ты выйграл')
         else:
             if get_language(ctx.message.author.name, ctx.message.guild.id) == "EN":
-                await ctx.send(f'You lose(')
+                await ctx.send(f'You lose')
             else:
-                await ctx.send(f'Ты проиграл(')
+                await ctx.send(f'Ты проиграл')
 
     @commands.command()
     async def help(self, ctx):
@@ -203,7 +203,7 @@ class Commands(commands.Cog):
                            f'\n\t - $help - Команды бота')
 
     @commands.command()
-    def about(self, ctx):
+    async def about(self, ctx):
         check_user(ctx.message.author.name, ctx.message.guild.id)
         await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
                        f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
