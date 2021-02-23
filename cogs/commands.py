@@ -173,32 +173,34 @@ class Commands(commands.Cog):
 
         if get_language(ctx.message.author.name, ctx.message.guild.id) == "EN":
             await ctx.send(f'Bot commands:'
-                           f'\n\t - $ping - You ping,'
-                           f'\n\t - $8ball `question` - Ball of predictions,'
-                           f'\n\t - $clear `Qty` - Clear chat,'
-                           f'\n\t - $kick `@user` - Kick user,'
-                           f'\n\t - $ban `@nickname` - Ban user,'
-                           f'\n\t - $unban `nickname#tag` - Unban user,'
-                           f'\n\t - $users - Bot users,'
-                           f'\n\t - $wbg - Advice on what to play,'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game,'
-                           f'\n\t - $lang `(EN/RU)` - Set language,'
-                           f'\n\t - $wb `(white/black)` - Game Black/White,'
-                           f'\n\t - $help - Bot commands.')
+                           f'\n\t - $ping - You ping'
+                           f'\n\t - $8ball `question` - Ball of predictions'
+                           f'\n\t - $clear `Qty` - Clear chat'
+                           f'\n\t - $kick `@user` - Kick user'
+                           f'\n\t - $ban `@nickname` - Ban user'
+                           f'\n\t - $unban `nickname#tag` - Unban user'
+                           f'\n\t - $users - Bot users'
+                           f'\n\t - $wbg - Advice on what to play'
+                           f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
+                           f'\n\t - $lang `(EN/RU)` - Set language'
+                           f'\n\t - $about - About bot'
+                           f'\n\t - $wb `(white/black)` - Game Black/White'
+                           f'\n\t - $help - Bot commands')
         else:
             await ctx.send(f'Команды бота:'
-                           f'\n\t - $ping - Твой ping,'
-                           f'\n\t - $8ball `вопрос` - Предсказывающий шар,'
-                           f'\n\t - $clear `кол-во` - Очистить чат,'
-                           f'\n\t - $kick `@user` - Выгнать пользователя,'
-                           f'\n\t - $ban `@nickname` - Заблокировать пользователя,'
-                           f'\n\t - $unban `nickname#tag` - Разблокировать пользователя,'
-                           f'\n\t - $users - Пользователи бота,'
-                           f'\n\t - $wbg - Предлагает во что поиграть,'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру,'
-                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык,'
-                           f'\n\t - $wb `(white/black)` - Игра Черное/Белое,'
-                           f'\n\t - $help - Команды бота.')
+                           f'\n\t - $ping - Твой ping'
+                           f'\n\t - $8ball `вопрос` - Предсказывающий шар'
+                           f'\n\t - $clear `кол-во` - Очистить чат'
+                           f'\n\t - $kick `@user` - Выгнать пользователя'
+                           f'\n\t - $ban `@nickname` - Заблокировать пользователя'
+                           f'\n\t - $unban `nickname#tag` - Разблокировать пользователя'
+                           f'\n\t - $users - Пользователи бота'
+                           f'\n\t - $wbg - Предлагает во что поиграть'
+                           f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
+                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык'
+                           f'\n\t - $wb `(white/black)` - Игра Черное/Белое'
+                           f'\n\t - $about - О боте'
+                           f'\n\t - $help - Команды бота')
 
     @commands.command()
     def about(self, ctx):
