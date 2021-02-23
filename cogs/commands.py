@@ -200,6 +200,13 @@ class Commands(commands.Cog):
                            f'\n\t - $wb `(white/black)` - Игра Черное/Белое,'
                            f'\n\t - $help - Команды бота.')
 
+    @commands.command()
+    def about(self, ctx):
+        check_user(ctx.message.author.name, ctx.message.guild.id)
+        await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
+                       f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
+                       f"Parzibot, 2021")
+
 
 def setup(client):
     """Setup function"""
