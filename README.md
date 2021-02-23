@@ -4,10 +4,8 @@ The source code of the bot is available to everyone.
 The bot used the English and Russian languages.
 This is free open source software and if anyone wants to change things in advance.
 Just before using my code, please write to me on _[Twitter](https://twitter.com/merive_)_.
-___
-#### I will be pleased to know that someone uses my work🙂.
 
-Also, the license is presented in the _[License file](https://github.com/merive/Parzibot/blob/master/LICENSE)_.
+**I will be pleased to know that someone uses my work🙂.**
 
 ___
 #### Bot Commands:
