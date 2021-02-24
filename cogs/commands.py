@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 from cogs.language import get_language
-from user_base import check_user
+from database import check_user
 
 
 def get_random_color():

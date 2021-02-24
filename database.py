@@ -21,11 +21,17 @@ def check_user(nickname, server: str):
         add_in_user_base(nickname, server)
 
 
-def add_in_user_base(nickname, server: str):
+def add_in_user_base(nickname, server: str, language="EN"):
     """Add user in db"""
-    new_user = User(nickname=nickname, server=server, language="EN")
+    new_user = User(nickname=nickname, server=server, language=language)
     session = create_session()
     session.add(new_user)
+    session.commit()
+
+
+def delete(nickname, server):
+    session = create_session()
+    session.query(User).filter_by(nickname=nickname, server=server).first().delete()
     session.commit()
 
 

@@ -1,9 +1,9 @@
 from discord.ext import commands
 
-from user_base import User, create_session, check_user, add_in_user_base
+from database import User, create_session, check_user, add_in_user_base, delete
 
 
-def get_language(nickname, server):
+def get_language(nickname, server: str):
     """Get language"""
     try:
         return create_session().query(User).filter_by(nickname=nickname, server=server).first().language
@@ -11,11 +11,10 @@ def get_language(nickname, server):
         add_in_user_base(nickname, server)
 
 
-def set_language(nickname, server, language):
+def set_language(nickname, server: str, language):
     """Set language"""
-    session = create_session()
-    session.query(User).filter_by(nickname=nickname, server=server).first().language = language
-    session.commit()
+    delete(nickname, server)
+    add_in_user_base(nickname, server, language)
 
 
 class Language(commands.Cog):
@@ -27,20 +26,21 @@ class Language(commands.Cog):
     @commands.command()
     async def lang(self, ctx, language=""):
         """Set language"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
+        got_language = get_language(ctx.message.author.name, str(ctx.guild.id))
         if language == "":
-            if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+            if got_language == "RU":
                 await ctx.send(
-                    f'Установленный язык: {get_language(ctx.message.author.name, ctx.message.guild.id)}')
+                    f'Установленный язык: {got_language}')
             else:
                 await ctx.send(
-                    f'Installed language: {get_language(ctx.message.author.name, ctx.message.guild.id)}')
+                    f'Installed language: {got_language}')
         elif language == "EN":
             await ctx.send("Language set")
-            set_language(ctx.message.author.name, ctx.message.guild.id, language)
+            set_language(ctx.message.author.name, str(ctx.guild.id), language)
         elif language == "RU":
             await ctx.send("Язык установлен")
-            set_language(ctx.message.author.name, ctx.message.guild.id, language)
+            set_language(ctx.message.author.name, str(ctx.guild.id), language)
         else:
             await ctx.send("Set Error")
 
