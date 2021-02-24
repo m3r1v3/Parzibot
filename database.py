@@ -16,22 +16,22 @@ def create_session():
 
 def check_user(nickname, server: str):
     try:
-        create_session().query(User).filter_by(nickname=nickname, server=server).first()
+        create_session().query(User).filter_by(nickname=nickname, server=str(server)).first()
     except AttributeError:
-        add_in_user_base(nickname, server)
+        add_in_user_base(nickname, str(server))
 
 
 def add_in_user_base(nickname, server: str, language="EN"):
     """Add user in db"""
-    new_user = User(nickname=nickname, server=server, language=language)
+    new_user = User(nickname=nickname, server=str(server), language=language)
     session = create_session()
     session.add(new_user)
     session.commit()
 
 
-def delete(nickname, server):
+def delete(nickname, server: str):
     session = create_session()
-    session.query(User).filter_by(nickname=nickname, server=server).first().delete()
+    session.query(User).filter_by(nickname=nickname, server=str(server)).first().delete()
     session.commit()
 
 

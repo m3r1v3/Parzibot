@@ -6,15 +6,15 @@ from database import User, create_session, check_user, add_in_user_base, delete
 def get_language(nickname, server: str):
     """Get language"""
     try:
-        return create_session().query(User).filter_by(nickname=nickname, server=server).first().language
+        return create_session().query(User).filter_by(nickname=nickname, server=str(server)).first().language
     except AttributeError:
-        add_in_user_base(nickname, server)
+        add_in_user_base(nickname, str(server))
 
 
 def set_language(nickname, server: str, language):
     """Set language"""
-    delete(nickname, server)
-    add_in_user_base(nickname, server, language)
+    delete(nickname, str(server))
+    add_in_user_base(nickname, str(server), language)
 
 
 class Language(commands.Cog):
