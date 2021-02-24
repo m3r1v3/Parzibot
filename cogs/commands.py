@@ -21,14 +21,14 @@ class Commands(commands.Cog):
     @commands.command()
     async def ping(self, ctx):
         """Return you latency"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
         await ctx.send(f'Ping: {round(self.client.latency * 1000)}ms')
 
     @commands.command(aliases=['8ball'])
     async def _8ball(self, ctx, *, question):
         """8ball game"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
-        if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+        check_user(ctx.message.author.name, str(ctx.guild.id))
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             responses_ru = ["Бесспорно...",
                             "Предрешено...",
                             "Никаких сомнений...",
@@ -76,15 +76,15 @@ class Commands(commands.Cog):
     @commands.command()
     async def clear(self, ctx, amount=6):
         """Clear chat"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
         await ctx.channel.purge(limit=amount)
 
     @commands.command()
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """Kick user"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
         await member.kick(reason=reason)
-        if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'{member.mention} был выгнан')
 
         else:
@@ -93,9 +93,9 @@ class Commands(commands.Cog):
     @commands.command()
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
         await member.ban(reason=reason)
-        if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
 
             await ctx.send(f'{member.mention} забанен')
         else:
@@ -104,7 +104,7 @@ class Commands(commands.Cog):
     @commands.command()
     async def unban(self, ctx, *, member):
         """Unban user"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
 
@@ -113,7 +113,7 @@ class Commands(commands.Cog):
 
             if (user.name, user.discriminator) == (member_name, member_discriminator):
                 await ctx.guild.unban(user)
-                if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+                if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
                     await ctx.send(f'{member.mention} разбанен')
                 else:
                     await ctx.send(f'Unbanned {member.mention}')
@@ -121,10 +121,10 @@ class Commands(commands.Cog):
     @commands.command()
     async def users(self, ctx):
         """Return bot users"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
         channel = ctx.channel
         members = "".join(f'\t*{str(member)}*\n' for member in channel.members)
-        if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'**Участники канала:**\n{str(members)}')
         else:
             await ctx.send(f'**Channel members:**\n{str(members)}')
@@ -132,12 +132,12 @@ class Commands(commands.Cog):
     @commands.command(aliases=['wbg'])
     async def what_by_game(self, ctx):
         """Function for choice game"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
 
         responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                      "Call of Duty:Warzone", "Minecraft"]
-        if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'Поиграй в {random.choice(responses)}')
         else:
             await ctx.send(f'Play to {random.choice(responses)}')
@@ -145,9 +145,9 @@ class Commands(commands.Cog):
     @commands.command(aliases=['gg'])
     async def good_game(self, ctx, *, games):
         """Random choice game"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
 
-        if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'Поиграй в {random.choice(games.split())}')
         else:
             await ctx.send(f'Play to {random.choice(games.split())}')
@@ -155,15 +155,15 @@ class Commands(commands.Cog):
     @commands.command(aliases=['wb'])
     async def white_black(self, ctx, question):
         """White/Black game"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
 
         if question == get_random_color():
-            if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
                 await ctx.send(f'Ты выйграл')
             else:
                 await ctx.send(f'You winner')
         else:
-            if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
                 await ctx.send(f'Ты проиграл')
             else:
                 await ctx.send(f'You lose')
@@ -171,9 +171,9 @@ class Commands(commands.Cog):
     @commands.command()
     async def help(self, ctx):
         """Return all commands"""
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
 
-        if get_language(ctx.message.author.name, ctx.message.guild.id) == "RU":
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'Команды бота:'
                            f'\n\t - $ping - Твой ping'
                            f'\n\t - $8ball `вопрос` - Предсказывающий шар'
@@ -206,7 +206,7 @@ class Commands(commands.Cog):
 
     @commands.command()
     async def about(self, ctx):
-        check_user(ctx.message.author.name, ctx.message.guild.id)
+        check_user(ctx.message.author.name, str(ctx.guild.id))
         await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
                        f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
                        f"Parzibot, 2021")

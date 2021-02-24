@@ -1,10 +1,11 @@
-from sqlalchemy import Column, Integer, String, Sequence
+import os
+
+from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-import os
 
-engine = create_engine(os.environ.get('DATABASE_URL'), echo=False)
+engine = create_engine(os.environ.get('DATABASE_URL'))
 Base = declarative_base()
 
 
@@ -13,29 +14,29 @@ def create_session():
     return Session()
 
 
-def check_user(nickname, server):
+def check_user(nickname, server: str):
     try:
-        create_session().query(UserBase).filter_by(nickname=nickname, server=server).first()
+        create_session().query(User).filter_by(nickname=nickname, server=server).first()
     except AttributeError:
         add_in_user_base(nickname, server)
 
 
-def add_in_user_base(nickname, server):
+def add_in_user_base(nickname, server: str):
     """Add user in db"""
-    new_user = UserBase(nickname=nickname, server=server, language="EN")
+    new_user = User(nickname=nickname, server=server, language="EN")
     session = create_session()
     session.add(new_user)
     session.commit()
 
 
-class UserBase(Base):
+class User(Base):
     __tablename__ = 'users'
 
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    user_id = Column(Integer, primary_key=True)
     nickname = Column(String(50), unique=True, nullable=False)
-    server = Column(Integer)
-    language = Column(String(2))
+    server = Column(String(30))
+    language = Column(String(50))
 
     def __repr__(self):
-        return "<UserBase(nickname='%s', server='%s', language='%s')>" % \
-               (self.nickname, self.server, self.language)
+        return "<User(id='%s', nickname='%s', server='%s', language='%s')>" % (
+            self.user_id, self.nickname, self.server, self.language)

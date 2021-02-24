@@ -1,12 +1,12 @@
 from discord.ext import commands
 
-from user_base import UserBase, create_session, check_user, add_in_user_base
+from user_base import User, create_session, check_user, add_in_user_base
 
 
 def get_language(nickname, server):
     """Get language"""
     try:
-        return create_session().query(UserBase).filter_by(nickname=nickname, server=server).first().language
+        return create_session().query(User).filter_by(nickname=nickname, server=server).first().language
     except AttributeError:
         add_in_user_base(nickname, server)
 
@@ -14,7 +14,7 @@ def get_language(nickname, server):
 def set_language(nickname, server, language):
     """Set language"""
     session = create_session()
-    session.query(UserBase).filter_by(nickname=nickname, server=server).first().language = language
+    session.query(User).filter_by(nickname=nickname, server=server).first().language = language
     session.commit()
 
 
