@@ -8,15 +8,13 @@ from sqlalchemy.orm import sessionmaker
 engine = create_engine(os.environ.get('DATABASE_URL'))
 Base = declarative_base()
 
-
-def create_session():
-    Session = sessionmaker(bind=engine)
-    return Session()
+Session = sessionmaker(bind=engine)
+session = Session()
 
 
 def check_user(nickname, server: str):
     try:
-        create_session().query(User).filter_by(nickname=nickname, server=str(server)).first()
+        session.query(User).filter_by(nickname=nickname, server=str(server)).first()
     except AttributeError:
         add_in_user_base(nickname, str(server))
 
@@ -24,14 +22,12 @@ def check_user(nickname, server: str):
 def add_in_user_base(nickname, server: str, language="EN"):
     """Add user in db"""
     new_user = User(nickname=nickname, server=str(server), language=language)
-    session = create_session()
     session.add(new_user)
     session.commit()
 
 
 def delete(nickname, server: str):
-    session = create_session()
-    session.query(User).filter_by(nickname=nickname, server=str(server)).first().delete()
+    session.delete(session.query(User).filter_by(nickname=nickname, server=str(server)).first())
     session.commit()
 
 
