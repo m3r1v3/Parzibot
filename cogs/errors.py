@@ -14,7 +14,6 @@ class Events(commands.Cog):
     async def on_command_error(self, ctx, error):
         """Returns a command error message"""
         got_language = get_language(ctx.message.author.name, str(ctx.guild.id))
-        print(got_language)
         if isinstance(error, discord.ext.commands.MissingRequiredArgument):
             if got_language == "RU":
                 await ctx.send(f'Команда не дописана')

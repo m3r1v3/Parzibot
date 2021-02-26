@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-from database import User, session, check_user, add_in_user_base, delete
+from database import User, session
 
 
 def get_language(nickname, server: str):
@@ -8,13 +8,13 @@ def get_language(nickname, server: str):
     try:
         return session.query(User).filter_by(nickname=nickname, server=str(server)).first().language
     except AttributeError:
-        add_in_user_base(nickname, str(server))
+        User().add(nickname, str(server))
 
 
 def set_language(nickname, server: str, language):
     """Set language"""
-    delete(nickname, str(server))
-    add_in_user_base(nickname, str(server), language)
+    User().delete(nickname, str(server))
+    User().add(nickname, str(server), language)
 
 
 class Language(commands.Cog):
@@ -26,7 +26,7 @@ class Language(commands.Cog):
     @commands.command()
     async def lang(self, ctx, language=""):
         """Set language"""
-        check_user(ctx.message.author.name, str(ctx.guild.id))
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
         got_language = get_language(ctx.message.author.name, str(ctx.guild.id))
         if language == "":
             if got_language == "RU":
