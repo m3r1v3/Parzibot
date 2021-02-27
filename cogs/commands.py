@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 
 from cogs.language import get_language
-from database import User
+from database import User, Role
 
 
 def get_random_color():
@@ -83,7 +83,10 @@ class Commands(commands.Cog):
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """Kick user"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
+        User().delete(member.display_name, str(ctx.guild.id))
+
         await member.kick(reason=reason)
+
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'{member.mention} был выгнан')
         else:
@@ -93,9 +96,11 @@ class Commands(commands.Cog):
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
-        await member.ban(reason=reason)
-        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+        User().delete(member.display_name, str(ctx.guild.id))
 
+        await member.ban(reason=reason)
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'{member.mention} забанен')
         else:
             await ctx.send(f'Banned {member.mention}')
@@ -121,8 +126,10 @@ class Commands(commands.Cog):
     async def users(self, ctx):
         """Return bot users"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
         channel = ctx.channel
         members = "".join(f'\t*{str(member)}*\n' for member in channel.members)
+
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'**Участники канала:**\n{str(members)}')
         else:
@@ -136,6 +143,7 @@ class Commands(commands.Cog):
         responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                      "Call of Duty:Warzone", "Minecraft"]
+
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'Поиграй в {random.choice(responses)}')
         else:
@@ -186,7 +194,10 @@ class Commands(commands.Cog):
                            f'\n\t - $lang `(EN/RU)` - Устанавливает язык'
                            f'\n\t - $wb `(white/black)` - Игра Черное/Белое'
                            f'\n\t - $about - О боте'
-                           f'\n\t - $help - Команды бота')
+                           f'\n\t - $help - Команды бота'
+                           f'\nКоманды для администратора:'
+                           f'||\n\t - $set_role `role_id` - Установить стандартную роль||'
+                           f'||\n\t - $remove_role `role_id` - Убрать стандартную роль||')
         else:
             await ctx.send(f'Bot commands:'
                            f'\n\t - $ping - You ping'
@@ -201,14 +212,38 @@ class Commands(commands.Cog):
                            f'\n\t - $lang `(EN/RU)` - Set language'
                            f'\n\t - $about - About bot'
                            f'\n\t - $wb `(white/black)` - Game Black/White'
-                           f'\n\t - $help - Bot commands')
+                           f'\n\t - $help - Bot commands'
+                           f'\nFor admins:'
+                           f'||\n\t - $set_role `role_id` - Set default role||'
+                           f'||\n\t - $remove_role `role_id` - Remove default role||')
 
     @commands.command()
     async def about(self, ctx):
+        """Return bout bot"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
         await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
                        f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
                        f"Parzibot, 2021")
+
+    @commands.command()
+    async def set_role(self, ctx, role):
+        """Set default role for server"""
+        Role().add(role, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("Стандартная роль для сервера установлена")
+        else:
+            await ctx.send("Default role for server installed")
+
+    @commands.command()
+    async def remove_role(self, ctx, role):
+        """Remove default role for server"""
+        Role().delete(role, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("Стандартная роль для сервера убрана")
+        else:
+            await ctx.send("Default role for server removed")
 
 
 def setup(client):

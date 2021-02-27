@@ -1,4 +1,7 @@
+import discord
 from discord.ext import commands
+
+from database import User, Role
 
 
 class Events(commands.Cog):
@@ -17,10 +20,14 @@ class Events(commands.Cog):
         """Sending a personal message about the bot and issuing a role in the chat"""
         await member.send(f'Hey {member}! White $help to find out my command. For replace language write $lang `EN/RU`')
 
+        role = discord.utils.get(member.guild.roles, id=Role().get_role(str(member.guild.id)))
+        await member.add_roles(role)
+
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         """Output information about user exit"""
         await member.send(f'{member} leave from server')
+        User().delete(member.nickname, str(member.guild.id))
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
