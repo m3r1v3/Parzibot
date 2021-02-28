@@ -12,27 +12,29 @@ ___
 
 #### Bot Commands:
 
-* _$ping - You ping_
-
 * _$8ball `question` - Ball of predictions_
-
-* _$clear `qty` - Clear chat_
-
-* _$kick `@user` - Kick user_
-
+  
 * _$ban `@nickname` - Ban user_
-
-* _$users - Bot users_
-
-* _$wbg - Advice on what to play_
-
+  
+* _$clear `qty` - Clear chat_
+  
 * _$gg `[game1 game2 game3 ... gameN]` - Randomly chooses a game_
-
+  
+* _$help - Bot commands_
+  
+* _$kick `@nickname` - Kick user_
+  
 * _$lang `(EN/RU)` - Set language_
 
-* _$wb `(white/black)` - Game Black/White for the role_
+* _$nickname `@nickname` `new_nick` - Edit nickname_
+  
+* _$ping - You ping_
+  
+* _$users - Bot users_
 
-* _$help - Bot commands._
+* _$wb `(white/black)` - Game Black/White for the role_
+  
+* _$wbg - Advice on what to play_
 
 #### Admin commands:
 

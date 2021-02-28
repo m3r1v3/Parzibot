@@ -80,7 +80,7 @@ class Commands(commands.Cog):
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
         await ctx.channel.purge(limit=amount + 1)
 
-    @commands.command()
+    @commands.command(pass_context=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """Kick user"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
@@ -97,7 +97,7 @@ class Commands(commands.Cog):
         else:
             await ctx.send(f'Kicked {member.mention}')
 
-    @commands.command()
+    @commands.command(pass_context=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
@@ -174,35 +174,37 @@ class Commands(commands.Cog):
 
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'Команды бота:'
-                           f'\n\t - $ping - Твой ping'
                            f'\n\t - $8ball `вопрос` - Предсказывающий шар'
-                           f'\n\t - $clear `кол-во` - Очистить чат'
-                           f'\n\t - $kick `@user` - Выгнать пользователя'
-                           f'\n\t - $ban `@nickname` - Заблокировать пользователя'
-                           f'\n\t - $users - Пользователи бота'
-                           f'\n\t - $wbg - Предлагает во что поиграть'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
-                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык'
-                           f'\n\t - $wb `(white/black)` - Игра Черное/Белое'
                            f'\n\t - $about - О боте'
+                           f'\n\t - $ban `@nickname` - Заблокировать пользователя'
+                           f'\n\t - $clear `кол-во` - Очистить чат'
+                           f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
                            f'\n\t - $help - Команды бота'
+                           f'\n\t - $kick `@user` - Выгнать пользователя'
+                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык'
+                           f'\n\t - $nickname `@nickname` `new_nick` - Меняет ник'
+                           f'\n\t - $users - Пользователи бота'
+                           f'\n\t - $wb `(white/black)` - Игра Черное/Белое'
+                           f'\n\t - $wbg - Предлагает во что поиграть'
+                           f'\n\t - $ping - Твой ping'
                            f'\nКоманды для администратора:'
                            f'||\n\t - $set_role `role_id` - Установить стандартную роль||'
                            f'||\n\t - $remove_role `role_id` - Убрать стандартную роль||')
         else:
             await ctx.send(f'Bot commands:'
-                           f'\n\t - $ping - You ping'
                            f'\n\t - $8ball `question` - Ball of predictions'
-                           f'\n\t - $clear `Qty` - Clear chat'
-                           f'\n\t - $kick `@user` - Kick user'
-                           f'\n\t - $ban `@nickname` - Ban user'
-                           f'\n\t - $users - Bot users'
-                           f'\n\t - $wbg - Advice on what to play'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
-                           f'\n\t - $lang `(EN/RU)` - Set language'
                            f'\n\t - $about - About bot'
-                           f'\n\t - $wb `(white/black)` - Game Black/White'
+                           f'\n\t - $ban `@nickname` - Ban user'
+                           f'\n\t - $clear `Qty` - Clear chat'
+                           f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
                            f'\n\t - $help - Bot commands'
+                           f'\n\t - $kick `@user` - Kick user'
+                           f'\n\t - $lang `(EN/RU)` - Set language'
+                           f'\n\t - $nickname `@nickname` `new_nick` - Edit nickname'
+                           f'\n\t - $ping - You ping'
+                           f'\n\t - $users - Bot users'
+                           f'\n\t - $wb `(white/black)` - Game Black/White'
+                           f'\n\t - $wbg - Advice on what to play'
                            f'\nFor admins:'
                            f'||\n\t - $set_role `role_id` - Set default role||'
                            f'||\n\t - $remove_role `role_id` - Remove default role||')
@@ -214,6 +216,14 @@ class Commands(commands.Cog):
         await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
                        f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
                        f"Parzibot, 2021")
+
+    @commands.command(pass_context=True)
+    async def nickname(self, ctx, member: discord.Member, *, nickname=None):
+        await member.edit(nick=nickname)
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send(f'Ник был изменен для {member.mention}')
+        else:
+            await ctx.send(f'Nickname was changed for {member.mention}')
 
     @commands.command()
     async def set_role(self, ctx, role):
