@@ -13,21 +13,28 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         """Returns a command error message"""
+        got_language = get_language(ctx.message.author.name, str(ctx.guild.id))
         if isinstance(error, discord.ext.commands.MissingRequiredArgument):
-            if get_language() == "EN":
-                await ctx.send('Command is not finished')
-            else:
+            if got_language == "RU":
                 await ctx.send(f'Команда не дописана')
+            else:
+                await ctx.send('Command is not finished')
         elif isinstance(error, discord.ext.commands.CommandNotFound):
-            if get_language() == "EN":
-                await ctx.send('Command does not found')
-            else:
+            if got_language == "RU":
                 await ctx.send(f'Команда не распознана')
-        elif isinstance(error, discord.ext.commands.CommandInvokeError):
-            if get_language() == "EN":
-                await ctx.send('Not enough access rights')
             else:
-                await ctx.send(f'Не хватает прав доступа')
+                await ctx.send('Command does not found')
+        elif isinstance(error, discord.ext.commands.BotMissingPermissions):
+            if got_language == "RU":
+                await ctx.send(f'У вас нет прав для использования данной команды')
+            else:
+                await ctx.send(f"You don't have permissions for using this command")
+        else:
+            if got_language == "RU":
+                await ctx.send(f'Неизвестная ошибка')
+            else:
+                await ctx.send(f"Unknown error")
+
 
 
 def setup(client):

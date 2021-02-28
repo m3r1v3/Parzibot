@@ -2,8 +2,10 @@ import random
 
 import discord
 from discord.ext import commands
+from sqlalchemy.orm.exc import UnmappedInstanceError
 
 from cogs.language import get_language
+from database import User, Role
 
 
 def get_random_color():
@@ -20,34 +22,14 @@ class Commands(commands.Cog):
     @commands.command()
     async def ping(self, ctx):
         """Return you latency"""
-        await ctx.send(f'Pong! {round(self.client.latency * 1000)}ms')
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+        await ctx.send(f'Ping: {round(self.client.latency * 1000)}ms')
 
     @commands.command(aliases=['8ball'])
     async def _8ball(self, ctx, *, question):
         """8ball game"""
-        if get_language() == "EN":
-            responses_en = ["It is certain...",
-                            "It is decidedly so...",
-                            "Without a doubt...",
-                            "Yes — definitely...",
-                            "You may rely on it...",
-                            "As I see it, yes...",
-                            "Most likely...",
-                            "Outlook good...",
-                            "Signs point to yes...",
-                            "Yes...",
-                            "Reply hazy, try again...",
-                            "Ask again later...",
-                            "Better not tell you now...",
-                            "Cannot predict now...",
-                            "Concentrate and ask again...",
-                            "Don’t count on it...",
-                            "My reply is no...",
-                            "My sources say no...",
-                            "Outlook not so good...",
-                            "Very doubtful..."]
-            await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses_en)}')
-        else:
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             responses_ru = ["Бесспорно...",
                             "Предрешено...",
                             "Никаких сомнений...",
@@ -69,120 +51,199 @@ class Commands(commands.Cog):
                             "Перспективы не очень хорошие...",
                             "Весьма сомнительно..."]
             await ctx.send(f'Вопрос: {question}\nОтвет: {random.choice(responses_ru)}')
+        else:
+            responses_en = ["It is certain...",
+                            "It is decidedly so...",
+                            "Without a doubt...",
+                            "Yes — definitely...",
+                            "You may rely on it...",
+                            "As I see it, yes...",
+                            "Most likely...",
+                            "Outlook good...",
+                            "Signs point to yes...",
+                            "Yes...",
+                            "Reply hazy, try again...",
+                            "Ask again later...",
+                            "Better not tell you now...",
+                            "Cannot predict now...",
+                            "Concentrate and ask again...",
+                            "Don’t count on it...",
+                            "My reply is no...",
+                            "My sources say no...",
+                            "Outlook not so good...",
+                            "Very doubtful..."]
+            await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses_en)}')
 
     @commands.command()
-    async def clear(self, ctx, amount=6):
+    async def clear(self, ctx, amount=5):
         """Clear chat"""
-        await ctx.channel.purge(limit=amount)
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+        await ctx.channel.purge(limit=amount + 1)
 
-    @commands.command()
+    @commands.command(pass_context=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """Kick user"""
-        await member.kick(reason=reason)
-        if get_language() == "EN":
-            await ctx.send(f'Kicked {member.mention}')
-        else:
-            await ctx.send(f'{member.mention} был выгнан')
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
 
-    @commands.command()
+        try:
+            User().delete(member.display_name, str(ctx.guild.id))
+        except UnmappedInstanceError:
+            pass
+
+        await member.kick(reason=reason)
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send(f'{member.mention} был выгнан')
+        else:
+            await ctx.send(f'Kicked {member.mention}')
+
+    @commands.command(pass_context=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
+        try:
+            User().delete(member.display_name, str(ctx.guild.id))
+        except UnmappedInstanceError:
+            pass
+
         await member.ban(reason=reason)
-        if get_language() == "EN":
-            await ctx.send(f'Banned {member.mention}')
-        else:
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'{member.mention} забанен')
-
-    @commands.command()
-    async def unban(self, ctx, *, member):
-        """Unban user"""
-        banned_users = await ctx.guild.bans()
-        member_name, member_discriminator = member.split('#')
-
-        for ban_entry in banned_users:
-            user = ban_entry.user
-
-            if (user.name, user.discriminator) == (member_name, member_discriminator):
-                await ctx.guild.unban(user)
-                if get_language() == "EN":
-                    await ctx.send(f'Unbanned {member.mention}')
-                else:
-                    await ctx.send(f'{member.mention} разбанен')
+        else:
+            await ctx.send(f'Banned {member.mention}')
 
     @commands.command()
     async def users(self, ctx):
         """Return bot users"""
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
         channel = ctx.channel
         members = "".join(f'\t*{str(member)}*\n' for member in channel.members)
-        if get_language() == "EN":
-            await ctx.send(f'**Channel members:**\n{str(members)}')
-        else:
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'**Участники канала:**\n{str(members)}')
+        else:
+            await ctx.send(f'**Channel members:**\n{str(members)}')
 
     @commands.command(aliases=['wbg'])
     async def what_by_game(self, ctx):
         """Function for choice game"""
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
         responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                      "Call of Duty:Warzone", "Minecraft"]
-        if get_language() == "EN":
-            await ctx.send(f'Play to {random.choice(responses)}.')
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send(f'Поиграй в {random.choice(responses)}')
         else:
-            await ctx.send(f'Поиграй в {random.choice(responses)}.')
+            await ctx.send(f'Play to {random.choice(responses)}')
 
     @commands.command(aliases=['gg'])
     async def good_game(self, ctx, *, games):
         """Random choice game"""
-        if get_language() == "EN":
-            await ctx.send(f'Play to {random.choice(games.split())}.')
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send(f'Поиграй в {random.choice(games.split())}')
         else:
-            await ctx.send(f'Поиграй в {random.choice(games.split())}.')
+            await ctx.send(f'Play to {random.choice(games.split())}')
 
     @commands.command(aliases=['wb'])
     async def white_black(self, ctx, question):
         """White/Black game"""
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
         if question == get_random_color():
-            if get_language() == "EN":
-                await ctx.send(f'You winner!')
+            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+                await ctx.send(f'Ты выйграл')
             else:
-                await ctx.send(f'Ты выйграл!')
+                await ctx.send(f'You winner')
         else:
-            if get_language() == "EN":
-                await ctx.send(f'You lose(')
+            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+                await ctx.send(f'Ты проиграл')
             else:
-                await ctx.send(f'Ты проиграл(')
+                await ctx.send(f'You lose')
 
     @commands.command()
     async def help(self, ctx):
         """Return all commands"""
-        if get_language() == "EN":
-            await ctx.send(f'Bot commands:'
-                           f'\n\t - $ping - You ping,'
-                           f'\n\t - $8ball `question` - Ball of predictions,'
-                           f'\n\t - $clear `Qty` - Clear chat,'
-                           f'\n\t - $kick `@user` - Kick user,'
-                           f'\n\t - $ban `@nickname` - Ban user,'
-                           f'\n\t - $unban `nickname#tag` - Unban user,'
-                           f'\n\t - $users - Bot users,'
-                           f'\n\t - $wbg - Advice on what to play,'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game,'
-                           f'\n\t - $lang `(EN/RU)` - Set language,'
-                           f'\n\t - $wb `(white/black)` - Game Black/White,'
-                           f'\n\t - $help - Bot commands.')
-        else:
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
             await ctx.send(f'Команды бота:'
-                           f'\n\t - $ping - Твой ping,'
-                           f'\n\t - $8ball `вопрос` - Предсказывающий шар,'
-                           f'\n\t - $clear `кол-во` - Очистить чат,'
-                           f'\n\t - $kick `@user` - Выгнать пользователя,'
-                           f'\n\t - $ban `@nickname` - Заблокировать пользователя,'
-                           f'\n\t - $unban `nickname#tag` - Разблокировать пользователя,'
-                           f'\n\t - $users - Пользователи бота,'
-                           f'\n\t - $wbg - Предлагает во что поиграть,'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру,'
-                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык,'
-                           f'\n\t - $wb `(white/black)` - Игра Черное/Белое,'
-                           f'\n\t - $help - Команды бота.')
+                           f'\n\t - $8ball `вопрос` - Предсказывающий шар'
+                           f'\n\t - $about - О боте'
+                           f'\n\t - $ban `@nickname` - Заблокировать пользователя'
+                           f'\n\t - $clear `кол-во` - Очистить чат'
+                           f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
+                           f'\n\t - $help - Команды бота'
+                           f'\n\t - $kick `@user` - Выгнать пользователя'
+                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык'
+                           f'\n\t - $nickname `@nickname` `new_nick` - Меняет ник'
+                           f'\n\t - $users - Пользователи бота'
+                           f'\n\t - $wb `(white/black)` - Игра Черное/Белое'
+                           f'\n\t - $wbg - Предлагает во что поиграть'
+                           f'\n\t - $ping - Твой ping'
+                           f'\nКоманды для администратора:'
+                           f'||\n\t - $set_role `role_id` - Установить стандартную роль||'
+                           f'||\n\t - $remove_role `role_id` - Убрать стандартную роль||')
+        else:
+            await ctx.send(f'Bot commands:'
+                           f'\n\t - $8ball `question` - Ball of predictions'
+                           f'\n\t - $about - About bot'
+                           f'\n\t - $ban `@nickname` - Ban user'
+                           f'\n\t - $clear `Qty` - Clear chat'
+                           f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
+                           f'\n\t - $help - Bot commands'
+                           f'\n\t - $kick `@user` - Kick user'
+                           f'\n\t - $lang `(EN/RU)` - Set language'
+                           f'\n\t - $nickname `@nickname` `new_nick` - Edit nickname'
+                           f'\n\t - $ping - You ping'
+                           f'\n\t - $users - Bot users'
+                           f'\n\t - $wb `(white/black)` - Game Black/White'
+                           f'\n\t - $wbg - Advice on what to play'
+                           f'\nFor admins:'
+                           f'||\n\t - $set_role `role_id` - Set default role||'
+                           f'||\n\t - $remove_role `role_id` - Remove default role||')
+
+    @commands.command()
+    async def about(self, ctx):
+        """Return bout bot"""
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+        await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
+                       f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
+                       f"Parzibot, 2021")
+
+    @commands.command(pass_context=True)
+    async def nickname(self, ctx, member: discord.Member, *, nickname=None):
+        await member.edit(nick=nickname)
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send(f'Ник был изменен для {member.mention}')
+        else:
+            await ctx.send(f'Nickname was changed for {member.mention}')
+
+    @commands.command()
+    async def set_role(self, ctx, role):
+        """Set default role for server"""
+        Role().add(role, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("Стандартная роль для сервера установлена")
+        else:
+            await ctx.send("Default role for server installed")
+
+    @commands.command()
+    async def remove_role(self, ctx, role):
+        """Remove default role for server"""
+        Role().delete(role, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("Стандартная роль для сервера убрана")
+        else:
+            await ctx.send("Default role for server removed")
 
 
 def setup(client):
