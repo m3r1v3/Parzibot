@@ -59,7 +59,7 @@ class Role(Base):
 
     @staticmethod
     def get_role(server: str):
-        return session.query(Role).filter_by(server=str(server)).first().role
+        return session.query(Role).filter_by(server=str(server)).first().role_id
 
     @staticmethod
     def delete(role_id, server: str):

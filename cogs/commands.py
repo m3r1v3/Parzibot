@@ -2,6 +2,7 @@ import random
 
 import discord
 from discord.ext import commands
+from sqlalchemy.orm.exc import UnmappedInstanceError
 
 from cogs.language import get_language
 from database import User, Role
@@ -74,16 +75,20 @@ class Commands(commands.Cog):
             await ctx.send(f'Question: {question}\nAnswer: {random.choice(responses_en)}')
 
     @commands.command()
-    async def clear(self, ctx, amount=6):
+    async def clear(self, ctx, amount=5):
         """Clear chat"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
-        await ctx.channel.purge(limit=amount)
+        await ctx.channel.purge(limit=amount + 1)
 
     @commands.command()
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """Kick user"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
-        User().delete(member.display_name, str(ctx.guild.id))
+
+        try:
+            User().delete(member.display_name, str(ctx.guild.id))
+        except UnmappedInstanceError:
+            pass
 
         await member.kick(reason=reason)
 
@@ -96,7 +101,11 @@ class Commands(commands.Cog):
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
-        User().delete(member.display_name, str(ctx.guild.id))
+
+        try:
+            User().delete(member.display_name, str(ctx.guild.id))
+        except UnmappedInstanceError:
+            pass
 
         await member.ban(reason=reason)
 
@@ -104,23 +113,6 @@ class Commands(commands.Cog):
             await ctx.send(f'{member.mention} забанен')
         else:
             await ctx.send(f'Banned {member.mention}')
-
-    @commands.command()
-    async def unban(self, ctx, *, member):
-        """Unban user"""
-        User().check_user(ctx.message.author.name, str(ctx.guild.id))
-        banned_users = await ctx.guild.bans()
-        member_name, member_discriminator = member.split('#')
-
-        for ban_entry in banned_users:
-            user = ban_entry.user
-
-            if (user.name, user.discriminator) == (member_name, member_discriminator):
-                await ctx.guild.unban(user)
-                if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                    await ctx.send(f'{member.mention} разбанен')
-                else:
-                    await ctx.send(f'Unbanned {member.mention}')
 
     @commands.command()
     async def users(self, ctx):
@@ -187,7 +179,6 @@ class Commands(commands.Cog):
                            f'\n\t - $clear `кол-во` - Очистить чат'
                            f'\n\t - $kick `@user` - Выгнать пользователя'
                            f'\n\t - $ban `@nickname` - Заблокировать пользователя'
-                           f'\n\t - $unban `nickname#tag` - Разблокировать пользователя'
                            f'\n\t - $users - Пользователи бота'
                            f'\n\t - $wbg - Предлагает во что поиграть'
                            f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
@@ -205,7 +196,6 @@ class Commands(commands.Cog):
                            f'\n\t - $clear `Qty` - Clear chat'
                            f'\n\t - $kick `@user` - Kick user'
                            f'\n\t - $ban `@nickname` - Ban user'
-                           f'\n\t - $unban `nickname#tag` - Unban user'
                            f'\n\t - $users - Bot users'
                            f'\n\t - $wbg - Advice on what to play'
                            f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
