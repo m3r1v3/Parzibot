@@ -10,7 +10,9 @@ on _[Twitter](https://twitter.com/merive_)_.
 
 ___
 
-#### Bot Commands:
+### Bot Commands
+
+#### User commands
 
 * _$8ball `question` - Ball of predictions_
   
@@ -36,7 +38,7 @@ ___
   
 * _$wbg - Advice on what to play_
 
-#### Admin commands:
+#### Admin commands
 
 * _$set_role `role_id` - Set default role_
 
