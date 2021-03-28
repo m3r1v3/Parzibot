@@ -33,3 +33,4 @@ token = os.environ.get('BOT_TOKEN')
 
 # Run bot
 client.run(str(token))
+
