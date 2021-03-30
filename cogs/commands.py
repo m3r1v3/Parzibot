@@ -104,7 +104,6 @@ class Commands(commands.Cog):
             else:
                 await ctx.send(f"You don't have permissions for using this command")
 
-
     @commands.command(pass_context=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
         """Ban user"""
@@ -127,7 +126,6 @@ class Commands(commands.Cog):
                 await ctx.send(f"У вас нет прав для использования данной команды")
             else:
                 await ctx.send(f"You don't have permissions for using this command")
-
 
     @commands.command()
     async def users(self, ctx):
@@ -188,43 +186,63 @@ class Commands(commands.Cog):
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
 
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-            await ctx.send(f'Команды бота:'
-                           f'\n\t - $8ball `вопрос` - Предсказывающий шар'
-                           f'\n\t - $about - О боте'
-                           f'\n\t - $clear `кол-во` - Очистить чат'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
-                           f'\n\t - $help - Команды бота'
-                           f'\n\t - $lang `(EN/RU)` - Устанавливает язык'
-                           f'\n\t - $nickname `@nickname` `new_nick` - Меняет ник'
-                           f'\n\t - $users - Пользователи бота'
-                           f'\n\t - $wb `(white/black)` - Игра Черное/Белое'
-                           f'\n\t - $wbg - Предлагает во что поиграть'
-                           f'\n\t - $ping - Твой ping'
-                           f'\nКоманды для администратора:'
-                           f'||\n\t - $ban `@nickname` - Заблокировать пользователя||'
-                           f'||\n\t - $give_role `@nickname` `role_id` - Дать роль||'
-                           f'||\n\t - $kick `@user` - Выгнать пользователя||'
-                           f'||\n\t - $set_role `role_id` - Установить стандартную роль||'
-                           f'||\n\t - $remove_role `role_id` - Убрать стандартную роль||')
+            await ctx.send('**Slash команды**'
+                           '\n\t - /8ball `question` - Предсказывающий шар'
+                           '\n\t - /about - О боте'
+                           '\n\t - /clear `Qty` - Очистить чат'
+                           '\n\t - /gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
+                           '\n\t - /help - Команды бота'
+                           '\n\t - /ping - Ваш пинг'
+                           '\n\t - /users - Пользователи бота'
+                           '\n\t - /wb `(white/black)` - Игра Черное/Белое'
+                           '\n\t - /wbg - Предлагает во что поиграть'
+                           '\n**Обычные команды**'
+                           '\n\t - $8ball `question` - Предсказывающий шар'
+                           '\n\t - $about - О боте'
+                           '\n\t - $clear `Qty` - Очитить чат'
+                           '\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
+                           '\n\t - $help - Команды бота'
+                           '\n\t - $lang `(EN/RU)` - Устанавливает язык'
+                           '\n\t - $ping - Ваш пинг'
+                           '\n\t - $users - Пользователи бота'
+                           '\n\t - $wb `(white/black)` - Игра Черное/Белое'
+                           '\n\t - $wbg - Предлагает во что поиграть'
+                           '\n**Команды админа**'
+                           '||\n\t - $ban `@nickname` - Заблокировать пользователя||'
+                           '||\n\t - $give_role `@nickname` `role_id` - Выдать роль||'
+                           '||\n\t - $nickname `@nickname` `new_nick` - Изменить никнейм||'
+                           '||\n\t - $kick `@user` - Выгнать пользователя||'
+                           '||\n\t - $set_role `role_id` - Установить стандартную роль||'
+                           '||\n\t - $remove_role `role_id` - Убрать стандартную роль||')
         else:
-            await ctx.send(f'Bot commands:'
-                           f'\n\t - $8ball `question` - Ball of predictions'
-                           f'\n\t - $about - About bot'
-                           f'\n\t - $clear `Qty` - Clear chat'
-                           f'\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
-                           f'\n\t - $help - Bot commands'
-                           f'\n\t - $lang `(EN/RU)` - Set language'
-                           f'\n\t - $nickname `@nickname` `new_nick` - Edit nickname'
-                           f'\n\t - $ping - You ping'
-                           f'\n\t - $users - Bot users'
-                           f'\n\t - $wb `(white/black)` - Game Black/White'
-                           f'\n\t - $wbg - Advice on what to play'
-                           f'\nFor admins:'
-                           f'||\n\t - $ban `@nickname` - Ban user||'
-                           f'||\n\t - $give_role `@nickname` `role_id` - Give role||'
-                           f'||\n\t - $kick `@user` - Kick user||'
-                           f'||\n\t - $set_role `role_id` - Set default role||'
-                           f'||\n\t - $remove_role `role_id` - Remove default role||')
+            await ctx.send('**Slash commands**'
+                           '\n\t - /8ball `question` - Ball of predictions'
+                           '\n\t - /about - About bot'
+                           '\n\t - /clear `Qty` - Clear chat'
+                           '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
+                           '\n\t - /help - Bot commands'
+                           '\n\t - /ping - You ping'
+                           '\n\t - /users - Bot users'
+                           '\n\t - /wb `(white/black)` - Game Black/White'
+                           '\n\t - /wbg - Advice on what to play'
+                           '\n**Common Commands**'
+                           '\n\t - $8ball `question` - Ball of predictions'
+                           '\n\t - $about - About bot'
+                           '\n\t - $clear `Qty` - Clear chat'
+                           '\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
+                           '\n\t - $help - Bot commands'
+                           '\n\t - $lang `(EN/RU)` - Set language'
+                           '\n\t - $ping - You ping'
+                           '\n\t - $users - Bot users'
+                           '\n\t - $wb `(white/black)` - Game Black/White'
+                           '\n\t - $wbg - Advice on what to play'
+                           '\n**Admin Commands**'
+                           '||\n\t - $ban `@nickname` - Ban user||'
+                           '||\n\t - $give_role `@nickname` `role_id` - Give role||'
+                           '||\n\t - $nickname `@nickname` `new_nick` - Edit nickname||'
+                           '||\n\t - $kick `@user` - Kick user||'
+                           '||\n\t - $set_role `role_id` - Set default role||'
+                           '||\n\t - $remove_role `role_id` - Remove default role||')
 
     @commands.command()
     async def about(self, ctx):

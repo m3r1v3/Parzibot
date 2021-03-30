@@ -10,40 +10,35 @@ on _[Twitter](https://twitter.com/merive_)_.
 
 ___
 
-### Bot Commands
+### Commands
+#### **Slash commands**
+ - /8ball `question` - Ball of predictions
+ - /about - About bot
+ - /clear `Qty` - Clear chat
+ - /gg `[game1 game2 ... gameN]` - Randomly chooses a game
+ - /help - Bot commands
+ - /lang `(EN/RU)` - Set language
+ - /ping - You ping
+ - /users - Bot users
+ - /wb `(white/black)` - Game Black/White
 
-#### User commands
+#### **Common Commands**'
+ - $8ball `question` - Ball of predictions
+ - $about - About bot
+ - $clear `Qty` - Clear chat
+ - $gg `[game1 game2 ... gameN]` - Randomly chooses a game
+ - $help - Bot commands
+ - $lang `(EN/RU)` - Set language
+ - $ping - You ping
+ - $users - Bot users
+ - $wb `(white/black)` - Game Black/White
+ - $wbg - Advice on what to play
 
-* _$8ball `question` - Ball of predictions_
-
-* _$clear `qty` - Clear chat_
-
-* _$gg `[game1 game2 game3 ... gameN]` - Randomly chooses a game_
-
-* _$help - Bot commands_
-
-* _$lang `(EN/RU)` - Set language_
-
-* _$nickname `@nickname` `new_nick` - Edit nickname_
-
-* _$ping - You ping_
-
-* _$users - Bot users_
-
-* _$wb `(white/black)` - Game Black/White for the role_
-
-* _$wbg - Advice on what to play_
-
-#### Admin commands
-
-* _$ban `@nickname` - Ban user_
-
-* _$give_role `@nickname` `role_id` - Give role_
-
-* _$kick `@nickname` - Kick user_
-
-* _$set_role `role_id` - Set default role_
-
-* _$remove_role `role_id` - Remove default role_
-
+#### **Admin Commands**
+ - $ban `@nickname` - Ban user
+ - $give_role `@nickname` `role_id` - Give role
+ - $nickname `@nickname` `new_nick` - Edit nickname
+ - $kick `@user` - Kick user
+ - $set_role `role_id` - Set default role
+ - $remove_role `role_id` - Remove default role
 ___
