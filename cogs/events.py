@@ -19,7 +19,8 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         """Sending a personal message about the bot and issuing a role in the chat"""
-        await member.send(f'Hey {member}! White $help to find out my command. For replace language write $lang `EN/RU`')
+        await member.send(f'Hey {member}! White $help to find out my command.'
+                          'For replace language write $lang `EN/RU`')
 
         role = discord.utils.get(member.guild.roles, id=int(Role().get_role(member.guild.id)))
         await member.add_roles(role)

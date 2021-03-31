@@ -17,11 +17,11 @@ ___
  - /clear `Qty` - Clear chat
  - /gg `[game1 game2 ... gameN]` - Randomly chooses a game
  - /help - Bot commands
- - /lang `(EN/RU)` - Set language
  - /ping - You ping
  - /users - Bot users
  - /wb `(white/black)` - Game Black/White
-
+ - /wbg - Advice on what to play
+ 
 #### **Common Commands**'
  - $8ball `question` - Ball of predictions
  - $about - About bot

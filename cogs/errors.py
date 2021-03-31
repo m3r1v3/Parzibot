@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from cogs.language import get_language
+from cogs.language_commands import get_language
 
 
 class Events(commands.Cog):
@@ -16,25 +16,24 @@ class Events(commands.Cog):
         got_language = get_language(ctx.message.author.name, str(ctx.guild.id))
         if isinstance(error, discord.ext.commands.MissingRequiredArgument):
             if got_language == "RU":
-                await ctx.send(f'Команда не дописана')
+                await ctx.send('Команда не дописана')
             else:
                 await ctx.send('Command is not finished')
         elif isinstance(error, discord.ext.commands.CommandNotFound):
             if got_language == "RU":
-                await ctx.send(f'Команда не распознана')
+                await ctx.send('Команда не распознана')
             else:
                 await ctx.send('Command does not found')
         elif isinstance(error, discord.ext.commands.BotMissingPermissions):
             if got_language == "RU":
-                await ctx.send(f'У вас нет прав для использования данной команды')
+                await ctx.send('У вас нет прав для использования данной команды')
             else:
-                await ctx.send(f"You don't have permissions for using this command")
+                await ctx.send("You don't have permissions for using this command")
         else:
             if got_language == "RU":
-                await ctx.send(f'Неизвестная ошибка')
+                await ctx.send('Неизвестная ошибка')
             else:
-                await ctx.send(f"Unknown error")
-
+                await ctx.send("Unknown error")
 
 
 def setup(client):

@@ -17,7 +17,7 @@ def set_language(nickname, server: str, language):
     User().add(nickname, str(server), language)
 
 
-class Language(commands.Cog):
+class LanguageCommands(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client and LANGUAGE"""
@@ -39,7 +39,7 @@ class Language(commands.Cog):
             await ctx.send("Language set")
             set_language(ctx.message.author.name, str(ctx.guild.id), language)
         elif language == "RU":
-            await ctx.send(f"Язык установлен")
+            await ctx.send("Язык установлен")
             set_language(ctx.message.author.name, str(ctx.guild.id), language)
         else:
             await ctx.send("Set Error")
@@ -47,4 +47,4 @@ class Language(commands.Cog):
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Language(client))
+    client.add_cog(LanguageCommands(client))

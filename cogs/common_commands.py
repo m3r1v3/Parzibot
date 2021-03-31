@@ -1,12 +1,10 @@
 import random
 import datetime
 
-import discord
 from discord.ext import commands
-from sqlalchemy.orm.exc import UnmappedInstanceError
 
-from cogs.language import get_language
-from database import User, Role
+from cogs.language_commands import get_language
+from database import User
 
 
 def get_random_color():
@@ -14,7 +12,7 @@ def get_random_color():
     return random.choice(['white', 'black'])
 
 
-class Commands(commands.Cog):
+class CommonCommands(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
@@ -80,52 +78,7 @@ class Commands(commands.Cog):
         """Clear chat"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
         await ctx.channel.purge(limit=amount + 1)
-
-    @commands.command(pass_context=True)
-    async def kick(self, ctx, member: discord.Member, *, reason=None):
-        """Kick user"""
-        if ctx.message.author.guild_permissions.administrator:
-            User().check_user(ctx.message.author.name, str(ctx.guild.id))
-
-            try:
-                User().delete(member.display_name, str(ctx.guild.id))
-            except UnmappedInstanceError:
-                pass
-
-            await member.kick(reason=reason)
-
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-            	await ctx.send(f'{member.mention} был выгнан')
-            else:
-            	await ctx.send(f'Kicked {member.mention}')
-        else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send(f"У вас нет прав для использования данной команды")
-            else:
-                await ctx.send(f"You don't have permissions for using this command")
-
-    @commands.command(pass_context=True)
-    async def ban(self, ctx, member: discord.Member, *, reason=None):
-        """Ban user"""
-        if ctx.message.author.guild_permissions.administrator:
-            User().check_user(ctx.message.author.name, str(ctx.guild.id))
-
-            try:
-                User().delete(member.display_name, str(ctx.guild.id))
-            except UnmappedInstanceError:
-                pass
-
-            await member.ban(reason=reason)
-
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send(f'{member.mention} забанен')
-            else:
-                await ctx.send(f'Banned {member.mention}')
-        else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send(f"У вас нет прав для использования данной команды")
-            else:
-                await ctx.send(f"You don't have permissions for using this command")
+        await ctx.send(f"*Cleared {amount+1} messages*")
 
     @commands.command()
     async def users(self, ctx):
@@ -168,17 +121,17 @@ class Commands(commands.Cog):
     async def white_black(self, ctx, question):
         """White/Black game"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
-
-        if question == get_random_color():
+        result = get_random_color()
+        if question == result:
             if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send(f'Ты выйграл')
+                await ctx.send(f'Ты выйграл ({result})')
             else:
-                await ctx.send(f'You winner')
+                await ctx.send(f'You winner ({result})')
         else:
             if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send(f'Ты проиграл')
+                await ctx.send(f'Ты проиграл({result})')
             else:
-                await ctx.send(f'You lose')
+                await ctx.send(f'You lose ({result})')
 
     @commands.command()
     async def help(self, ctx):
@@ -252,64 +205,7 @@ class Commands(commands.Cog):
                        f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
                        f"Parzibot, {datetime.datetime.now().year}")
 
-    @commands.command(pass_context=True)
-    async def nickname(self, ctx, member: discord.Member, *, nickname=None):
-        await member.edit(nick=nickname)
-        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-            await ctx.send(f'Ник был изменен для {member.mention}')
-        else:
-            await ctx.send(f'Nickname was changed for {member.mention}')
-
-    @commands.command()
-    async def set_role(self, ctx, role):
-        """Set default role for server"""
-        if ctx.message.author.guild_permissions.administrator:
-            Role().add(role, str(ctx.guild.id))
-
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("Стандартная роль для сервера установлена")
-            else:
-                await ctx.send("Default role for server installed")
-        else:
-        	if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-        		await ctx.send(f"У вас нет прав для использования данной команды")
-        	else:
-        		await ctx.send(f"You don't have permissions for using this command")
-
-    @commands.command()
-    async def remove_role(self, ctx, role):
-        """Remove default role for server"""
-        if ctx.message.author.guild_permissions.administrator:
-            Role().delete(role, str(ctx.guild.id))
-
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("Стандартная роль для сервера убрана")
-            else:
-                await ctx.send("Default role for server removed")
-        else:
-        	if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-        		await ctx.send(f"У вас нет прав для использования данной команды")
-        	else:
-        		await ctx.send(f"You don't have permissions for using this command")
-
-    @commands.command()
-    async def give_role(self, ctx, member: discord.Member, role_id: str):
-        """Give role to member"""
-        if ctx.message.author.guild_permissions.administrator:
-            role = discord.utils.get(member.guild.roles, id=int(role_id))
-            await member.add_roles(role)
-
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("Роль была дана {member}")
-            else:
-                await ctx.send(f"Role was given to {member}")
-        else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send(f"У вас нет прав для использования данной команды")
-            else:
-                await ctx.send(f"You don't have permissions for using this command")
-
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Commands(client))
+    client.add_cog(CommonCommands(client))

@@ -11,7 +11,7 @@ def get_random_color():
     return random.choice(['white', 'black'])
 
 
-class Slash(commands.Cog):
+class SlashCommands(commands.Cog):
     def __init__(self, client):
         self.client = client
 
@@ -65,7 +65,7 @@ class Slash(commands.Cog):
     async def clear(self, ctx, amount=5):
         """Clear chat"""
         await ctx.channel.purge(limit=amount+1)
-        await ctx.send(f"Cleared {amount} messages")
+        await ctx.send(f"*Cleared {amount+1} messages*")
 
     @cog_ext.cog_slash(name="users", description="Amount users of chat")
     async def users(self, ctx):
@@ -80,7 +80,9 @@ class Slash(commands.Cog):
         responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
                      "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
                      "Call of Duty:Warzone", "Minecraft"]
-        await ctx.send(f'Play to {random.choice(responses)}')
+        result = random.choice(responses)
+
+        await ctx.send(f'Play to {result}')
 
     @cog_ext.cog_slash(name="gg", description="Choice you random game from your list")
     async def good_game(self, ctx, *, games):
@@ -103,10 +105,11 @@ class Slash(commands.Cog):
                        ])
     async def white_black(self, ctx, color: str):
         """White/Black game"""
-        if color == get_random_color():
-            await ctx.send('You winner')
+        result = get_random_color()
+        if color == result:
+            await ctx.send(f'You winner ({result})')
         else:
-            await ctx.send('You lose')
+            await ctx.send(f'You lose ({result})')
 
     @cog_ext.cog_slash(name="help", description="Help command")
     async def help(self, ctx):
@@ -117,7 +120,6 @@ class Slash(commands.Cog):
                        '\n\t - /clear `Qty` - Clear chat'
                        '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
                        '\n\t - /help - Bot commands'
-                       '\n\t - /lang `(EN/RU)` - Set language'
                        '\n\t - /ping - You ping'
                        '\n\t - /users - Bot users'
                        '\n\t - /wb `(white/black)` - Game Black/White'
@@ -151,4 +153,4 @@ class Slash(commands.Cog):
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Slash(client))
+    client.add_cog(SlashCommands(client))
