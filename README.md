@@ -11,6 +11,7 @@ on _[Twitter](https://twitter.com/merive_)_.
 ___
 
 ### Commands
+___
 #### **Slash commands**
  - /8ball `question` - Ball of predictions
  - /about - About bot
@@ -21,7 +22,7 @@ ___
  - /users - Bot users
  - /wb `(white/black)` - Game Black/White
  - /wbg - Advice on what to play
- 
+ ___
 #### **Common Commands**'
  - $8ball `question` - Ball of predictions
  - $about - About bot
@@ -33,7 +34,7 @@ ___
  - $users - Bot users
  - $wb `(white/black)` - Game Black/White
  - $wbg - Advice on what to play
-
+___
 #### **Admin Commands**
  - $ban `@nickname` - Ban user
  - $give_role `@nickname` `role_id` - Give role
