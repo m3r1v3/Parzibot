@@ -134,7 +134,7 @@ class CommonCommands(commands.Cog):
 
     @commands.command()
     async def help(self, ctx):
-        """Return all commands"""
+        """Return commands"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
 
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
@@ -168,7 +168,7 @@ class CommonCommands(commands.Cog):
 
     @commands.command()
     async def slash_help(self, ctx):
-        """Return all commands"""
+        """Return slash commands"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
 
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
@@ -180,7 +180,7 @@ class CommonCommands(commands.Cog):
                            '\n\t - /gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
                            '\n\t - /help - Команды бота'
                            '\n\t - /ping - Ваш пинг'
-                           '\n\t - /splash_commands - Slash-команды'
+                           '\n\t - /splash_help - Slash-команды'
                            '\n\t - /users - Пользователи бота'
                            '\n\t - /wb `(white/black)` - Игра Черное/Белое'
                            '\n\t - /wbg - Предлагает во что поиграть')
@@ -193,14 +193,14 @@ class CommonCommands(commands.Cog):
                            '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
                            '\n\t - /help - Bot commands'
                            '\n\t - /ping - You ping'
-                           '\n\t - /splash_commands - Slash-commands'
+                           '\n\t - /splash_help - Slash-commands'
                            '\n\t - /users - Bot users'
                            '\n\t - /wb `(white/black)` - Game Black/White'
                            '\n\t - /wbg - Advice on what to play')
 
     @commands.command()
     async def admin_help(self, ctx):
-        """Return all commands"""
+        """Return admin commands"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
 
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":

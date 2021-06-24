@@ -21,7 +21,7 @@ ___
  - $help - Bot commands
  - $lang `(EN/RU)` - Set language
  - $ping - You ping
- - $splash_commands - Slash-commands
+ - $splash_help - Slash-commands
  - $users - Bot users
  - $wb `(white/black)` - Game Black/White
  - $wbg - Advice on what to play
@@ -35,7 +35,7 @@ ___
  - /gg `[game1 game2 ... gameN]` - Randomly chooses a game
  - /help - Bot commands
  - /ping - You ping
- - /splash_commands - Slash-commands
+ - /splash_help - Slash-commands
  - /users - Bot users
  - /wb `(white/black)` - Game Black/White
  - /wbg - Advice on what to play
@@ -49,3 +49,8 @@ ___
  - $set_role `role_id` - Set default role
  - $remove_role `role_id` - Remove default role
 ___
+
+### LICENSE
+Our project's using _MIT License_. 
+You can edit/update/use/etc. code of our project. 
+For more information read **LICENSE** in the repository.

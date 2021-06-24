@@ -130,7 +130,7 @@ class SlashCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="slash_help", description="Slash commands")
     async def slash_help(self, ctx):
-        """Return all commands"""
+        """Return slash commands"""
         await ctx.send('**Slash commands**'
                        '\n\t - /8ball `question` - Ball of predictions'
                        '\n\t - /about - About bot'
@@ -139,7 +139,7 @@ class SlashCommands(commands.Cog):
                        '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
                        '\n\t - /help - Bot commands'
                        '\n\t - /ping - You ping'
-                       '\n\t - /splash_commands - Slash-commands'
+                       '\n\t - /splash_help - Slash-commands'
                        '\n\t - /users - Bot users'
                        '\n\t - /wb `(white/black)` - Game Black/White'
                        '\n\t - /wbg - Advice on what to play')
