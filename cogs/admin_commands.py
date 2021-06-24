@@ -29,11 +29,10 @@ class AdminCommands(commands.Cog):
                 await ctx.send(f'{member.mention} был выгнан')
             else:
                 await ctx.send(f'Kicked {member.mention}')
+        elif get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("У вас нет прав для использования данной команды")
         else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("У вас нет прав для использования данной команды")
-            else:
-                await ctx.send("You don't have permissions for using this command")
+            await ctx.send("You don't have permissions for using this command")
 
     @commands.command(pass_context=True)
     async def ban(self, ctx, member: discord.Member, *, reason=None):
@@ -52,11 +51,10 @@ class AdminCommands(commands.Cog):
                 await ctx.send(f'{member.mention} забанен')
             else:
                 await ctx.send(f'Banned {member.mention}')
+        elif get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("У вас нет прав для использования данной команды")
         else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("У вас нет прав для использования данной команды")
-            else:
-                await ctx.send("You don't have permissions for using this command")
+            await ctx.send("You don't have permissions for using this command")
 
     @commands.command(pass_context=True)
     async def nickname(self, ctx, member: discord.Member, *, nickname=None):
@@ -66,11 +64,10 @@ class AdminCommands(commands.Cog):
                 await ctx.send(f'Ник был изменен для {member.mention}')
             else:
                 await ctx.send(f'Nickname was changed for {member.mention}')
+        elif get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("У вас нет прав для использования данной команды")
         else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("У вас нет прав для использования данной команды")
-            else:
-                await ctx.send("You don't have permissions for using this command")
+            await ctx.send("You don't have permissions for using this command")
 
     @commands.command()
     async def set_role(self, ctx, role):
@@ -82,11 +79,10 @@ class AdminCommands(commands.Cog):
                 await ctx.send("Стандартная роль для сервера установлена")
             else:
                 await ctx.send("Default role for server installed")
+        elif get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("У вас нет прав для использования данной команды")
         else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("У вас нет прав для использования данной команды")
-            else:
-                await ctx.send("You don't have permissions for using this command")
+            await ctx.send("You don't have permissions for using this command")
 
     @commands.command()
     async def remove_role(self, ctx, role):
@@ -98,11 +94,10 @@ class AdminCommands(commands.Cog):
                 await ctx.send("Стандартная роль для сервера убрана")
             else:
                 await ctx.send("Default role for server removed")
+        elif get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("У вас нет прав для использования данной команды")
         else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("У вас нет прав для использования данной команды")
-            else:
-                await ctx.send("You don't have permissions for using this command")
+            await ctx.send("You don't have permissions for using this command")
 
     @commands.command()
     async def give_role(self, ctx, member: discord.Member, role_id: str):
@@ -115,11 +110,10 @@ class AdminCommands(commands.Cog):
                 await ctx.send("Роль была дана {member}")
             else:
                 await ctx.send(f"Role was given to {member}")
+        elif get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send("У вас нет прав для использования данной команды")
         else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send("У вас нет прав для использования данной команды")
-            else:
-                await ctx.send("You don't have permissions for using this command")
+            await ctx.send("You don't have permissions for using this command")
 
 
 def setup(client):

@@ -12,29 +12,35 @@ ___
 
 ### Commands
 ___
-#### **Slash commands**
- - /8ball `question` - Ball of predictions
- - /about - About bot
- - /clear `Qty` - Clear chat
- - /gg `[game1 game2 ... gameN]` - Randomly chooses a game
- - /help - Bot commands
- - /ping - You ping
- - /users - Bot users
- - /wb `(white/black)` - Game Black/White
- - /wbg - Advice on what to play
- ___
 #### **Common Commands**'
  - $8ball `question` - Ball of predictions
  - $about - About bot
+ - $admin_help - Admin commands
  - $clear `Qty` - Clear chat
  - $gg `[game1 game2 ... gameN]` - Randomly chooses a game
  - $help - Bot commands
  - $lang `(EN/RU)` - Set language
  - $ping - You ping
+ - $splash_commands - Slash-commands
  - $users - Bot users
  - $wb `(white/black)` - Game Black/White
  - $wbg - Advice on what to play
 ___
+
+#### **Slash commands**
+ - /8ball `question` - Ball of predictions
+ - /about - About bot
+ - /admin_help - Admin commands
+ - /clear `Qty` - Clear chat
+ - /gg `[game1 game2 ... gameN]` - Randomly chooses a game
+ - /help - Bot commands
+ - /ping - You ping
+ - /splash_commands - Slash-commands
+ - /users - Bot users
+ - /wb `(white/black)` - Game Black/White
+ - /wbg - Advice on what to play
+ ___
+
 #### **Admin Commands**
  - $ban `@nickname` - Ban user
  - $give_role `@nickname` `role_id` - Give role

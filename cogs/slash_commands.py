@@ -26,7 +26,7 @@ class SlashCommands(commands.Cog):
                            description="You  question",
                            option_type=3,
                            required=True
-                           )
+                       )
                        ])
     async def _8ball(self, ctx, *, question: str):
         """8ball game"""
@@ -64,8 +64,8 @@ class SlashCommands(commands.Cog):
                        ])
     async def clear(self, ctx, amount=5):
         """Clear chat"""
-        await ctx.channel.purge(limit=amount+1)
-        await ctx.send(f"*Cleared {amount+1} messages*")
+        await ctx.channel.purge(limit=amount + 1)
+        await ctx.send(f"*Cleared {amount + 1} messages*")
 
     @cog_ext.cog_slash(name="users", description="Amount users of chat")
     async def users(self, ctx):
@@ -101,7 +101,7 @@ class SlashCommands(commands.Cog):
                                    create_choice(name="White", value="white"),
                                    create_choice(name="Black", value="black")
                                ]
-                               )
+                           )
                        ])
     async def white_black(self, ctx, color: str):
         """White/Black game"""
@@ -113,29 +113,41 @@ class SlashCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="help", description="Help command")
     async def help(self, ctx):
-        """Return all commands"""
-        await ctx.send('**Slash commands**'
-                       '\n\t - /8ball `question` - Ball of predictions'
-                       '\n\t - /about - About bot'
-                       '\n\t - /clear `Qty` - Clear chat'
-                       '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
-                       '\n\t - /help - Bot commands'
-                       '\n\t - /ping - You ping'
-                       '\n\t - /users - Bot users'
-                       '\n\t - /wb `(white/black)` - Game Black/White'
-                       '\n\t - /wbg - Advice on what to play'
-                       '\n**Common Commands**'
+        """Return commands"""
+        await ctx.send('**Common Commands**'
                        '\n\t - $8ball `question` - Ball of predictions'
                        '\n\t - $about - About bot'
+                       '\n\t - $admin_help - Admin commands'
                        '\n\t - $clear `Qty` - Clear chat'
                        '\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
                        '\n\t - $help - Bot commands'
                        '\n\t - $lang `(EN/RU)` - Set language'
                        '\n\t - $ping - You ping'
+                       '\n\t - $splash_commands - Slash-commands'
                        '\n\t - $users - Bot users'
                        '\n\t - $wb `(white/black)` - Game Black/White'
-                       '\n\t - $wbg - Advice on what to play'
-                       '\n**Admin Commands**'
+                       '\n\t - $wbg - Advice on what to play')
+
+    @cog_ext.cog_slash(name="slash_help", description="Slash commands")
+    async def slash_help(self, ctx):
+        """Return all commands"""
+        await ctx.send('**Slash commands**'
+                       '\n\t - /8ball `question` - Ball of predictions'
+                       '\n\t - /about - About bot'
+                       '\n\t - /admin_help - Admin commands'
+                       '\n\t - /clear `Qty` - Clear chat'
+                       '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
+                       '\n\t - /help - Bot commands'
+                       '\n\t - /ping - You ping'
+                       '\n\t - /splash_commands - Slash-commands'
+                       '\n\t - /users - Bot users'
+                       '\n\t - /wb `(white/black)` - Game Black/White'
+                       '\n\t - /wbg - Advice on what to play')
+
+    @cog_ext.cog_slash(name="admin_help", description="Admin commands")
+    async def admin_help(self, ctx):
+        """Return admin commands"""
+        await ctx.send('**Admin Commands**'
                        '||\n\t - $ban `@nickname` - Ban user||'
                        '||\n\t - $give_role `@nickname` `role_id` - Give role||'
                        '||\n\t - $nickname `@nickname` `new_nick` - Edit nickname||'

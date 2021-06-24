@@ -78,7 +78,7 @@ class CommonCommands(commands.Cog):
         """Clear chat"""
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
         await ctx.channel.purge(limit=amount + 1)
-        await ctx.send(f"*Cleared {amount+1} messages*")
+        await ctx.send(f"*Cleared {amount + 1} messages*")
 
     @commands.command()
     async def users(self, ctx):
@@ -127,11 +127,10 @@ class CommonCommands(commands.Cog):
                 await ctx.send(f'Ты выйграл ({result})')
             else:
                 await ctx.send(f'You winner ({result})')
+        elif get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send(f'Ты проиграл({result})')
         else:
-            if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-                await ctx.send(f'Ты проиграл({result})')
-            else:
-                await ctx.send(f'You lose ({result})')
+            await ctx.send(f'You lose ({result})')
 
     @commands.command()
     async def help(self, ctx):
@@ -139,28 +138,73 @@ class CommonCommands(commands.Cog):
         User().check_user(ctx.message.author.name, str(ctx.guild.id))
 
         if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
-            await ctx.send('**Slash команды**'
-                           '\n\t - /8ball `question` - Предсказывающий шар'
-                           '\n\t - /about - О боте'
-                           '\n\t - /clear `Qty` - Очистить чат'
-                           '\n\t - /gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
-                           '\n\t - /help - Команды бота'
-                           '\n\t - /ping - Ваш пинг'
-                           '\n\t - /users - Пользователи бота'
-                           '\n\t - /wb `(white/black)` - Игра Черное/Белое'
-                           '\n\t - /wbg - Предлагает во что поиграть'
-                           '\n**Обычные команды**'
+            await ctx.send('**Обычные команды**'
                            '\n\t - $8ball `question` - Предсказывающий шар'
                            '\n\t - $about - О боте'
+                           '\n\t - $admin_help - Команды администратора'
                            '\n\t - $clear `Qty` - Очитить чат'
                            '\n\t - $gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
                            '\n\t - $help - Команды бота'
                            '\n\t - $lang `(EN/RU)` - Устанавливает язык'
                            '\n\t - $ping - Ваш пинг'
+                           '\n\t - $splash_commands - Slash-команды'
                            '\n\t - $users - Пользователи бота'
                            '\n\t - $wb `(white/black)` - Игра Черное/Белое'
-                           '\n\t - $wbg - Предлагает во что поиграть'
-                           '\n**Команды админа**'
+                           '\n\t - $wbg - Предлагает во что поиграть')
+        else:
+            await ctx.send('**Common Commands**'
+                           '\n\t - $8ball `question` - Ball of predictions'
+                           '\n\t - $about - About bot'
+                           '\n\t - $admin_help - Admin commands'
+                           '\n\t - $clear `Qty` - Clear chat'
+                           '\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
+                           '\n\t - $help - Bot commands'
+                           '\n\t - $lang `(EN/RU)` - Set language'
+                           '\n\t - $ping - You ping'
+                           '\n\t - $splash_commands - Slash-commands'
+                           '\n\t - $users - Bot users'
+                           '\n\t - $wb `(white/black)` - Game Black/White'
+                           '\n\t - $wbg - Advice on what to play')
+
+    @commands.command()
+    async def slash_help(self, ctx):
+        """Return all commands"""
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send('**Slash команды**'
+                           '\n\t - /8ball `question` - Предсказывающий шар'
+                           '\n\t - /about - О боте'
+                           '\n\t - /admin_help - Команды администратора'
+                           '\n\t - /clear `Qty` - Очистить чат'
+                           '\n\t - /gg `[game1 game2 ... gameN]` - Выбирает случайную игру'
+                           '\n\t - /help - Команды бота'
+                           '\n\t - /ping - Ваш пинг'
+                           '\n\t - /splash_commands - Slash-команды'
+                           '\n\t - /users - Пользователи бота'
+                           '\n\t - /wb `(white/black)` - Игра Черное/Белое'
+                           '\n\t - /wbg - Предлагает во что поиграть')
+        else:
+            await ctx.send('**Slash commands**'
+                           '\n\t - /8ball `question` - Ball of predictions'
+                           '\n\t - /about - About bot'
+                           '\n\t - /admin_help - Admin commands'
+                           '\n\t - /clear `Qty` - Clear chat'
+                           '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
+                           '\n\t - /help - Bot commands'
+                           '\n\t - /ping - You ping'
+                           '\n\t - /splash_commands - Slash-commands'
+                           '\n\t - /users - Bot users'
+                           '\n\t - /wb `(white/black)` - Game Black/White'
+                           '\n\t - /wbg - Advice on what to play')
+
+    @commands.command()
+    async def admin_help(self, ctx):
+        """Return all commands"""
+        User().check_user(ctx.message.author.name, str(ctx.guild.id))
+
+        if get_language(ctx.message.author.name, str(ctx.guild.id)) == "RU":
+            await ctx.send('**Команды админа**'
                            '||\n\t - $ban `@nickname` - Заблокировать пользователя||'
                            '||\n\t - $give_role `@nickname` `role_id` - Выдать роль||'
                            '||\n\t - $nickname `@nickname` `new_nick` - Изменить никнейм||'
@@ -168,28 +212,7 @@ class CommonCommands(commands.Cog):
                            '||\n\t - $set_role `role_id` - Установить стандартную роль||'
                            '||\n\t - $remove_role `role_id` - Убрать стандартную роль||')
         else:
-            await ctx.send('**Slash commands**'
-                           '\n\t - /8ball `question` - Ball of predictions'
-                           '\n\t - /about - About bot'
-                           '\n\t - /clear `Qty` - Clear chat'
-                           '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
-                           '\n\t - /help - Bot commands'
-                           '\n\t - /ping - You ping'
-                           '\n\t - /users - Bot users'
-                           '\n\t - /wb `(white/black)` - Game Black/White'
-                           '\n\t - /wbg - Advice on what to play'
-                           '\n**Common Commands**'
-                           '\n\t - $8ball `question` - Ball of predictions'
-                           '\n\t - $about - About bot'
-                           '\n\t - $clear `Qty` - Clear chat'
-                           '\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
-                           '\n\t - $help - Bot commands'
-                           '\n\t - $lang `(EN/RU)` - Set language'
-                           '\n\t - $ping - You ping'
-                           '\n\t - $users - Bot users'
-                           '\n\t - $wb `(white/black)` - Game Black/White'
-                           '\n\t - $wbg - Advice on what to play'
-                           '\n**Admin Commands**'
+            await ctx.send('**Admin Commands**'
                            '||\n\t - $ban `@nickname` - Ban user||'
                            '||\n\t - $give_role `@nickname` `role_id` - Give role||'
                            '||\n\t - $nickname `@nickname` `new_nick` - Edit nickname||'
