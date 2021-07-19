@@ -17,7 +17,7 @@ class SlashCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="ping", description="Return user ping")
     async def ping(self, ctx):
-        await ctx.send(f'Ping: {round(self.client.latency * 1000)}ms')
+        await ctx.send(f'Ping - `{round(self.client.latency * 1000)}ms`')
 
     @cog_ext.cog_slash(name="8ball",
                        description="8ball game",
@@ -50,8 +50,8 @@ class SlashCommands(commands.Cog):
                      "My sources say no...",
                      "Outlook not so good...",
                      "Very doubtful..."]
-        await ctx.send(f'Question: {question}\n'
-                       f'Answer: {random.choice(responses)}')
+        await ctx.send(f'Question: `{question}`\n'
+                       f'Answer: `{random.choice(responses)}`')
 
     @cog_ext.cog_slash(name="clear",
                        description="Clear chat",
@@ -65,7 +65,7 @@ class SlashCommands(commands.Cog):
     async def clear(self, ctx, amount=5):
         """Clear chat"""
         await ctx.channel.purge(limit=amount + 1)
-        await ctx.send(f"*Cleared {amount + 1} messages*")
+        await ctx.send(f"*Cleared {amount} messages*")
 
     @cog_ext.cog_slash(name="users", description="Amount users of chat")
     async def users(self, ctx):
@@ -77,17 +77,17 @@ class SlashCommands(commands.Cog):
     @cog_ext.cog_slash(name="wbg", description="Choice random game from our list")
     async def what_by_game(self, ctx):
         """Function for choice game"""
-        responses = ["Fortnite", "CS:GO", "GTAV", "GTA:SA",
-                     "PUBG", "SAR", "Rust", "RDR2", "Assassin's creed",
-                     "Call of Duty:Warzone", "Minecraft"]
+        responses = ["Fortnite", "CS:GO", "GTAV", "GTA:San Andreas", "Dota 2", "Rocket League",
+                     "PUBG", "Super Animal Royale", "Rust", "RDR2", "Assassin's creed",
+                     "Call of Duty: Warzone", "Minecraft", "Fall Guys", "Apex Legends"]
         result = random.choice(responses)
 
-        await ctx.send(f'Play to {result}')
+        await ctx.send(f'Play to `{result}`')
 
     @cog_ext.cog_slash(name="gg", description="Choice you random game from your list")
     async def good_game(self, ctx, *, games):
         """Random choice game"""
-        await ctx.send(f'Play to {random.choice(games.split())}')
+        await ctx.send(f'Play to `{random.choice(games.split())}`')
 
     @cog_ext.cog_slash(name="wb",
                        description="White/Black Game",
@@ -107,39 +107,21 @@ class SlashCommands(commands.Cog):
         """White/Black game"""
         result = get_random_color()
         if color == result:
-            await ctx.send(f'You winner ({result})')
+            await ctx.send(f'You won (`{result}`)')
         else:
-            await ctx.send(f'You lose ({result})')
+            await ctx.send(f'You lose (`{result}`)')
 
     @cog_ext.cog_slash(name="help", description="Help command")
     async def help(self, ctx):
-        """Return commands"""
-        await ctx.send('**Common Commands**'
-                       '\n\t - $8ball `question` - Ball of predictions'
-                       '\n\t - $about - About bot'
-                       '\n\t - $admin_help - Admin commands'
-                       '\n\t - $clear `Qty` - Clear chat'
-                       '\n\t - $gg `[game1 game2 ... gameN]` - Randomly chooses a game'
-                       '\n\t - $help - Bot commands'
-                       '\n\t - $lang `(EN/RU)` - Set language'
-                       '\n\t - $ping - You ping'
-                       '\n\t - $splash_commands - Slash-commands'
-                       '\n\t - $users - Bot users'
-                       '\n\t - $wb `(white/black)` - Game Black/White'
-                       '\n\t - $wbg - Advice on what to play')
-
-    @cog_ext.cog_slash(name="slash_help", description="Slash commands")
-    async def slash_help(self, ctx):
         """Return slash commands"""
-        await ctx.send('**Slash commands**'
+        await ctx.send('**Bot commands**'
                        '\n\t - /8ball `question` - Ball of predictions'
                        '\n\t - /about - About bot'
                        '\n\t - /admin_help - Admin commands'
-                       '\n\t - /clear `Qty` - Clear chat'
+                       '\n\t - /clear `Quantity` - Clear chat'
                        '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
                        '\n\t - /help - Bot commands'
                        '\n\t - /ping - You ping'
-                       '\n\t - /splash_help - Slash-commands'
                        '\n\t - /users - Bot users'
                        '\n\t - /wb `(white/black)` - Game Black/White'
                        '\n\t - /wbg - Advice on what to play')
@@ -159,7 +141,7 @@ class SlashCommands(commands.Cog):
     async def about(self, ctx):
         """Return about bot"""
         await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
-                       f"All source code is on [GitHub](https://github.com/merive/Parzibot)\n"
+                       f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
                        f"Parzibot, {datetime.datetime.now().year}")
 
 

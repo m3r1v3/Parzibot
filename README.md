@@ -11,46 +11,34 @@ on _[Twitter](https://twitter.com/merive_)_.
 ___
 
 ### Commands
-___
-#### **Common Commands**'
- - $8ball `question` - Ball of predictions
- - $about - About bot
- - $admin_help - Admin commands
- - $clear `Qty` - Clear chat
- - $gg `[game1 game2 ... gameN]` - Randomly chooses a game
- - $help - Bot commands
- - $lang `(EN/RU)` - Set language
- - $ping - You ping
- - $splash_help - Slash-commands
- - $users - Bot users
- - $wb `(white/black)` - Game Black/White
- - $wbg - Advice on what to play
-___
 
-#### **Slash commands**
- - /8ball `question` - Ball of predictions
- - /about - About bot
- - /admin_help - Admin commands
- - /clear `Qty` - Clear chat
- - /gg `[game1 game2 ... gameN]` - Randomly chooses a game
- - /help - Bot commands
- - /ping - You ping
- - /splash_help - Slash-commands
- - /users - Bot users
- - /wb `(white/black)` - Game Black/White
- - /wbg - Advice on what to play
+#### **Bot commands**
+
+- /8ball `question` - Ball of predictions
+- /about - About bot
+- /admin_help - Admin commands
+- /clear `Quantity` - Clear chat
+- /gg `[game1 game2 ... gameN]` - Randomly chooses a game
+- /help - Bot commands
+- /ping - You ping
+- /users - Bot users
+- /wb `(white/black)` - Game Black/White
+- /wbg - Advice on what to play
+
  ___
 
 #### **Admin Commands**
- - $ban `@nickname` - Ban user
- - $give_role `@nickname` `role_id` - Give role
- - $nickname `@nickname` `new_nick` - Edit nickname
- - $kick `@user` - Kick user
- - $set_role `role_id` - Set default role
- - $remove_role `role_id` - Remove default role
+
+- $ban `@nickname` - Ban user
+- $give_role `@nickname` `role_id` - Give role
+- $nickname `@nickname` `new_nick` - Edit nickname
+- $kick `@user` - Kick user
+- $set_role `role_id` - Set default role
+- $remove_role `role_id` - Remove default role
+
 ___
 
 ### LICENSE
-Our project's using _MIT License_. 
-You can edit/update/use/etc. code of our project. 
-For more information read **LICENSE** in the repository.
+
+Our project's using _MIT License_. You can edit/update/use/etc. code of our project. For more information read **
+LICENSE** in the repository.
