@@ -18,7 +18,7 @@ class Events(commands.Cog):
         elif isinstance(error, discord.ext.commands.BotMissingPermissions):
             await ctx.send("You don't have permissions for using this command")
         else:
-            await ctx.send("Unknown error")
+            await ctx.send(f"Unknown error ({error})")
 
 
 def setup(client):

@@ -2,7 +2,7 @@
 
 ### _Simple and convenient bot discord on Python._
 
-The source code of the bot is available to everyone. The bot used the English and Russian languages. This is free open
+The source code of the bot is available to everyone. The bot used the English language. This is free open
 source software and if anyone wants to change things in advance. Just before using my code, please write to me
 on _[Twitter](https://twitter.com/merive_)_.
 

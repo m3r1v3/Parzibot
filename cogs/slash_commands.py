@@ -64,7 +64,7 @@ class SlashCommands(commands.Cog):
                        ])
     async def clear(self, ctx, amount=5):
         """Clear chat"""
-        await ctx.channel.purge(limit=amount + 1)
+        await ctx.channel.purge(limit=amount)
         await ctx.send(f"*Cleared {amount} messages*")
 
     @cog_ext.cog_slash(name="users", description="Amount users of chat")
@@ -140,9 +140,9 @@ class SlashCommands(commands.Cog):
     @cog_ext.cog_slash(name="about", description="About command")
     async def about(self, ctx):
         """Return about bot"""
-        await ctx.send(f"Parzibot is free open source project, created by **@merive_#6187**.\n"
+        await ctx.send(f"**Parzibot** is free open source project, created by **@merive_#6187**.\n"
                        f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
-                       f"Parzibot, {datetime.datetime.now().year}")
+                       f"**Parzibot**, {datetime.datetime.now().year}")
 
 
 def setup(client):
