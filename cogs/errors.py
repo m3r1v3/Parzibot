@@ -11,14 +11,14 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         """Returns a command error message"""
-        if isinstance(error, discord.ext.commands.MissingRequiredArgument):
-            await ctx.send('Command is not finished')
-        elif isinstance(error, discord.ext.commands.CommandNotFound):
-            await ctx.send('Command does not found')
-        elif isinstance(error, discord.ext.commands.BotMissingPermissions):
-            await ctx.send("You don't have permissions for using this command")
+        if isinstance(error, commands.CommandNotFound):
+            await ctx.send(f"**Error**: `Command not found`")
+        elif isinstance(error, (commands.CommandInvokeError, commands.MissingPermissions)):
+            await ctx.send("**Error**: `You don't have permissions for using this command!`")
+        elif isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send("**Error**: `Command isn't finished!`")
         else:
-            await ctx.send(f"Unknown error ({error})")
+            await ctx.send(f"**Unknown Error**")
 
 
 def setup(client):

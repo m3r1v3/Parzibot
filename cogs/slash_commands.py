@@ -17,7 +17,7 @@ class SlashCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="ping", description="Return user ping")
     async def ping(self, ctx):
-        await ctx.send(f'Ping - `{round(self.client.latency * 1000)}ms`')
+        await ctx.send(f'**Ping**: `{round(self.client.latency * 1000)}ms`')
 
     @cog_ext.cog_slash(name="8ball",
                        description="8ball game",
@@ -50,8 +50,8 @@ class SlashCommands(commands.Cog):
                      "My sources say no...",
                      "Outlook not so good...",
                      "Very doubtful..."]
-        await ctx.send(f'Question: `{question}`\n'
-                       f'Answer: `{random.choice(responses)}`')
+        await ctx.send(f'**Question**: `{question}`\n'
+                       f'**Answer**: `{random.choice(responses)}`')
 
     @cog_ext.cog_slash(name="clear",
                        description="Clear chat",
@@ -65,7 +65,7 @@ class SlashCommands(commands.Cog):
     async def clear(self, ctx, amount=5):
         """Clear chat"""
         await ctx.channel.purge(limit=amount)
-        await ctx.send(f"*Cleared {amount} messages*")
+        await ctx.send(f"Cleared **{amount}** messages")
 
     @cog_ext.cog_slash(name="users", description="Amount users of chat")
     async def users(self, ctx):
@@ -107,35 +107,35 @@ class SlashCommands(commands.Cog):
         """White/Black game"""
         result = get_random_color()
         if color == result:
-            await ctx.send(f'You won (`{result}`)')
+            await ctx.send(f'**You won**: `{result}`')
         else:
-            await ctx.send(f'You lose (`{result}`)')
+            await ctx.send(f'**You lose**: `{result}`')
 
     @cog_ext.cog_slash(name="help", description="Help command")
     async def help(self, ctx):
         """Return slash commands"""
         await ctx.send('**Bot commands**'
-                       '\n\t - /8ball `question` - Ball of predictions'
-                       '\n\t - /about - About bot'
-                       '\n\t - /admin_help - Admin commands'
-                       '\n\t - /clear `Quantity` - Clear chat'
-                       '\n\t - /gg `[game1 game2 ... gameN]` - Randomly chooses a game'
-                       '\n\t - /help - Bot commands'
-                       '\n\t - /ping - You ping'
-                       '\n\t - /users - Bot users'
-                       '\n\t - /wb `(white/black)` - Game Black/White'
-                       '\n\t - /wbg - Advice on what to play')
+                       '\n\t - **/8ball** `question` - Ball of predictions'
+                       '\n\t - **/about** - About bot'
+                       '\n\t - **/admin_help** - Admin commands'
+                       '\n\t - **/clear** `Quantity` - Clear chat'
+                       '\n\t - **/gg** `[game1 game2 ... gameN]` - Randomly chooses a game'
+                       '\n\t - **/help** - Bot commands'
+                       '\n\t - **/ping** - You ping'
+                       '\n\t - **/users** - Bot users'
+                       '\n\t - **/wb** `(white/black)` - Game Black/White'
+                       '\n\t - **/wbg** - Advice on what to play')
 
     @cog_ext.cog_slash(name="admin_help", description="Admin commands")
     async def admin_help(self, ctx):
         """Return admin commands"""
         await ctx.send('**Admin Commands**'
-                       '||\n\t - $ban `@nickname` - Ban user||'
-                       '||\n\t - $give_role `@nickname` `role_id` - Give role||'
-                       '||\n\t - $nickname `@nickname` `new_nick` - Edit nickname||'
-                       '||\n\t - $kick `@user` - Kick user||'
-                       '||\n\t - $set_role `role_id` - Set default role||'
-                       '||\n\t - $remove_role `role_id` - Remove default role||')
+                       '||\n\t - **$ban** `@user` - Ban user||'
+                       '||\n\t - **$give_role** `@user` `role_id` - Give role||'
+                       '||\n\t - **$nickname** `@user` `new_nick` - Edit nickname||'
+                       '||\n\t - **$kick** `@user` - Kick user||'
+                       '||\n\t - **$set_role** `role_id` - Set default role||'
+                       '||\n\t - **$remove_role** `role_id` - Remove default role||')
 
     @cog_ext.cog_slash(name="about", description="About command")
     async def about(self, ctx):
