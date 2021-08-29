@@ -1,25 +1,19 @@
 from discord.ext import commands
+from discord_slash import error
 
 
-class Events(commands.Cog):
+class Errors(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
         self.client = client
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
-        """Returns a command error message"""
-        if isinstance(error, commands.CommandNotFound):
-            await ctx.send(f"**Error**: `Command not found`")
-        elif isinstance(error, (commands.CommandInvokeError, commands.MissingPermissions)):
-            await ctx.send("**Error**: `You don't have permissions for using this command!`")
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("**Error**: `Command isn't finished!`")
-        else:
-            await ctx.send(f"**Unknown Error**")
+    async def on_slash_command_error(self, ctx, error):
+        """Returns a command error message on slash command error"""
+        await ctx.send(f"**Error**: `Something went wrong! Try again.`")
 
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Events(client))
+    client.add_cog(Errors(client))

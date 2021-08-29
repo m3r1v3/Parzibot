@@ -30,6 +30,7 @@ class AdminCommands(commands.Cog):
                        ]
                        )
     async def ban(self, ctx, member: discord.Member, *, reason=None):
+        """Ban a member on the server"""
         if ctx.author.guild_permissions.manage_messages:
             await member.ban(reason=reason)
             await ctx.send(f'Banned **{member.mention}**')
@@ -53,6 +54,7 @@ class AdminCommands(commands.Cog):
                        ]
                        )
     async def give_role(self, ctx, member: discord.Member, role):
+        """Give role to member"""
         if ctx.author.guild_permissions.manage_messages:
             await member.add_roles(role)
             await ctx.send(f"Role was given to **{member}**")
@@ -77,6 +79,7 @@ class AdminCommands(commands.Cog):
                        ]
                        )
     async def nickname(self, ctx, member: discord.Member, *, nickname=None):
+        """Change nickname to member"""
         if ctx.author.guild_permissions.manage_messages:
             await member.edit(nick=nickname)
             await ctx.send(f'Nickname was changed for **{member}**')
@@ -102,6 +105,7 @@ class AdminCommands(commands.Cog):
                        )
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         if ctx.author.guild_permissions.manage_messages:
+            """Kick a member from the server"""
             await member.kick(reason=reason)
             await ctx.send(f'Kicked **{member}**')
         else:
@@ -119,6 +123,7 @@ class AdminCommands(commands.Cog):
                        ]
                        )
     async def set_role(self, ctx, role):
+        """Set default role on the server"""
         if ctx.author.guild_permissions.manage_messages:
             Role().add(role, str(ctx.guild.id))
             await ctx.send("**Default role for server set**")
@@ -137,6 +142,7 @@ class AdminCommands(commands.Cog):
                        ]
                        )
     async def remove_role(self, ctx, role):
+        """Remove default role on the server"""
         if ctx.author.guild_permissions.manage_messages:
             Role().delete(role, str(ctx.guild.id))
             await ctx.send("**Default role for server removed**")
@@ -145,6 +151,7 @@ class AdminCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="admin_help", description="Parzibot Admin-Commands list")
     async def admin_help(self, ctx):
+        """Parzibot Admin-Commands list"""
         if ctx.author.guild_permissions.manage_messages:
             await ctx.send('**Admin Commands**'
                            '\n\t - **/ban** `@member` - Ban a member on the server'
