@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from sqlalchemy.orm.exc import UnmappedInstanceError
 
 from database import Role
 
