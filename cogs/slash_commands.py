@@ -15,15 +15,15 @@ class SlashCommands(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @cog_ext.cog_slash(name="ping", description="Return user ping")
+    @cog_ext.cog_slash(name="ping", description="Parzibot ping")
     async def ping(self, ctx):
         await ctx.send(f'**Ping**: `{round(self.client.latency * 1000)}ms`')
 
     @cog_ext.cog_slash(name="8ball",
-                       description="8ball game",
+                       description="The ball of predictions",
                        options=[create_option(
                            name="question",
-                           description="You  question",
+                           description="Your question to ball",
                            option_type=3,
                            required=True
                        )
@@ -54,20 +54,20 @@ class SlashCommands(commands.Cog):
                        f'**Answer**: `{random.choice(responses)}`')
 
     @cog_ext.cog_slash(name="clear",
-                       description="Clear chat",
+                       description="Clear text chat",
                        options=[
                            create_option(
-                               name="amount",
-                               description="Amount messages on clearing",
+                               name="number",
+                               description="Number of messages for clear",
                                option_type=4,
                                required=False)
                        ])
-    async def clear(self, ctx, amount=5):
+    async def clear(self, ctx, number=5):
         """Clear chat"""
-        await ctx.channel.purge(limit=amount)
-        await ctx.send(f"Cleared **{amount}** messages")
+        await ctx.channel.purge(limit=number)
+        await ctx.send(f"Cleared **{number}** messages")
 
-    @cog_ext.cog_slash(name="users", description="Amount users of chat")
+    @cog_ext.cog_slash(name="users", description="List of text chat members")
     async def users(self, ctx):
         """Return bot users"""
         channel = ctx.channel
@@ -84,13 +84,13 @@ class SlashCommands(commands.Cog):
 
         await ctx.send(f'Play to `{result}`')
 
-    @cog_ext.cog_slash(name="gg", description="Choice you random game from your list")
+    @cog_ext.cog_slash(name="gg", description="Randomly chooses a game from your list")
     async def good_game(self, ctx, *, games):
         """Random choice game"""
         await ctx.send(f'Play to `{random.choice(games.split())}`')
 
     @cog_ext.cog_slash(name="wb",
-                       description="White/Black Game",
+                       description="The White/Black Game",
                        options=[
                            create_option(
                                name="color",
@@ -111,36 +111,25 @@ class SlashCommands(commands.Cog):
         else:
             await ctx.send(f'**You lose**: `{result}`')
 
-    @cog_ext.cog_slash(name="help", description="Help command")
+    @cog_ext.cog_slash(name="help", description="List of Parzibot commands")
     async def help(self, ctx):
         """Return slash commands"""
         await ctx.send('**Bot commands**'
-                       '\n\t - **/8ball** `question` - Ball of predictions'
-                       '\n\t - **/about** - About bot'
-                       '\n\t - **/admin_help** - Admin commands'
-                       '\n\t - **/clear** `Quantity` - Clear chat'
-                       '\n\t - **/gg** `[game1 game2 ... gameN]` - Randomly chooses a game'
-                       '\n\t - **/help** - Bot commands'
-                       '\n\t - **/ping** - You ping'
-                       '\n\t - **/users** - Bot users'
-                       '\n\t - **/wb** `(white/black)` - Game Black/White'
-                       '\n\t - **/wbg** - Advice on what to play')
+                       '\n\t - **/8ball** `question` - The ball of predictions'
+                       '\n\t - **/about** - About Parzibot'
+                       '\n\t - **/admin_help** - List of Parzibot admin commands'
+                       '\n\t - **/clear** `Number of messages` - Clear text chat'
+                       '\n\t - **/gg** `game1 game2 ... gameN` - Randomly chooses a game from your list'
+                       '\n\t - **/help** - List of Parzibot commands'
+                       '\n\t - **/ping** - Parzibot ping'
+                       '\n\t - **/users** - List of text chat members'
+                       '\n\t - **/wb** `white/black` - The White/Black Game'
+                       '\n\t - **/wbg** - Choice random game from our list')
 
-    @cog_ext.cog_slash(name="admin_help", description="Admin commands")
-    async def admin_help(self, ctx):
-        """Return admin commands"""
-        await ctx.send('**Admin Commands**'
-                       '||\n\t - **$ban** `@user` - Ban user||'
-                       '||\n\t - **$give_role** `@user` `role_id` - Give role||'
-                       '||\n\t - **$nickname** `@user` `new_nick` - Edit nickname||'
-                       '||\n\t - **$kick** `@user` - Kick user||'
-                       '||\n\t - **$set_role** `role_id` - Set default role||'
-                       '||\n\t - **$remove_role** `role_id` - Remove default role||')
-
-    @cog_ext.cog_slash(name="about", description="About command")
+    @cog_ext.cog_slash(name="about", description="About Parzibot")
     async def about(self, ctx):
         """Return about bot"""
-        await ctx.send(f"**Parzibot** is free open source project, created by **@merive_#6187**.\n"
+        await ctx.send(f"**Parzibot** is free open-source project, created by **@merive_#6187**.\n"
                        f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
                        f"**Parzibot**, {datetime.datetime.now().year}")
 

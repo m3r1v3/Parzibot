@@ -34,7 +34,7 @@ class Events(commands.Cog):
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
                 if i not in after.roles:
-                    await after.send(f'You were deprived of the role `{i}`')
+                    await after.send(f'You were deprived of the role **{i}**')
 
 
 def setup(client):
