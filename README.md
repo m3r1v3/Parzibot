@@ -14,27 +14,27 @@ ___
 
 #### **Bot commands**
 
-- **/8ball** `question` - Ball of predictions
-- **/about** - About bot
-- **/admin_help** - Admin commands
-- **/clear** `Quantity` - Clear chat
-- **/gg** `[game1 game2 ... gameN]` - Randomly chooses a game
-- **/help** - Bot commands
-- **/ping** - You ping
-- **/users** - Bot users
-- **/wb** `(white/black)` - Game Black/White
-- **/wbg** - Advice on what to play
+- **/8ball** `question` - The ball of predictions
+- **/about** - About Parzibot
+- **/clear** `number` - Clear current text chat
+- **/gg** `games` - Randomly chooses a game from your list
+- **/help** - List of Parzibot commands
+- **/ping** - Parzibot ping
+- **/users** - List of text chat members
+- **/wb** `white/black` - The White/Black Game
+- **/wbg** - Choice random game from our list
 
  ___
 
 #### **Admin Commands**
 
-- **$ban** `@nickname` - Ban user
-- **$give_role** `@user` `role_id` - Give role
-- **$nickname** `@user` `new_nick` - Edit nickname
-- **$kick** `@user` - Kick user
-- **$set_role** `role_id` - Set default role
-- **$remove_role** `role_id` - Remove default role
+- **/admin_help** - List of Parzibot admin commands
+- **/ban** `@member` - Ban a member on the server
+- **/give_role** `@member` `role` - Give a role to a member
+- **/nickname** `@member` `new_nick` - Change member\'s nickname
+- **/kick** `@member` - Kick a member from the server
+- **/set_role** `role_id` - Set default role on the server
+- **/remove_role** `role_id` - Remove default role on the server
 
 ___
 
@@ -42,3 +42,9 @@ ___
 
 Our project's using _MIT License_. You can edit/update/use code of our project. For more information read
 **LICENSE** in the repository.
+
+___
+
+### Contributing
+
+If you want to work on our project, you are welcome! Read _CONTRIBUTING.md_ and start improving **Parzibot**!
