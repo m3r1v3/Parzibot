@@ -67,10 +67,13 @@ class Commands(commands.Cog):
                        ])
     async def clear(self, ctx, number=5):
         """Clear text chat"""
-        await ctx.channel.purge(limit=number)
-        await ctx.send(f"Cleared **{number}** messages")
+        if number > 0:
+            await ctx.channel.purge(limit=number)
+            await ctx.send(f"Cleared **{number}** messages")
+        else:
+            await ctx.send(f"Cannot clear **{number}** messages")
 
-    @cog_ext.cog_slash(name="gg",
+    @cog_ext.cog_slash(name="choosegame",
                        description="Randomly chooses a game from your list",
                        options=[
                            create_option(
@@ -79,7 +82,7 @@ class Commands(commands.Cog):
                                option_type=3,
                                required=False)
                        ])
-    async def good_game(self, ctx, *, games: str):
+    async def choose_game(self, ctx, *, games: str):
         """Randomly chooses a game from your list"""
         await ctx.send(f'Play to **{random.choice(games.split())}**')
 
@@ -89,14 +92,14 @@ class Commands(commands.Cog):
         await ctx.send('**Bot commands**'
                        '\n\t - **/8ball** `question` - The ball of predictions'
                        '\n\t - **/about** - About Parzibot'
-                       '\n\t - **/admin_help** - List of Parzibot admin commands'
+                       '\n\t - **/adminhelp** - List of Parzibot admin commands'
                        '\n\t - **/clear** `number` - Clear current text chat'
-                       '\n\t - **/gg** `games` - Randomly chooses a game from your list'
+                       '\n\t - **/choosegame** `games` - Randomly chooses a game from your list'
                        '\n\t - **/help** - List of Parzibot commands'
                        '\n\t - **/ping** - Parzibot ping'
                        '\n\t - **/users** - List of text chat members'
-                       '\n\t - **/wb** `white/black` - The White/Black Game'
-                       '\n\t - **/wbg** - Choice random game from our list')
+                       '\n\t - **/whiteblack** `white/black` - The White/Black Game'
+                       '\n\t - **/givegame** - Choice random game from our list')
 
     @cog_ext.cog_slash(name="ping", description="Parzibot ping")
     async def ping(self, ctx):
@@ -110,7 +113,7 @@ class Commands(commands.Cog):
         members = "".join(f'\t*{str(member)}*\n' for member in channel.members)
         await ctx.send(f'**Channel members:**\n{str(members)}')
 
-    @cog_ext.cog_slash(name="wb",
+    @cog_ext.cog_slash(name="whiteblack",
                        description="The White/Black Game",
                        options=[
                            create_option(
@@ -132,12 +135,13 @@ class Commands(commands.Cog):
         else:
             await ctx.send(f'**You lose**: `{result}`')
 
-    @cog_ext.cog_slash(name="wbg", description="Choice random game from our list")
-    async def what_by_game(self, ctx):
+    @cog_ext.cog_slash(name="givegame", description="Choice random game from our list")
+    async def give_game(self, ctx):
         """Choice random game from our list"""
-        responses = ["Fortnite", "CS:GO", "GTAV", "GTA:San Andreas", "Dota 2", "Rocket League",
-                     "PUBG", "Super Animal Royale", "Rust", "RDR2", "Assassin's creed",
-                     "Call of Duty: Warzone", "Minecraft", "Fall Guys", "Apex Legends"]
+        responses = ["Minecraft", "GTA V", "Fortnite", "PUBG", "League of Legends", "CS:GO", "Dota 2", "Apex Legends", "Rocket League",
+                "Rainbow Six: Siege", "Overwatch", "RDR 2", "Dead by Daylight", "Call of Duty: Warzone", "Cyberpunk 2077", "The Elder Scrolls V: Skyrim",
+                "Forza Horizon 4", "Assasin's Creed Valhalla", "Animal Crossing: New Horizons", "Valorant", "Fall Guys", "Terraria", "Fallout 76",
+                "Super Animal Royale", "Genshin Impact", "Control"]
         result = random.choice(responses)
 
         await ctx.send(f'Play to **{result}**')

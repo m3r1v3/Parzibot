@@ -6,7 +6,7 @@ The source code of the bot is available to everyone. The bot used the English la
 software and if anyone wants to change things in advance. Just before using my code, please write to me
 on _[Twitter](https://twitter.com/merive_)_.
 
-**I will be pleased to know that someone uses my work🙂.**
+**I will be pleased to know that someone uses my work**
 
 ___
 
@@ -17,24 +17,24 @@ ___
 - **/8ball** `question` - The ball of predictions
 - **/about** - About Parzibot
 - **/clear** `number` - Clear current text chat
-- **/gg** `games` - Randomly chooses a game from your list
+- **/choosegame** `games` - Randomly chooses a game from your list
 - **/help** - List of Parzibot commands
 - **/ping** - Parzibot ping
 - **/users** - List of text chat members
-- **/wb** `white/black` - The White/Black Game
-- **/wbg** - Choice random game from our list
+- **/whiteblack** `white/black` - The White/Black Game
+- **/givegame** - Choice random game from our list
 
  ___
 
 #### **Admin Commands**
 
-- **/admin_help** - List of Parzibot admin commands
+- **/adminhelp** - List of Parzibot admin commands
 - **/ban** `@member` - Ban a member on the server
-- **/give_role** `@member` `role` - Give a role to a member
-- **/nickname** `@member` `new_nick` - Change member\'s nickname
+- **/giverole** `@member` `role` - Give a role to a member
+- **/nickname** `@member` `new nickname` - Change member\'s nickname
 - **/kick** `@member` - Kick a member from the server
-- **/set_role** `role_id` - Set default role on the server
-- **/remove_role** `role_id` - Remove default role on the server
+- **/setrole** `role id` - Set default role on the server
+- **/removerole** `role id` - Remove default role on the server
 
 ___
 

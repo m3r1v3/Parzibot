@@ -37,7 +37,7 @@ class AdminCommands(commands.Cog):
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 
-    @cog_ext.cog_slash(name="give_role",
+    @cog_ext.cog_slash(name="giverole",
                        description="Give role to member",
                        options=[
                            create_option(
@@ -53,7 +53,7 @@ class AdminCommands(commands.Cog):
                                required=True)
                        ]
                        )
-    async def give_role(self, ctx, member: discord.Member, role):
+    async def giverole(self, ctx, member: discord.Member, role):
         """Give role to member"""
         if ctx.author.guild_permissions.manage_messages:
             await member.add_roles(role)
@@ -111,7 +111,7 @@ class AdminCommands(commands.Cog):
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 
-    @cog_ext.cog_slash(name="set_role",
+    @cog_ext.cog_slash(name="setrole",
                        description="Set default role on the server",
                        options=[
                            create_option(
@@ -122,7 +122,7 @@ class AdminCommands(commands.Cog):
                            )
                        ]
                        )
-    async def set_role(self, ctx, role):
+    async def setrole(self, ctx, role):
         """Set default role on the server"""
         if ctx.author.guild_permissions.manage_messages:
             Role().add(role, str(ctx.guild.id))
@@ -130,7 +130,7 @@ class AdminCommands(commands.Cog):
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 
-    @cog_ext.cog_slash(name="remove_role",
+    @cog_ext.cog_slash(name="removerole",
                        description="Remove default role on the server",
                        options=[
                            create_option(
@@ -141,7 +141,7 @@ class AdminCommands(commands.Cog):
                            )
                        ]
                        )
-    async def remove_role(self, ctx, role):
+    async def removerole(self, ctx, role):
         """Remove default role on the server"""
         if ctx.author.guild_permissions.manage_messages:
             Role().delete(role, str(ctx.guild.id))
@@ -149,17 +149,17 @@ class AdminCommands(commands.Cog):
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 
-    @cog_ext.cog_slash(name="admin_help", description="Parzibot Admin-Commands list")
-    async def admin_help(self, ctx):
-        """Parzibot Admin-Commands list"""
+    @cog_ext.cog_slash(name="adminhelp", description="Parzibot Admin Commands list")
+    async def adminhelp(self, ctx):
+        """Parzibot Admin Commands list"""
         if ctx.author.guild_permissions.manage_messages:
             await ctx.send('**Admin Commands**'
                            '\n\t - **/ban** `@member` - Ban a member on the server'
-                           '\n\t - **/give_role** `@member` `role` - Give a role to a member'
-                           '\n\t - **/nickname** `@member` `new_nick` - Change member\'s nickname'
+                           '\n\t - **/giverole** `@member` `role` - Give a role to a member'
+                           '\n\t - **/nickname** `@member` `new nickname` - Change member\'s nickname'
                            '\n\t - **/kick** `@member` - Kick a member from the server'
-                           '\n\t - **/set_role** `role_id` - Set default role on the server'
-                           '\n\t - **/remove_role** `role_id` - Remove default role on the server')
+                           '\n\t - **/setrole** `role id` - Set default role on the server'
+                           '\n\t - **/removerole** `role id` - Remove default role on the server')
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 
