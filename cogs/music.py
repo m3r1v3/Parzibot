@@ -50,8 +50,10 @@ class Music(commands.Cog):
             ydl.download([url])
         for file in os.listdir("./"):
             if file.endswith(".mp3"):
-                os.rename(file, "song.mp3")
+                os.rename(file, "song.mp3")       
+                 
         voice.play(discord.FFmpegPCMAudio("song.mp3"))
+        await ctx.send("**The Song has been started**")
 
     @cog_ext.cog_slash(name="leave",
                        description="Leave from Voice Channel")
@@ -88,7 +90,7 @@ class Music(commands.Cog):
     @cog_ext.cog_slash(name="stop",
                        description="Stop music in Voice Channel")
     async def stop(self, ctx):
-        voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
         await ctx.send("**The song has been stopped**")
 
