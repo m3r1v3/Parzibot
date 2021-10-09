@@ -26,6 +26,17 @@ ___
 
  ___
 
+#### **Music commands**
+
+ - **/play** `url` - Play music in Voice Channel
+ - **/leave** - Leave from Voice Channel
+ - **/musichelp** - List of Parzibot Music Commands
+ - **/pause** - Pause music in Voice Channel
+ - **/resume** - Resume music in Voice Channel
+ - **/stop** - Stop music in Voice Channel
+
+ ___
+
 #### **Admin Commands**
 
 - **/adminhelp** - List of Parzibot admin commands

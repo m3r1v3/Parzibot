@@ -86,7 +86,7 @@ class Commands(commands.Cog):
         """Randomly chooses a game from your list"""
         await ctx.send(f'Play to **{random.choice(games.split())}**')
 
-    @cog_ext.cog_slash(name="help", description="List of Parzibot commands")
+    @cog_ext.cog_slash(name="help", description="List of Parzibot Commands")
     async def help(self, ctx):
         """List of Parzibot commands"""
         await ctx.send('**Bot commands**'
