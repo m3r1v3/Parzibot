@@ -32,9 +32,6 @@ class Music(commands.Cog):
             await ctx.send("**Wait for the current playing music to end or use the _/stop_ command**")
             return
 
-        channel = ctx.author.voice.channel
-        await channel.connect()
-
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         await ctx.send("**The Song will be starting soon**")
 
@@ -61,9 +58,9 @@ class Music(commands.Cog):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_connected():
             await voice.disconnect()
-            await ctx.send("**The @Parzibot leave Voice Chat**")
+            await ctx.send("**Parzibot left Voice Chat**")
         else:
-            await ctx.send("**The @Parzibot isn't connected to a voice channel**")
+            await ctx.send("**Parzibot isn't connected to a voice channel**")
     
 
     @cog_ext.cog_slash(name="pause",
@@ -98,12 +95,29 @@ class Music(commands.Cog):
     async def musichelp(self, ctx):
         """List of Parzibot commands"""
         await ctx.send('**Music commands**'
+                       '\n\t - **/join** - Join to Voice Chat'
                        '\n\t - **/play** `url` - Play music in Voice Channel'
                        '\n\t - **/leave** - Leave from Voice Channel'
                        '\n\t - **/musichelp** - List of Parzibot Music Commands'
                        '\n\t - **/pause** - Pause music in Voice Channel'
                        '\n\t - **/resume** - Resume music in Voice Channel'
+                       '\n\t - **/replay** - Replay last sound'
                        '\n\t - **/stop** - Stop music in Voice Channel')
+
+    @cog_ext.cog_slash(name="replay", description="Replay last sound")
+    async def replay(self, ctx):
+        """Replay last sound"""
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
+        voice.stop()
+        voice.play(discord.FFmpegPCMAudio("song.mp3"))
+        await ctx.send("**The Song replayed**")
+
+    @cog_ext.cog_slash(name="join", description="Join to Voice Chat")
+    async def join(self, ctx):
+        """Join to Voice Chat"""
+        channel = ctx.author.voice.channel
+        await channel.connect()
+        await ctx.send("**Parzibot connected to Voice Chat**")
 
 
 def setup(client):

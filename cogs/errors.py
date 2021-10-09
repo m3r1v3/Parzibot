@@ -12,6 +12,7 @@ class Errors(commands.Cog):
     async def on_slash_command_error(self, ctx, error):
         """Returns a command error message on slash command error"""
         await ctx.send(f"**Error**: `Something went wrong! Try again`")
+        print(error)
 
 
 def setup(client):

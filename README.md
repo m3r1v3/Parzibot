@@ -28,11 +28,13 @@ ___
 
 #### **Music commands**
 
+ - **/join** - Join to Voice Chat
  - **/play** `url` - Play music in Voice Channel
  - **/leave** - Leave from Voice Channel
  - **/musichelp** - List of Parzibot Music Commands
  - **/pause** - Pause music in Voice Channel
- - **/resume** - Resume music in Voice Channel
+ - **/resume** - Resume music in Voice Channe
+ - **/replay** - Replay last soundl
  - **/stop** - Stop music in Voice Channel
 
  ___
