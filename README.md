@@ -16,11 +16,11 @@ ___
 
 - **/8ball** `question` - The ball of predictions
 - **/about** - About Parzibot
-- **/clear** `number` - Clear current text chat
+- **/clear** `number` - Clear current Text Channel
 - **/choosegame** `games` - Randomly chooses a game from your list
 - **/help** - List of Parzibot commands
 - **/ping** - Parzibot ping
-- **/users** - List of text chat members
+- **/users** - List of Text Channel members
 - **/whiteblack** `white/black` - The White/Black Game
 - **/givegame** - Choice random game from our list
 
@@ -28,7 +28,7 @@ ___
 
 #### **Music commands**
 
- - **/join** - Join to Your current Voice Chat
+ - **/join** - Join to Your current Voice Channel
  - **/leave** - Leave from Voice Channel
  - **/musichelp** - List of Parzibot Music Commands
  - **/pause** - Set Song on Pause

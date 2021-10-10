@@ -57,7 +57,7 @@ class Commands(commands.Cog):
                        f"**Parzibot**, {datetime.datetime.now().year}")
 
     @cog_ext.cog_slash(name="clear",
-                       description="Clear current text chat",
+                       description="Clear current Text Channel",
                        options=[
                            create_option(
                                name="number",
@@ -66,7 +66,7 @@ class Commands(commands.Cog):
                                required=False)
                        ])
     async def clear(self, ctx, number=5):
-        """Clear text chat"""
+        """Clear current Text Channel"""
         if number > 0:
             await ctx.channel.purge(limit=number)
             await ctx.send(f"Cleared **{number}** messages")
@@ -88,16 +88,16 @@ class Commands(commands.Cog):
 
     @cog_ext.cog_slash(name="help", description="List of Parzibot Commands")
     async def help(self, ctx):
-        """List of Parzibot commands"""
+        """List of Parzibot Commands"""
         await ctx.send('**Bot commands**'
                        '\n\t - **/8ball** `question` - The ball of predictions'
                        '\n\t - **/about** - About Parzibot'
                        '\n\t - **/adminhelp** - List of Parzibot admin commands'
-                       '\n\t - **/clear** `number` - Clear current text chat'
+                       '\n\t - **/clear** `number` - Clear current Text Channel'
                        '\n\t - **/choosegame** `games` - Randomly chooses a game from your list'
                        '\n\t - **/help** - List of Parzibot commands'
                        '\n\t - **/ping** - Parzibot ping'
-                       '\n\t - **/users** - List of text chat members'
+                       '\n\t - **/users** - List of Text Channel members'
                        '\n\t - **/whiteblack** `white/black` - The White/Black Game'
                        '\n\t - **/givegame** - Choice random game from our list')
 
@@ -106,9 +106,9 @@ class Commands(commands.Cog):
         """Parzibot ping"""
         await ctx.send(f'**Ping**: `{round(self.client.latency * 1000)}ms`')
 
-    @cog_ext.cog_slash(name="users", description="List of text chat members")
+    @cog_ext.cog_slash(name="users", description="List of Text Channel members")
     async def users(self, ctx):
-        """List of text chat members"""
+        """List of Text Channel members"""
         channel = ctx.channel
         members = "".join(f'\t*{str(member)}*\n' for member in channel.members)
         await ctx.send(f'**Channel members:**\n{str(members)}')
