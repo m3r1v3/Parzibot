@@ -14,7 +14,7 @@ class Music(commands.Cog):
         self.client = client
 
     @cog_ext.cog_slash(name="play",
-                       description="Play music in Voice Channel",
+                       description="Play Song in Voice Channel",
                        options=[
                            create_option(
                                name="url",
@@ -57,7 +57,7 @@ class Music(commands.Cog):
     async def leave(self, ctx):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_connected():
-            if song_there: os.remove("song.mp3")
+            if os.path.isfile("song.mp3"): os.remove("song.mp3")
             await voice.disconnect()
             await ctx.send("**Parzibot left Voice Chat**")
         else:
@@ -65,7 +65,7 @@ class Music(commands.Cog):
     
 
     @cog_ext.cog_slash(name="pause",
-                       description="Pause music in Voice Channel")
+                       description="Set Song on Pause")
     async def pause(self, ctx):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
@@ -76,7 +76,7 @@ class Music(commands.Cog):
 
 
     @cog_ext.cog_slash(name="resume",
-                       description="Resume music in Voice Channel")
+                       description="Resume current Song")
     async def resume(self, ctx):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_paused():
@@ -86,26 +86,26 @@ class Music(commands.Cog):
             await ctx.send("**The Song is not paused**")
 
     @cog_ext.cog_slash(name="stop",
-                       description="Stop music in Voice Channel")
+                       description="Stop current Song")
     async def stop(self, ctx):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
-        await ctx.send("**The song has been stopped**")
+        await ctx.send("**The Song has been stopped**")
 
     @cog_ext.cog_slash(name="musichelp", description="List of Parzibot Music Commands")
     async def musichelp(self, ctx):
         """List of Parzibot commands"""
         await ctx.send('**Music commands**'
-                        '\n\t - **/join** - Join to Voice Chat'
+                        '\n\t - **/join** - Join to Your current Voice Chat'
                         '\n\t - **/leave** - Leave from Voice Channel'
                         '\n\t - **/musichelp** - List of Parzibot Music Commands'
-                        '\n\t - **/pause** - Pause music in Voice Channel'
-                        '\n\t - **/play** `url` - Play music in Voice Channel'
-                        '\n\t - **/replay** - Replay last sound'
-                        '\n\t - **/resume** - Resume music in Voice Channel'
-                        '\n\t - **/stop** - Stop music in Voice Channel')
+                        '\n\t - **/pause** - Set Song on Pause'
+                        '\n\t - **/play** `url` - Play Song in Voice Channel'
+                        '\n\t - **/replay** - Replay current Song'
+                        '\n\t - **/resume** - Resume current Song'
+                        '\n\t - **/stop** - Stop current Song')
 
-    @cog_ext.cog_slash(name="replay", description="Replay last sound")
+    @cog_ext.cog_slash(name="replay", description="Replay current Song")
     async def replay(self, ctx):
         """Replay last sound"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
@@ -113,7 +113,7 @@ class Music(commands.Cog):
         voice.play(discord.FFmpegPCMAudio("song.mp3"))
         await ctx.send("**The Song replayed**")
 
-    @cog_ext.cog_slash(name="join", description="Join to Voice Chat")
+    @cog_ext.cog_slash(name="join", description="Join to Your current Voice Chat")
     async def join(self, ctx):
         """Join to Voice Chat"""
         channel = ctx.author.voice.channel
