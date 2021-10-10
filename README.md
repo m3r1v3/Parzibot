@@ -2,7 +2,7 @@
 
 ### _Simple and convenient bot discord on Python._
 
-The source code of the bot is available to everyone. The bot used the English language. This is free open source
+The source code of the bot is available to everyone. The bot is using English language. This is free open-source
 software and if anyone wants to change things in advance. Just before using my code, please write to me
 on _[Twitter](https://twitter.com/merive_)_.
 
@@ -29,12 +29,12 @@ ___
 #### **Music commands**
 
  - **/join** - Join to Voice Chat
- - **/play** `url` - Play music in Voice Channel
  - **/leave** - Leave from Voice Channel
  - **/musichelp** - List of Parzibot Music Commands
  - **/pause** - Pause music in Voice Channel
- - **/resume** - Resume music in Voice Channe
+ - **/play** `url` - Play music in Voice Channel
  - **/replay** - Replay last soundl
+ - **/resume** - Resume music in Voice Channe
  - **/stop** - Stop music in Voice Channel
 
  ___
