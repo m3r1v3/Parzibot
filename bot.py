@@ -5,14 +5,14 @@ from discord.ext import commands
 
 from discord_slash import SlashCommand
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.members = True
 intents.guilds = True
 
 client = commands.Bot(command_prefix='$', intents=intents)
 client.remove_command("help")
 
-slash = SlashCommand(client, sync_commands=True, sync_on_cog_reload=True)
+slash = SlashCommand(client, sync_commands=True)
 
 
 @client.command()

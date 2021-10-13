@@ -12,6 +12,9 @@ class Music(commands.Cog):
     def __init__(self, client):
         """Initialisation client"""
         self.client = client
+        self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+        self.url = ""
+
 
     @cog_ext.cog_slash(name="play",
                        description="Play Song in Voice Channel",
@@ -24,52 +27,44 @@ class Music(commands.Cog):
                        ])
     async def play(self, ctx, url: str):
         """Play Song in Voice Channel"""
-        song_there = os.path.isfile("song.mp3")
-        if song_there:
-            os.remove("song.mp3")
+        self.url = url
 
+        def search(url):
+            with youtube_dl.YoutubeDL({'format': 'bestaudio', 'noplaylist':'True'}) as ydl:
+                info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
+            return {'source': info['formats'][0]['url'], 'title': info['title']}        
+
+        channel = ctx.author.voice.channel
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-
-        if voice is None:
-            await ctx.send("**Parzibot** isn't connected to a **Voice Channel**")
-            return
-
-        await ctx.send("**The Song** will be starting soon")
-
-        song_name = "The Song"
-
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-        }
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            info_dict = ydl.extract_info(url, download=False)
-            ydl.download([url])
-            song_name = info_dict.get('title', None)
-        for file in os.listdir("./"):
-            if file.endswith(".mp3"):
-                os.rename(file, "song.mp3")      
         
-        voice.play(discord.FFmpegPCMAudio("song.mp3"))
-        await ctx.send(f"**{song_name}** is playing")
+        if channel:
+            if not voice is None and voice.is_connected():
+                await voice.move_to(channel)
+            else: 
+                voice = await channel.connect()
+
+            if not voice.is_playing():
+                data = search(self.url)
+                voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS))
+                await ctx.send(f"**{data['title']}** is playing")
+            else: await ctx.send("**The Song** is already playing. Write _/stop_ or _/pause_ and try again")
+
+        else:
+            await ctx.send("You're not connected to any **Voice Channel**")
+
 
     @cog_ext.cog_slash(name="leave",
                        description="Leave from Voice Channel")
     async def leave(self, ctx):
         """Leave from Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if voice.is_connected():
-            if os.path.isfile("song.mp3"): os.remove("song.mp3")
+        if not voice.is_connected() is None:
+            self.url = ""
             await voice.disconnect()
             await ctx.send("**Parzibot** left **Voice Channel**")
         else:
             await ctx.send("**Parzibot** isn't connected to a **Voice Channel**")
     
-
     @cog_ext.cog_slash(name="pause",
                        description="Set Song on Pause")
     async def pause(self, ctx):
@@ -79,8 +74,7 @@ class Music(commands.Cog):
             voice.pause()
             await ctx.send("**The Song** has been paused")
         else:
-            await ctx.send("Currently no **Song** is playing")
-
+            await ctx.send("**The Song** is not playing now")
 
     @cog_ext.cog_slash(name="resume",
                        description="Resume current Song")
@@ -119,15 +113,29 @@ class Music(commands.Cog):
         """Replay last sound"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
-        voice.play(discord.FFmpegPCMAudio("song.mp3"))
-        await ctx.send("**The Song** replayed")
+
+        song_name = ""
+
+        def search(url):
+            global song_name
+            with youtube_dl.YoutubeDL({'format': 'bestaudio', 'noplaylist':'True'}) as ydl:
+                info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
+                song_name = info.get('title', None)
+            return {'source': info['formats'][0]['url'], 'title': info['title']}        
+
+        data = search(self.url)
+
+        voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS))
+        await ctx.send(f"**{data['title']}** has been replayed")
 
     @cog_ext.cog_slash(name="join", description="Join to Your current Voice Channel")
     async def join(self, ctx):
         """Join to Your current Voice Channel"""
-        channel = ctx.author.voice.channel
-        await channel.connect()
-        await ctx.send("**Parzibot** connected to **Voice Channel**")
+        if discord.utils.get(self.client.voice_clients, guild=ctx.guild) is None:
+            channel = ctx.author.voice.channel
+            await channel.connect()
+            await ctx.send("**Parzibot** connected to **Voice Channel**")
+        else: await ctx.send("**Parzibot** already connected to **Voice Channel**")
 
 
 def setup(client):
