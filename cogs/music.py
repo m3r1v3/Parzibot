@@ -27,6 +27,12 @@ class Music(commands.Cog):
                        ])
     async def play(self, ctx, url: str):
         """Play Song in Voice Channel"""
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
+        channel = ctx.author.voice.channel
+        if not voice is None and not ctx.author.voice.channel == ctx.voice_client.channel:
+            await ctx.send("**Parzibot** isn't connected to your **Voice Channel**")
+            return
+
         self.url = url
 
         def search(url):
@@ -34,11 +40,8 @@ class Music(commands.Cog):
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
             return {'source': info['formats'][0]['url'], 'title': info['title']}        
 
-        channel = ctx.author.voice.channel
-        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        
         if channel:
-            if not voice is None and voice.is_connected():
+            if not voice is None and not voice.is_connected() is None:
                 await voice.move_to(channel)
             else: 
                 voice = await channel.connect()
@@ -46,6 +49,7 @@ class Music(commands.Cog):
             if not voice.is_playing():
                 data = search(self.url)
                 voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS))
+                voice.is_playing()
                 await ctx.send(f"**{data['title']}** is playing")
             else: await ctx.send("**The Song** is already playing. Write _/stop_ or _/pause_ and try again")
 
@@ -58,17 +62,20 @@ class Music(commands.Cog):
     async def leave(self, ctx):
         """Leave from Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if not voice.is_connected() is None:
+        if not ctx.author.voice.channel is None or not ctx.author.voice.channel == ctx.voice_client.channel and not voice.is_connected() is None:
             self.url = ""
             await voice.disconnect()
             await ctx.send("**Parzibot** left **Voice Channel**")
         else:
-            await ctx.send("**Parzibot** isn't connected to a **Voice Channel**")
+            await ctx.send("**Parzibot** isn't connected to your **Voice Channel**")
     
     @cog_ext.cog_slash(name="pause",
                        description="Set Song on Pause")
     async def pause(self, ctx):
         """Set Song on Pause"""
+        if ctx.author.voice.channel is None or not ctx.author.voice.channel == ctx.voice_client.channel:
+            await ctx.send("**Parzibot** isn't connected to your **Voice Channel**")
+            return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             voice.pause()
@@ -80,6 +87,9 @@ class Music(commands.Cog):
                        description="Resume current Song")
     async def resume(self, ctx):
         """Resume current Song"""
+        if ctx.author.voice.channel is None or not ctx.author.voice.channel == ctx.voice_client.channel:
+            await ctx.send("**Parzibot** isn't connected to your **Voice Channel**")
+            return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_paused():
             voice.resume()
@@ -91,6 +101,9 @@ class Music(commands.Cog):
                        description="Stop current Song")
     async def stop(self, ctx):
         """Stop current Song"""
+        if ctx.author.voice.channel is None or not ctx.author.voice.channel == ctx.voice_client.channel:
+            await ctx.send("**Parzibot** isn't connected to your **Voice Channel**")
+            return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
         await ctx.send("**The Song** has been stopped")
@@ -111,6 +124,9 @@ class Music(commands.Cog):
     @cog_ext.cog_slash(name="replay", description="Replay current Song")
     async def replay(self, ctx):
         """Replay last sound"""
+        if ctx.author.voice.channel is None or not ctx.author.voice.channel == ctx.voice_client.channel:
+            await ctx.send("**Parzibot** isn't connected to your **Voice Channel**")
+            return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
 
@@ -131,7 +147,7 @@ class Music(commands.Cog):
     @cog_ext.cog_slash(name="join", description="Join to Your current Voice Channel")
     async def join(self, ctx):
         """Join to Your current Voice Channel"""
-        if discord.utils.get(self.client.voice_clients, guild=ctx.guild) is None:
+        if discord.utils.get(self.client.voice_clients, guild=ctx.guild) is None or not voice.is_connected():
             channel = ctx.author.voice.channel
             await channel.connect()
             await ctx.send("**Parzibot** connected to **Voice Channel**")
