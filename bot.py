@@ -2,7 +2,6 @@ import os
 
 import discord
 from discord.ext import commands
-
 from discord_slash import SlashCommand
 
 intents = discord.Intents.all()
@@ -25,6 +24,7 @@ async def load(extension):
 async def unload(extension):
     """Unload cogs"""
     client.unload_extension(f'cogs.{extension}')
+
 
 # Load files
 for filename in os.listdir('./cogs'):

@@ -13,7 +13,7 @@ session = Session()
 
 
 class Role(Base):
-    __tablename__ = 'roles'
+    __tablename__ = "roles"
 
     id = Column(Integer, primary_key=True)
     role_id = Column(String(50), unique=True, nullable=False)
@@ -36,5 +36,4 @@ class Role(Base):
         session.commit()
 
     def __repr__(self):
-        return "<Role(id='%s', role_id='%s', server='%s')>" % (
-            self.id, self.role_id, self.server)
+        return "<Role(id='%s', role_id='%s', server='%s')>" % (self.id, self.role_id, self.server)
