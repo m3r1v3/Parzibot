@@ -39,8 +39,7 @@ class Music(commands.Cog):
 
             if not voice.is_playing():
                 data = search(self.url)
-                voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS),
-                           after=await ctx.send(f"{data['title']} is ended"))
+                voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS))
                 voice.is_playing()
                 await ctx.send(f"**{data['title']}** is playing")
             else:
