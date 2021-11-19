@@ -74,7 +74,10 @@ class Music(commands.Cog):
 
     @cog_ext.cog_slash(name="musicqueue", description="Number of songs in queue")
     async def musicqueue(self, ctx):
-        await ctx.send(f"**{len(self.queue)}** songs in queue")
+        if self.queue:
+            await ctx.send(f"**{len(self.queue)}** songs in queue")
+        else: 
+            await ctx.send(f"**The Queue** is already empty")
 
     @cog_ext.cog_slash(name="next", description="Play next song in queue")
     async def next(self, ctx):
@@ -146,8 +149,6 @@ class Music(commands.Cog):
                        after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
             voice.is_playing()
             await ctx.send(f"**{data['title']}** is playing")
-        else:
-            await ctx.send("**The Queue** is empty")
 
     @cog_ext.cog_slash(name="replay", description="Replay current Song")
     async def replay(self, ctx):
