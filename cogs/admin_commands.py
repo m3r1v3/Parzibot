@@ -12,6 +12,21 @@ class AdminCommands(commands.Cog):
         """Initialisation client"""
         self.client = client
 
+    @cog_ext.cog_slash(name="adminhelp", description="Parzibot Admin Commands list")
+    async def adminhelp(self, ctx):
+        """Parzibot Admin Commands list"""
+        if ctx.author.guild_permissions.manage_messages:
+            await ctx.send('**Admin Commands**'
+                           '\n\t - **/adminhelp** - List of Parzibot admin commands'
+                           '\n\t - **/ban** `@member` - Ban a member on the server'
+                           '\n\t - **/giverole** `@member` `role` - Give a role to a member'
+                           '\n\t - **/kick** `@member` - Kick a member from the server'
+                           '\n\t - **/nickname** `@member` `new nickname` - Change member\'s nickname'
+                           '\n\t - **/setrole** `role id` - Set default role on the server'
+                           '\n\t - **/removerole** `role id` - Remove default role on the server')
+        else:
+            await ctx.send("**You doesn't have permissions for executing this command**")
+
     @cog_ext.cog_slash(name="ban",
                        description="Ban a member on the server",
                        options=[
@@ -59,30 +74,6 @@ class AdminCommands(commands.Cog):
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 
-    @cog_ext.cog_slash(name="nickname",
-                       description="Change nickname to member",
-                       options=[
-                           create_option(
-                               name="member",
-                               description="Member to whom we change nickname",
-                               option_type=6,
-                               required=True
-                           ),
-                           create_option(
-                               name="nickname",
-                               description="Member's future nickname",
-                               option_type=3,
-                               required=False
-                           )
-                       ])
-    async def nickname(self, ctx, member: discord.Member, *, nickname=None):
-        """Change nickname to member"""
-        if ctx.author.guild_permissions.manage_messages:
-            await member.edit(nick=nickname)
-            await ctx.send(f'Nickname was changed for **{member}**')
-        else:
-            await ctx.send("**You doesn't have permissions for executing this command**")
-
     @cog_ext.cog_slash(name="kick",
                        description="Kick a member from the server",
                        options=[
@@ -104,6 +95,30 @@ class AdminCommands(commands.Cog):
             """Kick a member from the server"""
             await member.kick(reason=reason)
             await ctx.send(f'Kicked **{member}**')
+        else:
+            await ctx.send("**You doesn't have permissions for executing this command**")
+
+    @cog_ext.cog_slash(name="nickname",
+                       description="Change nickname to member",
+                       options=[
+                           create_option(
+                               name="member",
+                               description="Member to whom we change nickname",
+                               option_type=6,
+                               required=True
+                           ),
+                           create_option(
+                               name="nickname",
+                               description="Member's future nickname",
+                               option_type=3,
+                               required=False
+                           )
+                       ])
+    async def nickname(self, ctx, member: discord.Member, *, nickname=None):
+        """Change nickname to member"""
+        if ctx.author.guild_permissions.manage_messages:
+            await member.edit(nick=nickname)
+            await ctx.send(f'Nickname was changed for **{member}**')
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 
@@ -140,20 +155,6 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             Role().delete(role, str(ctx.guild.id))
             await ctx.send("**Default role for server removed**")
-        else:
-            await ctx.send("**You doesn't have permissions for executing this command**")
-
-    @cog_ext.cog_slash(name="adminhelp", description="Parzibot Admin Commands list")
-    async def adminhelp(self, ctx):
-        """Parzibot Admin Commands list"""
-        if ctx.author.guild_permissions.manage_messages:
-            await ctx.send('**Admin Commands**'
-                           '\n\t - **/ban** `@member` - Ban a member on the server'
-                           '\n\t - **/giverole** `@member` `role` - Give a role to a member'
-                           '\n\t - **/nickname** `@member` `new nickname` - Change member\'s nickname'
-                           '\n\t - **/kick** `@member` - Kick a member from the server'
-                           '\n\t - **/setrole** `role id` - Set default role on the server'
-                           '\n\t - **/removerole** `role id` - Remove default role on the server')
         else:
             await ctx.send("**You doesn't have permissions for executing this command**")
 

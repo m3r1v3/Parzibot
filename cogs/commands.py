@@ -55,6 +55,19 @@ class Commands(commands.Cog):
                        f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
                        f"**Parzibot**, {datetime.datetime.now().year}")
 
+    @cog_ext.cog_slash(name="choosegame",
+                       description="Randomly chooses a game from your list",
+                       options=[
+                           create_option(
+                               name="games",
+                               description="List of games",
+                               option_type=3,
+                               required=False)
+                       ])
+    async def choose_game(self, ctx, *, games: str):
+        """Randomly chooses a game from your list"""
+        await ctx.send(f'Play to **{random.choice(games.split())}**')
+
     @cog_ext.cog_slash(name="clear",
                        description="Clear current Text Channel",
                        options=[
@@ -72,18 +85,17 @@ class Commands(commands.Cog):
         else:
             await ctx.send(f"Cannot clear **{number}** messages")
 
-    @cog_ext.cog_slash(name="choosegame",
-                       description="Randomly chooses a game from your list",
-                       options=[
-                           create_option(
-                               name="games",
-                               description="List of games",
-                               option_type=3,
-                               required=False)
-                       ])
-    async def choose_game(self, ctx, *, games: str):
-        """Randomly chooses a game from your list"""
-        await ctx.send(f'Play to **{random.choice(games.split())}**')
+    @cog_ext.cog_slash(name="givegame", description="Choice random game from our list")
+    async def give_game(self, ctx):
+        """Choice random game from our list"""
+        responses = ["Minecraft", "GTA V", "Fortnite", "PUBG", "League of Legends", "CS:GO", "Dota 2", "Apex Legends",
+                     "Rocket League",
+                     "Rainbow Six: Siege", "Overwatch", "RDR 2", "Dead by Daylight", "Call of Duty: Warzone",
+                     "Cyberpunk 2077", "The Elder Scrolls V: Skyrim",
+                     "Forza Horizon 4", "Assasin's Creed Valhalla", "Animal Crossing: New Horizons", "Valorant",
+                     "Fall Guys", "Terraria", "Fallout 76",
+                     "Super Animal Royale", "Genshin Impact", "Control"]
+        await ctx.send(f'Play to **{random.choice(responses)}**')
 
     @cog_ext.cog_slash(name="help", description="List of Parzibot Commands")
     async def help(self, ctx):
@@ -91,14 +103,14 @@ class Commands(commands.Cog):
         await ctx.send('**Bot commands**'
                        '\n\t - **/8ball** `question` - The ball of predictions'
                        '\n\t - **/about** - About Parzibot'
-                       '\n\t - **/adminhelp** - List of Parzibot admin commands'
-                       '\n\t - **/clear** `number` - Clear current Text Channel'
                        '\n\t - **/choosegame** `games` - Randomly chooses a game from your list'
+                       '\n\t - **/clear** `number` - Clear current Text Channel'
+                       '\n\t - **/givegame** - Choice random game from our list'
                        '\n\t - **/help** - List of Parzibot commands'
                        '\n\t - **/ping** - Parzibot ping'
                        '\n\t - **/users** - List of Text Channel members'
                        '\n\t - **/whiteblack** `white/black` - The White/Black Game'
-                       '\n\t - **/givegame** - Choice random game from our list')
+                       )
 
     @cog_ext.cog_slash(name="ping", description="Parzibot ping")
     async def ping(self, ctx):
@@ -133,20 +145,6 @@ class Commands(commands.Cog):
             await ctx.send(f'**You won**: `{result}`')
         else:
             await ctx.send(f'**You lose**: `{result}`')
-
-    @cog_ext.cog_slash(name="givegame", description="Choice random game from our list")
-    async def give_game(self, ctx):
-        """Choice random game from our list"""
-        responses = ["Minecraft", "GTA V", "Fortnite", "PUBG", "League of Legends", "CS:GO", "Dota 2", "Apex Legends",
-                     "Rocket League",
-                     "Rainbow Six: Siege", "Overwatch", "RDR 2", "Dead by Daylight", "Call of Duty: Warzone",
-                     "Cyberpunk 2077", "The Elder Scrolls V: Skyrim",
-                     "Forza Horizon 4", "Assasin's Creed Valhalla", "Animal Crossing: New Horizons", "Valorant",
-                     "Fall Guys", "Terraria", "Fallout 76",
-                     "Super Animal Royale", "Genshin Impact", "Control"]
-        result = random.choice(responses)
-
-        await ctx.send(f'Play to **{result}**')
 
 
 def setup(client):

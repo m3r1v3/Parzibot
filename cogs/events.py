@@ -28,10 +28,12 @@ class Events(commands.Cog):
         """Notifies about the issuance and withdrawal of a role from a user"""
         if len(before.roles) < len(after.roles):
             for i in after.roles:
-                if i not in before.roles: await after.send(f'You have been given a role **{i}**')
+                if i not in before.roles:
+                    await after.send(f'You have been given a role **{i}**')
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
-                if i not in after.roles: await after.send(f'You were deprived of the role **{i}**')
+                if i not in after.roles:
+                    await after.send(f'You were deprived of the role **{i}**')
 
 
 def setup(client):

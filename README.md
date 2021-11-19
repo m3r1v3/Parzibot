@@ -14,15 +14,15 @@ ___
 
 #### **Bot commands**
 
-- **/8ball** `question` - The ball of predictions
-- **/about** - About Parzibot
-- **/clear** `number` - Clear current Text Channel
-- **/choosegame** `games` - Randomly chooses a game from your list
-- **/help** - List of Parzibot commands
-- **/ping** - Parzibot ping
-- **/users** - List of Text Channel members
-- **/whiteblack** `white/black` - The White/Black Game
-- **/givegame** - Choice random game from our list
+ - **/8ball** `question` - The ball of predictions
+ - **/about** - About Parzibot
+ - **/choosegame** `games` - Randomly chooses a game from your list
+ - **/clear** `number` - Clear current Text Channel
+ - **/givegame** - Choice random game from our list
+ - **/help** - List of Parzibot commands
+ - **/ping** - Parzibot ping
+ - **/users** - List of Text Channel members
+ - **/whiteblack** `white/black` - The White/Black Game
 
  ___
 
@@ -30,24 +30,28 @@ ___
 
  - **/join** - Join to Your current Voice Channel
  - **/leave** - Leave from Voice Channel
+ - **/musicclear** - Clear music queue
  - **/musichelp** - List of Parzibot Music Commands
+ - **/musicqueue** - Number of songs in queue
+ - **/next** - Play next song in queue
  - **/pause** - Set Song on Pause
  - **/play** `url` - Play Song in Voice Channel
  - **/replay** - Replay current Song
  - **/resume** - Resume current Song
- - **/stop** - Stop current Song
+ - **/shuffle** - Shuffle list of songs
+ - **/stop** - Stop current Song'
 
  ___
 
 #### **Admin Commands**
 
-- **/adminhelp** - List of Parzibot admin commands
-- **/ban** `@member` - Ban a member on the server
-- **/giverole** `@member` `role` - Give a role to a member
-- **/nickname** `@member` `new nickname` - Change member\'s nickname
-- **/kick** `@member` - Kick a member from the server
-- **/setrole** `role id` - Set default role on the server
-- **/removerole** `role id` - Remove default role on the server
+ - **/adminhelp** - List of Parzibot admin commands
+ - **/ban** `@member` - Ban a member on the server
+ - **/giverole** `@member` `role` - Give a role to a member
+ - **/kick** `@member` - Kick a member from the server
+ - **/nickname** `@member` `new nickname` - Change member's nickname
+ - **/setrole** `role id` - Set default role on the server
+ - **/removerole** `role id` - Remove default role on the server
 
 ___
 
