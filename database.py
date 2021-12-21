@@ -28,11 +28,13 @@ class Role(Base):
 
     @staticmethod
     def get_role(server: str):
-        return session.query(Role).filter_by(server=str(server)).first().role_id
+        try:
+            return session.query(Role).filter_by(server=str(server)).first().role_id
+        except AttributeError: return None
 
     @staticmethod
-    def delete(role_id, server: str):
-        session.delete(session.query(Role).filter_by(role_id=role_id, server=str(server)).first())
+    def delete(server: str):
+        session.delete(session.query(Role).filter_by(server=str(server)).first())
         session.commit()
 
     def __repr__(self):

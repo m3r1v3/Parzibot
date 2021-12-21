@@ -39,7 +39,7 @@ ___
  - **/replay** - Replay current Song
  - **/resume** - Resume current Song
  - **/shuffle** - Shuffle list of songs
- - **/stop** - Stop current Song'
+ - **/stop** - Stop current Song
 
  ___
 
@@ -50,8 +50,8 @@ ___
  - **/giverole** `@member` `role` - Give a role to a member
  - **/kick** `@member` - Kick a member from the server
  - **/nickname** `@member` `new nickname` - Change member's nickname
- - **/setrole** `role id` - Set default role on the server
- - **/removerole** `role id` - Remove default role on the server
+ - **/defaultrole** `role id` - Set default role on the server
+ - **/removedefaultrole** - Remove default role on the server
 
 ___
 
