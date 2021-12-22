@@ -1,6 +1,7 @@
 import datetime
 import random
 
+from discord import Embed, Colour
 from discord.ext import commands
 from discord_slash import cog_ext
 from discord_slash.utils.manage_commands import create_option, create_choice
@@ -45,15 +46,18 @@ class Commands(commands.Cog):
                      "My sources say no...",
                      "Outlook not so good...",
                      "Very doubtful..."]
-        await ctx.send(f'**Question**: `{question}`\n'
-                       f'**Answer**: `{random.choice(responses)}`')
+        await ctx.send(embed=Embed(title=f"**Question:** `{question}`",
+                    description=f"**Answer:** `{random.choice(responses)}`",
+                    color=Colour(0x59d9b9)))
 
     @cog_ext.cog_slash(name="about", description="About Parzibot")
     async def about(self, ctx):
         """About Parzibot"""
-        await ctx.send(f"**Parzibot** is free open-source project, created by **merive_**.\n"
-                       f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
-                       f"**Parzibot**, {datetime.datetime.now().year}")
+        await ctx.send(embed=Embed(title=f"About **Parzibot**",
+                    description=f"**Parzibot** is free open-source project, created by **merive_**\n"
+                    f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
+                    f"**Parzibot**, {datetime.datetime.now().year}",
+                    color=Colour(0x59d9b9)))
 
     @cog_ext.cog_slash(name="choosegame",
                        description="Randomly chooses a game from your list",
@@ -66,7 +70,9 @@ class Commands(commands.Cog):
                        ])
     async def choose_game(self, ctx, *, games: str):
         """Randomly chooses a game from your list"""
-        await ctx.send(f'Play to **{random.choice(games.split())}**')
+        await ctx.send(embed=Embed(title=f"Random game from your list",
+                    description=f"Play to **{random.choice(games.split())}",
+                    color=Colour(0x59d9b9)))
 
     @cog_ext.cog_slash(name="clear",
                        description="Clear current Text Channel",
@@ -81,9 +87,14 @@ class Commands(commands.Cog):
         """Clear current Text Channel"""
         if number > 0:
             await ctx.channel.purge(limit=number)
-            await ctx.send(f"Cleared **{number}** messages")
+            await ctx.send(embed=Embed(title=f"Messages was cleared",
+                    description=f"Cleared **{number}** messages",
+                    color=Colour(0x59d9b9)))
         else:
-            await ctx.send(f"Cannot clear **{number}** messages")
+            await ctx.send(embed=Embed(title=f"Error",
+                    description=f"Cannot clear **{number}** messages",
+                    color=Colour(0xd95959)))
+            
 
     @cog_ext.cog_slash(name="givegame", description="Choice random game from our list")
     async def give_game(self, ctx):
@@ -95,13 +106,15 @@ class Commands(commands.Cog):
                      "Forza Horizon 4", "Assasin's Creed Valhalla", "Animal Crossing: New Horizons", "Valorant",
                      "Fall Guys", "Terraria", "Fallout 76",
                      "Super Animal Royale", "Genshin Impact", "Control"]
-        await ctx.send(f'Play to **{random.choice(responses)}**')
+        await ctx.send(embed=Embed(title=f"Random game by **Parzibot** for you",
+                    description=f"Play to **{random.choice(responses)}**",
+                    color=Colour(0x59d9b9)))
 
     @cog_ext.cog_slash(name="help", description="List of Parzibot Commands")
     async def help(self, ctx):
         """List of Parzibot Commands"""
-        await ctx.send('**Bot commands**'
-                       '\n\t - **/8ball** `question` - The ball of predictions'
+        await ctx.send(embed=Embed(title=f"Bot Commands",
+                    description='\n\t - **/8ball** `question` - The ball of predictions'
                        '\n\t - **/about** - About Parzibot'
                        '\n\t - **/choosegame** `games` - Randomly chooses a game from your list'
                        '\n\t - **/clear** `number` - Clear current Text Channel'
@@ -109,20 +122,24 @@ class Commands(commands.Cog):
                        '\n\t - **/help** - List of Parzibot commands'
                        '\n\t - **/ping** - Parzibot ping'
                        '\n\t - **/users** - List of Text Channel members'
-                       '\n\t - **/whiteblack** `white/black` - The White/Black Game'
-                       )
+                       '\n\t - **/whiteblack** `white/black` - The White/Black Game',
+                    color=Colour(0x59d9b9)))
 
     @cog_ext.cog_slash(name="ping", description="Parzibot ping")
     async def ping(self, ctx):
         """Parzibot ping"""
-        await ctx.send(f'**Ping**: `{round(self.client.latency * 1000)}ms`')
+        await ctx.send(embed=Embed(title=f"**Parzibot** ping",
+                    description=f"**Ping**: `{round(self.client.latency * 1000)}ms`",
+                    color=Colour(0x59d9b9)))
 
     @cog_ext.cog_slash(name="users", description="List of Text Channel members")
     async def users(self, ctx):
         """List of Text Channel members"""
         channel = ctx.channel
-        members = "".join(f'\t*{member}*\n' for member in channel.members)
-        await ctx.send(f'**Channel members:**\n{members}')
+        members = "".join(f'\t**{member}**\n' for member in channel.members)
+        await ctx.send(embed=Embed(title=f"Channel members",
+                    description=f"{members}",
+                    color=Colour(0x59d9b9)))
 
     @cog_ext.cog_slash(name="whiteblack",
                        description="The White/Black Game",
@@ -142,9 +159,13 @@ class Commands(commands.Cog):
         """The White/Black Game"""
         result = get_random_color()
         if color == result:
-            await ctx.send(f'**You won**: `{result}`')
+            await ctx.send(embed=Embed(title=f"You won :D",
+                    description=f"Right color is `{result}`",
+                    color=Colour(0x59d9b9)))
         else:
-            await ctx.send(f'**You lose**: `{result}`')
+            await ctx.send(embed=Embed(title=f"You lose :(",
+                    description=f"Right color is `{result}`",
+                    color=Colour(0xd95959)))
 
 
 def setup(client):

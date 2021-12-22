@@ -1,4 +1,5 @@
 import discord
+from discord import Embed, Colour
 from discord.ext import commands
 
 from database import Role
@@ -18,7 +19,9 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         """Sending a personal message about the bot and issuing a role in the chat"""
-        await member.send(f'Hey **{member}**! White **/help** to find out my command')
+        await ctx.send(embed=Embed(title=f"Hey **{member}**!",
+                    description="White **/help** to find out my command or **/musichelp** to find out my music command",
+                    color=Colour(0x59d9b9)))
 
         role = discord.utils.get(member.guild.roles, id=int(Role().get_role(member.guild.id)))
         await member.add_roles(role)
@@ -29,11 +32,13 @@ class Events(commands.Cog):
         if len(before.roles) < len(after.roles):
             for i in after.roles:
                 if i not in before.roles:
-                    await after.send(f'You have been given a role **{i}**')
+                    await ctx.send(embed=Embed(title=f"You have been given the **{i}** role",
+                            color=Colour(0x59d9b9)))
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
                 if i not in after.roles:
-                    await after.send(f'You were deprived of the role **{i}**')
+                    await ctx.send(embed=Embed(title=f"You have been deprived the **{i}** role",
+                            color=Colour(0xd95959)))
 
 
 def setup(client):
