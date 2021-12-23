@@ -18,7 +18,7 @@ ___
  - **/about** - About Parzibot
  - **/choosegame** `games` - Randomly chooses a game from your list
  - **/clear** `number` - Clear current Text Channel
- - **/givegame** - Choice random game from our list
+ - **/getgame** - Choice random game from our list
  - **/help** - List of Parzibot commands
  - **/ping** - Parzibot ping
  - **/users** - List of Text Channel members

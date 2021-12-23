@@ -32,12 +32,12 @@ class Events(commands.Cog):
         if len(before.roles) < len(after.roles):
             for i in after.roles:
                 if i not in before.roles:
-                    await ctx.send(embed=Embed(title=f"You have been given the **{i}** role",
+                    await ctx.send(embed=Embed(title=f"You have received the **{i}** role",
                             color=Colour(0x59d9b9)))
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
                 if i not in after.roles:
-                    await ctx.send(embed=Embed(title=f"You have been deprived the **{i}** role",
+                    await ctx.send(embed=Embed(title=f"You have deprived the **{i}** role",
                             color=Colour(0xd95959)))
 
 

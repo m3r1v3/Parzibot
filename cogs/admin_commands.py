@@ -18,13 +18,13 @@ class AdminCommands(commands.Cog):
         """Parzibot Admin Commands list"""
         if ctx.author.guild_permissions.manage_messages:
             await ctx.send(embed=Embed(title=f"**Admin Commands**",
-                    description=f'\n\t - **/adminhelp** - List of Parzibot admin commands'
-                           '\n\t - **/ban** `@member` - Ban a member on the server'
-                           '\n\t - **/giverole** `@member` `role` - Give a role to a member'
-                           '\n\t - **/kick** `@member` - Kick a member from the server'
-                           '\n\t - **/nickname** `@member` `new nickname` - Change member\'s nickname'
-                           '\n\t - **/defaultrole** `role id` - Set default role on the server'
-                           '\n\t - **/removedefaultrole** - Remove default role on the server',
+                    description=f' - **/adminhelp** - List of Parzibot admin commands\n'
+                           ' - **/ban** `@member` - Ban a member on the server\n'
+                           ' - **/giverole** `@member` `role` - Give a role to a member\n'
+                           ' - **/kick** `@member` - Kick a member from the server\n'
+                           ' - **/nickname** `@member` `new nickname` - Change member\'s nickname\n'
+                           ' - **/defaultrole** `role id` - Set default role on the server\n'
+                           ' - **/removedefaultrole** - Remove default role on the server\n',
                     color=Colour(0xd3d959)))
         else:
             await ctx.send(embed=Embed(title=f"Error",
@@ -51,8 +51,7 @@ class AdminCommands(commands.Cog):
         """Ban a member on the server"""
         if ctx.author.guild_permissions.manage_messages:
             await member.ban(reason=reason)
-            await ctx.send(embed=Embed(title=f"Member was banned",
-                    description=f"**{member.mention}** has been banned",
+            await ctx.send(embed=Embed(title=f"**{member.mention}** has been banned",
                     color=Colour(0xd3d959)))
         else:
             await ctx.send(embed=Embed(title=f"Error",
@@ -78,8 +77,7 @@ class AdminCommands(commands.Cog):
         """Give role to member"""
         if ctx.author.guild_permissions.manage_messages:
             await member.add_roles(role)
-            await ctx.send(embed=Embed(title=f"Member received role",
-                    description=f"Role has been given to **{member}**",
+            await ctx.send(embed=Embed(title=f"Role has been given to **{member}**",
                     color=Colour(0xd3d959)))
         else:
             await ctx.send(embed=Embed(title=f"Error",
@@ -106,8 +104,7 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             """Kick a member from the server"""
             await member.kick(reason=reason)
-            await ctx.send(embed=Embed(title=f"Member was kicked",
-                    description=f"**{member}** has been kicked",
+            await ctx.send(embed=Embed(title=f"**{member}** has been kicked",
                     color=Colour(0xd3d959)))
         else:
             await ctx.send(embed=Embed(title=f"Error",
@@ -134,8 +131,7 @@ class AdminCommands(commands.Cog):
         """Change nickname to member"""
         if ctx.author.guild_permissions.manage_messages:
             await member.edit(nick=nickname)
-            await ctx.send(embed=Embed(title=f"Nickname was changed",
-                    description=f"**{member}** nickname has been changed",
+            await ctx.send(embed=Embed(title=f"**{member}** nickname has been changed",
                     color=Colour(0xd3d959)))
         else:
             await ctx.send(embed=Embed(title=f"Error",
@@ -157,14 +153,12 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             if Role().get_role(str(ctx.guild.id)) is None:
                 Role().add(role, str(ctx.guild.id))
-                await ctx.send(embed=Embed(title=f"Default role was set",
-                    description=f"**Server default role has been set**",
+                await ctx.send(embed=Embed(title=f"**Server Default Role** has been set",
                     color=Colour(0xd3d959)))
             else: 
                 if Role().get_role(str(ctx.guild.id)) is None:
                     Role().add(role, str(ctx.guild.id))
-                    await ctx.send(embed=Embed(title=f"Default role already set",
-                        description=f"**Server default role already had been set**",
+                    await ctx.send(embed=Embed(title=f"**Server Default Role** already had been set",
                         color=Colour(0x59d9b9)))
         else:
             await ctx.send(embed=Embed(title=f"Error",
@@ -179,13 +173,11 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             if not Role().get_role(str(ctx.guild.id)) is None:
                 Role().delete(str(ctx.guild.id))
-                await ctx.send(embed=Embed(title=f"Default role was removed",
-                        description=f"**Server default role has been removed**",
+                await ctx.send(embed=Embed(title=f"**Server Default Role** has been removed",
                         color=Colour(0xd3d959)))
             else:
                 Role().add(role, str(ctx.guild.id))
-                await ctx.send(embed=Embed(title=f"Default role hadn't set",
-                        description=f"**Server default role already hadn't been set**",
+                await ctx.send(embed=Embed(title=f"**Server Default Role** already hadn't been set",
                         color=Colour(0x59d9b9)))
         else:
             await ctx.send(embed=Embed(title=f"Error",
