@@ -17,6 +17,7 @@ ___
  - **/8ball** `question` - The ball of predictions
  - **/about** - About Parzibot
  - **/clear** `number` - Clear current Text Channel
+  - **/dice** `value` - The Game of Dice
  - **/getgame** - Choice random game from our list
  - **/help** - List of Parzibot commands
  - **/ping** - Parzibot ping

@@ -77,7 +77,31 @@ class Commands(commands.Cog):
         else:
             await ctx.send(embed=Embed(title=f"Cannot clear **{number}** messages",
                     color=Colour(0xd95959)))
-            
+
+    @cog_ext.cog_slash(name="dice",
+                       description="The Game of Dice",
+                       options=[
+                            create_option(
+                                name="value",
+                                description="The value what you're predicting",
+                                option_type=4,
+                                required=True)
+                       ])
+    async def dice(self, ctx, value):
+        """Game of Dice"""
+        v1, v2 = random.randint(1, 6), random.randint(1, 6)
+        if v1 + v2 == value:
+            await ctx.send(embed=Embed(title=f"You won :D",
+                    description=f"The sum of values is **{v1+v2}**. The values of dice is **{v1}** and **{v2}**",
+                    color=Colour(0x59d9b9)))
+        elif v1 == value or v2 == value:
+            await ctx.send(embed=Embed(title=f"You guess value one of the dice :D",
+                    description=f"The values one of dice is **{v1 if v1 == value else v2}**. The values of dice is **{v1}** and **{v2}**",
+                    color=Colour(0x59d9b9)))
+        else:
+            await ctx.send(embed=Embed(title=f"You lose :(",
+                    description=f"The values of dice is **{v1}** and **{v2}**",
+                    color=Colour(0xd95959)))
 
     @cog_ext.cog_slash(name="getgame", description="Choice random game from our list")
     async def getgame(self, ctx):
@@ -99,6 +123,7 @@ class Commands(commands.Cog):
                     description=' - **/8ball** `question` - The ball of predictions\n'
                        ' - **/about** - About Parzibot\n'
                        ' - **/clear** `number` - Clear current Text Channel\n'
+                       ' - **/dice** `value` - The Game of Dice\n'
                        ' - **/getgame** - Choice random game from our list\n'
                        ' - **/help** - List of Parzibot commands\n'
                        ' - **/ping** - Parzibot ping\n'
