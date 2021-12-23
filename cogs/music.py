@@ -45,8 +45,8 @@ class Music(commands.Cog):
             await ctx.send(embed=Embed(title=f"**Parzibot** has left **Voice Channel**",
                     color=Colour(0x59d9b9)))
 
-    @cog_ext.cog_slash(name="musicclear", description="Clear music queue")
-    async def musicclear(self, ctx):
+    @cog_ext.cog_slash(name="clearqueue", description="Clear music queue")
+    async def clearqueue(self, ctx):
         """Clear music queue"""
         if (
                 ctx.author.voice.channel is None
@@ -69,9 +69,9 @@ class Music(commands.Cog):
         await ctx.send(embed=Embed(title=f"Music commands",
                     description=f' - **/join** - Join to Your current Voice Channel\n'
                        ' - **/leave** - Leave from Voice Channel\n'
-                       ' - **/musicclear** - Clear music queue\n'
+                       ' - **/clearqueue** - Clear music queue\n'
                        ' - **/musichelp** - List of Parzibot Music Commands\n'
-                       ' - **/musicqueue** - Number of songs in queue\n'
+                       ' - **/queue** - Number of songs in queue\n'
                        ' - **/next** - Play next song in queue\n'
                        ' - **/pause** - Set Song on Pause\n'
                        ' - **/play** `url` - Play Song in Voice Channel\n'
@@ -81,8 +81,9 @@ class Music(commands.Cog):
                        ' - **/stop** - Stop current Song\n',
                     color=Colour(0x59d9b9)))
 
-    @cog_ext.cog_slash(name="musicqueue", description="Number of songs in queue")
-    async def musicqueue(self, ctx):
+    @cog_ext.cog_slash(name="queue", description="Number of songs in queue")
+    async def queue(self, ctx):
+        """Number of songs in queue"""
         if self.queue:
             await ctx.send(embed=Embed(title=f"**The Queue** contains about **{len(self.queue)}** song(-s)",
                     color=Colour(0x59d9b9)))

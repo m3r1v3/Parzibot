@@ -16,7 +16,6 @@ ___
 
  - **/8ball** `question` - The ball of predictions
  - **/about** - About Parzibot
- - **/choosegame** `games` - Randomly chooses a game from your list
  - **/clear** `number` - Clear current Text Channel
  - **/getgame** - Choice random game from our list
  - **/help** - List of Parzibot commands
@@ -30,9 +29,9 @@ ___
 
  - **/join** - Join to Your current Voice Channel
  - **/leave** - Leave from Voice Channel
- - **/musicclear** - Clear music queue
+ - **/clearqueue** - Clear music queue
  - **/musichelp** - List of Parzibot Music Commands
- - **/musicqueue** - Number of songs in queue
+ - **/queue** - Number of songs in queue
  - **/next** - Play next song in queue
  - **/pause** - Set Song on Pause
  - **/play** `url` - Play Song in Voice Channel
