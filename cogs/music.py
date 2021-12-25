@@ -18,9 +18,9 @@ class Music(commands.Cog):
             'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
             'options': '-vn'
             }
-        self.queue, self.current = [], ""
+        self.songs, self.current = [], ""
 
-    @cog_ext.cog_slash(name="clearplaylist", description="Clear Music Queue")
+    @cog_ext.cog_slash(name="clearplaylist", description="Clear Music Playlist")
     async def clearplaylist(self, ctx):
         """Clear Music Playlist"""
         if (
@@ -33,8 +33,8 @@ class Music(commands.Cog):
                     color=Colour(0xd95959)
                     )
                 )
-        elif not self.queue:
-            self.queue = []
+        elif not self.songs:
+            self.songs = []
             discord.utils.get(self.client.voice_clients, guild=ctx.guild).stop()
             await ctx.send(
                 embed=Embed(
@@ -54,7 +54,7 @@ class Music(commands.Cog):
     async def join(self, ctx):
         """Parzibot Joins to Your Current Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if voice is None or not voice.is_connected():
+        if ctx.author.voice is not None and voice is None or not voice.is_connected():
             channel = ctx.author.voice.channel
             await channel.connect()
             await ctx.send(
@@ -66,7 +66,7 @@ class Music(commands.Cog):
         else:
             await ctx.send(
                 embed=Embed(
-                    title="**Parzibot** isn't connected to your **Voice Channel**",
+                    title="**Parzibot** already connected to **Voice Channel**",
                     color=Colour(0xd95959)
                     )
                 )
@@ -84,7 +84,7 @@ class Music(commands.Cog):
                         )
                     )
         else:
-            self.queue, self.current = [], ""
+            self.songs, self.current = [], ""
             await voice.disconnect()
             await ctx.send(
                 embed=Embed(
@@ -206,7 +206,7 @@ class Music(commands.Cog):
                     title="**/play** command - Play The Song in The Current Voice Channel",
                     description=(
                         '**Syntax:** **/play** `url`\n'
-                        '**Options:** `url` - YouTube Video URL (Required)'
+                        '**Options:** `url` - YouTube Video URL **(Required)**'
                         ),
                     color=Colour(0x59d9b9)
                     )
@@ -278,7 +278,7 @@ class Music(commands.Cog):
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
-        if self.queue: await self.play_song(ctx)
+        if self.songs: await self.play_song(ctx)
         else:
             await ctx.send(
                 embed=Embed(
@@ -341,7 +341,7 @@ class Music(commands.Cog):
                 )
             return
 
-        self.queue.append(str(url))
+        self.songs.append(str(url))
 
         channel = ctx.author.voice.channel
         if channel and channel is not None:
@@ -368,7 +368,6 @@ class Music(commands.Cog):
                 )
 
     async def play_song(self, ctx):
-        
         def search(url):
             with youtube_dl.YoutubeDL({'format': 'bestaudio', 'noplaylist': 'True'}) as ydl:
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
@@ -376,8 +375,8 @@ class Music(commands.Cog):
 
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
 
-        if self.queue:
-            self.current = self.queue.pop(0)
+        if self.songs:
+            self.current = self.songs.pop(0)
             data = search(self.current)
             
             voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS),
@@ -395,7 +394,7 @@ class Music(commands.Cog):
     async def playlist(self, ctx):
         """The Number of Songs in The Playlist"""
         if (
-            ctx.author.voice is None
+            ctx.author.voice is None or ctx.voice_client is None
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
             await ctx.send(
@@ -405,10 +404,10 @@ class Music(commands.Cog):
                     )
                 )
             return
-        if self.queue:
+        if self.songs:
             await ctx.send(
                 embed=Embed(
-                    title=f"**The Playlist** contains about **{len(self.queue)}** song(-s)",
+                    title=f"**The Playlist** contains about **{len(self.songs)}** song(-s)",
                     color=Colour(0x59d9b9)
                     )
                 )
@@ -440,7 +439,6 @@ class Music(commands.Cog):
         await self.replay_song(ctx)
 
     async def replay_song(self, ctx):
-        
         def search(url):
             with youtube_dl.YoutubeDL({'format': 'bestaudio', 'noplaylist': 'True'}) as ydl:
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
@@ -502,8 +500,8 @@ class Music(commands.Cog):
                     )
                 )
             return
-        elif self.queue:
-            random.shuffle(self.queue)
+        elif self.songs:
+            random.shuffle(self.songs)
             await ctx.send(
                 embed=Embed(
                     title=f"**The Playlist** has been shuffled",

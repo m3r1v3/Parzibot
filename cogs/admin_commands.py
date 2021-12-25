@@ -189,14 +189,12 @@ class AdminCommands(commands.Cog):
                         )
                     )
             else: 
-                if Role().get_role(str(ctx.guild.id)) is None:
-                    Role().add(role, str(ctx.guild.id))
-                    await ctx.send(
-                        embed=Embed(
-                            title="**Server Default Role** already had been set",
-                            color=Colour(0x59d9b9)
-                            )
+                await ctx.send(
+                    embed=Embed(
+                        title="**Server Default Role** already had been set",
+                        color=Colour(0x59d9b9)
                         )
+                    )
         else:
             await ctx.send(
                 embed=Embed(
@@ -315,7 +313,7 @@ class AdminCommands(commands.Cog):
     async def removedefaultrole(self, ctx):
         """Remove The Default Role on The Server"""
         if ctx.author.guild_permissions.manage_messages:
-            if not Role().get_role(str(ctx.guild.id)) is None:
+            if Role().get_role(str(ctx.guild.id)) is not None:
                 Role().delete(str(ctx.guild.id))
                 await ctx.send(
                     embed=Embed(
@@ -324,7 +322,6 @@ class AdminCommands(commands.Cog):
                         )
                     )
             else:
-                Role().add(role, str(ctx.guild.id))
                 await ctx.send(
                     embed=Embed(
                         title="**Server Default Role** already hadn't been set",
