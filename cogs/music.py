@@ -14,150 +14,362 @@ class Music(commands.Cog):
     def __init__(self, client):
         """Initialisation client"""
         self.client = client
-        self.FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-                               'options': '-vn'}
+        self.FFMPEG_OPTIONS = {
+            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+            'options': '-vn'
+            }
         self.queue, self.current = [], ""
 
-    @cog_ext.cog_slash(name="join", description="Join to Your current Voice Channel")
+    @cog_ext.cog_slash(name="clearqueue", description="Clear Music Queue")
+    async def clearqueue(self, ctx):
+        """Clear Music Queue"""
+        if (
+            ctx.author.voice.channel is None 
+                or ctx.author.voice.channel != ctx.voice_client.channel
+        ):
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
+        elif not self.queue:
+            self.queue = []
+            discord.utils.get(self.client.voice_clients, guild=ctx.guild).stop()
+            await ctx.send(
+                embed=Embed(
+                    title="**The Queue** has been cleared",
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        else:
+            await ctx.send(
+                embed=Embed(
+                    title="**The Queue** is empty",
+                    color=Colour(0x59d9b9)
+                    )
+                )
+
+    @cog_ext.cog_slash(name="join", description="Parzibot Joins to Your Current Voice Channel")
     async def join(self, ctx):
-        """Join to Your current Voice Channel"""
+        """Parzibot Joins to Your Current Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice is None or not voice.is_connected():
             channel = ctx.author.voice.channel
             await channel.connect()
-            await ctx.send(embed=Embed(title=f"**Parzibot** has been connected to **Voice Channel**",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** has been connected to **Voice Channel**",
+                    color=Colour(0x59d9b9)
+                    )
+                )
         else:
-            await ctx.send(embed=Embed(title=f"**Parzibot** isn't connected to your **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
 
-    @cog_ext.cog_slash(name="leave", description="Leave from Voice Channel")
+    @cog_ext.cog_slash(name="leave", description="Parzibot Leaves from Your Current Voice Channel")
     async def leave(self, ctx):
-        """Leave from Voice Channel"""
+        """Parzibot Leaves Your Current Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if ctx.author.voice.channel is None and (
                 ctx.author.voice.channel == ctx.voice_client.channel or voice.is_connected() is None):
-                await ctx.send(embed=Embed(title=f"**Parzibot** isn't connected to your **Voice Channel**",
-                    color=Colour(0xd95959)))
+                await ctx.send(
+                    embed=Embed(
+                        title="**Parzibot** isn't connected to your **Voice Channel**",
+                        color=Colour(0xd95959)
+                        )
+                    )
         else:
             self.queue, self.current = [], ""
             await voice.disconnect()
-            await ctx.send(embed=Embed(title=f"**Parzibot** has left **Voice Channel**",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** has left **Voice Channel**",
+                    color=Colour(0x59d9b9)
+                    ))
 
-    @cog_ext.cog_slash(name="clearqueue", description="Clear music queue")
-    async def clearqueue(self, ctx):
-        """Clear music queue"""
-        if (
-                ctx.author.voice.channel is None
-                or ctx.author.voice.channel != ctx.voice_client.channel
-        ):
-            await ctx.send(embed=Embed(title=f"**Parzibot** isn't connected to your **Voice Channel**",
-                    color=Colour(0xd95959)))
-        elif not self.queue:
-            self.queue = []
-            discord.utils.get(self.client.voice_clients, guild=ctx.guild).stop()
-            await ctx.send(embed=Embed(title=f"**The Queue** has been cleared",
-                    color=Colour(0x59d9b9)))
-        else:
-            await ctx.send(embed=Embed(title=f"**The Queue** is empty",
-                    color=Colour(0x59d9b9)))
+    @cog_ext.cog_slash(
+        name="musichelp",
+        description="The List of Parzibot Music Commands",
+        options=[
+            create_option(
+                name="command",
+                description="The Music Help Message for Specific Command",
+                option_type=3,
+                required=False,
+                choices=[
+                    create_choice(name="clearqueue", value="clearqueue"),
+                    create_choice(name="join", value="join"),
+                    create_choice(name="leave", value="leave"),
+                    create_choice(name="musichelp", value="musichelp"),
+                    create_choice(name="next", value="next"),
+                    create_choice(name="pause", value="pause"),
+                    create_choice(name="play", value="play"),
+                    create_choice(name="queue", value="clearqueue"),
+                    create_choice(name="replay", value="replay"),
+                    create_choice(name="resume", value="resume"),
+                    create_choice(name="shuffle", value="shuffle"),                    
+                    create_choice(name="stop", value="stop")
+                    ])
+            ])
+    async def musichelp(self, ctx, command=None):
+        """The List of Parzibot Music Commands"""
+        if command is None:
+            await ctx.send(
+                embed=Embed(
+                    title=f"Music commands",
+                    description=(
+                        ' - **/clearqueue** - Clear Music Queue\n'
+                        ' - **/join** - Parzibot Joins to Your Current Voice Channel\n'
+                        ' - **/leave** - Parzibot Leaves Your Current Voice Channel\n'
+                        ' - **/musichelp** `command` - The List of Parzibot Music Commands\n'
+                        ' - **/next** - Play The Next Song in The Queue\n'
+                        ' - **/pause** - Pause The Current Song\n'
+                        ' - **/play** `url` - Play The Song in The Current Voice Channel\n'
+                        ' - **/queue** - The Number of Songs in The Queue\n'
+                        ' - **/replay** - Replay The Current Song\n'
+                        ' - **/resume** - Resume The Current Song\n'
+                        ' - **/shuffle** - Shuffle The List of Songs\n'
+                        ' - **/stop** - Stop The Current Song'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "clearqueue":
+            await ctx.send(
+                embed=Embed(
+                    title="**/clearqueue** command - Clear Music Queue",
+                    description=(
+                        '**Syntax:** **/clearqueue**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "join":
+            await ctx.send(
+                embed=Embed(
+                    title="**/join** command - Parzibot Joins to Your Current Voice Channel",
+                    description=(
+                        '**Syntax:** **/join**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "leave":
+            await ctx.send(
+                embed=Embed(
+                    title="**/leave** command - Parzibot Leaves Your Current Voice Channel",
+                    description=(
+                        '**Syntax:** **/leave**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "musichelp":
+            await ctx.send(
+                embed=Embed(
+                    title="**/musichelp** command - The List of Parzibot Music Commands",
+                    description=(
+                        '**Syntax:** **/musichelp** `command`\n'
+                        '**Options:** `command` - The Music Help Message for Specific Command **(Optional)**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "next":
+            await ctx.send(
+                embed=Embed(
+                    title="**/next** command - Play The Next Song in The Queue",
+                    description=(
+                        '**Syntax:** **/next**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "pause":
+            await ctx.send(
+                embed=Embed(
+                    title="**/pause** command - Pause The Current Song",
+                    description=(
+                        '**Syntax:** **/pause**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "play":
+            await ctx.send(
+                embed=Embed(
+                    title="**/play** command - Play The Song in The Current Voice Channel",
+                    description=(
+                        '**Syntax:** **/play** `url`\n'
+                        '**Options:** `url` - YouTube Video URL (Required)'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "queue":
+            await ctx.send(
+                embed=Embed(
+                    title="**/queue** command - The Number of Songs in The Queue",
+                    description=(
+                        '**Syntax:** **/queue**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "replay":
+            await ctx.send(
+                embed=Embed(
+                    title="**/replay** command - Replay The Current Song",
+                    description=(
+                        '**Syntax:** **/replay**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "resume":
+            await ctx.send(
+                embed=Embed(
+                    title="**/resume** command - Resume The Current Song",
+                    description=(
+                        '**Syntax:** **/resume**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "shuffle":
+            await ctx.send(
+                embed=Embed(
+                    title="**/shuffle** command - Shuffle The List of Songs",
+                    description=(
+                        '**Syntax:** **/shuffle**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        elif command == "stop":
+            await ctx.send(
+                embed=Embed(
+                    title="**/stop** command - Stop The Current Song",
+                    description=(
+                        '**Syntax:** **/stop**'
+                        ),
+                    color=Colour(0x59d9b9)
+                    )
+                )
 
-    @cog_ext.cog_slash(name="musichelp", description="List of Parzibot Music Commands")
-    async def musichelp(self, ctx):
-        """List of Parzibot Music Commands"""
-        await ctx.send(embed=Embed(title=f"Music commands",
-                    description=f' - **/join** - Join to Your current Voice Channel\n'
-                       ' - **/leave** - Leave from Voice Channel\n'
-                       ' - **/clearqueue** - Clear music queue\n'
-                       ' - **/musichelp** - List of Parzibot Music Commands\n'
-                       ' - **/queue** - Number of songs in queue\n'
-                       ' - **/next** - Play next song in queue\n'
-                       ' - **/pause** - Set Song on Pause\n'
-                       ' - **/play** `url` - Play Song in Voice Channel\n'
-                       ' - **/replay** - Replay current Song\n'
-                       ' - **/resume** - Resume current Song\n'
-                       ' - **/shuffle** - Shuffle list of songs\n'
-                       ' - **/stop** - Stop current Song\n',
-                    color=Colour(0x59d9b9)))
-
-    @cog_ext.cog_slash(name="queue", description="Number of songs in queue")
-    async def queue(self, ctx):
-        """Number of songs in queue"""
-        if self.queue:
-            await ctx.send(embed=Embed(title=f"**The Queue** contains about **{len(self.queue)}** song(-s)",
-                    color=Colour(0x59d9b9)))
-        else:
-            await ctx.send(embed=Embed(title=f"**The Queue** is empty",
-                    color=Colour(0x59d9b9)))
-
-    @cog_ext.cog_slash(name="next", description="Play next song in queue")
+    @cog_ext.cog_slash(name="next", description="Play The Next Song in The Queue")
     async def next(self, ctx):
-        """Play next song in queue"""
+        """Play The Next Song in The Queue"""
         if (
-                ctx.author.voice.channel is None
+            ctx.author.voice.channel is None
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
-            await ctx.send(embed=Embed(title=f"**Parzibot** isn't connected to your **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
-        if self.queue:
-            await self.play_song(ctx)
+        if self.queue: await self.play_song(ctx)
         else:
-            await ctx.send(embed=Embed(title=f"**The Queue** is empty",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title="**The Queue** is empty",
+                    color=Colour(0x59d9b9)
+                    )
+                )
 
-    @cog_ext.cog_slash(name="pause", description="Set Song on Pause")
+    @cog_ext.cog_slash(name="pause", description="Pause The Current Song")
     async def pause(self, ctx):
-        """Set Song on Pause"""
+        """Pause The Current Song"""
         if ctx.author.voice.channel is None or ctx.author.voice.channel != ctx.voice_client.channel:
-            await ctx.send(embed=Embed(title=f"**Parzibot** isn't connected to your **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             voice.pause()
-            await ctx.send(embed=Embed(title=f"**The Song** has been paused",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title="**The Song** has been paused",
+                    color=Colour(0x59d9b9)
+                    )
+                )
         else:
-            await ctx.send(embed=Embed(title=f"**The Song** isn't playing right now",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title="**The Song** isn't playing right now",
+                    color=Colour(0x59d9b9)
+                    )
+                )
 
-    @cog_ext.cog_slash(name="play", description="Play Song in Voice Channel", options=[
-        create_option(name="url", description="YouTube Video URL", option_type=3, required=True)])
+
+    @cog_ext.cog_slash(
+        name="play",
+        description="Play The Song in The Current Voice Channel",
+        options=[
+            create_option(
+                name="url",
+                description="YouTube Video URL",
+                option_type=3,
+                required=True
+                )
+            ])
     async def play(self, ctx, url: str):
-        """Play Song in Voice Channel"""
+        """Play The Song in The Current Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         channel = ctx.author.voice.channel
         if (
-                voice is not None
+            voice is not None
                 and ctx.author.voice.channel != ctx.voice_client.channel
         ):
-            await ctx.send(embed=Embed(title=f"**Parzibot** isn't connected to your **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
             return
 
         self.queue.append(str(url))
 
         if channel:
-            if voice is not None and voice.is_connected() is not None:
+            if voice is not None and voice.is_connected() is not None: 
                 await voice.move_to(channel)
-            else:
-                voice = await channel.connect()
+            else:  voice = await channel.connect()
 
-            if not voice.is_playing() or voice.is_paused():
+            if not voice.is_playing() or voice.is_paused(): 
                 await self.play_song(ctx)
             else:
-                await ctx.send(embed=Embed(title=f"**The Song** added to queue",
-                    description="If you want to play song right now write **/next**",
-                    color=Colour(0x59d9b9)))
+                await ctx.send(
+                    embed=Embed(
+                        title="**The Song** added to queue",
+                        description="If you want to play song right now write **/next**",
+                        color=Colour(0x59d9b9)
+                        )
+                    )
         else:
-            await ctx.send(embed=Embed(title=f"You're not connected to any **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="You're not connected to any **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
 
     async def play_song(self, ctx):
+        
         def search(url):
             with youtube_dl.YoutubeDL({'format': 'bestaudio', 'noplaylist': 'True'}) as ydl:
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
@@ -168,21 +380,49 @@ class Music(commands.Cog):
         if self.queue:
             self.current = self.queue.pop(0)
             data = search(self.current)
+            
             voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS),
                        after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
+            
             voice.is_playing()
-            await ctx.send(embed=Embed(title=f"**{data['title']}** is playing now",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title=f"**{data['title']}** is playing now",
+                    color=Colour(0x59d9b9)
+                    )
+                )
 
-    @cog_ext.cog_slash(name="replay", description="Replay current Song")
+    @cog_ext.cog_slash(name="queue", description="The Number of Songs in The Queue")
+    async def queue(self, ctx):
+        """The Number of Songs in The Queue"""
+        if self.queue:
+            await ctx.send(
+                embed=Embed(
+                    title=f"**The Queue** contains about **{len(self.queue)}** song(-s)",
+                    color=Colour(0x59d9b9)
+                    )
+                )
+        else:
+            await ctx.send(
+                embed=Embed(
+                    title="**The Queue** is empty",
+                    color=Colour(0x59d9b9)
+                    )
+                )
+
+    @cog_ext.cog_slash(name="replay", description="Replay The Current Song")
     async def replay(self, ctx):
-        """Replay last sound"""
+        """Replay The Current Song"""
         if (
-                ctx.author.voice.channel is None
+            ctx.author.voice.channel is None
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
-            await ctx.send(embed=Embed(title=f"You're not connected to any **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="You're not connected to any **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
@@ -190,6 +430,7 @@ class Music(commands.Cog):
         await self.replay_song(ctx)
 
     async def replay_song(self, ctx):
+        
         def search(url):
             with youtube_dl.YoutubeDL({'format': 'bestaudio', 'noplaylist': 'True'}) as ydl:
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
@@ -199,55 +440,92 @@ class Music(commands.Cog):
 
         data = search(self.current)
         voice.play(discord.FFmpegPCMAudio(data['source'], **self.FFMPEG_OPTIONS),
-                   after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
+            after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
+        
         voice.is_playing()
-        await ctx.send(embed=Embed(title=f"**{data['title']}** is playing now",
-                    color=Colour(0x59d9b9)))
+        await ctx.send(
+            embed=Embed(
+                title=f"**{data['title']}** is playing now",
+                color=Colour(0x59d9b9)
+                )
+            )
 
-    @cog_ext.cog_slash(name="resume", description="Resume current Song")
+    @cog_ext.cog_slash(name="resume", description="Resume The Current Song")
     async def resume(self, ctx):
-        """Resume current Song"""
+        """Resume The Current Song"""
         if ctx.author.voice.channel is None or ctx.author.voice.channel != ctx.voice_client.channel:
-            await ctx.send(embed=Embed(title=f"You're not connected to any **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="You're not connected to any **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_paused():
             voice.resume()
-            await ctx.send(embed=Embed(title=f"**The Song** has been resumed",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title="**The Song** has been resumed",
+                    color=Colour(0x59d9b9)
+                    )
+                )
         else:
-            await ctx.send(embed=Embed(title=f"**The Song** isn't paused",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title="**The Song** isn't paused",
+                    color=Colour(0x59d9b9)
+                    )
+                )
 
-    @cog_ext.cog_slash(name="shuffle", description="Shuffle list of songs")
+    @cog_ext.cog_slash(name="shuffle", description="Shuffle The List of Songs")
     async def shuffle(self, ctx):
-        """Shuffle list of songs"""
+        """Shuffle The List of Songs"""
         if (
-                ctx.author.voice.channel is None
+            ctx.author.voice.channel is None
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
-            await ctx.send(embed=Embed(title=f"You're not connected to any **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title="You're not connected to any **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
         elif self.queue:
             random.shuffle(self.queue)
-            await ctx.send(embed=Embed(title=f"**The Queue** has been shuffled",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title=f"**The Queue** has been shuffled",
+                    color=Colour(0x59d9b9)
+                    )
+                )
         else:
-            await ctx.send(embed=Embed(title=f"**The Queue** is empty",
-                    color=Colour(0x59d9b9)))
+            await ctx.send(
+                embed=Embed(
+                    title=f"**The Queue** is empty",
+                    color=Colour(0x59d9b9)
+                    )
+                )
 
-    @cog_ext.cog_slash(name="stop", description="Stop current Song")
+    @cog_ext.cog_slash(name="stop", description="Stop The Current Song")
     async def stop(self, ctx):
-        """Stop current Song"""
+        """Stop The Current Song"""
         if ctx.author.voice.channel is None or ctx.author.voice.channel != ctx.voice_client.channel:
-            await ctx.send(embed=Embed(title=f"You're not connected to any **Voice Channel**",
-                    color=Colour(0xd95959)))
+            await ctx.send(
+                embed=Embed(
+                    title=f"You're not connected to any **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
-        await ctx.send(embed=Embed(title=f"**The Song** has been stopped",
-                    color=Colour(0x59d9b9)))
+        await ctx.send(
+            embed=Embed(
+                title=f"**The Song** has been stopped",
+                color=Colour(0x59d9b9)
+                )
+            )
 
 
 def setup(client):

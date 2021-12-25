@@ -197,7 +197,7 @@ class Commands(commands.Cog):
                         ' - **/help** `command` - The list of Parzibot commands\n'
                         ' - **/ping** - Parzibot ping\n'
                         ' - **/users** - List of Text Channel members\n'
-                        ' - **/whiteblack** `white/black` - The White/Black Game\n'
+                        ' - **/whiteblack** `color` - The White/Black Game'
                     ),
                     color=Colour(0x59d9b9)
                     )

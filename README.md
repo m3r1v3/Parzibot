@@ -14,32 +14,32 @@ ___
 
 #### **Bot commands**
 
- - **/8ball** `question` - The ball of predictions
- - **/about** - About Parzibot
- - **/clear** `number` - Clear current Text Channel
-  - **/dice** `value` - The Game of Dice
+ - **/8ball** `question` - The Ball of Predictions
+ - **/about** - Information About Parzibot
+ - **/clear** `number` - Clear Messages in Current Text Channel
+ - **/dice** `value` - The Game of Dice
  - **/getgame** - Choice random game from our list
- - **/help** - List of Parzibot commands
- - **/ping** - Parzibot ping
+ - **/help** `command` - The list of Parzibot commands
+ - **/ping** - Parzibot ping\n'
  - **/users** - List of Text Channel members
- - **/whiteblack** `white/black` - The White/Black Game
+ - **/whiteblack** `color` - The White/Black Game
 
  ___
 
 #### **Music commands**
 
- - **/join** - Join to Your current Voice Channel
- - **/leave** - Leave from Voice Channel
- - **/clearqueue** - Clear music queue
- - **/musichelp** - List of Parzibot Music Commands
- - **/queue** - Number of songs in queue
- - **/next** - Play next song in queue
- - **/pause** - Set Song on Pause
- - **/play** `url` - Play Song in Voice Channel
- - **/replay** - Replay current Song
- - **/resume** - Resume current Song
- - **/shuffle** - Shuffle list of songs
- - **/stop** - Stop current Song
+ - **/clearqueue** - Clear Music Queue
+ - **/join** - Parzibot Joins to Your Current Voice Channel
+ - **/leave** - Parzibot Leaves Your Current Voice Channel
+ - **/musichelp** `command` - The List of Parzibot Music Commands
+ - **/next** - Play The Next Song in The Queue
+ - **/pause** - Pause The Current Song
+ - **/play** `url` - Play The Song in The Current Voice Channelx
+ - **/queue** - The Number of Songs in The Queue
+ - **/replay** - Replay The Current Song
+ - **/resume** - Resume The Current Song
+ - **/shuffle** - Shuffle The List of Songs
+ - **/stop** - Stop The Current Song
 
  ___
 
