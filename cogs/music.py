@@ -6,7 +6,7 @@ import youtube_dl
 from discord import Embed, Colour
 from discord.ext import commands
 from discord_slash import cog_ext
-from discord_slash.utils.manage_commands import create_option
+from discord_slash.utils.manage_commands import create_option, create_choice
 
 
 class Music(commands.Cog):
@@ -20,11 +20,11 @@ class Music(commands.Cog):
             }
         self.queue, self.current = [], ""
 
-    @cog_ext.cog_slash(name="clearqueue", description="Clear Music Queue")
-    async def clearqueue(self, ctx):
-        """Clear Music Queue"""
+    @cog_ext.cog_slash(name="clearplaylist", description="Clear Music Queue")
+    async def clearplaylist(self, ctx):
+        """Clear Music Playlist"""
         if (
-            ctx.author.voice.channel is None 
+            ctx.author.voice is None 
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
             await ctx.send(
@@ -38,14 +38,14 @@ class Music(commands.Cog):
             discord.utils.get(self.client.voice_clients, guild=ctx.guild).stop()
             await ctx.send(
                 embed=Embed(
-                    title="**The Queue** has been cleared",
+                    title="**The Playlist** has been cleared",
                     color=Colour(0x59d9b9)
                     )
                 )
         else:
             await ctx.send(
                 embed=Embed(
-                    title="**The Queue** is empty",
+                    title="**The Playlist** is empty",
                     color=Colour(0x59d9b9)
                     )
                 )
@@ -75,8 +75,8 @@ class Music(commands.Cog):
     async def leave(self, ctx):
         """Parzibot Leaves Your Current Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if ctx.author.voice.channel is None and (
-                ctx.author.voice.channel == ctx.voice_client.channel or voice.is_connected() is None):
+        if ctx.author.voice is None or (
+                ctx.author.voice.channel != ctx.voice_client.channel or voice.is_connected() is None):
                 await ctx.send(
                     embed=Embed(
                         title="**Parzibot** isn't connected to your **Voice Channel**",
@@ -98,18 +98,18 @@ class Music(commands.Cog):
         options=[
             create_option(
                 name="command",
-                description="The Music Help Message for Specific Command",
+                description="The Help Message for Specific Music Command",
                 option_type=3,
                 required=False,
                 choices=[
-                    create_choice(name="clearqueue", value="clearqueue"),
+                    create_choice(name="clearplaylist", value="clearplaylist"),
                     create_choice(name="join", value="join"),
                     create_choice(name="leave", value="leave"),
                     create_choice(name="musichelp", value="musichelp"),
                     create_choice(name="next", value="next"),
                     create_choice(name="pause", value="pause"),
                     create_choice(name="play", value="play"),
-                    create_choice(name="queue", value="clearqueue"),
+                    create_choice(name="playlist", value="playlist"),
                     create_choice(name="replay", value="replay"),
                     create_choice(name="resume", value="resume"),
                     create_choice(name="shuffle", value="shuffle"),                    
@@ -123,28 +123,28 @@ class Music(commands.Cog):
                 embed=Embed(
                     title=f"Music commands",
                     description=(
-                        ' - **/clearqueue** - Clear Music Queue\n'
+                        ' - **/clearplaylist** - Clear Music Playlist\n'
                         ' - **/join** - Parzibot Joins to Your Current Voice Channel\n'
                         ' - **/leave** - Parzibot Leaves Your Current Voice Channel\n'
                         ' - **/musichelp** `command` - The List of Parzibot Music Commands\n'
-                        ' - **/next** - Play The Next Song in The Queue\n'
+                        ' - **/next** - Play The Next Song in The Playlist\n'
                         ' - **/pause** - Pause The Current Song\n'
                         ' - **/play** `url` - Play The Song in The Current Voice Channel\n'
-                        ' - **/queue** - The Number of Songs in The Queue\n'
+                        ' - **/playlist** - The Number of Songs in The Playlist\n'
                         ' - **/replay** - Replay The Current Song\n'
                         ' - **/resume** - Resume The Current Song\n'
-                        ' - **/shuffle** - Shuffle The List of Songs\n'
+                        ' - **/shuffle** - Shuffle The Playlist of Songs\n'
                         ' - **/stop** - Stop The Current Song'
                         ),
                     color=Colour(0x59d9b9)
                     )
                 )
-        elif command == "clearqueue":
+        elif command == "clearplaylist":
             await ctx.send(
                 embed=Embed(
-                    title="**/clearqueue** command - Clear Music Queue",
+                    title="**/clearplaylist** command - Clear Music Playlist",
                     description=(
-                        '**Syntax:** **/clearqueue**'
+                        '**Syntax:** **/clearplaylist**'
                         ),
                     color=Colour(0x59d9b9)
                     )
@@ -175,7 +175,7 @@ class Music(commands.Cog):
                     title="**/musichelp** command - The List of Parzibot Music Commands",
                     description=(
                         '**Syntax:** **/musichelp** `command`\n'
-                        '**Options:** `command` - The Music Help Message for Specific Command **(Optional)**'
+                        '**Options:** `command` - The Help Message for Specific Music Command **(Optional)**'
                         ),
                     color=Colour(0x59d9b9)
                     )
@@ -183,7 +183,7 @@ class Music(commands.Cog):
         elif command == "next":
             await ctx.send(
                 embed=Embed(
-                    title="**/next** command - Play The Next Song in The Queue",
+                    title="**/next** command - Play The Next Song in The Playlist",
                     description=(
                         '**Syntax:** **/next**'
                         ),
@@ -211,12 +211,12 @@ class Music(commands.Cog):
                     color=Colour(0x59d9b9)
                     )
                 )
-        elif command == "queue":
+        elif command == "playlist":
             await ctx.send(
                 embed=Embed(
-                    title="**/queue** command - The Number of Songs in The Queue",
+                    title="**/playlist** command - The Number of Songs in The Playlist",
                     description=(
-                        '**Syntax:** **/queue**'
+                        '**Syntax:** **/playlist**'
                         ),
                     color=Colour(0x59d9b9)
                     )
@@ -262,11 +262,11 @@ class Music(commands.Cog):
                     )
                 )
 
-    @cog_ext.cog_slash(name="next", description="Play The Next Song in The Queue")
+    @cog_ext.cog_slash(name="next", description="Play The Next Song in The Playlist")
     async def next(self, ctx):
-        """Play The Next Song in The Queue"""
+        """Play The Next Song in The Playlist"""
         if (
-            ctx.author.voice.channel is None
+            ctx.author.voice is None
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
             await ctx.send(
@@ -282,7 +282,7 @@ class Music(commands.Cog):
         else:
             await ctx.send(
                 embed=Embed(
-                    title="**The Queue** is empty",
+                    title="**The Playlist** is empty",
                     color=Colour(0x59d9b9)
                     )
                 )
@@ -290,7 +290,7 @@ class Music(commands.Cog):
     @cog_ext.cog_slash(name="pause", description="Pause The Current Song")
     async def pause(self, ctx):
         """Pause The Current Song"""
-        if ctx.author.voice.channel is None or ctx.author.voice.channel != ctx.voice_client.channel:
+        if ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(
                 embed=Embed(
                     title="**Parzibot** isn't connected to your **Voice Channel**",
@@ -330,10 +330,8 @@ class Music(commands.Cog):
     async def play(self, ctx, url: str):
         """Play The Song in The Current Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        channel = ctx.author.voice.channel
         if (
-            voice is not None
-                and ctx.author.voice.channel != ctx.voice_client.channel
+            ctx.author.voice is None or voice is not None and ctx.author.voice.channel != ctx.voice_client.channel
         ):
             await ctx.send(
                 embed=Embed(
@@ -345,7 +343,8 @@ class Music(commands.Cog):
 
         self.queue.append(str(url))
 
-        if channel:
+        channel = ctx.author.voice.channel
+        if channel and channel is not None:
             if voice is not None and voice.is_connected() is not None: 
                 await voice.move_to(channel)
             else:  voice = await channel.connect()
@@ -355,7 +354,7 @@ class Music(commands.Cog):
             else:
                 await ctx.send(
                     embed=Embed(
-                        title="**The Song** added to queue",
+                        title="**The Song** added to playlist",
                         description="If you want to play song right now write **/next**",
                         color=Colour(0x59d9b9)
                         )
@@ -392,20 +391,31 @@ class Music(commands.Cog):
                     )
                 )
 
-    @cog_ext.cog_slash(name="queue", description="The Number of Songs in The Queue")
-    async def queue(self, ctx):
-        """The Number of Songs in The Queue"""
+    @cog_ext.cog_slash(name="playlist", description="The Number of Songs in The Playlist")
+    async def playlist(self, ctx):
+        """The Number of Songs in The Playlist"""
+        if (
+            ctx.author.voice is None
+                or ctx.author.voice.channel != ctx.voice_client.channel
+        ):
+            await ctx.send(
+                embed=Embed(
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
+                    color=Colour(0xd95959)
+                    )
+                )
+            return
         if self.queue:
             await ctx.send(
                 embed=Embed(
-                    title=f"**The Queue** contains about **{len(self.queue)}** song(-s)",
+                    title=f"**The Playlist** contains about **{len(self.queue)}** song(-s)",
                     color=Colour(0x59d9b9)
                     )
                 )
         else:
             await ctx.send(
                 embed=Embed(
-                    title="**The Queue** is empty",
+                    title="**The Playlist** is empty",
                     color=Colour(0x59d9b9)
                     )
                 )
@@ -414,12 +424,12 @@ class Music(commands.Cog):
     async def replay(self, ctx):
         """Replay The Current Song"""
         if (
-            ctx.author.voice.channel is None
+            ctx.author.voice is None
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
             await ctx.send(
                 embed=Embed(
-                    title="You're not connected to any **Voice Channel**",
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
                     color=Colour(0xd95959)
                     )
                 )
@@ -453,10 +463,10 @@ class Music(commands.Cog):
     @cog_ext.cog_slash(name="resume", description="Resume The Current Song")
     async def resume(self, ctx):
         """Resume The Current Song"""
-        if ctx.author.voice.channel is None or ctx.author.voice.channel != ctx.voice_client.channel:
+        if ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(
                 embed=Embed(
-                    title="You're not connected to any **Voice Channel**",
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
                     color=Colour(0xd95959)
                     )
                 )
@@ -478,31 +488,32 @@ class Music(commands.Cog):
                     )
                 )
 
-    @cog_ext.cog_slash(name="shuffle", description="Shuffle The List of Songs")
+    @cog_ext.cog_slash(name="shuffle", description="Shuffle The Playlist of Songs")
     async def shuffle(self, ctx):
-        """Shuffle The List of Songs"""
+        """Shuffle The Playlist of Songs"""
         if (
-            ctx.author.voice.channel is None
+            ctx.author.voice is None
                 or ctx.author.voice.channel != ctx.voice_client.channel
         ):
             await ctx.send(
                 embed=Embed(
-                    title="You're not connected to any **Voice Channel**",
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
                     color=Colour(0xd95959)
                     )
                 )
+            return
         elif self.queue:
             random.shuffle(self.queue)
             await ctx.send(
                 embed=Embed(
-                    title=f"**The Queue** has been shuffled",
+                    title=f"**The Playlist** has been shuffled",
                     color=Colour(0x59d9b9)
                     )
                 )
         else:
             await ctx.send(
                 embed=Embed(
-                    title=f"**The Queue** is empty",
+                    title=f"**The Playlist** is empty",
                     color=Colour(0x59d9b9)
                     )
                 )
@@ -510,10 +521,10 @@ class Music(commands.Cog):
     @cog_ext.cog_slash(name="stop", description="Stop The Current Song")
     async def stop(self, ctx):
         """Stop The Current Song"""
-        if ctx.author.voice.channel is None or ctx.author.voice.channel != ctx.voice_client.channel:
+        if ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel:
             await ctx.send(
                 embed=Embed(
-                    title=f"You're not connected to any **Voice Channel**",
+                    title="**Parzibot** isn't connected to your **Voice Channel**",
                     color=Colour(0xd95959)
                     )
                 )
