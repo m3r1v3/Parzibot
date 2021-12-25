@@ -1,7 +1,7 @@
 ---
 name: Enhancement or Improvement
 about: Let us know about the proposed innovation
-title: "[Improvement]"
+title: "[Enhancement|Improvement]"
 labels: enhancement, improvement
 assignees: merive
 

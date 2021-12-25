@@ -1,8 +1,8 @@
 # Parzibot
 
-### _Simple and convenient bot discord on Python._
+## _Powerful and Useful Discord Bot on Python._
 
-The source code of the bot is available to everyone. The bot is using English language. This is free open-source
+The source code of the bot is available to everyone. Parzibot uses English language. This is free open-source
 software and if anyone wants to change things in advance. Just before using my code, please write to me
 on _[Twitter](https://twitter.com/merive_)_.
 
@@ -10,58 +10,58 @@ on _[Twitter](https://twitter.com/merive_)_.
 
 ___
 
-### Commands
+## Commands
 
-#### **Bot commands**
+### **Bot commands**
 
- - **/8ball** `question` - The ball of predictions
- - **/about** - About Parzibot
- - **/choosegame** `games` - Randomly chooses a game from your list
- - **/clear** `number` - Clear current Text Channel
- - **/givegame** - Choice random game from our list
- - **/help** - List of Parzibot commands
- - **/ping** - Parzibot ping
+ - **/8ball** `question` - The Ball of Predictions
+ - **/about** - Information About Parzibot
+ - **/clear** `number` - Clear Messages in Current Text Channel
+ - **/dice** `value` - The Game of Dice
+ - **/getgame** - Choice random game from our list
+ - **/help** `command` - The list of Parzibot commands
+ - **/ping** - Parzibot ping\n'
  - **/users** - List of Text Channel members
- - **/whiteblack** `white/black` - The White/Black Game
+ - **/whiteblack** `color` - The White/Black Game
 
  ___
 
-#### **Music commands**
+### **Music commands**
 
- - **/join** - Join to Your current Voice Channel
- - **/leave** - Leave from Voice Channel
- - **/musicclear** - Clear music queue
- - **/musichelp** - List of Parzibot Music Commands
- - **/musicqueue** - Number of songs in queue
- - **/next** - Play next song in queue
- - **/pause** - Set Song on Pause
- - **/play** `url` - Play Song in Voice Channel
- - **/replay** - Replay current Song
- - **/resume** - Resume current Song
- - **/shuffle** - Shuffle list of songs
- - **/stop** - Stop current Song'
+ - **/clearplaylist** - Clear Music Playlist
+ - **/join** - Parzibot Joins to Your Current Voice Channel
+ - **/leave** - Parzibot Leaves Your Current Voice Channel
+ - **/musichelp** `command` - The List of Parzibot Music Commands
+ - **/next** - Play The Next Song in The Playlist
+ - **/pause** - Pause The Current Song
+ - **/play** `url` - Play The Song in The Current Voice Channelx
+ - **/playlist** - The Number of Songs in The Playlist
+ - **/replay** - Replay The Current Song
+ - **/resume** - Resume The Current Song
+ - **/shuffle** - Shuffle The Playlist of Songs
+ - **/stop** - Stop The Current Song
 
  ___
 
-#### **Admin Commands**
+### **Admin Commands**
 
- - **/adminhelp** - List of Parzibot admin commands
- - **/ban** `@member` - Ban a member on the server
- - **/giverole** `@member` `role` - Give a role to a member
- - **/kick** `@member` - Kick a member from the server
- - **/nickname** `@member` `new nickname` - Change member's nickname
- - **/setrole** `role id` - Set default role on the server
- - **/removerole** `role id` - Remove default role on the server
+ - **/adminhelp** `command` - The List of Parzibot Admin Commands
+ - **/ban** `member` - Ban The Member on The Server
+ - **/defaultrole** `role` - Set The Default Role on The Server
+ - **/giverole** `member` `role` - Give The Role to The Member
+ - **/kick** `member` - Kick The Member from The Server
+ - **/nickname** `member` `nickname` - Change The Nickname to The Member
+ - **/removedefaultrole** - Remove The Default Role on The Server
 
 ___
 
-### LICENSE
+## LICENSE
 
 Our project's using _MIT License_. You can edit/update/use code of our project. For more information read
 **LICENSE** in the repository.
 
 ___
 
-### Contributing
+## Contributing
 
 If you want to work on our project, you are welcome! Read _CONTRIBUTING.md_ and start improving **Parzibot**!
