@@ -80,7 +80,7 @@ class Commands(commands.Cog):
             embed.set_thumbnail(url="attachment://Parzibot.png")
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
-            embed=Embed(title=f"Cannot clear **{number}** messages", color=Colour(0xd95959))
+            embed=Embed(title=f"Cannot clear **{number}** messages", color=Colour(0xff6868))
             embed.set_thumbnail(url="attachment://Parzibot.png")
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
 
@@ -111,7 +111,7 @@ class Commands(commands.Cog):
             embed.set_thumbnail(url="attachment://Parzibot.png")
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
-            embed=Embed(title="You lose :(", description=f"The values of dice is **{v1}** and **{v2}**", color=Colour(0xd95959))
+            embed=Embed(title="You lose :(", description=f"The values of dice is **{v1}** and **{v2}**", color=Colour(0xff6868))
             embed.set_thumbnail(url="attachment://Parzibot.png")
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
 
@@ -290,7 +290,7 @@ class Commands(commands.Cog):
             embed.set_thumbnail(url="attachment://Parzibot.png")
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
-            embed=Embed(title="You lose :(", description=f"Right color is `{result}`", color=Colour(0xd95959))
+            embed=Embed(title="You lose :(", description=f"Right color is `{result}`", color=Colour(0xff6868))
             embed.set_thumbnail(url="attachment://Parzibot.png")
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
 
