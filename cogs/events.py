@@ -19,9 +19,12 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         """Sending a personal message about the bot and issuing a role in the chat"""
-        await member.send(embed=Embed(title=f"Hey **{member}**!",
-                    description="White **/help** to find out my command or **/musichelp** to find out my music command",
-                    color=Colour(0x59d9b9)))
+        embed=Embed(
+            title=f"Hey **{member}**!",
+            description="White **/help** to find out my command or **/musichelp** to find out my music command",
+            color=Colour(0x59d9b9))
+        embed.set_thumbnail(url="attachment://Parzibot.png")
+        await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
 
         role = discord.utils.get(member.guild.roles, id=int(Role().get_role(member.guild.id)))
         await member.add_roles(role)
@@ -32,13 +35,15 @@ class Events(commands.Cog):
         if len(before.roles) < len(after.roles):
             for i in after.roles:
                 if i not in before.roles:
-                    await after.send(embed=Embed(title=f"You have received the **{i}** role",
-                            color=Colour(0x59d9b9)))
+                    embed=Embed(title=f"You have received the **{i}** role", color=Colour(0x59d9b9))
+                    embed.set_thumbnail(url="attachment://Parzibot.png")
+                    await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
                 if i not in after.roles:
-                    await after.send(embed=Embed(title=f"You have deprived the **{i}** role",
-                            color=Colour(0xd95959)))
+                    embed=Embed(title=f"You have deprived the **{i}** role", color=Colour(0xd95959))
+                    embed.set_thumbnail(url="attachment://Parzibot.png")
+                    await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
 
 
 def setup(client):
