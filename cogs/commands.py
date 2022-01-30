@@ -81,8 +81,8 @@ class Commands(commands.Cog):
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
             embed=Embed(title=f"Cannot clear **{number}** messages", color=Colour(0xff6868))
-            embed.set_thumbnail(url="attachment://Parzibot.png")
-            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(
         name="dice",
@@ -112,8 +112,8 @@ class Commands(commands.Cog):
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
             embed=Embed(title="You lose :(", description=f"The values of dice is **{v1}** and **{v2}**", color=Colour(0xff6868))
-            embed.set_thumbnail(url="attachment://Parzibot.png")
-            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(name="getgame", description="Choice Random Game from Our List")
     async def getgame(self, ctx):
@@ -291,8 +291,8 @@ class Commands(commands.Cog):
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
             embed=Embed(title="You lose :(", description=f"Right color is `{result}`", color=Colour(0xff6868))
-            embed.set_thumbnail(url="attachment://Parzibot.png")
-            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
 
 def setup(client):

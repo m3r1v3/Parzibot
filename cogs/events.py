@@ -42,8 +42,8 @@ class Events(commands.Cog):
             for i in before.roles:
                 if i not in after.roles:
                     embed=Embed(title=f"You have deprived the **{i}** role", color=Colour(0xff6868))
-                    embed.set_thumbnail(url="attachment://Parzibot.png")
-                    await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
+                    embed.set_thumbnail(url="attachment://ParzibotError.png")
+                    await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
 
 def setup(client):
