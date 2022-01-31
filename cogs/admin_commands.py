@@ -36,105 +36,88 @@ class AdminCommands(commands.Cog):
         """Parzibot Admin Commands list"""
         if ctx.author.guild_permissions.manage_messages:
             if command is None:
-                await ctx.send(
-                    embed=Embed(
-                        title="**Admin Commands**",
-                        description=(
-                            ' - **/adminhelp** `command` - The List of Parzibot Admin Commands\n'
-                            ' - **/ban** `member` - Ban The Member on The Server\n'
-                            ' - **/defaultrole** `role` - Set The Default Role on The Server\n'
-                            ' - **/giverole** `member` `role` - Give The Role to The Member\n'
-                            ' - **/kick** `member` - Kick The Member from The Server\n'
-                            ' - **/nickname** `member` `nickname` - Change The Nickname to The Member\n'
-                            ' - **/removedefaultrole** - Remove The Default Role on The Server'
-                            ),
-                        color=Colour(0xd3d959)))
-            elif command == "adminhelp":
-                await ctx.send(
-                    embed=Embed(
-                        title="**/adminhelp** command - The List of Parzibot Admin Commands",
-                        description=(
-                            '**Syntax:** **/adminhelp** `command`\n'
-                            '**Options:** `command` - The Help Message for Specific Admin Command **(Optional)**'
-                        ),
-                        color=Colour(0xd3d959)
-                    )
-                )
-            elif command == "ban":
-                await ctx.send(
-                    embed=Embed(
-                        title="**/ban** command - Ban The Member on The Server",
-                        description=(
-                            '**Syntax:** **/ban** `member`\n'
-                            '**Options:** `member` - The Member Who Will Be Banned **(Required)**'
-                        ),
-                        color=Colour(0xd3d959)
-                    )
-                )
-            elif command == "defaultrole":
-                await ctx.send(
-                    embed=Embed(
-                        title="**/defaultrole** command - Set The Default Role on The Server",
-                        description=(
-                            '**Syntax:** **/defaultrole** `role`\n'
-                            '**Options:** `role` - The Role Name **(Required)**'
-                        ),
-                        color=Colour(0xd3d959)
-                    )
-                )
-            elif command == "giverole":
-                await ctx.send(
-                    embed=Embed(
-                        title="**/giverole** command - Give The Role to The Member",
-                        description=(
-                            '**Syntax:** **/giverole** `member` `role`\n'
-                            '**Options:**\n'
-                            '`member` - Member Who Will Received Role **(Required)**\n'
-                            '`role` - The Role Name **(Required)**'
-                        ),
-                        color=Colour(0xd3d959)
-                    )
-                )
-            elif command == "kick":
-                await ctx.send(
-                    embed=Embed(
-                        title="**/kick** command - Kick The Member from The Server",
-                        description=(
-                            '**Syntax:** **/kick** `member`\n'
-                            '**Options:** `member` - The Member Who Will Be Kicked **(Required)**'
-                        ),
-                        color=Colour(0xd3d959)
-                    )
-                )
-            elif command == "nickname":
-                await ctx.send(
-                    embed=Embed(
-                        title="**/nickname** command - Change The Nickname to The Member",
-                        description=(
-                            '**Syntax:** **/nickname** `member` `nickname`\n'
-                            '**Options:**\n'
-                            '`member` - The Member to Whom We Will Change Nickname **(Required)**\n'
-                            '`nickname` - The Member\'s Future Nickname **(Optional)**'
-                        ),
-                        color=Colour(0xd3d959)
-                    )
-                )
-            elif command == "removedefaultrole":
-                await ctx.send(
-                    embed=Embed(
-                        title="**/removedefaultrole** command - Remove The Default Role on The Server",
-                        description=(
-                            '**Syntax:** **/removedefaultrole**'
-                        ),
-                        color=Colour(0xd3d959)
-                    )
-                )
-        else:
-            await ctx.send(
                 embed=Embed(
-                    title="Error",
-                    description="**You doesn't have permissions for executing this command**",
-                    color=Colour(0xd95959)))
+                    title="**Admin Commands**",
+                    description=(
+                        ' - **/adminhelp** `command` - The List of Parzibot Admin Commands\n'
+                        ' - **/ban** `member` - Ban The Member on The Server\n'
+                        ' - **/defaultrole** `role` - Set The Default Role on The Server\n'
+                        ' - **/giverole** `member` `role` - Give The Role to The Member\n'
+                        ' - **/kick** `member` - Kick The Member from The Server\n'
+                        ' - **/nickname** `member` `nickname` - Change The Nickname to The Member\n'
+                        ' - **/removedefaultrole** - Remove The Default Role on The Server'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+            elif command == "adminhelp":
+                embed=Embed(
+                    title="**/adminhelp** command - The List of Parzibot Admin Commands",
+                    description=(
+                        '**Syntax:** **/adminhelp** `command`\n'
+                        '**Options:** `command` - The Help Message for Specific Admin Command **(Optional)**'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+            elif command == "ban":
+                embed=Embed(
+                    title="**/ban** command - Ban The Member on The Server",
+                    description=(
+                        '**Syntax:** **/ban** `member`\n'
+                        '**Options:** `member` - The Member Who Will Be Banned **(Required)**'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+            elif command == "defaultrole":
+                embed=Embed(
+                    title="**/defaultrole** command - Set The Default Role on The Server",
+                    description=(
+                        '**Syntax:** **/defaultrole** `role`\n'
+                        '**Options:** `role` - The Role Name **(Required)**'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+            elif command == "giverole":
+                embed=Embed(
+                    title="**/giverole** command - Give The Role to The Member",
+                    description=(
+                        '**Syntax:** **/giverole** `member` `role`\n'
+                        '**Options:**\n'
+                        '`member` - Member Who Will Received Role **(Required)**\n'
+                        '`role` - The Role Name **(Required)**'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+            elif command == "kick":
+                embed=Embed(
+                    title="**/kick** command - Kick The Member from The Server",
+                    description=(
+                        '**Syntax:** **/kick** `member`\n'
+                        '**Options:** `member` - The Member Who Will Be Kicked **(Required)**'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+            elif command == "nickname":
+                embed=Embed(
+                    title="**/nickname** command - Change The Nickname to The Member",
+                    description=(
+                        '**Syntax:** **/nickname** `member` `nickname`\n'
+                        '**Options:**\n'
+                        '`member` - The Member to Whom We Will Change Nickname **(Required)**\n'
+                        '`nickname` - The Member\'s Future Nickname **(Optional)**'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+            elif command == "removedefaultrole":
+                embed=Embed(
+                    title="**/removedefaultrole** command - Remove The Default Role on The Server",
+                    description=('**Syntax:** **/removedefaultrole**'),
+                    color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
+        else:
+            embed=Embed(title="Error", description="**You doesn't have permissions for executing this command**", color=Colour(0xff6868))
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(
         name="ban",
@@ -151,20 +134,13 @@ class AdminCommands(commands.Cog):
         """Ban The Member on The Server"""
         if ctx.author.guild_permissions.manage_messages:
             await member.ban(reason=None)
-            await ctx.send(
-                embed=Embed(
-                    title=f"**{member}** has been banned",
-                    color=Colour(0xd3d959)
-                    )
-                )
+            embed=Embed(title=f"**{member}** has been banned", color=Colour(0xffff68))
+            embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+            await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="Error",
-                    description="**You doesn't have permissions for executing this command**",
-                    color=Colour(0xd95959)
-                    )
-                )
+            embed=Embed(title="Error", description="**You doesn't have permissions for executing this command**", color=Colour(0xff6868))
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(
         name="defaultrole",
@@ -182,27 +158,17 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             if Role().get_role(str(ctx.guild.id)) is None:
                 Role().add(str(role.id), str(ctx.guild.id))
-                await ctx.send(
-                    embed=Embed(
-                        title="**Server Default Role** has been set",
-                        color=Colour(0xd3d959)
-                        )
-                    )
+                embed=Embed(title="**Server Default Role** has been set", color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
             else: 
-                await ctx.send(
-                    embed=Embed(
-                        title="**Server Default Role** already had been set",
-                        color=Colour(0x59d9b9)
-                        )
-                    )
+                embed=Embed(title="**Server Default Role** already had been set", color=Colour(0x68FFD9))
+                embed.set_thumbnail(url="attachment://Parzibot.png")
+                await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="Error",
-                    description="**You doesn't have permissions for executing this command**",
-                    color=Colour(0xd95959)
-                    )
-                )
+            embed=Embed(title="Error", description="**You doesn't have permissions for executing this command**", color=Colour(0xff6868))
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(
         name="giverole",
@@ -225,20 +191,13 @@ class AdminCommands(commands.Cog):
         """Give The Role to The Member"""
         if ctx.author.guild_permissions.manage_messages:
             await member.add_roles(role)
-            await ctx.send(
-                embed=Embed(
-                    title=f"Role has been given to **{member}**",
-                    color=Colour(0xd3d959)
-                    )
-                )
+            embed=Embed(title=f"Role has been given to **{member}**", color=Colour(0xffff68))
+            embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+            await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="Error",
-                    description="**You doesn't have permissions for executing this command**",
-                    color=Colour(0xd95959)
-                    )
-                )
+            embed=Embed(title="Error", description="**You doesn't have permissions for executing this command**", color=Colour(0xff6868))
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(
         name="kick",
@@ -255,20 +214,13 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             """Kick The Member from The Server"""
             await member.kick(reason=None)
-            await ctx.send(
-                embed=Embed(
-                    title=f"**{member}** has been kicked",
-                    color=Colour(0xd3d959)
-                    )
-                )
+            embed=Embed(title=f"**{member}** has been kicked", color=Colour(0xffff68))
+            embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+            await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="Error",
-                    description="**You doesn't have permissions for executing this command**",
-                    color=Colour(0xd95959)
-                    )
-                )
+            embed=Embed(title="Error", description="**You doesn't have permissions for executing this command**", color=Colour(0xff6868))
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(
         name="nickname",
@@ -291,20 +243,13 @@ class AdminCommands(commands.Cog):
         """Change The Nickname to The Member"""
         if ctx.author.guild_permissions.manage_messages:
             await member.edit(nick=nickname)
-            await ctx.send(
-                embed=Embed(
-                    title=f"**{member}** nickname has been changed",
-                    color=Colour(0xd3d959)
-                    )
-                )
+            embed=Embed(title=f"**{member}** nickname has been changed", color=Colour(0xffff68))
+            embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+            await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="Error",
-                    description="**You doesn't have permissions for executing this command**",
-                    color=Colour(0xd95959)
-                    )
-                )
+            embed=Embed(title="Error", description="**You doesn't have permissions for executing this command**", color=Colour(0xff6868))
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
     @cog_ext.cog_slash(
         name="removedefaultrole",
@@ -315,27 +260,17 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             if Role().get_role(str(ctx.guild.id)) is not None:
                 Role().delete(str(ctx.guild.id))
-                await ctx.send(
-                    embed=Embed(
-                        title="**Server Default Role** has been removed",
-                        color=Colour(0xd3d959)
-                        )
-                    )
+                embed=Embed(title="**Server Default Role** has been removed", color=Colour(0xffff68))
+                embed.set_thumbnail(url="attachment://ParzibotAdmin.png")
+                await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"), embed=embed)
             else:
-                await ctx.send(
-                    embed=Embed(
-                        title="**Server Default Role** already hadn't been set",
-                        color=Colour(0x59d9b9)
-                        )
-                    )
+                embed=Embed(title="**Server Default Role** already hadn't been set", color=Colour(0x68FFD9))
+                embed.set_thumbnail(url="attachment://Parzibot.png")
+                await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"), embed=embed)
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="Error",
-                    description="**You doesn't have permissions for executing this command**",
-                    color=Colour(0xd95959)
-                    )
-                )
+            embed=Embed(title="Error", description="**You doesn't have permissions for executing this command**", color=Colour(0xff6868))
+            embed.set_thumbnail(url="attachment://ParzibotError.png")
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"), embed=embed)
 
 
 def setup(client):
