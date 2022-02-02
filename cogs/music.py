@@ -106,18 +106,18 @@ class Music(commands.Cog):
         if command is None:
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
                 embed=Music.get_embed("Music commands", (
-                    ' - **/clearplaylist** - Clear Music Playlist\n'
-                    ' - **/join** - Parzibot Joins to Your Current Voice Channel\n'
-                    ' - **/leave** - Parzibot Leaves Your Current Voice Channel\n'
-                    ' - **/musichelp** `command` - The List of Parzibot Music Commands\n'
-                    ' - **/next** - Play The Next Song in The Playlist\n'
-                    ' - **/pause** - Pause The Current Song\n'
-                    ' - **/play** `url` - Play The Song in The Current Voice Channel\n'
-                    ' - **/playlist** - The Number of Songs in The Playlist\n'
-                    ' - **/replay** - Replay The Current Song\n'
-                    ' - **/resume** - Resume The Current Song\n'
-                    ' - **/shuffle** - Shuffle The Playlist of Songs\n'
-                    ' - **/stop** - Stop The Current Song')))
+                    ' • **/clearplaylist** - Clear Music Playlist\n'
+                    ' • **/join** - Parzibot Joins to Your Current Voice Channel\n'
+                    ' • **/leave** - Parzibot Leaves Your Current Voice Channel\n'
+                    ' • **/musichelp** `command` - The List of Parzibot Music Commands\n'
+                    ' • **/next** - Play The Next Song in The Playlist\n'
+                    ' • **/pause** - Pause The Current Song\n'
+                    ' • **/play** `url` - Play The Song in The Current Voice Channel\n'
+                    ' • **/playlist** - The Number of Songs in The Playlist\n'
+                    ' • **/replay** - Replay The Current Song\n'
+                    ' • **/resume** - Resume The Current Song\n'
+                    ' • **/shuffle** - Shuffle The Playlist of Songs\n'
+                    ' • **/stop** - Stop The Current Song')))
         elif command == "clearplaylist":
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
                 embed=Music.get_embed("**/clearplaylist** command - Clear Music Playlist", '**Syntax:** **/clearplaylist**'))

@@ -56,13 +56,13 @@ class Admin(commands.Cog):
             if command is None:
                 await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"),
                     embed=Admin.get_admin_embed("**Admin Commands**", (
-                        ' - **/adminhelp** `command` - The List of Parzibot Admin Commands\n'
-                        ' - **/ban** `member` - Ban The Member on The Server\n'
-                        ' - **/defaultrole** `role` - Set The Default Role on The Server\n'
-                        ' - **/giverole** `member` `role` - Give The Role to The Member\n'
-                        ' - **/kick** `member` - Kick The Member from The Server\n'
-                        ' - **/nickname** `member` `nickname` - Change The Nickname to The Member\n'
-                        ' - **/removedefaultrole** - Remove The Default Role on The Server')))
+                        ' • **/adminhelp** `command` - The List of Parzibot Admin Commands\n'
+                        ' • **/ban** `member` - Ban The Member on The Server\n'
+                        ' • **/defaultrole** `role` - Set The Default Role on The Server\n'
+                        ' • **/giverole** `member` `role` - Give The Role to The Member\n'
+                        ' • **/kick** `member` - Kick The Member from The Server\n'
+                        ' • **/nickname** `member` `nickname` - Change The Nickname to The Member\n'
+                        ' • **/removedefaultrole** - Remove The Default Role on The Server')))
             elif command == "adminhelp":
                 await ctx.send(file=discord.File("images/ParzibotAdmin.png", filename="ParzibotAdmin.png"),
                     embed=Admin.get_admin_embed("**/adminhelp** command - The List of Parzibot Admin Commands", (

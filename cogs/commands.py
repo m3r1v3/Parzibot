@@ -162,15 +162,15 @@ class Commands(commands.Cog):
         if command is None:
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
                 embed=Commands.get_embed("Bot Commands", (
-                    ' - **/8ball** `question` - The Ball of Predictions\n'
-                    ' - **/about** - Information About Parzibot\n'
-                    ' - **/clear** `number` - Clear Messages in Current Text Channel\n'
-                    ' - **/dice** `value` - The Game of Dice\n'
-                    ' - **/getgame** - Choice random game from our list\n'
-                    ' - **/help** `command` - The list of Parzibot commands\n'
-                    ' - **/ping** - Parzibot ping\n'
-                    ' - **/users** - List of Text Channel members\n'
-                    ' - **/whiteblack** `color` - The White/Black Game')))
+                    ' • **/8ball** `question` - The Ball of Predictions\n'
+                    ' • **/about** - Information About Parzibot\n'
+                    ' • **/clear** `number` - Clear Messages in Current Text Channel\n'
+                    ' • **/dice** `value` - The Game of Dice\n'
+                    ' • **/getgame** - Choice random game from our list\n'
+                    ' • **/help** `command` - The list of Parzibot commands\n'
+                    ' • **/ping** - Parzibot ping\n'
+                    ' • **/users** - List of Text Channel members\n'
+                    ' • **/whiteblack** `color` - The White/Black Game')))
         elif command == "8ball":
             await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
                 embed=Commands.get_embed("**/8ball** command - The Ball of Predictions", (
