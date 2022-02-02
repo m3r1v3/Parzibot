@@ -16,50 +16,50 @@
     </p>
 </div>
 
-</hr>
+<hr/>
 
 <div>
     <h2>Commands</h2>
     <h3>Common Commands</h3>
     <p>
-        - **/8ball** `question` - The Ball of Predictions
-        - **/about** - Information About Parzibot
-        - **/clear** `number` - Clear Messages in Current Text Channel
-        - **/dice** `value` - The Game of Dice
-        - **/getgame** - Choice random game from our list
-        - **/help** `command` - The list of Parzibot commands
-        - **/ping** - Parzibot ping
-        - **/users** - List of Text Channel members
+        - **/8ball** `question` - The Ball of Predictions<br>
+        - **/about** - Information About Parzibot<br>
+        - **/clear** `number` - Clear Messages in Current Text Channel<br>
+        - **/dice** `value` - The Game of Dice<br>
+        - **/getgame** - Choice random game from our list<br>
+        - **/help** `command` - The list of Parzibot commands<br>
+        - **/ping** - Parzibot ping<br>
+        - **/users** - List of Text Channel members<br>
         - **/whiteblack** `color` - The White/Black Game
     </p>
     <h3>Music Commands</h3>
     <p>
-        - **/clearplaylist** - Clear Music Playlist
-        - **/join** - Parzibot Joins to Your Current Voice Channel
-        - **/leave** - Parzibot Leaves Your Current Voice Channel
-        - **/musichelp** `command` - The List of Parzibot Music Commands
-        - **/next** - Play The Next Song in The Playlist
-        - **/pause** - Pause The Current Song
-        - **/play** `url` - Play The Song in The Current Voice Channelx
-        - **/playlist** - The Number of Songs in The Playlist
-        - **/replay** - Replay The Current Song
-        - **/resume** - Resume The Current Song
-        - **/shuffle** - Shuffle The Playlist of Songs
+        - **/clearplaylist** - Clear Music Playlist<br>
+        - **/join** - Parzibot Joins to Your Current Voice Channel<br>
+        - **/leave** - Parzibot Leaves Your Current Voice Channel<br>
+        - **/musichelp** `command` - The List of Parzibot Music Commands<br>
+        - **/next** - Play The Next Song in The Playlist<br>
+        - **/pause** - Pause The Current Song<br>
+        - **/play** `url` - Play The Song in The Current Voice Channel<br>
+        - **/playlist** - The Number of Songs in The Playlist<br>
+        - **/replay** - Replay The Current Song<br>
+        - **/resume** - Resume The Current Song<br>
+        - **/shuffle** - Shuffle The Playlist of Songs<br>
         - **/stop** - Stop The Current Song
     </p>
     <h3>Admin Commands</h3>
     <p>
-        - **/adminhelp** `command` - The List of Parzibot Admin Commands
-        - **/ban** `member` - Ban The Member on The Server
-        - **/defaultrole** `role` - Set The Default Role on The Server
-        - **/giverole** `member` `role` - Give The Role to The Member
-        - **/kick** `member` - Kick The Member from The Server
-        - **/nickname** `member` `nickname` - Change The Nickname to The Member
+        - **/adminhelp** `command` - The List of Parzibot Admin Commands<br>
+        - **/ban** `member` - Ban The Member on The Server<br>
+        - **/defaultrole** `role` - Set The Default Role on The Server<br>
+        - **/giverole** `member` `role` - Give The Role to The Member<br>
+        - **/kick** `member` - Kick The Member from The Server<br>
+        - **/nickname** `member` `nickname` - Change The Nickname to The Member<br>
         - **/removedefaultrole** - Remove The Default Role on The Server
     </p>
 </div>
 
-</hr>
+<hr/>
 
 <div>
     <h2>Contribution</h2>
@@ -72,7 +72,7 @@
     </p>
 </div>
 
-</hr>
+<hr/>
 
 <div>
     <h2>Version Scheme</h2>
@@ -82,8 +82,10 @@
     </p>
 </div>
 
-<div align="center">
-    <h3>More Inforamation</h3>
+<hr/>
+
+<div>
+    <h2>More Inforamation</h2>
     <p>
         More information you can find on <a href="https://merive.herokuapp.com/Parzibot/">Parzibot Website</a>. 
         There you can find link to add Parzibot to server.
