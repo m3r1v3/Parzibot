@@ -55,7 +55,7 @@ class Commands(commands.Cog):
             "Outlook not so good...", "Very doubtful..."
             ]
         await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
-            embed=Commands.get_embed(f"**Question:** `{question}`", f"**Answer:** `{random.choice(responses)}`"))
+            embed=Commands.get_embed(f"Question: `{question}`", f"**Answer:** `{random.choice(responses)}`"))
 
     @cog_ext.cog_slash(
         name="about",
@@ -64,7 +64,7 @@ class Commands(commands.Cog):
     async def about(self, ctx):
         """Information About Parzibot"""
         await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
-            embed=Commands.get_embed("About **Parzibot**", (
+            embed=Commands.get_embed("About Parzibot", (
                     f"**Parzibot** is free open-source project, created by **merive_**\n"
                     f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
                     f"**Parzibot**, {datetime.datetime.now().year}"
@@ -134,7 +134,7 @@ class Commands(commands.Cog):
             'The Elder Scrolls V: Skyrim', 'Valorant'
             ]
         await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
-                embed=Commands.get_embed("Special game by **Parzibot**", f"I advise you to play **{random.choice(responses)}**"))
+                embed=Commands.get_embed("Special game by Parzibot", f"I advise you to play **{random.choice(responses)}**"))
 
     @cog_ext.cog_slash(
         name="help",
