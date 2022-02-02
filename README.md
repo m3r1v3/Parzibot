@@ -1,67 +1,93 @@
-# Parzibot
+<div align="center">
+    <img src="https://github.com/merive/Parzibot/blob/master/images/Parzibot.png" width="64">
+    <h1 align="center">Parzibot</h1>
+    <h2 align="center">Powerful and Useful Discord Bot on Python</h2>
+</div>
 
-## _Powerful and Useful Discord Bot on Python._
+<hr/>
 
-The source code of the bot is available to everyone. Parzibot uses English language. This is free open-source
-software and if anyone wants to change things in advance. Just before using my code, please write to me
-on _[Twitter](https://twitter.com/merive_)_.
+<div align="center">
+    <h2>About Parzibot</h2>
+    <p>
+        This Discord Bot have got a lot of features.
+        We're making the bot that we're using.
+        Parzibot have many common, music and admin commands, events.
+        Parzibot often get updates, new features. 
+    </p>
+</div>
 
-**I will be pleased to know that someone uses my work**
+<hr/>
 
-___
+<div>
+    <h2>Commands</h2>
+    <h3>Common Commands</h3>
+    <p>
+        • <b>/8ball</b> <i>question</i> - The Ball of Predictions<br>
+        • <b>/about</b> - Information About Parzibot<br>
+        • <b>/clear</b> <i>number</i> - Clear Messages in Current Text Channel<br>
+        • <b>/dice</b> <i>value</i> - The Game of Dice<br>
+        • <b>/getgame</b> - Choice random game from our list<br>
+        • <b>/help</b> <i>command</i> - The list of Parzibot commands<br>
+        • <b>/ping</b> - Parzibot ping<br>
+        • <b>/users</b> - List of Text Channel members<br>
+        • <b>/whiteblack</b> <i>color</i> - The White/Black Game
+    </p>
+    <h3>Music Commands</h3>
+    <p>
+        • <b>/clearplaylist</b> - Clear Music Playlist<br>
+        • <b>/join</b> - Parzibot Joins to Your Current Voice Channel<br>
+        • <b>/leave</b> - Parzibot Leaves Your Current Voice Channel<br>
+        • <b>/musichelp</b> <i>command</i> - The List of Parzibot Music Commands<br>
+        • <b>/next</b> - Play The Next Song in The Playlist<br>
+        • <b>/pause</b> - Pause The Current Song<br>
+        • <b>/play</b> <i>url</i> - Play The Song in The Current Voice Channel<br>
+        • <b>/playlist</b> - The Number of Songs in The Playlist<br>
+        • <b>/replay</b> - Replay The Current Song<br>
+        • <b>/resume</b> - Resume The Current Song<br>
+        • <b>/shuffle</b> - Shuffle The Playlist of Songs<br>
+        • <b>/stop</b> - Stop The Current Song
+    </p>
+    <h3>Admin Commands</h3>
+    <p>
+        • <b>/adminhelp</b> <i>command</i> - The List of Parzibot Admin Commands<br>
+        • <b>/ban</b> <i>member</i> - Ban The Member on The Server<br>
+        • <b>/defaultrole</b> <i>role</i> - Set The Default Role on The Server<br>
+        • <b>/giverole</b> <i>member</i> <i>role</i> - Give The Role to The Member<br>
+        • <b>/kick</b> <i>member</i> - Kick The Member from The Server<br>
+        • <b>/nickname</b> <i>member</i> <i>nickname</i> - Change The Nickname to The Member<br>
+        • <b>/removedefaultrole</b> - Remove The Default Role on The Server
+    </p>
+</div>
 
-## Commands
+<hr/>
 
-### **Bot commands**
+<div>
+    <h2>Contribution</h2>
+    <p>
+        Parzibot is using <b>MIT License</b>.
+        It means that you can do with project anything.
+        If you want contribution to project, open Issues and PRs.
+        Also read <b>CODE_OF_CONDUCT.md</b> and <b>CONTRIBUTING.md</b>.
+        If you have questions asking in Parzibot <b>GitHub Discussions</b>.
+    </p>
+</div>
 
- - **/8ball** `question` - The Ball of Predictions
- - **/about** - Information About Parzibot
- - **/clear** `number` - Clear Messages in Current Text Channel
- - **/dice** `value` - The Game of Dice
- - **/getgame** - Choice random game from our list
- - **/help** `command` - The list of Parzibot commands
- - **/ping** - Parzibot ping\n'
- - **/users** - List of Text Channel members
- - **/whiteblack** `color` - The White/Black Game
+<hr/>
 
- ___
+<div>
+    <h2>Version Scheme</h2>
+    <p>
+        In Parzibot we're using the next version scheme - v<i>x.y.z</i>,
+        where <i>x</i> - <b>Major</b> update, <i>y</i> - <b>Minor</b> update, <i>z</i> - <b>Patch</b> update.
+    </p>
+</div>
 
-### **Music commands**
+<hr/>
 
- - **/clearplaylist** - Clear Music Playlist
- - **/join** - Parzibot Joins to Your Current Voice Channel
- - **/leave** - Parzibot Leaves Your Current Voice Channel
- - **/musichelp** `command` - The List of Parzibot Music Commands
- - **/next** - Play The Next Song in The Playlist
- - **/pause** - Pause The Current Song
- - **/play** `url` - Play The Song in The Current Voice Channelx
- - **/playlist** - The Number of Songs in The Playlist
- - **/replay** - Replay The Current Song
- - **/resume** - Resume The Current Song
- - **/shuffle** - Shuffle The Playlist of Songs
- - **/stop** - Stop The Current Song
-
- ___
-
-### **Admin Commands**
-
- - **/adminhelp** `command` - The List of Parzibot Admin Commands
- - **/ban** `member` - Ban The Member on The Server
- - **/defaultrole** `role` - Set The Default Role on The Server
- - **/giverole** `member` `role` - Give The Role to The Member
- - **/kick** `member` - Kick The Member from The Server
- - **/nickname** `member` `nickname` - Change The Nickname to The Member
- - **/removedefaultrole** - Remove The Default Role on The Server
-
-___
-
-## LICENSE
-
-Our project's using _MIT License_. You can edit/update/use code of our project. For more information read
-**LICENSE** in the repository.
-
-___
-
-## Contributing
-
-If you want to work on our project, you are welcome! Read _CONTRIBUTING.md_ and start improving **Parzibot**!
+<div>
+    <h2>More Inforamation</h2>
+    <p>
+        More information you can find on <a href="https://merive.herokuapp.com/Parzibot/">Parzibot Website</a>. 
+        There you can find link to add Parzibot to server.
+    </p>
+</div>

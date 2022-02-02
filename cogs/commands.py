@@ -1,5 +1,6 @@
 import datetime
 import random
+import discord
 
 from discord import Embed, Colour
 from discord.ext import commands
@@ -16,6 +17,18 @@ class Commands(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+
+    @staticmethod
+    def get_embed(title: str, description: str):
+        embed = Embed(title=title, description=description, color=Colour(0x68FFD9))
+        embed.set_thumbnail(url="attachment://Parzibot.png")
+        return embed
+
+    @staticmethod
+    def get_error_embed(title: str, description: str):
+        embed = Embed(title=title, description=description, color=Colour(0xff6868))
+        embed.set_thumbnail(url="attachment://ParzibotError.png")
+        return embed
 
     @cog_ext.cog_slash(
             name="8ball",
@@ -41,13 +54,8 @@ class Commands(commands.Cog):
             "My reply is no...", "My sources say no...",
             "Outlook not so good...", "Very doubtful..."
             ]
-        await ctx.send(
-            embed=Embed(
-                title=f"**Question:** `{question}`",
-                description=f"**Answer:** `{random.choice(responses)}`",
-                color=Colour(0x59d9b9)
-                )
-            )
+        await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+            embed=Commands.get_embed(f"Question: `{question}`", f"**Answer:** `{random.choice(responses)}`"))
 
     @cog_ext.cog_slash(
         name="about",
@@ -55,17 +63,12 @@ class Commands(commands.Cog):
         )
     async def about(self, ctx):
         """Information About Parzibot"""
-        await ctx.send(
-            embed=Embed(
-                title="About **Parzibot**",
-                description=(
+        await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+            embed=Commands.get_embed("About Parzibot", (
                     f"**Parzibot** is free open-source project, created by **merive_**\n"
                     f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
                     f"**Parzibot**, {datetime.datetime.now().year}"
-                    ), 
-                color=Colour(0x59d9b9)
-                )
-            )
+                    )))
 
     @cog_ext.cog_slash(
         name="clear",
@@ -81,19 +84,11 @@ class Commands(commands.Cog):
         """Clear Messages in Current Text Channel"""
         if number > 0:
             await ctx.channel.purge(limit=number)
-            await ctx.send(
-                embed=Embed(
-                    title=f"Cleared **{number}** messages",
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("Messages has been cleared", f"Cleared **{number}** messages"))
         else:
-            await ctx.send(
-                embed=Embed(
-                    title=f"Cannot clear **{number}** messages",
-                    color=Colour(0xd95959)
-                    )
-                )
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"),
+                embed=Commands.get_error_embed("Clear error", f"Cannot clear **{number}** messages"))
 
     @cog_ext.cog_slash(
         name="dice",
@@ -109,32 +104,16 @@ class Commands(commands.Cog):
         """Game of Dice"""
         v1, v2 = random.randint(1, 6), random.randint(1, 6)
         if v1 + v2 == value:
-            await ctx.send(
-                embed=Embed(
-                    title="You won :D",
-                    description=f"The sum of values is **{v1+v2}**. The values of dice is **{v1}** and **{v2}**",
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("You won :D", f"The sum of values is **{v1+v2}**. The values of dice is **{v1}** and **{v2}**"))
         elif v1 == value or v2 == value:
-            await ctx.send(
-                embed=Embed(
-                    title="You guess value one of the dice :D",
-                    description=(
-                        f"The values one of dice is **{v1 if v1 == value else v2}**."
-                        f" The values of dice is **{v1}** and **{v2}**"
-                    ),
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("You guess value one of the dice :D", (
+                    f"The values one of dice is **{v1 if v1 == value else v2}**."
+                    f" The values of dice is **{v1}** and **{v2}**")))
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="You lose :(",
-                    description=f"The values of dice is **{v1}** and **{v2}**",
-                    color=Colour(0xd95959)
-                    )
-                )
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"),
+                embed=Commands.get_error_embed("You lose :(", f"The values of dice is **{v1}** and **{v2}**"))
 
     @cog_ext.cog_slash(name="getgame", description="Choice Random Game from Our List")
     async def getgame(self, ctx):
@@ -154,12 +133,8 @@ class Commands(commands.Cog):
             'Super Animal Royale', 'Terraria',
             'The Elder Scrolls V: Skyrim', 'Valorant'
             ]
-        await ctx.send(
-            embed=Embed(
-                title=f"Play to **{random.choice(responses)}**",
-                color=Colour(0x59d9b9)
-                )
-            )
+        await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("Special game by Parzibot", f"I advise you to play **{random.choice(responses)}**"))
 
     @cog_ext.cog_slash(
         name="help",
@@ -185,134 +160,69 @@ class Commands(commands.Cog):
     async def help(self, ctx, command=None):
         """The List of Parzibot Commands"""
         if command is None:
-            await ctx.send(
-                embed=Embed(
-                    title="Bot Commands",
-                    description=(
-                        ' - **/8ball** `question` - The Ball of Predictions\n'
-                        ' - **/about** - Information About Parzibot\n'
-                        ' - **/clear** `number` - Clear Messages in Current Text Channel\n'
-                        ' - **/dice** `value` - The Game of Dice\n'
-                        ' - **/getgame** - Choice random game from our list\n'
-                        ' - **/help** `command` - The list of Parzibot commands\n'
-                        ' - **/ping** - Parzibot ping\n'
-                        ' - **/users** - List of Text Channel members\n'
-                        ' - **/whiteblack** `color` - The White/Black Game'
-                    ),
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("Bot Commands", (
+                    ' • **/8ball** `question` - The Ball of Predictions\n'
+                    ' • **/about** - Information About Parzibot\n'
+                    ' • **/clear** `number` - Clear Messages in Current Text Channel\n'
+                    ' • **/dice** `value` - The Game of Dice\n'
+                    ' • **/getgame** - Choice random game from our list\n'
+                    ' • **/help** `command` - The list of Parzibot commands\n'
+                    ' • **/ping** - Parzibot ping\n'
+                    ' • **/users** - List of Text Channel members\n'
+                    ' • **/whiteblack** `color` - The White/Black Game')))
         elif command == "8ball":
-            await ctx.send(
-                embed=Embed(
-                    title="**/8ball** command - The Ball of Predictions",
-                    description=(
-                        '**Syntax:** **/8ball** `question`\n'
-                        '**Options:** `question` - Your Question for The Ball of Predictions **(Required)**'
-                    ),
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/8ball** command - The Ball of Predictions", (
+                    '**Syntax:** **/8ball** `question`\n'
+                    '**Options:** `question` - Your Question for The Ball of Predictions **(Required)**')))
         elif command == "about":
-            await ctx.send(
-                embed=Embed(
-                    title="**/about** command - Information About Parzibot",
-                    description='**Syntax:** **/about**',
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/about** command - Information About Parzibot", '**Syntax:** **/about**'))
         elif command == "clear":
-            await ctx.send(
-                embed=Embed(
-                    title="**/clear** command - Clear Messages in Current Text Channel",
-                    description=(
-                        '**Syntax:** **/clear** `number`\n'
-                        '**Options:** `number` - Number of Messages for Clear **(Optional)**'
-                    ),
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/clear** command - Clear Messages in Current Text Channel", (
+                    '**Syntax:** **/clear** `number`\n'
+                    '**Options:** `number` - Number of Messages for Clear **(Optional)**')))
         elif command == "dice":
-            await ctx.send(
-                embed=Embed(
-                    title="**/dice** command - The Game of Dice",
-                    description=(
-                        '**Syntax:** **/dice** `value`\n'
-                        '**Options:** `value` - The Value What You\'re Predicting **(Required)**\n'
-                        '**Rules:** If you guess sum of dice values - you won, '
-                        'if you guess one of the dice value - it\'s a draw, else you lose'
-                    ),
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/dice** command - The Game of Dice", (
+                    '**Syntax:** **/dice** `value`\n'
+                    '**Options:** `value` - The Value What You\'re Predicting **(Required)**\n'
+                    '**Rules:** If you guess sum of dice values - you won, '
+                    'if you guess one of the dice value - it\'s a draw, else you lose')))
         elif command == "getgame":
-            await ctx.send(
-                embed=Embed(
-                    title="**/getgame** command - Choice Random Game from Our List",
-                    description='**Syntax:** **/getgame**',
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/getgame** command - Choice Random Game from Our List", '**Syntax:** **/getgame**'))
         elif command == "help":
-            await ctx.send(
-                embed=Embed(
-                    title="**/help** command - The List of Parzibot Commands",
-                    description=(
-                        '**Syntax:** **/help** `command`\n'
-                        '**Options:** `command` - The Help Message for Specific Command **(Optional)**'
-                        ),
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/help** command - The List of Parzibot Commands", (
+                    '**Syntax:** **/help** `command`\n'
+                    '**Options:** `command` - The Help Message for Specific Command **(Optional)**')))
         elif command == "ping":
-            await ctx.send(
-                embed=Embed(
-                    title="**/ping** command - Parzibot's Ping",
-                    description='**Syntax:** **/ping**',
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/ping** command - Parzibot's Ping", '**Syntax:** **/ping**'))
         elif command == "users":
-            await ctx.send(
-                embed=Embed(
-                    title="**/users** command - The List of Text Channel Members",
-                    description='**Syntax:** **/users**',
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/users** command - The List of Text Channel Members", '**Syntax:** **/users**'))
         elif command == "whiteblack":
-            await ctx.send(
-                embed=Embed(
-                    title="**/whiteblack** command - The White/Black Game",
-                    description=(
-                        '**Syntax:** **/whiteblack** `color`\n'
-                        '**Options:** `color` - The Hidden Color (White or Black) **(Required)**\n'
-                        ),
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("**/whiteblack** command - The White/Black Game", (
+                    '**Syntax:** **/whiteblack** `color`\n'
+                    '**Options:** `color` - The Hidden Color (White or Black) **(Required)**\n')))
 
     @cog_ext.cog_slash(name="ping", description="Parzibot's Ping")
     async def ping(self, ctx):
         """Parzibot's Ping"""
-        await ctx.send(
-            embed=Embed(
-                title=f"**Parzibot** Ping: `{round(self.client.latency * 1000)}ms`",
-                color=Colour(0x59d9b9)
-                )
-            )
+        await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("Parzibot Ping", f"**Parzibot** Ping: `{round(self.client.latency * 1000)}ms`"))
 
     @cog_ext.cog_slash(name="users", description="List of Text Channel members")
     async def users(self, ctx):
         """The List of Text Channel Members"""
         members = ''.join(f'\t**{member}**\n' for member in ctx.channel.members)
-        await ctx.send(
-            embed=Embed(
-                title="Channel Members",
-                description=f"{members}",
-                color=Colour(0x59d9b9)
-                )
-            )
+        await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("Channel Members", f"{members}"))
 
     @cog_ext.cog_slash(
         name="whiteblack",
@@ -332,21 +242,11 @@ class Commands(commands.Cog):
         """The White/Black Game"""
         result = get_random_color()
         if color == result:
-            await ctx.send(
-                embed=Embed(
-                    title="You won :D",
-                    description=f"Right color is `{result}`",
-                    color=Colour(0x59d9b9)
-                    )
-                )
+            await ctx.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
+                embed=Commands.get_embed("You won :D", f"Right color is `{result}`"))
         else:
-            await ctx.send(
-                embed=Embed(
-                    title="You lose :(",
-                    description=f"Right color is `{result}`",
-                    color=Colour(0xd95959)
-                    )
-                )
+            await ctx.send(file=discord.File("images/ParzibotError.png", filename="ParzibotError.png"),
+                embed=Commands.get_error_embed("You lose :(", f"Right color is `{result}`"))
 
 
 def setup(client):
