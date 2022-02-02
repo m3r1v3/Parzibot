@@ -8,7 +8,7 @@ assignees: merive
 ---
 
 **Specify the file/part of file where refactoring is needed**
-This way we will know where to work.
+This way we will know where to work
 
 **What is the improvement in the code**
 Indicate the problematic part and tell me how it can be solved
