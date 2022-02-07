@@ -2,12 +2,6 @@
     <img src="https://github.com/merive/Parzibot/blob/master/images/Parzibot.png" width="64">
     <h1 align="center">Parzibot</h1>
     <h2 align="center">Powerful and Useful Discord Bot on Python</h2>
-</div>
-
-<hr/>
-
-<div align="center">
-    <h2>About Parzibot</h2>
     <p>
         This Discord Bot have got a lot of features.
         We're making the bot that we're using.
