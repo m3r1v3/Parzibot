@@ -31,8 +31,5 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-# Get token from server and set bot token
-token = os.environ.get('BOT_TOKEN')
-
-# Run bot
-client.run(str(token))
+# Run client
+client.run(str(os.environ.get('BOT_TOKEN')))
