@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/merive/Parzibot/blob/master/images/Parzibot.png" width="64">
+    <img src="https://github.com/merive/Parzibot/blob/main/assets/Parzibot.svg" width="64">
     <h1 align="center">Parzibot</h1>
     <h2 align="center">Powerful and Useful Discord Bot on Python</h2>
     <p>
@@ -71,8 +71,12 @@
 <div>
     <h2>Version Scheme</h2>
     <p>
-        In Parzibot we're using the next version scheme - v<i>x.y.z</i>,
-        where <i>x</i> - <b>Major</b> update, <i>y</i> - <b>Minor</b> update, <i>z</i> - <b>Patch</b> update.
+        In Parzibot Repository we're using the next version scheme - v<i>x.y.z</i>, where
+        <table>
+            <tr><th>X</th><th>Major Update Version</th></tr>
+            <tr><td>Y</td><td>Minor Update Version</td></tr>
+            <tr><td>Z</td><td>Patch Update Version</td></tr>
+        </table>
     </p>
 </div>
 
