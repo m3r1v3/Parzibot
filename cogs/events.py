@@ -13,15 +13,11 @@ class Events(commands.Cog):
 
     @staticmethod
     def get_embed(title: str, description: str):
-        embed = Embed(title=title, description=description, color=Colour(0x68FFD9))
-        embed.set_thumbnail(url="attachment://Parzibot.png")
-        return embed
+        return Embed(title=title, description=description, color=Colour(0x68FFD9)).set_thumbnail(url="attachment://Parzibot.png")
 
     @staticmethod
     def get_error_embed(title: str, description: str):
-        embed = Embed(title=title, description=description, color=Colour(0xff6868))
-        embed.set_thumbnail(url="attachment://ParzibotError.png")
-        return embed
+        return Embed(title=title, description=description, color=Colour(0xff6868)).set_thumbnail(url="attachment://ParzibotError.png")
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -33,8 +29,7 @@ class Events(commands.Cog):
         """Sending a personal message about the bot and issuing a role in the chat"""
         await member.send(file=discord.File("images/Parzibot.png", filename="Parzibot.png"),
             embed=Events.get_embed(f"Hey **{member}**!", "White **/help** to find out my command or **/musichelp** to find out my music command"))
-        role = discord.utils.get(member.guild.roles, id=int(Role().get_role(member.guild.id)))
-        await member.add_roles(role)
+        await member.add_roles(discord.utils.get(member.guild.roles, id=int(Role().get_role(member.guild.id))))
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):

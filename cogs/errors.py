@@ -11,9 +11,7 @@ class Errors(commands.Cog):
 
     @staticmethod
     def get_error_embed(title: str, description: str):
-        embed = Embed(title=title, description=description, color=Colour(0xff6868))
-        embed.set_thumbnail(url="attachment://ParzibotError.png")
-        return embed
+        return Embed(title=title, description=description, color=Colour(0xff6868)).set_thumbnail(url="attachment://ParzibotError.png")
 
     @commands.Cog.listener()
     async def on_slash_command_error(self, ctx, error):

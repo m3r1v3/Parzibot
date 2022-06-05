@@ -22,15 +22,11 @@ class Music(commands.Cog):
 
     @staticmethod
     def get_embed(title: str, description: str):
-        embed = Embed(title=title, description=description, color=Colour(0x68FFD9))
-        embed.set_thumbnail(url="attachment://Parzibot.png")
-        return embed
+        return Embed(title=title, description=description, color=Colour(0x68FFD9)).set_thumbnail(url="attachment://Parzibot.png")
 
     @staticmethod
     def get_error_embed(title: str, description: str):
-        embed = Embed(title=title, description=description, color=Colour(0xff6868))
-        embed.set_thumbnail(url="attachment://ParzibotError.png")
-        return embed
+        return Embed(title=title, description=description, color=Colour(0xff6868)).set_thumbnail(url="attachment://ParzibotError.png")
 
     @cog_ext.cog_slash(name="clearplaylist", description="Clear Music Playlist")
     async def clearplaylist(self, ctx):
