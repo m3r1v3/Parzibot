@@ -22,9 +22,7 @@ class Role(Base):
     @staticmethod
     def add(role_id, server: str):
         """Add user in db"""
-        new_role = Role(role_id=role_id, server=str(server))
-        session.add(new_role)
-        session.commit()
+        session.add(Role(role_id=role_id, server=str(server))).commit()
 
     @staticmethod
     def get_role(server: str):
@@ -34,8 +32,7 @@ class Role(Base):
 
     @staticmethod
     def delete(server: str):
-        session.delete(session.query(Role).filter_by(server=str(server)).first())
-        session.commit()
+        session.delete(session.query(Role).filter_by(server=str(server)).first()).commit()
 
     def __repr__(self):
         return "<Role(id='%s', role_id='%s', server='%s')>" % (self.id, self.role_id, self.server)
