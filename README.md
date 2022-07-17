@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/merive/Parzibot/blob/main/assets/Parzibot.svg" width="64">
+    <img src="https://github.com/merive-inc/Parzibot/blob/main/assets/Parzibot.svg" width="64">
     <h1 align="center">Parzibot</h1>
     <h2 align="center">Powerful and Useful Discord Bot on Python</h2>
     <p>
@@ -14,7 +14,7 @@
 
 <div>
     <h2>Commands</h2>
-    <h3>Common Commands</h3>
+    <h3>Basic Commands</h3>
     <p>
         • <b>/8ball</b> <i>question</i> - The Ball of Predictions<br>
         • <b>/about</b> - Information About Parzibot<br>
@@ -83,9 +83,8 @@
 <hr/>
 
 <div>
-    <h2>More Inforamation</h2>
+    <h2>More Inforamation on Website</h2>
     <p>
-        More information you can find on <a href="https://merive.herokuapp.com/Parzibot/">Parzibot Website</a>. 
-        There you can find link to add Parzibot to server.
+        You can find more info on <a href="https://merive.herokuapp.com/Parzibot/">Parzibot</a> Website
     </p>
 </div>
