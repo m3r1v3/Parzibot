@@ -16,14 +16,18 @@
     <h2>Commands</h2>
     <h3>Basic Commands</h3>
     <p>
-        • <b>/8ball</b> <i>question</i> - The Ball of Predictions<br>
         • <b>/about</b> - Information About Parzibot<br>
         • <b>/clear</b> <i>number</i> - Clear Messages in Current Text Channel<br>
-        • <b>/dice</b> <i>value</i> - The Game of Dice<br>
-        • <b>/getgame</b> - Choice random game from our list<br>
         • <b>/help</b> <i>command</i> - The list of Parzibot commands<br>
         • <b>/ping</b> - Parzibot ping<br>
         • <b>/users</b> - List of Text Channel members<br>
+    </p>
+    <h3>Game Commands</h3>
+    <p>
+        • <b>/8ball</b> <i>question</i> - The Ball of Predictions<br>
+        • <b>/dice</b> <i>value</i> - The Game of Dice<br>
+        • <b>/getgame</b> - Choice random game from our list<br>
+        • <b>/gamehelp</b> <i>command</i> - The list of Parzibot Game commands<br>
         • <b>/whiteblack</b> <i>color</i> - The White/Black Game
     </p>
     <h3>Music Commands</h3>
