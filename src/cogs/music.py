@@ -28,12 +28,12 @@ class Music(commands.Cog):
     async def clearplaylist(self, ctx):
         """Clear Music Playlist"""
         if (ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel):
-            await Message.msg(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            await Message.music(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
         elif not self.songs:
             self.songs = []
             discord.utils.get(self.client.voice_clients, guild=ctx.guild).stop()
-            await Message.msg(ctx, "The Playlist has been cleared", "**The Playlist** was cleared")
-        else: await Message.msg(ctx, "The Playlist is empty", "**The Playlist** is already empty")
+            await Message.music(ctx, "The Playlist has been cleared", "**The Playlist** was cleared")
+        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is already empty")
 
     @cog_ext.cog_slash(name="join", description="Parzibot Joins to Your Current Voice Channel")
     async def join(self, ctx):
@@ -42,19 +42,19 @@ class Music(commands.Cog):
         if ctx.author.voice is not None and voice is None or not voice.is_connected():
             channel = ctx.author.voice.channel
             await channel.connect()
-            await Message.msg(ctx, "Parzibot has been connected", "**Parzibot** was connected to **Voice Channel**")
-        else: await Message.msg(ctx, "Parzibot already connected", "**Parzibot** already connected to **Voice Channel**")
+            await Message.music(ctx, "Parzibot has been connected", "**Parzibot** was connected to **Voice Channel**")
+        else: await Message.music(ctx, "Parzibot already connected", "**Parzibot** already connected to **Voice Channel**")
 
     @cog_ext.cog_slash(name="leave", description="Parzibot Leaves from Your Current Voice Channel")
     async def leave(self, ctx):
         """Parzibot Leaves Your Current Voice Channel"""
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if ctx.author.voice is None or (ctx.author.voice.channel != ctx.voice_client.channel or voice.is_connected() is None):
-            await Message.msg(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            await Message.music(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
         else:
             self.songs, self.current = [], ""
             await voice.disconnect()
-            await Message.msg(ctx, "Parzibot has left", "**Parzibot** has left **Voice Channel**")
+            await Message.music(ctx, "Parzibot has left", "**Parzibot** has left **Voice Channel**")
 
     @cog_ext.cog_slash(
         name="musichelp",
@@ -83,7 +83,7 @@ class Music(commands.Cog):
     async def musichelp(self, ctx, command=None):
         """The List of Parzibot Music Commands"""
         if command is None:
-            await Message.msg(ctx, "Music commands", (
+            await Message.music(ctx, "Music commands", (
                 " • **/clearplaylist** - Clear Music Playlist\n"
                 " • **/join** - Parzibot Joins to Your Current Voice Channel\n"
                 " • **/leave** - Parzibot Leaves Your Current Voice Channel\n"
@@ -97,33 +97,33 @@ class Music(commands.Cog):
                 " • **/shuffle** - Shuffle The Playlist of Songs\n"
                 " • **/stop** - Stop The Current Song"))
         elif command == "clearplaylist":
-            await Message.msg(ctx, "**/clearplaylist** command - Clear Music Playlist", "**Syntax:** **/clearplaylist**")
+            await Message.music(ctx, "**/clearplaylist** command - Clear Music Playlist", "**Syntax:** **/clearplaylist**")
         elif command == "join":
-            await Message.msg(ctx, "**/join** command - Parzibot Joins to Your Current Voice Channel", "**Syntax:** **/join**")
+            await Message.music(ctx, "**/join** command - Parzibot Joins to Your Current Voice Channel", "**Syntax:** **/join**")
         elif command == "leave":
-            await Message.msg(ctx, "**/leave** command - Parzibot Leaves Your Current Voice Channel", "**Syntax:** **/leave**")
+            await Message.music(ctx, "**/leave** command - Parzibot Leaves Your Current Voice Channel", "**Syntax:** **/leave**")
         elif command == "musichelp":
-            await Message.msg(ctx, "**/musichelp** command - The List of Parzibot Music Commands", (
+            await Message.music(ctx, "**/musichelp** command - The List of Parzibot Music Commands", (
                 "**Syntax:** **/musichelp** `command`\n"
                 "**Options:** `command` - The Help Message for Specific Music Command **(Optional)**"))
         elif command == "next":
-            await Message.msg(ctx, "**/next** command - Play The Next Song in The Playlist", "**Syntax:** **/next**")
+            await Message.music(ctx, "**/next** command - Play The Next Song in The Playlist", "**Syntax:** **/next**")
         elif command == "pause":
-            await Message.msg(ctx, "**/pause** command - Pause The Current Song", "**Syntax:** **/pause**")
+            await Message.music(ctx, "**/pause** command - Pause The Current Song", "**Syntax:** **/pause**")
         elif command == "play":
-            await Message.msg(ctx, "**/play** command - Play The Song in The Current Voice Channel", (
+            await Message.music(ctx, "**/play** command - Play The Song in The Current Voice Channel", (
                 "**Syntax:** **/play** `url`\n"
                 "**Options:** `url` - YouTube Video URL **(Required)**"))
         elif command == "playlist":
-            await Message.msg(ctx, "**/playlist** command - The Number of Songs in The Playlist", "**Syntax:** **/playlist**")
+            await Message.music(ctx, "**/playlist** command - The Number of Songs in The Playlist", "**Syntax:** **/playlist**")
         elif command == "replay":
-            await Message.msg(ctx, "**/replay** command - Replay The Current Song", "**Syntax:** **/replay**")
+            await Message.music(ctx, "**/replay** command - Replay The Current Song", "**Syntax:** **/replay**")
         elif command == "resume":
-            await Message.msg(ctx, "**/resume** command - Resume The Current Song", "**Syntax:** **/resume**")
+            await Message.music(ctx, "**/resume** command - Resume The Current Song", "**Syntax:** **/resume**")
         elif command == "shuffle":
-            await Message.msg(ctx, "**/shuffle** command - Shuffle The List of Songs", "**Syntax:** **/shuffle**")
+            await Message.music(ctx, "**/shuffle** command - Shuffle The List of Songs", "**Syntax:** **/shuffle**")
         elif command == "stop":
-            await Message.msg(ctx, "**/stop** command - Stop The Current Song", "**Syntax:** **/stop**")
+            await Message.music(ctx, "**/stop** command - Stop The Current Song", "**Syntax:** **/stop**")
 
     @cog_ext.cog_slash(name="next", description="Play The Next Song in The Playlist")
     async def next(self, ctx):
@@ -134,7 +134,7 @@ class Music(commands.Cog):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
         if self.songs: await self.play_song(ctx)
-        else: await Message.msg(ctx, "The Playlist is empty", "**The Playlist** is empty now")
+        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is empty now")
 
     @cog_ext.cog_slash(name="pause", description="Pause The Current Song")
     async def pause(self, ctx):
@@ -145,8 +145,8 @@ class Music(commands.Cog):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             voice.pause()
-            await Message.msg(ctx, "The Song has been paused", "**The Song** was paused")
-        else: await Message.msg(ctx, "The Song isn't playing", "**The Song** isn't playing right now")
+            await Message.music(ctx, "The Song has been paused", "**The Song** was paused")
+        else: await Message.music(ctx, "The Song isn't playing", "**The Song** isn't playing right now")
 
     @cog_ext.cog_slash(
         name="play",
@@ -173,7 +173,7 @@ class Music(commands.Cog):
             else: voice = await channel.connect()
 
             if not voice.is_playing() or voice.is_paused(): await self.play_song(ctx)
-            else: await Message.msg(ctx, "The Song added to playlist", "If you want to play song right now write **/next**")
+            else: await Message.music(ctx, "The Song added to playlist", "If you want to play song right now write **/next**")
         else: await Message.error(ctx, "You're not connected", "You're not connected to any **Voice Channel**")
 
     async def play_song(self, ctx):
@@ -192,7 +192,7 @@ class Music(commands.Cog):
                        after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
             
             voice.is_playing()
-            await Message.msg(ctx, "The Song is playing", f"**{data['title']}** is playing now")
+            await Message.music(ctx, "The Song is playing", f"**{data['title']}** is playing now")
 
     @cog_ext.cog_slash(name="playlist", description="The Number of Songs in The Playlist")
     async def playlist(self, ctx):
@@ -200,8 +200,8 @@ class Music(commands.Cog):
         if (ctx.author.voice is None or ctx.voice_client is None or ctx.author.voice.channel != ctx.voice_client.channel):
             await Message.error(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
             return
-        if self.songs: await Message.msg(ctx, "The Playlist contains several songs", f"**The Playlist** contains about **{len(self.songs)}** song(-s)")
-        else: await Message.msg(ctx, "The Playlist is empty", "**The Playlist** is empty now")
+        if self.songs: await Message.music(ctx, "The Playlist contains several songs", f"**The Playlist** contains about **{len(self.songs)}** song(-s)")
+        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is empty now")
 
     @cog_ext.cog_slash(name="replay", description="Replay The Current Song")
     async def replay(self, ctx):
@@ -230,7 +230,7 @@ class Music(commands.Cog):
             after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
         
         voice.is_playing()
-        await Message.msg(ctx, "The Song is playing", f"**{data['title']}** is playing now")
+        await Message.music(ctx, "The Song is playing", f"**{data['title']}** is playing now")
 
     @cog_ext.cog_slash(name="resume", description="Resume The Current Song")
     async def resume(self, ctx):
@@ -241,7 +241,7 @@ class Music(commands.Cog):
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_paused():
             voice.resume()
-            await Message.msg(ctx, "The Song has been resumed", "**The Song** was resumed")
+            await Message.music(ctx, "The Song has been resumed", "**The Song** was resumed")
         else: await Message.error(ctx, "The Song isn't paused", "**The Song** isn't paused right now")
 
     @cog_ext.cog_slash(name="shuffle", description="Shuffle The Playlist of Songs")
@@ -252,8 +252,8 @@ class Music(commands.Cog):
             return
         elif self.songs:
             random.shuffle(self.songs)
-            await Message.msg(ctx, "The Playlist has been shuffled", "**The Playlist** was shuffled")
-        else: await Message.msg(ctx, "The Playlist is empty", "**The Playlist** is empty now")
+            await Message.music(ctx, "The Playlist has been shuffled", "**The Playlist** was shuffled")
+        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is empty now")
 
     @cog_ext.cog_slash(name="stop", description="Stop The Current Song")
     async def stop(self, ctx):
@@ -263,7 +263,7 @@ class Music(commands.Cog):
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
-        await Message.msg(ctx, "The Song has been stopped", "**The Song** was stopped")
+        await Message.music(ctx, "The Song has been stopped", "**The Song** was stopped")
 
 
 def setup(client):
