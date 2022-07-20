@@ -41,6 +41,13 @@ class Games(commands.Cog):
         await Message.games(ctx, f"Question: `{question}`", f"**Answer:** `{random.choice(responses)}`")
 
     @cog_ext.cog_slash(
+        name="coin",
+        description="The Heads or Tails game")
+    async def coin(self, ctx):
+        """The Heads or Tails game"""
+        await Message.games(ctx, "Heads or Tails", f"{random.choice(["Head", "Tail"])} has fell")
+
+    @cog_ext.cog_slash(
         name="dice",
         description="The Game of Dice",
         options=[
@@ -60,52 +67,17 @@ class Games(commands.Cog):
                 f" The values of dice is **{v1}** and **{v2}**"))
         else: await Message.error(ctx, "You lose :(", f"The values of dice is **{v1}** and **{v2}**")
 
-    @cog_ext.cog_slash(
-        name="gamehelp",
-        description="The List of Parzibot Game Commands",
-        options=[
-            create_option(
-                name="command",
-                description="The Help Message for Specific Game Command",
-                option_type=3,
-                required=False,
-                choices=[
-                    create_choice(name="8ball", value="8ball"),
-                    create_choice(name="dice", value="dice"),
-                    create_choice(name="getgame", value="getgame"),
-                    create_choice(name="gamehelp", value="gamehelp"),
-                    create_choice(name="whiteblack", value="whiteblack")
-                ])
-            ])
-    async def help(self, ctx, command=None):
+    @cog_ext.cog_slash(name="gamehelp", description="The List of Parzibot Game Commands")
+    async def help(self, ctx):
         """The List of Parzibot Commands"""
-        if command is None:
-            await Message.games(ctx, "Game Commands", (
-                " • **/8ball** `question` - The Ball of Predictions\n"
-                " • **/dice** `value` - The Game of Dice\n"
-                " • **/gamehelp** `command` - The List of Parzibot Game Commands\n"
-                " • **/getgame** - Choice random game from our list\n"
-                " • **/whiteblack** `color` - The White/Black Game"))
-        elif command == "8ball":
-            await Message.games(ctx, "**/8ball** command - The Ball of Predictions", (
-                "**Syntax:** **/8ball** `question`\n"
-                "**Options:** `question` - Your Question for The Ball of Predictions **(Required)**"))
-        elif command == "dice":
-            await Message.games(ctx, "**/dice** command - The Game of Dice", (
-                "**Syntax:** **/dice** `value`\n"
-                "**Options:** `value` - The Value What You\"re Predicting **(Required)**\n"
-                "**Rules:** If you guess sum of dice values - you won, "
-                "if you guess one of the dice value - it\"s a draw, else you lose"))
-        elif command == "gamehelp":
-            await Message.games(ctx, "**/gamehelp** command - The List of Parzibot Game Commands", (
-                "**Syntax:** **/gamehelp** `command`\n"
-                "**Options:** `command` - The Help Message for Specific Game Command **(Optional)**"))
-        elif command == "getgame":
-            await Message.games(ctx, "**/getgame** command - Choice Random Game from Our List", "**Syntax:** **/getgame**")
-        elif command == "whiteblack":
-            await Message.games(ctx, "**/whiteblack** command - The White/Black Game", (
-                "**Syntax:** **/whiteblack** `color`\n"
-                "**Options:** `color` - The Hidden Color (White or Black) **(Required)**\n"))
+        await Message.games(ctx, "Game Commands", (
+            " • **/8ball** `question` - The Ball of Predictions\n"
+            " • **/coin** - The Heads or Tails Game\n"
+            " • **/dice** `value` - The Game of Dice\n"
+            " • **/gamehelp** - The List of Parzibot Game Commands\n"
+            " • **/getgame** - Choice random game from our list\n"
+            " • **/whiteblack** `color` - The White/Black Game"))
+        
 
     @cog_ext.cog_slash(name="getgame", description="Choice Random Game from Our List")
     async def getgame(self, ctx):
