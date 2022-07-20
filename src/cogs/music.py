@@ -56,74 +56,22 @@ class Music(commands.Cog):
             await voice.disconnect()
             await Message.music(ctx, "Parzibot has left", "**Parzibot** has left **Voice Channel**")
 
-    @cog_ext.cog_slash(
-        name="musichelp",
-        description="The List of Parzibot Music Commands",
-        options=[
-            create_option(
-                name="command",
-                description="The Help Message for Specific Music Command",
-                option_type=3,
-                required=False,
-                choices=[
-                    create_choice(name="clearplaylist", value="clearplaylist"),
-                    create_choice(name="join", value="join"),
-                    create_choice(name="leave", value="leave"),
-                    create_choice(name="musichelp", value="musichelp"),
-                    create_choice(name="next", value="next"),
-                    create_choice(name="pause", value="pause"),
-                    create_choice(name="play", value="play"),
-                    create_choice(name="playlist", value="playlist"),
-                    create_choice(name="replay", value="replay"),
-                    create_choice(name="resume", value="resume"),
-                    create_choice(name="shuffle", value="shuffle"),                    
-                    create_choice(name="stop", value="stop")
-                ])
-            ])
-    async def musichelp(self, ctx, command=None):
+    @cog_ext.cog_slash(name="musichelp", description="The List of Parzibot Music Commands")
+    async def musichelp(self, ctx):
         """The List of Parzibot Music Commands"""
-        if command is None:
-            await Message.music(ctx, "Music commands", (
-                " • **/clearplaylist** - Clear Music Playlist\n"
-                " • **/join** - Parzibot Joins to Your Current Voice Channel\n"
-                " • **/leave** - Parzibot Leaves Your Current Voice Channel\n"
-                " • **/musichelp** `command` - The List of Parzibot Music Commands\n"
-                " • **/next** - Play The Next Song in The Playlist\n"
-                " • **/pause** - Pause The Current Song\n"
-                " • **/play** `url` - Play The Song in The Current Voice Channel\n"
-                " • **/playlist** - The Number of Songs in The Playlist\n"
-                " • **/replay** - Replay The Current Song\n"
-                " • **/resume** - Resume The Current Song\n"
-                " • **/shuffle** - Shuffle The Playlist of Songs\n"
-                " • **/stop** - Stop The Current Song"))
-        elif command == "clearplaylist":
-            await Message.music(ctx, "**/clearplaylist** command - Clear Music Playlist", "**Syntax:** **/clearplaylist**")
-        elif command == "join":
-            await Message.music(ctx, "**/join** command - Parzibot Joins to Your Current Voice Channel", "**Syntax:** **/join**")
-        elif command == "leave":
-            await Message.music(ctx, "**/leave** command - Parzibot Leaves Your Current Voice Channel", "**Syntax:** **/leave**")
-        elif command == "musichelp":
-            await Message.music(ctx, "**/musichelp** command - The List of Parzibot Music Commands", (
-                "**Syntax:** **/musichelp** `command`\n"
-                "**Options:** `command` - The Help Message for Specific Music Command **(Optional)**"))
-        elif command == "next":
-            await Message.music(ctx, "**/next** command - Play The Next Song in The Playlist", "**Syntax:** **/next**")
-        elif command == "pause":
-            await Message.music(ctx, "**/pause** command - Pause The Current Song", "**Syntax:** **/pause**")
-        elif command == "play":
-            await Message.music(ctx, "**/play** command - Play The Song in The Current Voice Channel", (
-                "**Syntax:** **/play** `url`\n"
-                "**Options:** `url` - YouTube Video URL **(Required)**"))
-        elif command == "playlist":
-            await Message.music(ctx, "**/playlist** command - The Number of Songs in The Playlist", "**Syntax:** **/playlist**")
-        elif command == "replay":
-            await Message.music(ctx, "**/replay** command - Replay The Current Song", "**Syntax:** **/replay**")
-        elif command == "resume":
-            await Message.music(ctx, "**/resume** command - Resume The Current Song", "**Syntax:** **/resume**")
-        elif command == "shuffle":
-            await Message.music(ctx, "**/shuffle** command - Shuffle The List of Songs", "**Syntax:** **/shuffle**")
-        elif command == "stop":
-            await Message.music(ctx, "**/stop** command - Stop The Current Song", "**Syntax:** **/stop**")
+        await Message.music(ctx, "Music commands", (
+            " • **/clearplaylist** - Clear Music Playlist\n"
+            " • **/join** - Parzibot Joins to Your Current Voice Channel\n"
+            " • **/leave** - Parzibot Leaves Your Current Voice Channel\n"
+            " • **/musichelp** - The List of Parzibot Music Commands\n"
+            " • **/next** - Play The Next Song in The Playlist\n"
+            " • **/pause** - Pause The Current Song\n"
+            " • **/play** `url` - Play The Song in The Current Voice Channel\n"
+            " • **/playlist** - The Number of Songs in The Playlist\n"
+            " • **/replay** - Replay The Current Song\n"
+            " • **/resume** - Resume The Current Song\n"
+            " • **/shuffle** - Shuffle The Playlist of Songs\n"
+            " • **/stop** - Stop The Current Song"))
 
     @cog_ext.cog_slash(name="next", description="Play The Next Song in The Playlist")
     async def next(self, ctx):

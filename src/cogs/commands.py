@@ -41,46 +41,16 @@ class Commands(commands.Cog):
         else: await Message.error(ctx, "Clear error", f"Cannot clear **{number}** messages")
 
 
-    @cog_ext.cog_slash(
-        name="help",
-        description="The List of Parzibot Commands",
-        options=[
-            create_option(
-                name="command",
-                description="The Help Message for Specific Command",
-                option_type=3,
-                required=False,
-                choices=[
-                    create_choice(name="about", value="about"),
-                    create_choice(name="clear", value="clear"),
-                    create_choice(name="help", value="help"),
-                    create_choice(name="ping", value="ping"),
-                    create_choice(name="users", value="users")
-                ])
-            ])
-    async def help(self, ctx, command=None):
+    @cog_ext.cog_slash(name="help", description="The List of Parzibot Commands")
+    async def help(self, ctx):
         """The List of Parzibot Commands"""
-        if command is None:
-            await Message.msg(ctx, "Bot Commands", (
-                " • **/about** - Information About Parzibot\n"
-                " • **/clear** `number` - Clear Messages in Current Text Channel\n"
-                " • **/help** `command` - The list of Parzibot commands\n"
-                " • **/ping** - Parzibot ping\n"
-                " • **/users** - List of Text Channel members\n"))
-        elif command == "about":
-            await Message.msg(ctx, "**/about** command - Information About Parzibot", "**Syntax:** **/about**")
-        elif command == "clear":
-            await Message.msg(ctx, "**/clear** command - Clear Messages in Current Text Channel", (
-                "**Syntax:** **/clear** `number`\n"
-                "**Options:** `number` - Number of Messages for Clear **(Optional)**"))
-        elif command == "help":
-            await Message.msg(ctx, "**/help** command - The List of Parzibot Commands", (
-                "**Syntax:** **/help** `command`\n"
-                "**Options:** `command` - The Help Message for Specific Command **(Optional)**"))
-        elif command == "ping":
-            await Message.msg(ctx, "**/ping** command - Parzibot's Ping", "**Syntax:** **/ping**")
-        elif command == "users":
-            await Message.msg(ctx, "**/users** command - The List of Text Channel Members", "**Syntax:** **/users**")
+        await Message.msg(ctx, "Bot Commands", (
+            " • **/about** - Information About Parzibot\n"
+            " • **/clear** `number` - Clear Messages in Current Text Channel\n"
+            " • **/help** - The list of Parzibot commands\n"
+            " • **/ping** - Parzibot ping\n"
+            " • **/users** - List of Text Channel members\n"))
+        
 
     @cog_ext.cog_slash(name="ping", description="Parzibot's Ping")
     async def ping(self, ctx):

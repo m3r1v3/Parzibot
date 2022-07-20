@@ -14,67 +14,18 @@ class Admin(commands.Cog):
         """Initialisation client"""
         self.client = client
 
-    @cog_ext.cog_slash(
-        name="adminhelp",
-        description="The List of Parzibot Admin Commands",
-        options=[
-            create_option(
-                name="command",
-                description="The Help Message for Specific Admin Command",
-                option_type=3,
-                required=False,
-                choices=[
-                    create_choice(name="adminhelp", value="adminhelp"),
-                    create_choice(name="ban", value="ban"),
-                    create_choice(name="defaultrole", value="defaultrole"),
-                    create_choice(name="giverole", value="giverole"),
-                    create_choice(name="kick", value="kick"),
-                    create_choice(name="nickname", value="nickname"),
-                    create_choice(name="removedefaultrole", value="removedefaultrole")
-                    ])
-            ])
-    async def adminhelp(self, ctx, command=None):
+    @cog_ext.cog_slash(name="adminhelp", description="The List of Parzibot Admin Commands")
+    async def adminhelp(self, ctx):
         """Parzibot Admin Commands list"""
         if ctx.author.guild_permissions.manage_messages:
-            if command is None:
-                await Message.admin(ctx, "**Admin Commands**", (
-                        ' • **/adminhelp** `command` - The List of Parzibot Admin Commands\n'
-                        ' • **/ban** `member` - Ban The Member on The Server\n'
-                        ' • **/defaultrole** `role` - Set The Default Role on The Server\n'
-                        ' • **/giverole** `member` `role` - Give The Role to The Member\n'
-                        ' • **/kick** `member` - Kick The Member from The Server\n'
-                        ' • **/nickname** `member` `nickname` - Change The Nickname to The Member\n'
-                        ' • **/removedefaultrole** - Remove The Default Role on The Server'))
-            elif command == "adminhelp":
-                await Message.admin(ctx, "**/adminhelp** command - The List of Parzibot Admin Commands", (
-                        '**Syntax:** **/adminhelp** `command`\n'
-                        '**Options:** `command` - The Help Message for Specific Admin Command **(Optional)**')) 
-            elif command == "ban":
-                await Message.admin(ctx, "**/ban** command - Ban The Member on The Server", (
-                        '**Syntax:** **/ban** `member`\n'
-                        '**Options:** `member` - The Member Who Will Be Banned **(Required)**'))
-            elif command == "defaultrole":
-                await Message.admin(ctx, "**/defaultrole** command - Set The Default Role on The Server", (
-                        '**Syntax:** **/defaultrole** `role`\n'
-                        '**Options:** `role` - The Role Name **(Required)**'))
-            elif command == "giverole":
-                await Message.admin(ctx, "**/giverole** command - Give The Role to The Member", (
-                        '**Syntax:** **/giverole** `member` `role`\n'
-                        '**Options:**\n'
-                        '`member` - Member Who Will Received Role **(Required)**\n'
-                        '`role` - The Role Name **(Required)**'))
-            elif command == "kick":
-                await Message.admin(ctx, "**/kick** command - Kick The Member from The Server", (
-                        '**Syntax:** **/kick** `member`\n'
-                        '**Options:** `member` - The Member Who Will Be Kicked **(Required)**'))
-            elif command == "nickname":
-                await Message.admin(ctx, "**/nickname** command - Change The Nickname to The Member", (
-                        '**Syntax:** **/nickname** `member` `nickname`\n'
-                        '**Options:**\n'
-                        '`member` - The Member to Whom We Will Change Nickname **(Required)**\n'
-                        '`nickname` - The Member\'s Future Nickname **(Optional)**'))
-            elif command == "removedefaultrole":
-                await Message.admin(ctx, "**/removedefaultrole** command - Remove The Default Role on The Server", '**Syntax:** **/removedefaultrole**')
+            await Message.admin(ctx, "**Admin Commands**", (
+                ' • **/adminhelp** `command` - The List of Parzibot Admin Commands\n'
+                ' • **/ban** `member` - Ban The Member on The Server\n'
+                ' • **/defaultrole** `role` - Set The Default Role on The Server\n'
+                ' • **/giverole** `member` `role` - Give The Role to The Member\n'
+                ' • **/kick** `member` - Kick The Member from The Server\n'
+                ' • **/nickname** `member` `nickname` - Change The Nickname to The Member\n'
+                ' • **/removedefaultrole** - Remove The Default Role on The Server'))
         else: await Message.error(ctx, "Error", "**You doesn't have permissions for executing this command**")
 
     @cog_ext.cog_slash(
