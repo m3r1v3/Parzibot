@@ -18,16 +18,17 @@
     <p>
         • <b>/about</b> - Information About Parzibot<br>
         • <b>/clear</b> <i>number</i> - Clear Messages in Current Text Channel<br>
-        • <b>/help</b> <i>command</i> - The list of Parzibot commands<br>
+        • <b>/help</b> - The list of Parzibot commands<br>
         • <b>/ping</b> - Parzibot ping<br>
         • <b>/users</b> - List of Text Channel members<br>
     </p>
     <h3>Game Commands</h3>
     <p>
         • <b>/8ball</b> <i>question</i> - The Ball of Predictions<br>
+        • <b>/coin</b> - The Heads or Tails Game<br>
         • <b>/dice</b> <i>value</i> - The Game of Dice<br>
         • <b>/getgame</b> - Choice random game from our list<br>
-        • <b>/gamehelp</b> <i>command</i> - The list of Parzibot Game commands<br>
+        • <b>/gamehelp</b> - The list of Parzibot Game commands<br>
         • <b>/whiteblack</b> <i>color</i> - The White/Black Game
     </p>
     <h3>Music Commands</h3>
@@ -35,7 +36,7 @@
         • <b>/clearplaylist</b> - Clear Music Playlist<br>
         • <b>/join</b> - Parzibot Joins to Your Current Voice Channel<br>
         • <b>/leave</b> - Parzibot Leaves Your Current Voice Channel<br>
-        • <b>/musichelp</b> <i>command</i> - The List of Parzibot Music Commands<br>
+        • <b>/musichelp</b> - The List of Parzibot Music Commands<br>
         • <b>/next</b> - Play The Next Song in The Playlist<br>
         • <b>/pause</b> - Pause The Current Song<br>
         • <b>/play</b> <i>url</i> - Play The Song in The Current Voice Channel<br>
@@ -47,7 +48,7 @@
     </p>
     <h3>Admin Commands</h3>
     <p>
-        • <b>/adminhelp</b> <i>command</i> - The List of Parzibot Admin Commands<br>
+        • <b>/adminhelp</b> - The List of Parzibot Admin Commands<br>
         • <b>/ban</b> <i>member</i> - Ban The Member on The Server<br>
         • <b>/defaultrole</b> <i>role</i> - Set The Default Role on The Server<br>
         • <b>/giverole</b> <i>member</i> <i>role</i> - Give The Role to The Member<br>
