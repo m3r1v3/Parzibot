@@ -41,7 +41,7 @@ class GameCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="coin", description="The Heads or Tails Game")
     async def coin(self, ctx):
-        await Message.games(ctx, "Heads or Tails", f"{random.choice(["Head", "Tail"])} has fell")
+        await Message.games(ctx, "Heads or Tails", f"{random.choice(['Head', 'Tail'])} has fell")
 
     @cog_ext.cog_slash(
         name="dice",
