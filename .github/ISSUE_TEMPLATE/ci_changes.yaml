@@ -1,0 +1,21 @@
+name: Continuous Integrations Changes
+title: '[CI] Continuous Integrations'
+description: Changes to our CI configuration files and scripts
+labels: ci
+assignees: merive
+body:
+
+- type: input
+  id: ci
+  attributes:
+    label: Continuous Integrations Changes
+    description: "A complete of what the CI needs to be updated"
+  validations:
+    required: true
+
+- type: input
+  id: extra
+  attributes:
+    label: Any extra info
+  validations:
+    required: false

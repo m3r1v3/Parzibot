@@ -8,8 +8,8 @@ body:
 - type: input
   id: refactor
   attributes:
-    label: Refactor
-    description: "A complete of what the part of build file needs changes"
+    label: Code Refactoring
+    description: "A complete of what to needs to be refactored"
   validations:
     required: true
 

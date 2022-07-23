@@ -1,5 +1,5 @@
-name: Builds
-title: '[Build] Builds'
+name: Build Changes
+title: '[Build] Build'
 description: Changes that affect the build system or external dependencies
 labels: build
 assignees: merive
@@ -9,7 +9,7 @@ body:
   id: build
   attributes:
     label: Build Changes
-    description: "A complete of what the part of build file needs changes"
+    description: "A complete of what the part of build file needs to be changed"
   validations:
     required: true
 
