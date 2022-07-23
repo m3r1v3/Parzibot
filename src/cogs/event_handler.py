@@ -10,22 +10,18 @@ from message import Message
 class EventHandler(commands.Cog):
 
     def __init__(self, client):
-        """Initialisation client"""
         self.client = client
 
     @commands.Cog.listener()
     async def on_ready(self):
-        """Function check the work of the bot"""
         print('{0} is ready'.format(self.client.user))
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        """Sending a personal message about the bot and issuing a role in the chat"""
         await Message.msg(member, f"Hey **{member}**!", "White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command")
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
-        """Notifies about the issuance and withdrawal of a role from a user"""
         if len(before.roles) < len(after.roles):
             for i in after.roles:
                 if i not in before.roles:
@@ -37,5 +33,4 @@ class EventHandler(commands.Cog):
 
 
 def setup(client):
-    """Setup function"""
     client.add_cog(EventHandler(client))

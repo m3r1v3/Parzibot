@@ -16,7 +16,6 @@ class BasicCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="about", description="Information about Parzibot")
     async def about(self, ctx):
-        """Information about Parzibot"""
         await Message.msg(ctx, "About Parzibot", (
             f"**Parzibot** is free open-source project, created by **merive_**\n"
             f"You can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n"
@@ -33,7 +32,6 @@ class BasicCommands(commands.Cog):
                 required=False)
             ])
     async def clear(self, ctx, number=5):
-        """Clear messages in current Text Channel"""
         if number > 0:
             await ctx.channel.purge(limit=number)
             await Message.msg(ctx, "Messages has been cleared", f"Cleared **{number}** messages")
@@ -41,7 +39,6 @@ class BasicCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="help", description="The list of Parzibot basic commands")
     async def help(self, ctx):
-        """The list of Parzibot basic commands"""
         await Message.msg(ctx, "Parzibot // Basic Commands", (
             " • **/about** - Information about Parzibot\n"
             " • **/clear** `number` - Clear messages in current Text Channel\n"
@@ -51,15 +48,12 @@ class BasicCommands(commands.Cog):
         
     @cog_ext.cog_slash(name="ping", description="Parzibot ping")
     async def ping(self, ctx):
-        """Parzibot ping"""
         await Message.msg(ctx, "Parzibot Ping", f"**Parzibot** Ping: `{round(self.client.latency * 1000)}ms`")
 
     @cog_ext.cog_slash(name="users", description="The list of current Text Channel members")
     async def users(self, ctx):
-        """The list of current Text Channel members"""
         await Message.msg(ctx, "Channel Members", "".join(f"\t**{member}**\n" for member in ctx.channel.members))
 
 
 def setup(client):
-    """Setup function"""
     client.add_cog(BasicCommands(client))

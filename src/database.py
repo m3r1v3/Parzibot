@@ -21,13 +21,11 @@ class Role(Base):
 
     @staticmethod
     def add(role_id, server: str):
-        """Add user in db"""
         session.add(Role(role_id=role_id, server=str(server))).commit()
 
     @staticmethod
     def get_role(server: str):
-        try:
-            return session.query(Role).filter_by(server=str(server)).first().role_id
+        try: return session.query(Role).filter_by(server=str(server)).first().role_id
         except AttributeError: return None
 
     @staticmethod
