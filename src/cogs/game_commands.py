@@ -9,7 +9,7 @@ from discord_slash.utils.manage_commands import create_option, create_choice
 from message import Message
 
 
-class Games(commands.Cog):
+class GameCommands(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -122,4 +122,4 @@ class Games(commands.Cog):
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Games(client))
+    client.add_cog(GameCommands(client))

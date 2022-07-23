@@ -7,7 +7,7 @@ from database import Role
 from message import Message
 
 
-class Events(commands.Cog):
+class EventHandler(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
@@ -21,7 +21,7 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         """Sending a personal message about the bot and issuing a role in the chat"""
-        await Message.msg(member, f"Hey **{member}**!", "White **/help** to find out my command or **/musichelp** to find out my music command")
+        await Message.msg(member, f"Hey **{member}**!", "White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command")
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
@@ -38,4 +38,4 @@ class Events(commands.Cog):
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Events(client))
+    client.add_cog(EventHandler(client))

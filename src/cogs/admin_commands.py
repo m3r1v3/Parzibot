@@ -8,7 +8,7 @@ from database import Role
 from message import Message
 
 
-class Admin(commands.Cog):
+class AdminCommands(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
@@ -148,4 +148,4 @@ class Admin(commands.Cog):
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Admin(client))
+    client.add_cog(AdminCommands(client))

@@ -5,7 +5,7 @@ from discord.ext import commands
 from message import Message
 
 
-class Errors(commands.Cog):
+class ErrorHandler(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
@@ -19,4 +19,4 @@ class Errors(commands.Cog):
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Errors(client))
+    client.add_cog(ErrorHandler(client))

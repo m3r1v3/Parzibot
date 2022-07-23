@@ -13,7 +13,7 @@ from discord_slash.utils.manage_commands import create_option, create_choice
 from message import Message
 
 
-class Music(commands.Cog):
+class MusicCommands(commands.Cog):
 
     def __init__(self, client):
         """Initialisation client"""
@@ -216,4 +216,4 @@ class Music(commands.Cog):
 
 def setup(client):
     """Setup function"""
-    client.add_cog(Music(client))
+    client.add_cog(MusicCommands(client))
