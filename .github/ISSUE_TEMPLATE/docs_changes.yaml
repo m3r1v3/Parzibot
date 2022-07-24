@@ -1,0 +1,21 @@
+name: Documentation Changes
+title: '[Docs] Documentation'
+description: Documentation only changes
+labels: docs
+assignees: merive
+body:
+
+- type: input
+  id: docs
+  attributes:
+    label: Documentation Changes
+    description: "A complete of what the documentation needs to be updated"
+  validations:
+    required: true
+
+- type: input
+  id: extra
+  attributes:
+    label: Any extra info
+  validations:
+    required: false

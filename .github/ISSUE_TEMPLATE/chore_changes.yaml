@@ -1,0 +1,21 @@
+name: Chore Changes
+title: '[Chore] Chore'
+description: Other changes that don't modify src or test file
+labels: chore
+assignees: merive
+body:
+
+- type: input
+  id: chore
+  attributes:
+    label: Chore Changes
+    description: "A complete of what the chores is"
+  validations:
+    required: true
+
+- type: input
+  id: extra
+  attributes:
+    label: Any extra info
+  validations:
+    required: false

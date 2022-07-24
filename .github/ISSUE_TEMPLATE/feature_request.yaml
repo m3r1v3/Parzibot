@@ -1,0 +1,21 @@
+name: Feature Request
+title: '[Feature] Feature'
+description: A new feature
+labels: feature
+assignees: merive
+body:
+
+- type: input
+  id: feature
+  attributes:
+    label: Feature
+    description: "A complete of what the feature is"
+  validations:
+    required: true
+
+- type: input
+  id: extra
+  attributes:
+    label: Any extra info
+  validations:
+    required: false

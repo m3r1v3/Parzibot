@@ -1,0 +1,21 @@
+name: Code Refactoring
+title: '[Refactor] Code Refactoring'
+description: A code change that neither fixes a bug nor adds a feature
+labels: refactor
+assignees: merive
+body:
+
+- type: input
+  id: refactor
+  attributes:
+    label: Code Refactoring
+    description: "A complete of what to needs to be refactored"
+  validations:
+    required: true
+
+- type: input
+  id: extra
+  attributes:
+    label: Any extra info
+  validations:
+    required: false

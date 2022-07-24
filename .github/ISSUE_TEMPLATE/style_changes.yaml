@@ -1,0 +1,21 @@
+name: Style Changes
+title: '[Style] Style'
+description: Changes that do not affect the meaning of the code
+labels: style
+assignees: merive
+body:
+
+- type: input
+  id: style
+  attributes:
+    label: Style Chnages
+    description: "A complete of what to needs to be style updated"
+  validations:
+    required: true
+
+- type: input
+  id: extra
+  attributes:
+    label: Any extra info
+  validations:
+    required: false

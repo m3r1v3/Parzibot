@@ -1,0 +1,21 @@
+name: Build Changes
+title: '[Build] Build'
+description: Changes that affect the build system or external dependencies
+labels: build
+assignees: merive
+body:
+
+- type: input
+  id: build
+  attributes:
+    label: Build Changes
+    description: "A complete of what the part of build file needs to be changed"
+  validations:
+    required: true
+
+- type: input
+  id: extra
+  attributes:
+    label: Any extra info
+  validations:
+    required: false

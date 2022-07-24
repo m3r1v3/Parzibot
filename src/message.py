@@ -11,6 +11,14 @@ class Message:
         return Embed(title=title, description=description, color=Colour(0x68FFD9)).set_thumbnail(url="attachment://Parzibot.png")
 
     @staticmethod
+    def get_games_embed(title: str, description: str):
+        return Embed(title=title, description=description, color=Colour(0x8168ff)).set_thumbnail(url="attachment://ParzibotGames.png")
+
+    @staticmethod
+    def get_music_embed(title: str, description: str):
+        return Embed(title=title, description=description, color=Colour(0x68ff72)).set_thumbnail(url="attachment://ParzibotMusic.png")
+
+    @staticmethod
     def get_admin_embed(title: str, description: str):
         return Embed(title=title, description=description, color=Colour(0xffff68)).set_thumbnail(url="attachment://ParzibotAdmin.png")
 
@@ -22,6 +30,16 @@ class Message:
     async def msg(ctx, title: str, description: str):
         await ctx.send(file=discord.File("src/images/Parzibot.png", filename="Parzibot.png"),
             embed=Message.get_embed(title, description))
+
+    @staticmethod
+    async def games(ctx, title: str, description: str):
+        await ctx.send(file=discord.File("src/images/ParzibotGames.png", filename="ParzibotGames.png"),
+            embed=Message.get_games_embed(title, description))
+
+    @staticmethod
+    async def music(ctx, title: str, description: str):
+        await ctx.send(file=discord.File("src/images/ParzibotMusic.png", filename="ParzibotMusic.png"),
+            embed=Message.get_music_embed(title, description))
 
     @staticmethod
     async def admin(ctx, title: str, description: str):
