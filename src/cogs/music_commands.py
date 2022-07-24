@@ -38,7 +38,7 @@ class MusicCommands(commands.Cog):
             "**Playlist commands**\n"
             " • **/playlist** - Show number of songs in Playlist\n"
             " • **/playlistclear** - Clear all songs from Playlist\n"
-            " • **/playlistshuffle** - Shuffle order of songs in Playlist\n"))
+            " • **/playlistshuffle** - Shuffle order of songs in Playlist"))
 
     @cog_ext.cog_slash(name="connect", description="Parzibot connects to your current Voice Channel")
     async def connect(self, ctx):

@@ -44,7 +44,7 @@ class BasicCommands(commands.Cog):
             " • **/clear** `number` - Clear messages in current Text Channel\n"
             " • **/help** - The list of Parzibot basic commands\n"
             " • **/ping** - Parzibot ping\n"
-            " • **/users** - The list of current Text Channel members\n"))
+            " • **/users** - The list of current Text Channel members"))
         
     @cog_ext.cog_slash(name="ping", description="Parzibot ping")
     async def ping(self, ctx):
