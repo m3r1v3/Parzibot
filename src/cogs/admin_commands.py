@@ -17,16 +17,33 @@ class AdminCommands(commands.Cog):
     async def adminhelp(self, ctx):
         if ctx.author.guild_permissions.manage_messages:
             await Message.admin(ctx, "Parzibot // Admin Commands", (
-                "**Help Commands**\n"
+                '**Help Commands**\n'
                 ' • **/adminhelp** `command` - The list of Parzibot admin commands\n\n'
-                "**Member control Commands**\n"
+                '**Announce Commands**\n'
+                ' • **/announce** `title` `message` - Make announce message in current Text Channel\n\n'
+                '**Member control Commands**\n'
                 ' • **/ban** `member` - Ban member on your Server\n'
                 ' • **/kick** `member` - Kick member on your Server\n'
                 ' • **/giverole** `member` `role` - Give role to Member on Server\n'
                 ' • **/nickname** `member` `nickname` - Change nickname to Member on Server\n\n'
-                "**Default role Commands**\n"
+                '**Default role Commands**\n'
                 ' • **/defaultrole** `role` - Set default role what will be giving to new members of Server\n'
                 ' • **/defaultroleremove** - Remove default role what will be giving to new members of Server'))
+        else: await Message.error(ctx, "Error", "**You doesn't have permissions for executing this command**")
+
+    @cog_ext.cog_slash(
+        name="announce",
+        description="Make announce message in current Text Channel",
+        options=[
+            create_option(
+                name="message",
+                description="Text of announce message",
+                option_type=3,
+                required=True)
+            ])
+    async def announce(self, ctx, message: str):
+        if ctx.author.guild_permissions.manage_messages:
+            await Message.admin(ctx, "Parzibot // Announce", message)
         else: await Message.error(ctx, "Error", "**You doesn't have permissions for executing this command**")
 
     @cog_ext.cog_slash(
