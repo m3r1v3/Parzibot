@@ -17,10 +17,10 @@
     <h3>Basic Commands</h3>
     <p>
         • <b>/about</b> - Information about Parzibot<br>
-        • <b>/clear</b> <i>number</i> - Clear messages in current Text Channel<br>
-        • <b>/help</b> - The list of Parzibot basic commands<br>
-        • <b>/ping</b> - Parzibot ping<br>
-        • <b>/users</b> - The list of current Text Channel members<br>
+        • <b>/clear</b> <i>number</i> - Clear messages in Text Channel<br>
+        • <b>/help</b> - List of Parzibot basic commands<br>
+        • <b>/members</b> - Members of Text Channel<br>
+        • <b>/ping</b> - Parzibot ping
     </p>
     <h3>Game Commands</h3>
     <p>
