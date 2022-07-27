@@ -18,18 +18,18 @@ class EventHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        await Message.msg(member, f"Hey **{member}**!", "White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command")
+        await Message.msg(member, f"Parzibot // Hey **{member}**!", "White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command")
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
         if len(before.roles) < len(after.roles):
             for i in after.roles:
                 if i not in before.roles:
-                    await Message.msg(member, "You have received a role", f"You received the **{i}** role")
+                    await Message.msg(member, "Parzibot // Received role", f"You received **{i}** role")
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
                 if i not in after.roles:
-                    await Message.error(member, "You have deprived a role", f"You deprived the **{i}** role")
+                    await Message.error(member, "Parzibot // Deprived role", f"You deprived **{i}** role")
 
 
 def setup(client):
