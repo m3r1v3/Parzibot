@@ -29,7 +29,7 @@
         • <b>/dice</b> <i>value</i> - The Dice Game<br>
         • <b>/gamehelp</b> - The list of Parzibot game commands<br>
         • <b>/getgame</b> - Advises to play a random game<br>
-        • <b>/whiteblack</b> <i>color</i> - The White/Black Game
+        • <b>/whiteblack</b> <i>color</i> - The White or Black Game
     </p>
     <h3>Music Commands</h3>
     <p>
