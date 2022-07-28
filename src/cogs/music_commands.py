@@ -42,22 +42,30 @@ class MusicCommands(commands.Cog):
 
     @cog_ext.cog_slash(name="connect", description="Parzibot connects to your current Voice Channel")
     async def connect(self, ctx):
+        if isinstance(ctx.author.voice, type(None)):
+            await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if ctx.author.voice is not None and voice is None or not voice.is_connected():
-            channel = ctx.author.voice.channel
-            await channel.connect()
-            await Message.music(ctx, "Parzibot has been connected", "**Parzibot** was connected to **Voice Channel**")
-        else: await Message.music(ctx, "Parzibot already connected", "**Parzibot** already connected to **Voice Channel**")
+        if isinstance(voice, type(None)) or not voice.is_connected():
+            await ctx.author.voice.channel.connect()
+            await Message.music(ctx, "Parzibot // Connected", "**Parzibot** has been connected to **Voice Channel**")
+        elif ctx.author.voice.channel != ctx.voice_client.channel: await Message.music(ctx, "Parzibot // Connected to another", "**Parzibot** connected to another **Voice Channel**")
+        else: await Message.music(ctx, "Parzibot // Already connected", "**Parzibot** already connected to **Voice Channel**")
 
     @cog_ext.cog_slash(name="disconnect", description="Parzibot disconnects from your current Voice Channel")
     async def disconnect(self, ctx):
+        if isinstance(ctx.author.voice, type(None)):
+            await Message.error(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if ctx.author.voice is None or (ctx.author.voice.channel != ctx.voice_client.channel or voice.is_connected() is None):
-            await Message.music(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+        if isinstance(voice.is_connected(), type(None)): await Message.music(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to **Voice Channel**")
+        elif ctx.author.voice.channel != ctx.voice_client.channel: await Message.music(ctx, "Parzibot // Connected to another", "**Parzibot** connected to another **Voice Channel**")
         else:
+            await Message.music(ctx, "Parzibot // Disconnected", "**Parzibot** has disconnected **Voice Channel**")
             self.songs, self.current = [], ""
             await voice.disconnect()
-            await Message.music(ctx, "Parzibot has left", "**Parzibot** has left **Voice Channel**")
 
     @cog_ext.cog_slash(
         name="play",
@@ -71,21 +79,21 @@ class MusicCommands(commands.Cog):
                 )
             ])
     async def play(self, ctx, url: str):
+        if isinstance(ctx.author.voice, type(None)):
+            await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if (ctx.author.voice is None or voice is not None and ctx.author.voice.channel != ctx.voice_client.channel):
-            await Message.error(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+        if isinstance(voice, type(None)) or not voice.is_connected():
+            await ctx.author.voice.channel.connect()
+            await Message.music(ctx, "Parzibot // Connected", "**Parzibot** has been connected to **Voice Channel**")
+        elif ctx.author.voice.channel != ctx.voice_client.channel:
+            await Message.music(ctx, "Parzibot // Connected to another", "**Parzibot** connected to another **Voice Channel**")
+            return
 
-        self.songs.append(str(url))
-
-        channel = ctx.author.voice.channel
-        if channel and channel is not None:
-            if voice is not None and voice.is_connected() is not None: await voice.move_to(channel)
-            else: voice = await channel.connect()
-
-            if not voice.is_playing() or voice.is_paused(): await self.play_song(ctx)
-            else: await Message.music(ctx, "Song added to playlist", "If you want to play song right now write **/next**")
-        else: await Message.error(ctx, "You're not connected", "You're not connected to any **Voice Channel**")
-
+        self.songs.insert(0, url)
+        await self.play_song(ctx)
+        
     async def play_song(self, ctx):
         def search(url):
             with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
@@ -98,23 +106,30 @@ class MusicCommands(commands.Cog):
             self.current = self.songs.pop(0)
             data = search(self.current)
             
+            if voice.is_playing():
+                voice.pause()
             voice.play(discord.FFmpegPCMAudio(data["source"], **self.FFMPEG_OPTIONS),
-                       after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
-            
+                    after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
             voice.is_playing()
-            await Message.music(ctx, "The Song is playing", f"**{data['title']}** is playing now")
+
+            await Message.music(ctx, "Parzibot // Play", f"**{data['title']}** is playing now")
 
     @cog_ext.cog_slash(name="replay", description="Replay song in your current Voice Channel")
     async def replay(self, ctx):
-        if (ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel):
-            await Message.error(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+        if isinstance(ctx.author.voice, type(None)):
+            await Message.error(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
             return
+        elif ctx.author.voice.channel != ctx.voice_client.channel:
+            await Message.error(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
+
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
 
         await self.replay_song(ctx)
 
     async def replay_song(self, ctx):
+        
         def search(url):
             with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)["entries"][0]
@@ -125,59 +140,65 @@ class MusicCommands(commands.Cog):
         data = search(self.current)
         voice.play(discord.FFmpegPCMAudio(data["source"], **self.FFMPEG_OPTIONS),
             after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
-        
         voice.is_playing()
-        await Message.music(ctx, "The Song is playing", f"**{data['title']}** is playing now")
+
+        await Message.music(ctx, "Parzibot // Replay", f"**{data['title']}** is playing now")
 
     @cog_ext.cog_slash(name="pause", description="Pause current song in your Voice Channel")
     async def pause(self, ctx):
+        if isinstance(ctx.author.voice, type(None)):
+            await Message.error(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif ctx.author.voice.channel != ctx.voice_client.channel:
+            await Message.error(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
+
         if ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel:
-            await Message.error(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_playing():
             voice.pause()
-            await Message.music(ctx, "The Song has been paused", "**The Song** was paused")
-        else: await Message.music(ctx, "The Song isn't playing", "**The Song** isn't playing right now")
+            await Message.music(ctx, "Parzibot // Pause", "**The Song** has been paused")
+        else: await Message.music(ctx, "Parzibot // Not playing", "**The Song** isn't playing right now")
 
     @cog_ext.cog_slash(name="resume", description="Resume current song in your Voice Channel")
     async def resume(self, ctx):
         if ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel:
-            await Message.error(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            await Message.error(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         if voice.is_paused():
             voice.resume()
-            await Message.music(ctx, "The Song has been resumed", "**The Song** was resumed")
-        else: await Message.error(ctx, "The Song isn't paused", "**The Song** isn't paused right now")
+            await Message.music(ctx, "Parzibot // Resume", "**The Song** has been resumed")
+        else: await Message.error(ctx, "Parzibot // Not paused", "**The Song** isn't paused right now")
 
     @cog_ext.cog_slash(name="next", description="Play next song from Playlist")
     async def next(self, ctx):
         if (ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel):
-            await Message.error(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            await Message.error(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
             return
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
         voice.stop()
         if self.songs: await self.play_song(ctx)
-        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is empty now")
+        else: await Message.music(ctx, "Parzibot // Empty Playlist", "**The Playlist** is empty now")
 
     @cog_ext.cog_slash(name="playlist", description="Show number of songs in Playlist")
     async def playlist(self, ctx):
         if (ctx.author.voice is None or ctx.voice_client is None or ctx.author.voice.channel != ctx.voice_client.channel):
-            await Message.error(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            await Message.error(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
             return
-        if self.songs: await Message.music(ctx, "The Playlist contains several songs", f"**The Playlist** contains about **{len(self.songs)}** song(-s)")
-        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is empty now")
+        if self.songs: await Message.music(ctx, "Parzibot // Playlist", f"**The Playlist** contains about **{len(self.songs)}** song(-s)")
+        else: await Message.music(ctx, "Parzibot // Empty Playlist", "**The Playlist** is empty now")
 
     @cog_ext.cog_slash(name="playlistclear", description="Clear all songs from Playlist")
     async def playlistclear(self, ctx):
         if (ctx.author.voice is None or ctx.author.voice.channel != ctx.voice_client.channel):
-            await Message.music(ctx, "Parzibot isn't connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            await Message.error(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
         elif not self.songs:
             self.songs = []
             discord.utils.get(self.client.voice_clients, guild=ctx.guild).stop()
-            await Message.music(ctx, "The Playlist has been cleared", "**The Playlist** was cleared")
-        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is already empty")
+            await Message.music(ctx, "Parzibot // Clear Playlist", "**The Playlist** was cleared")
+        else: await Message.music(ctx, "Parzibot // Empty Playlist", "**The Playlist** is empty now")
 
     @cog_ext.cog_slash(name="playlistshuffle", description="Shuffle order of songs in Playlist")
     async def playlistshuffle(self, ctx):
@@ -186,10 +207,9 @@ class MusicCommands(commands.Cog):
             return
         elif self.songs:
             random.shuffle(self.songs)
-            await Message.music(ctx, "The Playlist has been shuffled", "**The Playlist** was shuffled")
-        else: await Message.music(ctx, "The Playlist is empty", "**The Playlist** is empty now")
+            await Message.music(ctx, "Parzibot // Shuffle", "**The Playlist** was shuffled")
+        else: await Message.music(ctx, "Parzibot // Empty Playlist", "**The Playlist** is empty now")
 
 
 def setup(client):
-    """Setup function"""
     client.add_cog(MusicCommands(client))
