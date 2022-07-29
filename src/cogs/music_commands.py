@@ -223,7 +223,7 @@ class MusicCommands(commands.Cog):
                     titles.append(ydl.extract_info(song, download=False).get('title', None))
 
             playlist = ''.join(f'• {title}\n' for title in titles)
-            if len(titles) >= 3: playlist = playlist + '...' 
+            if len(titles) >= 3: playlist = playlist + f'And {len(titles)-2} more song(-s)' 
             await Message.music(ctx, "Parzibot // Playlist", (
                 f"**Playlist** contains about **{len(self.songs)}** song(-s)\n\n"
                 f"**Playlist**\n{playlist}"))
