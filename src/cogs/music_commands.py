@@ -26,22 +26,22 @@ class MusicCommands(commands.Cog):
             "**Help Commands**\n"
             " • **/musichelp** - The list of Parzibot music commands\n\n"
             "**Connect commands**\n"
-            " • **/connect** - Parzibot connects to your current Voice Channel\n"
-            " • **/disconnect** - Parzibot disconnects from your current Voice Channel\n\n"
+            " • **/connect** - Parzibot connects to Voice Channel\n"
+            " • **/disconnect** - Parzibot disconnects from Voice Channel\n\n"
             "**Playing commands**\n"
-            " • **/play** `url` - Play song in your current Voice Channel\n"
-            " • **/replay** - Replay song in your current Voice Channel\n"
-            " • **/pause** - Pause current song in your Voice Channel\n"
-            " • **/resume** - Resume current song in your Voice Channel\n"
-            " • **/next** - Play next song from Playlist\n"
-            " • **/repeats** - Enable/Disable current song repeating\n\n"
+            " • **/play** `url` - Play song in Voice Channel\n"
+            " • **/replay** - Replay song in Voice Channel\n"
+            " • **/pause** - Pause current song in Voice Channel\n"
+            " • **/resume** - Resume current song in Voice Channel\n"
+            " • **/repeats** - Enable/Disable current song repeating\n"
+            " • **/next** - Play next song from Playlist\n\n"
             "**Playlist commands**\n"
             " • **/playlist** - Show number of songs and songs titles in Playlist\n"
             " • **/playlistadd** `url` - Add song to Playlist\n"
             " • **/playlistclear** - Clear all songs from Playlist\n"
             " • **/playlistshuffle** - Enable/Disable Playlist shuffling"))
 
-    @cog_ext.cog_slash(name="connect", description="Parzibot connects to your current Voice Channel")
+    @cog_ext.cog_slash(name="connect", description="Parzibot connects to Voice Channel")
     async def connect(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
             await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
@@ -54,7 +54,7 @@ class MusicCommands(commands.Cog):
         elif ctx.author.voice.channel != ctx.voice_client.channel: await Message.music(ctx, "Parzibot // Connected to another", "**Parzibot** connected to another **Voice Channel**")
         else: await Message.music(ctx, "Parzibot // Already connected", "**Parzibot** already connected to **Voice Channel**")
 
-    @cog_ext.cog_slash(name="disconnect", description="Parzibot disconnects from your current Voice Channel")
+    @cog_ext.cog_slash(name="disconnect", description="Parzibot disconnects from Voice Channel")
     async def disconnect(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
             await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
@@ -72,7 +72,7 @@ class MusicCommands(commands.Cog):
 
     @cog_ext.cog_slash(
         name="play",
-        description="Play song in your current Voice Channel",
+        description="Play song in Voice Channel",
         options=[
             create_option(
                 name="url",
@@ -119,7 +119,7 @@ class MusicCommands(commands.Cog):
 
             await Message.music(ctx, "Parzibot // Play", f"**{data['title']}** is playing now")
 
-    @cog_ext.cog_slash(name="replay", description="Replay song in your current Voice Channel")
+    @cog_ext.cog_slash(name="replay", description="Replay song in Voice Channel")
     async def replay(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
             await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
@@ -149,7 +149,7 @@ class MusicCommands(commands.Cog):
 
         await Message.music(ctx, "Parzibot // Replay", f"**{data['title']}** is playing now")
 
-    @cog_ext.cog_slash(name="pause", description="Pause current song in your Voice Channel")
+    @cog_ext.cog_slash(name="pause", description="Pause current song in Voice Channel")
     async def pause(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
             await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
@@ -166,7 +166,7 @@ class MusicCommands(commands.Cog):
             await Message.music(ctx, "Parzibot // Pause", "**Song** has been paused")
         else: await Message.music(ctx, "Parzibot // Not playing", "**Song** isn't playing right now")
 
-    @cog_ext.cog_slash(name="resume", description="Resume current song in your Voice Channel")
+    @cog_ext.cog_slash(name="resume", description="Resume current song in Voice Channel")
     async def resume(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
             await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
@@ -181,19 +181,6 @@ class MusicCommands(commands.Cog):
             await Message.music(ctx, "Parzibot // Resume", "**Song** has been resumed")
         else: await Message.music(ctx, "Parzibot // Not paused", "**Song** isn't paused right now")
 
-    @cog_ext.cog_slash(name="next", description="Play next song from Playlist")
-    async def next(self, ctx):
-        if isinstance(ctx.author.voice, type(None)):
-            await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-            return
-        elif ctx.author.voice.channel != ctx.voice_client.channel:
-            await Message.music(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-            return
-
-        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if self.songs: await self.play_song(ctx)
-        else: await Message.music(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
-
     @cog_ext.cog_slash(name="repeats", description="Enable/Disable current song repeating")
     async def repeats(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
@@ -206,6 +193,19 @@ class MusicCommands(commands.Cog):
         self.repeat = not self.repeat
         if self.repeat: await Message.music(ctx, "Parzibot // Repeat", "**Song** repeating is enabled")
         else: await Message.music(ctx, "Parzibot // Repeat", "**Song** repeating is disabled")
+
+    @cog_ext.cog_slash(name="next", description="Play next song from Playlist")
+    async def next(self, ctx):
+        if isinstance(ctx.author.voice, type(None)):
+            await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif ctx.author.voice.channel != ctx.voice_client.channel:
+            await Message.music(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
+
+        voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
+        if self.songs: await self.play_song(ctx)
+        else: await Message.music(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
     @cog_ext.cog_slash(name="playlist", description="Show number of songs and songs titles in Playlist")
     async def playlist(self, ctx):

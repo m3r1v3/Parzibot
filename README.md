@@ -17,52 +17,53 @@
     <h3>Basic Commands</h3>
     <p>
         • <b>/about</b> - Information about Parzibot<br>
-        • <b>/clear</b> <i>number</i> - Clear messages in Text Channel<br>
+        • <b>/clear</b> <code>number</code> - Clear messages in Text Channel<br>
         • <b>/help</b> - List of Parzibot basic commands<br>
         • <b>/members</b> - Members of Text Channel<br>
         • <b>/ping</b> - Parzibot ping
     </p>
     <h3>Game Commands</h3>
     <p>
-        • <b>/8ball</b> <i>question</i> - The Ball of Predictions<br>
+        • <b>/8ball</b> <code>question</code> - The Ball of Predictions<br>
         • <b>/coin</b> - The Heads or Tails Game<br>
-        • <b>/dice</b> <i>value</i> - The Dice Game<br>
+        • <b>/dice</b> <code>value</code> - The Dice Game<br>
         • <b>/gamehelp</b> - The list of Parzibot game commands<br>
         • <b>/getgame</b> - Advises to play a random game<br>
-        • <b>/whiteblack</b> <i>color</i> - The White or Black Game
+        • <b>/whiteblack</b> <code>color</code> - The White or Black Game
     </p>
     <h3>Music Commands</h3>
     <p>
         <b>Help Commands</b><br>
-            • <b>/musichelp</b> - The list of Parzibot music commands<br><br>
+             • <b>/musichelp</b> - The list of Parzibot music commands<br><br>
         <b>Connect commands</b><br>
-            • <b>/connect</b> - Parzibot connects to your current Voice Channel<br>
-            • <b>/disconnect</b> - Parzibot disconnects from your current Voice Channel<br><br>
+             • <b>/connect</b> - Parzibot connects to Voice Channel<br>
+             • <b>/disconnect</b> - Parzibot disconnects from Voice Channel<br><br>
         <b>Playing commands</b><br>
-            • <b>/play</b> <i>url</i> - Play song in your current Voice Channel<br>
-            • <b>/replay</b> - Replay song in your current Voice Channel<br>
-            • <b>/pause</b> - Pause current song in your Voice Channel<br>
-            • <b>/resume</b> - Resume current song in your Voice Channel<br>
-            • <b>/next</b> - Play next song from Playlist<br>
-            • <b>/repeat</b> - Repeat The Playlist of Songs (Soon)<br><br>
+             • <b>/play</b> <code>url</code> - Play song in Voice Channel<br>
+             • <b>/replay</b> - Replay song in Voice Channel<br>
+             • <b>/pause</b> - Pause current song in Voice Channel<br>
+             • <b>/resume</b> - Resume current song in Voice Channel<br>
+             • <b>/repeats</b> - Enable/Disable current song repeating<br>
+             • <b>/next</b> - Play next song from Playlist<br><br>
         <b>Playlist commands</b><br>
-            • <b>/playlist</b> - Show number of songs in Playlist<br>
-            • <b>/playlistclear</b> - Clear all songs from Playlist<br>
-            • <b>/playlistshuffle</b> - Shuffle order of songs in Playlist
+             • <b>/playlist</b> - Show number of songs and songs titles in Playlist<br>
+             • <b>/playlistadd</b> <code>url</code> - Add song to Playlist<br>
+             • <b>/playlistclear</b> - Clear all songs from Playlist<br>
+             • <b>/playlistshuffle</b> - Enable/Disable Playlist shuffling
     </p>
     <h3>Admin Commands</h3>
     <p>
         <b>Help Commands</b><br>
-            • <b>/adminhelp</b> <i>command</i> - The list of Parzibot admin commands<br><br>
+            • <b>/adminhelp</b> <code>command</code> - The list of Parzibot admin commands<br><br>
         <b>Announce Commands</b><br>
-            • <b>/announce</b> <i>title</i> <i>message</i> - Make announce message in current Text Channel<br><br>
+            • <b>/announce</b> <code>title</code> <code>message</code> - Make announce message in current Text Channel<br><br>
         <b>Member control Commands</b><br>
-            • <b>/ban</b> <i>member</i> - Ban member on your Server<br>
-            • <b>/kick</b> <i>member</i> - Kick member on your Server<br>
-            • <b>/giverole</b> <i>member</i> <i>role</i> - Give role to Member on Server<br>
-            • <b>/nickname</b> <i>member</i> <i>nickname</i> - Change nickname to Member on Server<br><br>
+            • <b>/ban</b> <code>member</code> - Ban member on your Server<br>
+            • <b>/kick</b> <code>member</code> - Kick member on your Server<br>
+            • <b>/giverole</b> <code>member</code> <code>role</code> - Give role to Member on Server<br>
+            • <b>/nickname</b> <code>member</code> <code>nickname</code> - Change nickname to Member on Server<br><br>
         <b>Default role Commands</b><br>
-            • <b>/defaultrole</b> <i>role</i> - Set default role what will be giving to new members of Server<br>
+            • <b>/defaultrole</b> <code>role</code> - Set default role what will be giving to new members of Server<br>
             • <b>/defaultroleremove</b> - Remove default role what will be giving to new members of Server
     </p>
 </div>
