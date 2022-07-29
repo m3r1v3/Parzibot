@@ -36,9 +36,10 @@ class MusicCommands(commands.Cog):
             " • **/next** - Play next song from Playlist\n"
             " • **/repeat** - Repeat The Playlist of Songs (Soon)\n\n"
             "**Playlist commands**\n"
-            " • **/playlist** - Show number of songs in Playlist\n"
+            " • **/playlist** - Show number of songs and songs titles in Playlist\n"
+            " • **/playlistadd** `url` - Add song to Playlist\n"
             " • **/playlistclear** - Clear all songs from Playlist\n"
-            " • **/playlistshuffle** - Shuffle order of songs in Playlist"))
+            " • **/playlistshuffle** - Enable/Disable Playlist shuffling"))
 
     @cog_ext.cog_slash(name="connect", description="Parzibot connects to your current Voice Channel")
     async def connect(self, ctx):
@@ -63,7 +64,7 @@ class MusicCommands(commands.Cog):
         if isinstance(voice.is_connected(), type(None)): await Message.music(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to **Voice Channel**")
         elif ctx.author.voice.channel != ctx.voice_client.channel: await Message.music(ctx, "Parzibot // Connected to another", "**Parzibot** connected to another **Voice Channel**")
         else:
-            await Message.music(ctx, "Parzibot // Disconnected", "**Parzibot** has disconnected **Voice Channel**")
+            await Message.music(ctx, "Parzibot // Disconnected", "**Parzibot** has been disconnected from **Voice Channel**")
             self.songs, self.current, self.shuffle = [], "", False
             await voice.disconnect()
 
@@ -95,6 +96,7 @@ class MusicCommands(commands.Cog):
         await self.play_song(ctx)
         
     async def play_song(self, ctx):
+
         def search(url):
             with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)["entries"][0]
@@ -186,12 +188,10 @@ class MusicCommands(commands.Cog):
             return
 
         voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-        if self.songs:
-            voice.stop()
-            await self.play_song(ctx)
+        if self.songs: await self.play_song(ctx)
         else: await Message.music(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
-    @cog_ext.cog_slash(name="playlist", description="Show number of songs in Playlist")
+    @cog_ext.cog_slash(name="playlist", description="Show number of songs and songs titles in Playlist")
     async def playlist(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
             await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
@@ -202,12 +202,15 @@ class MusicCommands(commands.Cog):
 
         if self.songs:
             titles = []
-            with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
-                for song in self.songs:
+            with youtube_dl.YoutubeDL({}) as ydl:
+                for song in self.songs[:3]:
                     titles.append(ydl.extract_info(song, download=False).get('title', None))
 
             playlist = ''.join(f'• {title}\n' for title in titles)
-            await Message.music(ctx, "Parzibot // Playlist", f"**Playlist** contains about **{len(self.songs)}** song(-s)\n\n**Playlist**\n{playlist}")
+            if len(titles) >= 3: playlist = playlist + '...' 
+            await Message.music(ctx, "Parzibot // Playlist", (
+                f"**Playlist** contains about **{len(self.songs)}** song(-s)\n\n"
+                f"**Playlist**\n{playlist}"))
         else: await Message.music(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
     @cog_ext.cog_slash(name="playlistadd",
@@ -247,7 +250,7 @@ class MusicCommands(commands.Cog):
             await Message.music(ctx, "Parzibot // Clear Playlist", "**Playlist** has been cleared")
         else: await Message.music(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
-    @cog_ext.cog_slash(name="playlistshuffle", description="Shuffle order of songs in Playlist")
+    @cog_ext.cog_slash(name="playlistshuffle", description="Enable/Disable Playlist shuffling")
     async def playlistshuffle(self, ctx):
         if isinstance(ctx.author.voice, type(None)):
             await Message.music(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
