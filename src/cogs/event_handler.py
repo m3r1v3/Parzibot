@@ -25,11 +25,11 @@ class EventHandler(commands.Cog):
         if len(before.roles) < len(after.roles):
             for i in after.roles:
                 if i not in before.roles:
-                    await Message.msg(member, "Parzibot // Received role", f"You received **{i}** role")
+                    await Message.msg(before, "Parzibot // Received role", f"You received **{i} Role**")
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
                 if i not in after.roles:
-                    await Message.error(member, "Parzibot // Deprived role", f"You deprived **{i}** role")
+                    await Message.error(before, "Parzibot // Deprived role", f"You deprived **{i} Role**")
 
 
 def setup(client):
