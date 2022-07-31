@@ -12,7 +12,7 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_slash_command_error(self, ctx, error):
-        await Message.error(ctx, "Error", "Something went wrong! Try again")
+        await Message.error(ctx, "Parzibot // Error", "Something went wrong! Try again")
 
 
 def setup(client):

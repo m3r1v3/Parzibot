@@ -35,13 +35,12 @@ class GameCommands(commands.Cog):
             "Better not tell you now...", "Cannot predict now...",
             "Concentrate and ask again...", "Don’t count on it...",
             "My reply is no...", "My sources say no...",
-            "Outlook not so good...", "Very doubtful..."
-            ]
-        await Message.games(ctx, f"Question: `{question}`", f"**Answer:** `{random.choice(responses)}`")
+            "Outlook not so good...", "Very doubtful..."]
+        await Message.games(ctx, "Parzibot // The Ball of Predictions", f"Question - **{question}**\nAnswer - **{random.choice(responses)}**")
 
     @cog_ext.cog_slash(name="coin", description="The Heads or Tails Game")
     async def coin(self, ctx):
-        await Message.games(ctx, "Heads or Tails", f"{random.choice(['Head', 'Tail'])} has fell")
+        await Message.games(ctx, "Parzibot // Heads or Tails", f"**{random.choice(['Head', 'Tail'])}** has fell")
 
     @cog_ext.cog_slash(
         name="dice",
@@ -49,20 +48,17 @@ class GameCommands(commands.Cog):
         options=[
             create_option(
                 name="value",
-                description="The value what you're predicting (from 2 to 12)",
+                description="The value what you're predicting (from 1 to 12)",
                 option_type=4,
                 required=True)
             ])
     async def dice(self, ctx, value):
-        if value > 1 or value <= 12:
-            v1, v2 = random.randint(1, 7), random.randint(1, 7)
-            if v1 + v2 == value: await Message.games(ctx, "You won :D", f"The sum of values is **{v1 + v2}**. The values of dice is **{v1}** and **{v2}**")
-            elif v1 == value or v2 == value:
-                await Message.games(ctx, "You guess value one of the dice :D", (
-                    f"The values one of dice is **{v1 if v1 == value else v2}**."
-                    f" The values of dice is **{v1}** and **{v2}**"))
-            else: await Message.games(ctx, "You lose :(", f"The values of dice is **{v1}** and **{v2}**")
-        else: await Message.games(ctx, "You're predicting wrong value", f"The values should be between 2 and 12")
+        if 1 <= value <= 12:
+            v1, v2 = random.randint(1, 6), random.randint(1, 6)
+            if v1 + v2 == value: await Message.games(ctx, "Parzibot // The Dice", f"You won :D. The sum of values is **{v1 + v2}**. The values of dice is **{v1}** and **{v2}**")
+            elif v1 == value or v2 == value: await Message.games(ctx, "Parzibot // The Dice", f"You guess value one of the dice :D The values of dice is **{v1}** and **{v2}**")
+            else: await Message.games(ctx, "Parzibot // The Dice", f"You lose :( The values of dice is **{v1}** and **{v2}**")
+        else: await Message.games(ctx, "Parzibot // The Dice", f"You're predicting wrong value. The value should be between 2 and 12")
 
     @cog_ext.cog_slash(name="gamehelp", description="The list of Parzibot game commands")
     async def help(self, ctx):
@@ -89,13 +85,12 @@ class GameCommands(commands.Cog):
             "PUBG", "RDR 2",
             "Rainbow Six: Siege", "Rocket League",
             "Super Animal Royale", "Terraria",
-            "The Elder Scrolls V: Skyrim", "Valorant"
-            ]
-        await Message.games(ctx, "Special game by Parzibot", f"I advise you to play **{random.choice(responses)}**")
+            "The Elder Scrolls V: Skyrim", "Valorant"]
+        await Message.games(ctx, "Parzibot // Game by Parzibot", f"I advise you to play **{random.choice(responses)}**")
 
     @cog_ext.cog_slash(
         name="whiteblack",
-        description="The White/Black Game",
+        description="The White or Black Game",
         options=[
             create_option(
                 name="color",
@@ -109,7 +104,7 @@ class GameCommands(commands.Cog):
             ])
     async def white_black(self, ctx, color: str):
         result = random.choice(["white", "black"])
-        if color == result: await Message.games(ctx, "You won :D", f"Right color is `{result}`")
+        if color == result: await Message.games(ctx, "Parzibot // White or Black Game", f"You won :D Right color is `{result}`")
         else: await Message.games(ctx, "You lose :(", f"Right color is `{result}`")
 
 
