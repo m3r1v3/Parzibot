@@ -19,6 +19,7 @@ class EventHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member):
         await Message.msg(member, f"Parzibot // Hey **{member}**!", "White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command")
+        await member.add_roles(discord.utils.get(member.guild.roles, id=int(Role().get_role(member.guild.id))))
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):

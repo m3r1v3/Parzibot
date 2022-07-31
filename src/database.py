@@ -13,24 +13,26 @@ session = Session()
 
 
 class Role(Base):
-    __tablename__ = "roles"
+    __tablename__ = "role"
 
     id = Column(Integer, primary_key=True)
-    role_id = Column(String(50), unique=True, nullable=False)
+    role = Column(String(50), unique=True, nullable=False)
     server = Column(String(30), unique=True, nullable=False)
 
     @staticmethod
-    def add(role_id, server: str):
-        session.add(Role(role_id=role_id, server=str(server))).commit()
+    def add(role: str, server: str):
+        session.add(Role(role=str(role), server=str(server)))
+        session.commit()
 
     @staticmethod
     def get_role(server: str):
-        try: return session.query(Role).filter_by(server=str(server)).first().role_id
+        try: return session.query(Role).filter_by(server=str(server)).first().role
         except AttributeError: return None
 
     @staticmethod
     def delete(server: str):
-        session.delete(session.query(Role).filter_by(server=str(server)).first()).commit()
+        session.delete(session.query(Role).filter_by(server=str(server)).first())
+        session.commit()
 
     def __repr__(self):
-        return "<Role(id='%s', role_id='%s', server='%s')>" % (self.id, self.role_id, self.server)
+        return "<Role(id='%s', role='%s', server='%s')>" % (self.id, self.role, self.server)

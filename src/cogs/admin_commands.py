@@ -21,12 +21,13 @@ class AdminCommands(commands.Cog):
                 ' • **/adminhelp** `command` - The list of Parzibot admin commands\n\n'
                 '**Announce Commands**\n'
                 ' • **/announce** `title` `message` - Make announce message in current Text Channel\n\n'
-                '**Member control Commands**\n'
+                '**Member Control Commands**\n'
                 ' • **/ban** `member` - Ban member on your Server\n'
                 ' • **/kick** `member` - Kick member on your Server\n'
-                ' • **/giverole** `member` `role` - Give role to Member on Server\n'
                 ' • **/nickname** `member` `nickname` - Change nickname to Member on Server\n\n'
-                '**Default role Commands**\n'
+                '**Role Commands**\n'
+                ' • **/role** `name` `color` - Create role with default role permissions on Server\n'
+                ' • **/giverole** `member` `role` - Give role to Member on Server\n'
                 ' • **/defaultrole** `role` - Set default role what will be giving to new members of Server\n'
                 ' • **/defaultroleremove** - Remove default role what will be giving to new members of Server'))
         else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
@@ -78,6 +79,38 @@ class AdminCommands(commands.Cog):
         if ctx.author.guild_permissions.manage_messages:
             await member.kick(reason=None)
             await Message.admin(ctx, "Parzibot // Kick", f"**{member}** has been kicked")
+        else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
+
+    @cog_ext.cog_slash(
+        name="role",
+        description="Create role with default role permissions on Server",
+        options=[
+            create_option(
+                name="name",
+                description="Name of future role",
+                option_type=3,
+                required=True
+                ),
+            create_option(
+                name="color",
+                description="Role color (Hex Code without '#' (6 symbols))",
+                option_type=3,
+                required=True
+                )
+            ])
+    async def role(self, ctx, name: str, color: str):
+        if ctx.author.guild_permissions.manage_messages:
+            if Role().get_role(str(ctx.guild.id)) is not None:
+                try:
+                    if len(color) == 6:
+                        rgb = tuple(int(hex(int(color, 16))[2:8][i:i+2], 16) for i in (0, 2, 4))
+                        await ctx.guild.create_role(name=name,
+                            colour=discord.Color.from_rgb(rgb[0], rgb[1], rgb[2]),
+                            permissions=discord.utils.get(ctx.author.guild.roles, id=int(Role().get_role(ctx.author.guild.id))).permissions)
+                        await Message.admin(ctx, "Parzibot // Role", f"**{name} Role** added on Server")
+                    else: await Message.admin(ctx, "Parzibot // Incorrect color", f"**Hex Color Code** is written in the incorrect format")
+                except ValueError: await Message.admin(ctx, "Parzibot // Incorrect color", f"**Hex Color Code** is written in the incorrect format")
+            else: await Message.admin(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
         else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     @cog_ext.cog_slash(
@@ -151,7 +184,7 @@ class AdminCommands(commands.Cog):
             if Role().get_role(str(ctx.guild.id)) is not None:
                 Role().delete(str(ctx.guild.id))
                 await Message.admin(ctx, "Parzibot // Default Role Removed", "**Server Default Role** was removed")
-            else: await Message.admin(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** hadn't been set yet")
+            else: await Message.admin(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
         else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
 
