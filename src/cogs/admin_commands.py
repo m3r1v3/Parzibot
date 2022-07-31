@@ -89,14 +89,12 @@ class AdminCommands(commands.Cog):
                 name="name",
                 description="Name of future role",
                 option_type=3,
-                required=True
-                ),
+                required=True),
             create_option(
                 name="color",
                 description="Role color (Hex Code without '#' (6 symbols))",
                 option_type=3,
-                required=True
-                )
+                required=True)
             ])
     async def role(self, ctx, name: str, color: str):
         if ctx.author.guild_permissions.manage_messages:
@@ -105,7 +103,7 @@ class AdminCommands(commands.Cog):
                     if len(color) == 6:
                         rgb = tuple(int(hex(int(color, 16))[2:8][i:i+2], 16) for i in (0, 2, 4))
                         await ctx.guild.create_role(name=name,
-                            colour=discord.Color.from_rgb(rgb[0], rgb[1], rgb[2]),
+                            colour=Colour.from_rgb(rgb[0], rgb[1], rgb[2]),
                             permissions=discord.utils.get(ctx.author.guild.roles, id=int(Role().get_role(ctx.author.guild.id))).permissions)
                         await Message.admin(ctx, "Parzibot // Role", f"**{name} Role** added on Server")
                     else: await Message.admin(ctx, "Parzibot // Incorrect color", f"**Hex Color Code** is written in the incorrect format")
@@ -121,14 +119,12 @@ class AdminCommands(commands.Cog):
                 name="member",
                 description="Member who will receive Role",
                 option_type=6,
-                required=True
-                ),
+                required=True),
             create_option(
                 name="role",
                 description="Role that will be received by Member",
                 option_type=8,
-                required=True
-                )
+                required=True)
             ])
     async def giverole(self, ctx, member: discord.Member, role):
         if ctx.author.guild_permissions.manage_messages:
@@ -144,14 +140,12 @@ class AdminCommands(commands.Cog):
                 name="member",
                 description="The Member to Whom We Will Change Nickname",
                 option_type=6,
-                required=True
-                ),
+                required=True),
                 create_option(
                     name="nickname",
                     description="The Member's Future Nickname",
                     option_type=3,
-                    required=False
-                    )
+                    required=False)
                 ])
     async def nickname(self, ctx, member: discord.Member, *, nickname=None):
         if ctx.author.guild_permissions.manage_messages:
@@ -167,8 +161,7 @@ class AdminCommands(commands.Cog):
                 name="role",
                 description="Role that will be giving",
                 option_type=8,
-                required=True
-                )
+                required=True)
             ])
     async def defaultrole(self, ctx, role):
         if ctx.author.guild_permissions.manage_messages:
