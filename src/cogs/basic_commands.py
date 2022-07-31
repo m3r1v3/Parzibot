@@ -32,7 +32,7 @@ class BasicCommands(commands.Cog):
                 required=False)
             ])
     async def clear(self, ctx, number=5):
-        if number > 0:
+        if number:
             await ctx.channel.purge(limit=number)
             await Message.msg(ctx, "Parzibot // Clear", f"Cleared **{number}** messages")
         else: await Message.error(ctx, "Parzibot // Error", f"Cannot clear **{number}** messages")
