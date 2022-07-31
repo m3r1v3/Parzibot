@@ -57,12 +57,13 @@
             • <b>/adminhelp</b> <code>command</code> - The list of Parzibot admin commands<br><br>
         <b>Announce Commands</b><br>
             • <b>/announce</b> <code>title</code> <code>message</code> - Make announce message in current Text Channel<br><br>
-        <b>Member control Commands</b><br>
+        <b>Member Control Commands</b><br>
             • <b>/ban</b> <code>member</code> - Ban member on your Server<br>
             • <b>/kick</b> <code>member</code> - Kick member on your Server<br>
-            • <b>/giverole</b> <code>member</code> <code>role</code> - Give role to Member on Server<br>
             • <b>/nickname</b> <code>member</code> <code>nickname</code> - Change nickname to Member on Server<br><br>
-        <b>Default role Commands</b><br>
+        <b>Role Commands</b><br>
+            • <b>/role</b> <code>name</code> <code>color</code> - Create role with default role permissions on Server<br>
+            • <b>/giverole</b> <code>member</code> <code>role</code> - Give role to Member on Server<br>
             • <b>/defaultrole</b> <code>role</code> - Set default role what will be giving to new members of Server<br>
             • <b>/defaultroleremove</b> - Remove default role what will be giving to new members of Server
     </p>
