@@ -78,8 +78,7 @@ class MusicCommands(commands.Cog):
                 name="url",
                 description="YouTube Video URL",
                 option_type=3,
-                required=True
-                )
+                required=True)
             ])
     async def play(self, ctx, url: str):
         if isinstance(ctx.author.voice, type(None)):
@@ -218,9 +217,7 @@ class MusicCommands(commands.Cog):
 
         if self.songs:
             titles = []
-            with youtube_dl.YoutubeDL({}) as ydl:
-                for song in self.songs[:3]:
-                    titles.append(ydl.extract_info(song, download=False).get('title', None))
+            with youtube_dl.YoutubeDL({}) as ydl: titles = [ydl.extract_info(song, download=False).get('title', None) for song in self.songs[:3]]
 
             playlist = ''.join(f'• {title}\n' for title in titles)
             if len(titles) >= 3: playlist = playlist + f'And {len(titles)-2} more song(-s)' 
