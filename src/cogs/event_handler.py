@@ -24,9 +24,11 @@ class EventHandler(commands.Cog):
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
         if len(before.roles) < len(after.roles):
-            for i in after.roles: if i not in before.roles: await Message.msg(before, "Parzibot // Received role", f"You has been received **{i} Role**")
+            for i in after.roles: 
+                if i not in before.roles: await Message.msg(before, "Parzibot // Received role", f"You has been received **{i} Role**")
         elif len(before.roles) > len(after.roles):
-            for i in before.roles: if i not in after.roles: await Message.error(before, "Parzibot // Deprived role", f"You has been deprived **{i} Role**")
+            for i in before.roles:
+                if i not in after.roles: await Message.error(before, "Parzibot // Deprived role", f"You has been deprived **{i} Role**")
 
 
 def setup(client):
