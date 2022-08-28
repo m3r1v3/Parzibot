@@ -11,7 +11,7 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        await Message.error(ctx, "Parzibot // Error", "Something went wrong! Try again")
+        await Message.error_event_msg(ctx, "Parzibot // Error", "Something went wrong! Try again")
 
 
 async def setup(bot: commands.Bot) -> None:
