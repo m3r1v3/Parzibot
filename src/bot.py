@@ -1,31 +1,25 @@
 import os
+import asyncio
+
 
 import discord
+from discord import app_commands
 from discord.ext import commands
-from discord_slash import SlashCommand
 
-intents = discord.Intents.all()
-intents.members = True
-intents.guilds = True
+class Bot(commands.Bot):
 
-client = commands.Bot(command_prefix='$', intents=intents)
-client.remove_command("help")
+    def __init__(self):
+        super().__init__(
+            command_prefix='$',
+            intents = discord.Intents.all()
+            )
 
-slash = SlashCommand(client, sync_commands=True)
+        self.cogs_extensions = [f'cogs.{filename[:-3]}' for filename in os.listdir('src/cogs') if filename.endswith('.py')]
 
+    async def setup_hook(self):
+        for ext in self.cogs_extensions:
+            await self.load_extension(ext)
+        await bot.tree.sync()
 
-@client.command()
-async def load(extension):
-    client.load_extension(f'cogs.{extension}')
-
-
-@client.command()
-async def unload(extension):
-    client.unload_extension(f'cogs.{extension}')
-
-
-for filename in os.listdir('src/cogs'):
-    if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}')
-
-client.run(str(os.environ.get('BOT_TOKEN')))
+bot = Bot()
+bot.run(str(os.environ.get('BOT_TOKEN')))
