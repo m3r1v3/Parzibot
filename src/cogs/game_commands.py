@@ -1,30 +1,22 @@
 import datetime
 import random
-import discord
 
+import discord
+from discord import app_commands, Embed, Colour, AppCommandOptionType
+from discord.app_commands import Choice
 from discord.ext import commands
-from discord_slash import cog_ext
-from discord_slash.utils.manage_commands import create_option, create_choice
 
 from message import Message
 
 
 class GameCommands(commands.Cog):
 
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot: commands.Bot) -> None:
+        self.bot = bot
 
-    @cog_ext.cog_slash(
-        name="8ball",
-        description="The Ball of Predictions",
-        options=[
-            create_option(
-                name="question",
-                description="Your question to The Ball",
-                option_type=3,
-                required=True)
-            ])
-    async def _8ball(self, ctx, *, question: str):
+    @app_commands.command(name="8ball", description="The Ball of Predictions")
+    @app_commands.describe(question="Your question to The Ball")
+    async def _8ball(self, interaction: discord.Interaction, *, question: str):
         responses = [
             "It is certain...", "It is decidedly so...",
             "Without a doubt...", "Yes — definitely...",
@@ -36,33 +28,25 @@ class GameCommands(commands.Cog):
             "Concentrate and ask again...", "Don’t count on it...",
             "My reply is no...", "My sources say no...",
             "Outlook not so good...", "Very doubtful..."]
-        await Message.games(ctx, "Parzibot // The Ball of Predictions", f"Question - **{question}**\nAnswer - **{random.choice(responses)}**")
+        await Message.games_msg(interaction, "Parzibot // The Ball of Predictions", f"Question - **{question}**\nAnswer - **{random.choice(responses)}**")
 
-    @cog_ext.cog_slash(name="coin", description="The Heads or Tails Game")
-    async def coin(self, ctx):
-        await Message.games(ctx, "Parzibot // Heads or Tails", f"**{random.choice(['Head', 'Tail'])}** has fell")
+    @app_commands.command(name="coin", description="The Heads or Tails Game")
+    async def coin(self, interaction: discord.Interaction):
+        await Message.games_msg(interaction, "Parzibot // Heads or Tails", f"**{random.choice(['Head', 'Tail'])}** has fell")
 
-    @cog_ext.cog_slash(
-        name="dice",
-        description="The Dice Game",
-        options=[
-            create_option(
-                name="value",
-                description="The value what you're predicting (from 1 to 12)",
-                option_type=4,
-                required=True)
-            ])
-    async def dice(self, ctx, value):
+    @app_commands.command(name="dice", description="The Dice Game")
+    @app_commands.describe(value="The value what you're predicting (from 1 to 12)")
+    async def dice(self, interaction: discord.Interaction, value: int):
         if 1 <= value <= 12:
             v1, v2 = random.randint(1, 6), random.randint(1, 6)
-            if v1 + v2 == value: await Message.games(ctx, "Parzibot // The Dice", f"You won :D. The sum of values is **{v1 + v2}**. The values of dice is **{v1}** and **{v2}**")
-            elif v1 == value or v2 == value: await Message.games(ctx, "Parzibot // The Dice", f"You guess value one of the dice :D The values of dice is **{v1}** and **{v2}**")
-            else: await Message.games(ctx, "Parzibot // The Dice", f"You lose :( The values of dice is **{v1}** and **{v2}**")
-        else: await Message.games(ctx, "Parzibot // The Dice", f"You're predicting wrong value. The value should be between 2 and 12")
+            if v1 + v2 == value: await Message.games_msg(interaction, "Parzibot // The Dice", f"You won :D. The sum of values is **{v1 + v2}**. The values of dice is **{v1}** and **{v2}**")
+            elif v1 == value or v2 == value: await Message.games_msg(interaction, "Parzibot // The Dice", f"You guess value one of the dice :D The values of dice is **{v1}** and **{v2}**")
+            else: await Message.games_msg(interaction, "Parzibot // The Dice", f"You lose :( The values of dice is **{v1}** and **{v2}**")
+        else: await Message.games_msg(interaction, "Parzibot // The Dice", f"You're predicting wrong value. The value should be between 2 and 12")
 
-    @cog_ext.cog_slash(name="gamehelp", description="The list of Parzibot game commands")
-    async def help(self, ctx):
-        await Message.games(ctx, "Parzibot // Game Commands", (
+    @app_commands.command(name="gamehelp", description="The list of Parzibot game commands")
+    async def help(self, interaction: discord.Interaction):
+        await Message.games_msg(interaction, "Parzibot // Game Commands", (
             " • **/8ball** `question` - The Ball of Predictions\n"
             " • **/coin** - The Heads or Tails Game\n"
             " • **/dice** `value` - The Dice Game\n"
@@ -70,8 +54,8 @@ class GameCommands(commands.Cog):
             " • **/getgame** - Advises to play a random game\n"
             " • **/whiteblack** `color` - The White/Black Game"))
 
-    @cog_ext.cog_slash(name="getgame", description="Advises to play a random game")
-    async def getgame(self, ctx):
+    @app_commands.command(name="getgame", description="Advises to play a random game")
+    async def getgame(self, interaction: discord.Interaction):
         responses = [
             "Animal Crossing: New Horizons", "Apex Legends",
             "Assasin\"s Creed Valhalla", "CS:GO",
@@ -86,27 +70,19 @@ class GameCommands(commands.Cog):
             "Rainbow Six: Siege", "Rocket League",
             "Super Animal Royale", "Terraria",
             "The Elder Scrolls V: Skyrim", "Valorant"]
-        await Message.games(ctx, "Parzibot // Game by Parzibot", f"I advise you to play **{random.choice(responses)}**")
+        await Message.games_msg(interaction, "Parzibot // Game by Parzibot", f"I advise you to play **{random.choice(responses)}**")
 
-    @cog_ext.cog_slash(
-        name="whiteblack",
-        description="The White or Black Game",
-        options=[
-            create_option(
-                name="color",
-                description="The hidden color (White or Black)",
-                option_type=3,
-                required=True,
-                choices=[
-                    create_choice(name="White", value="white"),
-                    create_choice(name="Black", value="black")
-                ])
-            ])
-    async def white_black(self, ctx, color: str):
+    @app_commands.command(name="whiteblack", description="The White or Black Game")
+    @app_commands.describe(color="The hidden color (White or Black)")
+    @app_commands.choices(color=[
+        Choice(name="White", value="white"),
+        Choice(name="Black", value="black")
+        ])
+    async def white_black(self, interaction: discord.Interaction, color: str):
         result = random.choice(["white", "black"])
-        if color == result: await Message.games(ctx, "Parzibot // White or Black Game", f"You won :D Right color is `{result}`")
-        else: await Message.games(ctx, "You lose :(", f"Right color is `{result}`")
+        if color == result: await Message.games_msg(interaction, "Parzibot // White or Black Game", f"You won :D Right color is `{result}`")
+        else: await Message.games_msg(interaction, "You lose :(", f"Right color is `{result}`")
 
 
-def setup(client):
-    client.add_cog(GameCommands(client))
+async def setup(bot: commands.Bot) -> None:
+    await bot.add_cog(GameCommands(bot))

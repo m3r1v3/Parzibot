@@ -3,7 +3,6 @@ import random
 
 import discord
 from discord import app_commands, Embed, Colour, AppCommandOptionType
-from discord.app_commands import Parameter
 from discord.ext import commands
 
 from message import Message
