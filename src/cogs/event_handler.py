@@ -1,20 +1,17 @@
 import discord
-from discord import Embed, Colour
+from discord import app_commands, Embed, Colour
 from discord.ext import commands
-
-from database import Role
 
 from message import Message
 
-
 class EventHandler(commands.Cog):
 
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot: commands.Bot) -> None:
+        self.bot = bot
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('{0} is ready'.format(self.client.user))
+        print('{0} is ready'.format(self.bot.user))
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
@@ -31,5 +28,5 @@ class EventHandler(commands.Cog):
                 if i not in after.roles: await Message.error(before, "Parzibot // Deprived role", f"You has been deprived **{i} Role**")
 
 
-def setup(client):
-    client.add_cog(EventHandler(client))
+async def setup(bot: commands.Bot) -> None:
+    await bot.add_cog(EventHandler(bot))
