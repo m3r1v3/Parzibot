@@ -2,7 +2,7 @@ import datetime
 import random
 
 import discord
-from discord import app_commands, Embed, Colour, AppCommandOptionType
+from discord import app_commands, Embed, Colour
 from discord.app_commands import Choice
 from discord.ext import commands
 
@@ -28,25 +28,25 @@ class GameCommands(commands.Cog):
             "Concentrate and ask again...", "Don’t count on it...",
             "My reply is no...", "My sources say no...",
             "Outlook not so good...", "Very doubtful..."]
-        await Message.games_msg(interaction, "Parzibot // The Ball of Predictions", f"Question - **{question}**\nAnswer - **{random.choice(responses)}**")
+        await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // The Ball of Predictions", f"Question - **{question}**\nAnswer - **{random.choice(responses)}**")
 
     @app_commands.command(name="coin", description="The Heads or Tails Game")
     async def coin(self, interaction: discord.Interaction):
-        await Message.games_msg(interaction, "Parzibot // Heads or Tails", f"**{random.choice(['Head', 'Tail'])}** has fell")
+        await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // Heads or Tails", f"**{random.choice(['Head', 'Tail'])}** has fell")
 
     @app_commands.command(name="dice", description="The Dice Game")
     @app_commands.describe(value="The value what you're predicting (from 1 to 12)")
     async def dice(self, interaction: discord.Interaction, value: int):
         if 1 <= value <= 12:
             v1, v2 = random.randint(1, 6), random.randint(1, 6)
-            if v1 + v2 == value: await Message.games_msg(interaction, "Parzibot // The Dice", f"You won :D. The sum of values is **{v1 + v2}**. The values of dice is **{v1}** and **{v2}**")
-            elif v1 == value or v2 == value: await Message.games_msg(interaction, "Parzibot // The Dice", f"You guess value one of the dice :D The values of dice is **{v1}** and **{v2}**")
-            else: await Message.games_msg(interaction, "Parzibot // The Dice", f"You lose :( The values of dice is **{v1}** and **{v2}**")
-        else: await Message.games_msg(interaction, "Parzibot // The Dice", f"You're predicting wrong value. The value should be between 2 and 12")
+            if v1 + v2 == value: await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // The Dice", f"You won :D. The sum of values is **{v1 + v2}**. The values of dice is **{v1}** and **{v2}**")
+            elif v1 == value or v2 == value: await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // The Dice", f"You guess value one of the dice :D The values of dice is **{v1}** and **{v2}**")
+            else: await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // The Dice", f"You lose :( The values of dice is **{v1}** and **{v2}**")
+        else: await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // The Dice", f"You're predicting wrong value. The value should be between 2 and 12")
 
     @app_commands.command(name="gamehelp", description="The list of Parzibot game commands")
     async def help(self, interaction: discord.Interaction):
-        await Message.games_msg(interaction, "Parzibot // Game Commands", (
+        await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // Game Commands", (
             " • **/8ball** `question` - The Ball of Predictions\n"
             " • **/coin** - The Heads or Tails Game\n"
             " • **/dice** `value` - The Dice Game\n"
@@ -70,7 +70,7 @@ class GameCommands(commands.Cog):
             "Rainbow Six: Siege", "Rocket League",
             "Super Animal Royale", "Terraria",
             "The Elder Scrolls V: Skyrim", "Valorant"]
-        await Message.games_msg(interaction, "Parzibot // Game by Parzibot", f"I advise you to play **{random.choice(responses)}**")
+        await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // Game by Parzibot", f"I advise you to play **{random.choice(responses)}**")
 
     @app_commands.command(name="whiteblack", description="The White or Black Game")
     @app_commands.describe(color="The hidden color (White or Black)")
@@ -80,8 +80,8 @@ class GameCommands(commands.Cog):
         ])
     async def white_black(self, interaction: discord.Interaction, color: str):
         result = random.choice(["white", "black"])
-        if color == result: await Message.games_msg(interaction, "Parzibot // White or Black Game", f"You won :D Right color is `{result}`")
-        else: await Message.games_msg(interaction, "You lose :(", f"Right color is `{result}`")
+        if color == result: await Message.games_msg(await self.bot.get_context(interaction), "Parzibot // White or Black Game", f"You won :D Right color is `{result}`")
+        else: await Message.games_msg(await self.bot.get_context(interaction), "You lose :(", f"Right color is `{result}`")
 
 
 async def setup(bot: commands.Bot) -> None:
