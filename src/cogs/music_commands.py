@@ -239,20 +239,21 @@ class MusicCommands(commands.Cog):
         with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
             await Message.music_msg(ctx, "Parzibot // Playlist", f"**{ydl.extract_info(url, download=False).get('title', None)}** added to **Playlist**")
         
-    # @app_commands.command(name="playlistclear", description="Clear all songs from Playlist")
-    # async def playlistclear(self, interaction: discord.Interaction):
-    #     if isinstance(ctx.author.voice, type(None)):
-    #         await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-    #         return
-    #     elif ctx.author.voice.channel != ctx.voice_client.channel:
-    #         await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-    #         return
+    @app_commands.command(name="playlistclear", description="Clear all songs from Playlist")
+    async def playlistclear(self, interaction: discord.Interaction):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if isinstance(interaction.user.voice, type(None)):
+            await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif interaction.user.voice.channel != ctx.voice_client.channel:
+            await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
 
-    #     if self.songs:
-    #         self.songs, self.current = [], ""
-    #         discord.utils.get(self.client.voice_clients, guild=ctx.guild).stop()
-    #         await Message.music_msg(ctx, "Parzibot // Clear Playlist", "**Playlist** has been cleared")
-    #     else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
+        if self.songs:
+            self.songs, self.current = [], ""
+            discord.utils.get(self.bot.voice_clients, guild=interaction.guild).stop()
+            await Message.music_msg(ctx, "Parzibot // Clear Playlist", "**Playlist** has been cleared")
+        else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
     # @app_commands.command(name="playlistshuffle", description="Enable/Disable Playlist shuffling")
     # async def playlistshuffle(self, interaction: discord.Interaction):
