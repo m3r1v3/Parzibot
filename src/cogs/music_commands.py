@@ -202,25 +202,26 @@ class MusicCommands(commands.Cog):
         if self.songs: await self.play_song(interaction)
         else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
-    # @app_commands.command(name="playlist", description="Show number of songs and songs titles in Playlist")
-    # async def playlist(self, interaction: discord.Interaction):
-    #     if isinstance(ctx.author.voice, type(None)):
-    #         await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-    #         return
-    #     elif ctx.author.voice.channel != ctx.voice_client.channel:
-    #         await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-    #         return
+    @app_commands.command(name="playlist", description="Show number of songs and songs titles in Playlist")
+    async def playlist(self, interaction: discord.Interaction):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if isinstance(interaction.user.voice, type(None)):
+            await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif interaction.user.voice.channel != ctx.voice_client.channel:
+            await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
 
-    #     if self.songs:
-    #         titles = []
-    #         with youtube_dl.YoutubeDL({}) as ydl: titles = [ydl.extract_info(song, download=False).get('title', None) for song in self.songs[:3]]
+        if self.songs:
+            titles = []
+            with youtube_dl.YoutubeDL({}) as ydl: titles = [ydl.extract_info(song, download=False).get('title', None) for song in self.songs[:3]]
 
-    #         playlist = ''.join(f'• {title}\n' for title in titles)
-    #         if len(titles) >= 3: playlist = playlist + f'And {len(titles)-2} more song(-s)' 
-    #         await Message.music_msg(ctx, "Parzibot // Playlist", (
-    #             f"**Playlist** contains about **{len(self.songs)}** song(-s)\n\n"
-    #             f"**Playlist**\n{playlist}"))
-    #     else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
+            playlist = ''.join(f'• {title}\n' for title in titles)
+            if len(titles) >= 3: playlist = playlist + f'And {len(titles)-2} more song(-s)' 
+            await Message.music_msg(ctx, "Parzibot // Playlist", (
+                f"**Playlist** contains about **{len(self.songs)}** song(-s)\n\n"
+                f"**Playlist**\n{playlist}"))
+        else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
     # @app_commands.command(name="playlistadd",
     #     description="Add song to Playlist",
