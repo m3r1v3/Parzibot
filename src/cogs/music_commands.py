@@ -157,21 +157,22 @@ class MusicCommands(commands.Cog):
             await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // Pause", "**Song** has been paused")
         else: await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // Not playing", "**Song** isn't playing right now")
 
-    # @app_commands.command(name="resume", description="Resume current song in Voice Channel")
-    # async def resume(self, interaction: discord.Interaction):
-    #     if isinstance(ctx.author.voice, type(None)):
-    #         await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-    #         return
-    #     elif ctx.author.voice.channel != ctx.voice_client.channel:
-    #         await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-    #         return
+    @app_commands.command(name="resume", description="Resume current song in Voice Channel")
+    async def resume(self, interaction: discord.Interaction):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if isinstance(interaction.user.voice, type(None)):
+            await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif interaction.user.voice.channel != ctx.voice_client.channel:
+            await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
 
-    #     voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-    #     if voice.is_paused():
-    #         voice.resume()
-    #         await Message.music_msg(ctx, "Parzibot // Resume", "**Song** has been resumed")
-    #     else: await Message.music_msg(ctx, "Parzibot // Not paused", "**Song** isn't paused right now")
-
+        voice = discord.utils.get(self.bot.voice_clients, guild=interaction.guild)
+        if voice.is_paused():
+            voice.resume()
+            await Message.music_msg(ctx, "Parzibot // Resume", "**Song** has been resumed")
+        else: await Message.music_msg(ctx, "Parzibot // Not paused", "**Song** isn't paused right now")
+        
     # @app_commands.command(name="repeats", description="Enable/Disable current song repeating")
     # async def repeats(self, interaction: discord.Interaction):
     #     if isinstance(ctx.author.voice, type(None)):
