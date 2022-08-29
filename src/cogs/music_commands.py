@@ -223,27 +223,21 @@ class MusicCommands(commands.Cog):
                 f"**Playlist**\n{playlist}"))
         else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
-    # @app_commands.command(name="playlistadd",
-    #     description="Add song to Playlist",
-    #     options=[
-    #         create_option(
-    #             name="url",
-    #             description="YouTube Video URL",
-    #             option_type=3,
-    #             required=True)
-    #         ])
-    # async def playlistadd(self, interaction: discord.Interaction, url: str):
-    #     if isinstance(ctx.author.voice, type(None)):
-    #         await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-    #         return
-    #     elif ctx.author.voice.channel != ctx.voice_client.channel:
-    #         await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-    #         return
+    @app_commands.command(name="playlistadd", description="Add song to Playlist")
+    @app_commands.describe(url="YouTube Video URL")
+    async def playlistadd(self, interaction: discord.Interaction, url: str):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if isinstance(interaction.user.voice, type(None)):
+            await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif interaction.user.voice.channel != ctx.voice_client.channel:
+            await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
 
-    #     self.songs.append(url)
-    #     if self.shuffle: random.shuffle(self.songs)
-    #     with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
-    #         await Message.music_msg(ctx, "Parzibot // Playlist", f"**{ydl.extract_info(url, download=False).get('title', None)}** added to **Playlist**")
+        self.songs.append(url)
+        if self.shuffle: random.shuffle(self.songs)
+        with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
+            await Message.music_msg(ctx, "Parzibot // Playlist", f"**{ydl.extract_info(url, download=False).get('title', None)}** added to **Playlist**")
         
     # @app_commands.command(name="playlistclear", description="Clear all songs from Playlist")
     # async def playlistclear(self, interaction: discord.Interaction):
