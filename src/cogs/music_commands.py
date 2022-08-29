@@ -188,18 +188,19 @@ class MusicCommands(commands.Cog):
         if self.repeat: await Message.music_msg(ctx, "Parzibot // Repeat", "**Song** repeating is enabled")
         else: await Message.music_msg(ctx, "Parzibot // Repeat", "**Song** repeating is disabled")
 
-    # @app_commands.command(name="next", description="Play next song from Playlist")
-    # async def next(self, interaction: discord.Interaction):
-    #     if isinstance(ctx.author.voice, type(None)):
-    #         await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-    #         return
-    #     elif ctx.author.voice.channel != ctx.voice_client.channel:
-    #         await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-    #         return
+    @app_commands.command(name="next", description="Play next song from Playlist")
+    async def next(self, interaction: discord.Interaction):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if isinstance(interaction.user.voice, type(None)):
+            await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif interaction.user.voice.channel != ctx.voice_client.channel:
+            await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
 
-    #     voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-    #     if self.songs: await self.play_song(ctx)
-    #     else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
+        voice = discord.utils.get(self.bot.voice_clients, guild=interaction.guild)
+        if self.songs: await self.play_song(interaction)
+        else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
     # @app_commands.command(name="playlist", description="Show number of songs and songs titles in Playlist")
     # async def playlist(self, interaction: discord.Interaction):
