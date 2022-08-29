@@ -111,35 +111,35 @@ class MusicCommands(commands.Cog):
 
             await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // Play", f"**{data['title']}** is playing now")
 
-    # @app_commands.command(name="replay", description="Replay song in Voice Channel")
-    # async def replay(self, interaction: discord.Interaction):
-    #     if isinstance(ctx.author.voice, type(None)):
-    #         await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-    #         return
-    #     elif ctx.author.voice.channel != ctx.voice_client.channel:
-    #         await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-    #         return
+    @app_commands.command(name="replay", description="Replay song in Voice Channel")
+    async def replay(self, interaction: discord.Interaction):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if isinstance(interaction.user.voice, type(None)):
+            await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif interaction.user.voice.channel != ctx.voice_client.channel:
+            await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
 
-    #     voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
-    #     voice.stop()
+        voice = discord.utils.get(self.bot.voice_clients, guild=interaction.guild)
+        voice.stop()
 
-    #     await self.replay_song(ctx)
+        await self.replay_song(interaction)
 
-    # async def replay_song(self, interaction: discord.Interaction):
-        
-    #     def search(url):
-    #         with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
-    #             info = ydl.extract_info(f"ytsearch:{url}", download=False)["entries"][0]
-    #         return {"source": info["formats"][0]["url"], "title": info["title"]}
+    async def replay_song(self, interaction: discord.Interaction):
+        def search(url):
+            with youtube_dl.YoutubeDL({"format": "bestaudio", "noplaylist": "True"}) as ydl:
+                info = ydl.extract_info(f"ytsearch:{url}", download=False)["entries"][0]
+            return {"source": info["formats"][0]["url"], "title": info["title"]}
 
-    #     voice = discord.utils.get(self.client.voice_clients, guild=ctx.guild)
+        voice = discord.utils.get(self.bot.voice_clients, guild=interaction.guild)
 
-    #     data = search(self.current)
-    #     voice.play(discord.FFmpegPCMAudio(data["source"], **self.FFMPEG_OPTIONS),
-    #         after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(ctx), self.client.loop))
-    #     voice.is_playing()
+        data = search(self.current)
+        voice.play(discord.FFmpegPCMAudio(data["source"], **self.FFMPEG_OPTIONS),
+            after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(interaction), self.bot.loop))
+        voice.is_playing()
 
-    #     await Message.music_msg(ctx, "Parzibot // Replay", f"**{data['title']}** is playing now")
+        await Message.music_msg(await self.bot.get_context(interaction), "Parzibot // Replay", f"**{data['title']}** is playing now")
 
     # @app_commands.command(name="pause", description="Pause current song in Voice Channel")
     # async def pause(self, interaction: discord.Interaction):
