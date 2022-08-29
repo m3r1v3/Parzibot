@@ -255,18 +255,19 @@ class MusicCommands(commands.Cog):
             await Message.music_msg(ctx, "Parzibot // Clear Playlist", "**Playlist** has been cleared")
         else: await Message.music_msg(ctx, "Parzibot // Empty Playlist", "**Playlist** is empty")
 
-    # @app_commands.command(name="playlistshuffle", description="Enable/Disable Playlist shuffling")
-    # async def playlistshuffle(self, interaction: discord.Interaction):
-    #     if isinstance(ctx.author.voice, type(None)):
-    #         await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
-    #         return
-    #     elif ctx.author.voice.channel != ctx.voice_client.channel:
-    #         await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
-    #         return
+    @app_commands.command(name="playlistshuffle", description="Enable/Disable Playlist shuffling")
+    async def playlistshuffle(self, interaction: discord.Interaction):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if isinstance(interaction.user.voice, type(None)):
+            await Message.music_msg(ctx, "Parzibot // You aren't connected", "You're not connected to any **Voice Channel**")
+            return
+        elif interaction.user.voice.channel != ctx.voice_client.channel:
+            await Message.music_msg(ctx, "Parzibot // Not connected", "**Parzibot** isn't connected to your **Voice Channel**")
+            return
 
-    #     self.shuffle = not self.shuffle
-    #     if self.shuffle: await Message.music_msg(ctx, "Parzibot // Shuffle", "**Playlist** shuffling is enabled")
-    #     else: await Message.music_msg(ctx, "Parzibot // Shuffle", "**Playlist** shuffling is disabled")
+        self.shuffle = not self.shuffle
+        if self.shuffle: await Message.music_msg(ctx, "Parzibot // Shuffle", "**Playlist** shuffling is enabled")
+        else: await Message.music_msg(ctx, "Parzibot // Shuffle", "**Playlist** shuffling is disabled")
 
 
 async def setup(bot: commands.Bot) -> None:
