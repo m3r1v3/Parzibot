@@ -44,22 +44,13 @@ class AdminCommands(commands.Cog):
             await Message.admin_msg(ctx, "Parzibot // Ban", f"**{member}** has been banned")
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
-    # @cog_ext.cog_slash(
-    #     name="kick",
-    #     description="Kick member on your Server",
-    #     options=[
-    #         create_option(
-    #             name="member",
-    #             description="The Member Who Will Be Kicked",
-    #             option_type=6,
-    #             required=True
-    #             )
-    #         ])
-    # async def kick(self, ctx, member: discord.Member):
-    #     if ctx.author.guild_permissions.manage_messages:
-    #         await member.kick(reason=None)
-    #         await Message.admin(ctx, "Parzibot // Kick", f"**{member}** has been kicked")
-    #     else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
+    @app_commands.command(name="kick", description="Kick member on your Server")
+    async def kick(self, interaction: discord.Interaction, member: discord.Member):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if interaction.user.guild_permissions.manage_messages:
+            await member.kick(reason=None)
+            await Message.admin_msg(ctx, "Parzibot // Kick", f"**{member}** has been kicked")
+        else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     # @cog_ext.cog_slash(
     #     name="role",
