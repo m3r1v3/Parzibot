@@ -109,4 +109,4 @@ class AdminCommands(commands.Cog):
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(ErrorHandler(bot))
+    await bot.add_cog(AdminCommands(bot))
