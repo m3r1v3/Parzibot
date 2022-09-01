@@ -78,26 +78,14 @@ class AdminCommands(commands.Cog):
             await Message.admin_msg(ctx, "Parzibot // Give Role", f"**{role.name} Role** has been given to **{member}**")
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
-    # @cog_ext.cog_slash(
-    #     name="nickname",
-    #     description="Change nickname to Member on Server",
-    #     options=[
-    #         create_option(
-    #             name="member",
-    #             description="The Member to Whom We Will Change Nickname",
-    #             option_type=6,
-    #             required=True),
-    #             create_option(
-    #                 name="nickname",
-    #                 description="The Member's Future Nickname",
-    #                 option_type=3,
-    #                 required=False)
-    #             ])
-    # async def nickname(self, ctx, member: discord.Member, *, nickname=None):
-    #     if ctx.author.guild_permissions.manage_messages:
-    #         await member.edit(nick=nickname)
-    #         await Message.admin(ctx, "Parzibot // Nickname Changed", f"**{member}**'s nickname has been changed")
-    #     else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
+    @app_commands.command(name="nickname", description="Change nickname to Member on Server")
+    @app_commands.describe(member="Member to whom we will change nickname", nickname="Member's future nickname")
+    async def nickname(self, interaction: discord.Interaction, member: discord.Member, *, nickname: str=None):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if interaction.user.guild_permissions.manage_messages:
+            await member.edit(nick=nickname)
+            await Message.admin_msg(ctx, "Parzibot // Nickname Changed", f"**{member}**'s nickname has been changed")
+        else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     # @cog_ext.cog_slash(
     #     name="defaultrole",
