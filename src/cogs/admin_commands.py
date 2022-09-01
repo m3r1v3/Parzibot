@@ -65,30 +65,18 @@ class AdminCommands(commands.Cog):
                 await interaction.guild.create_role(name=name, 
                     colour=ColourConverter.convert(ctx, color),
                     permissions=discord.utils.get(interaction.user.guild.roles, id=int(Role().get_role(interaction.user.guild.id))).permissions)
-                await Message.admin(ctx, "Parzibot // Role", f"**{name} Role** added on Server")
+                await Message.admin_msg(ctx, "Parzibot // Role", f"**{name} Role** added on Server")
             else: await Message.admin_msg(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
-    # @cog_ext.cog_slash(
-    #     name="giverole",
-    #     description="Give role to Member on Server",
-    #     options=[
-    #         create_option(
-    #             name="member",
-    #             description="Member who will receive Role",
-    #             option_type=6,
-    #             required=True),
-    #         create_option(
-    #             name="role",
-    #             description="Role that will be received by Member",
-    #             option_type=8,
-    #             required=True)
-    #         ])
-    # async def giverole(self, ctx, member: discord.Member, role):
-    #     if ctx.author.guild_permissions.manage_messages:
-    #         await member.add_roles(role)
-    #         await Message.admin(ctx, "Parzibot // Give Role", f"**{role.name} Role** has been given to **{member}**")
-    #     else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
+    @app_commands.command(name="giverole", description="Give role to Member on Server")
+    @app_commands.describe(member="Member who will receive Role", role="Role that will be received by Member")
+    async def giverole(self, interaction: discord.Interaction, member: discord.Member, role: discord.Role):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if interaction.user.guild_permissions.manage_messages:
+            await member.add_roles(role)
+            await Message.admin_msg(ctx, "Parzibot // Give Role", f"**{role.name} Role** has been given to **{member}**")
+        else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     # @cog_ext.cog_slash(
     #     name="nickname",
