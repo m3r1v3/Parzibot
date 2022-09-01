@@ -1,6 +1,7 @@
 import discord
 from discord import app_commands, Embed, Colour
 from discord.ext import commands
+from discord.ext.commands import ColourConverter
 
 from message import Message
 
@@ -30,6 +31,7 @@ class AdminCommands(commands.Cog):
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     @app_commands.command(name="announce", description="Make announce message in current Text Channel")
+    @app_commands.describe(message="Text of announce message")
     async def announce(self, interaction: discord.Interaction, message: str):
         ctx: commands.Context = await self.bot.get_context(interaction)
         if interaction.user.guild_permissions.manage_messages:
@@ -37,6 +39,7 @@ class AdminCommands(commands.Cog):
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     @app_commands.command(name="ban", description="Ban member on your Server")
+    @app_commands.describe(member="Member who will be banned")
     async def ban(self, interaction: discord.Interaction, member: discord.Member):
         ctx: commands.Context = await self.bot.get_context(interaction)
         if interaction.user.guild_permissions.manage_messages:
@@ -45,6 +48,7 @@ class AdminCommands(commands.Cog):
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     @app_commands.command(name="kick", description="Kick member on your Server")
+    @app_commands.describe(member="Member who will be kicked")
     async def kick(self, interaction: discord.Interaction, member: discord.Member):
         ctx: commands.Context = await self.bot.get_context(interaction)
         if interaction.user.guild_permissions.manage_messages:
@@ -52,35 +56,18 @@ class AdminCommands(commands.Cog):
             await Message.admin_msg(ctx, "Parzibot // Kick", f"**{member}** has been kicked")
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
-    # @cog_ext.cog_slash(
-    #     name="role",
-    #     description="Create role with default role permissions on Server",
-    #     options=[
-    #         create_option(
-    #             name="name",
-    #             description="Name of future role",
-    #             option_type=3,
-    #             required=True),
-    #         create_option(
-    #             name="color",
-    #             description="Role color (Hex Code without '#' (6 symbols))",
-    #             option_type=3,
-    #             required=True)
-    #         ])
-    # async def role(self, ctx, name: str, color: str):
-    #     if ctx.author.guild_permissions.manage_messages:
-    #         if Role().get_role(str(ctx.guild.id)) is not None:
-    #             try:
-    #                 if len(color) == 6:
-    #                     rgb = tuple(int(hex(int(color, 16))[2:8][i:i+2], 16) for i in (0, 2, 4))
-    #                     await ctx.guild.create_role(name=name,
-    #                         colour=Colour.from_rgb(rgb[0], rgb[1], rgb[2]),
-    #                         permissions=discord.utils.get(ctx.author.guild.roles, id=int(Role().get_role(ctx.author.guild.id))).permissions)
-    #                     await Message.admin(ctx, "Parzibot // Role", f"**{name} Role** added on Server")
-    #                 else: await Message.admin(ctx, "Parzibot // Incorrect color", f"**Hex Color Code** is written in the incorrect format")
-    #             except ValueError: await Message.admin(ctx, "Parzibot // Incorrect color", f"**Hex Color Code** is written in the incorrect format")
-    #         else: await Message.admin(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
-    #     else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
+    @app_commands.command(name="role", description="Create role with default role permissions on Server")
+    @app_commands.describe(name="Name of future role", color="Role color code")
+    async def role(self, interaction: discord.Interaction, name: str, color: str):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if interaction.user.guild_permissions.manage_messages:
+            if Role().get_role(str(ctx.guild.id)) is not None:
+                await interaction.guild.create_role(name=name, 
+                    colour=ColourConverter.convert(ctx, color),
+                    permissions=discord.utils.get(interaction.user.guild.roles, id=int(Role().get_role(interaction.user.guild.id))).permissions)
+                await Message.admin(ctx, "Parzibot // Role", f"**{name} Role** added on Server")
+            else: await Message.admin_msg(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
+        else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     # @cog_ext.cog_slash(
     #     name="giverole",
