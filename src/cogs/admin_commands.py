@@ -98,14 +98,15 @@ class AdminCommands(commands.Cog):
             else: await Message.admin_msg(ctx, "Parzibot // Default Role Already Set", "**Server Default Role** already had been set")
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
-    # @cog_ext.cog_slash(name="defaultroleremove", description="Remove default role what will be giving to new members of Server")
-    # async def removedefaultrole(self, ctx):
-    #     if ctx.author.guild_permissions.manage_messages:
-    #         if Role().get_role(str(ctx.guild.id)) is not None:
-    #             Role().delete(str(ctx.guild.id))
-    #             await Message.admin(ctx, "Parzibot // Default Role Removed", "**Server Default Role** was removed")
-    #         else: await Message.admin(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
-    #     else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
+    @app_commands.command(name="defaultroleremove", description="Remove default role what will be giving to new members of Server")
+    async def removedefaultrole(self, interaction: discord.Interaction):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if interaction.user.guild_permissions.manage_messages:
+            if Role().get_role(str(interaction.guild.id)) is not None:
+                Role().delete(str(interaction.guild.id))
+                await Message.admin_msg(ctx, "Parzibot // Default Role Removed", "**Server Default Role** was removed")
+            else: await Message.admin_msg(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
+        else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
 async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(ErrorHandler(bot))
