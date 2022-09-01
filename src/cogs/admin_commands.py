@@ -31,26 +31,18 @@ class AdminCommands(commands.Cog):
 
     @app_commands.command(name="announce", description="Make announce message in current Text Channel")
     async def announce(self, interaction: discord.Interaction, message: str):
+        ctx: commands.Context = await self.bot.get_context(interaction)
         if interaction.user.guild_permissions.manage_messages:
             await Message.admin_msg(ctx, "Parzibot // Announce", message.replace("\\n", "\n"))
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
-    # @cog_ext.cog_slash(
-    #     name="ban",
-    #     description="Ban member on your Server",
-    #     options=[
-    #         create_option(
-    #             name="member",
-    #             description="Member who will be banned",
-    #             option_type=6,
-    #             required=True
-    #             )
-    #         ])
-    # async def ban(self, ctx, member: discord.Member):
-    #     if ctx.author.guild_permissions.manage_messages:
-    #         await member.ban(reason=None)
-    #         await Message.admin(ctx, "Parzibot // Ban", f"**{member}** has been banned")
-    #     else: await Message.error(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
+    @app_commands.command(name="ban", description="Ban member on your Server")
+    async def ban(self, interaction: discord.Interaction, member: discord.Member):
+        ctx: commands.Context = await self.bot.get_context(interaction)
+        if interaction.user.guild_permissions.manage_messages:
+            await member.ban(reason=None)
+            await Message.admin_msg(ctx, "Parzibot // Ban", f"**{member}** has been banned")
+        else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     # @cog_ext.cog_slash(
     #     name="kick",
