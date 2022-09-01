@@ -140,6 +140,7 @@ class MusicCommands(commands.Cog):
             after=lambda e: asyncio.run_coroutine_threadsafe(self.play_song(interaction), self.bot.loop))
         voice.is_playing()
 
+        ctx: commands.Context = await self.bot.get_context(interaction)
         await Message.music_msg(ctx, "Parzibot // Replay", f"**{data['title']}** is playing now")
 
     @app_commands.command(name="pause", description="Pause current song in Voice Channel")
