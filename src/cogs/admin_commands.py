@@ -1,7 +1,6 @@
 import discord
 from discord import app_commands, Embed, Colour
 from discord.ext import commands
-from discord.ext.commands import ColourConverter
 
 from message import Message
 from database import Role
@@ -58,13 +57,13 @@ class AdminCommands(commands.Cog):
         else: await Message.error_msg(ctx, "Parzibot // Error", "You doesn't have permissions for executing this command")
 
     @app_commands.command(name="role", description="Create role with default role permissions on Server")
-    @app_commands.describe(name="Name of future role", color="Role color code")
+    @app_commands.describe(name="Name of future role", color="Role color code (hex color code)")
     async def role(self, interaction: discord.Interaction, name: str, color: str):
         ctx: commands.Context = await self.bot.get_context(interaction)
         if interaction.user.guild_permissions.manage_messages:
             if Role().get_role(str(ctx.guild.id)) is not None:
                 await interaction.guild.create_role(name=name, 
-                    colour=ColourConverter.convert(ctx, color),
+                    colour=Colour(int(color.replace("#", ""), 16)),
                     permissions=discord.utils.get(interaction.user.guild.roles, id=int(Role().get_role(interaction.user.guild.id))).permissions)
                 await Message.admin_msg(ctx, "Parzibot // Role", f"**{name} Role** added on Server")
             else: await Message.admin_msg(ctx, "Parzibot // Default Role Hadn't Set", "**Server Default Role** should be set for using this command")
