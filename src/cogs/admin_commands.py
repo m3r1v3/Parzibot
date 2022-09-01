@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord.ext.commands import ColourConverter
 
 from message import Message
+from database import Role
 
 class AdminCommands(commands.Cog):
 
@@ -16,7 +17,7 @@ class AdminCommands(commands.Cog):
         if interaction.user.guild_permissions.manage_messages:
             await Message.admin_msg(ctx, "Parzibot // Admin Commands", (
                 '**Help Commands**\n'
-                ' • **/adminhelp** `command` - The list of Parzibot admin commands\n\n'
+                ' • **/adminhelp** - The list of Parzibot admin commands\n\n'
                 '**Announce Commands**\n'
                 ' • **/announce** `title` `message` - Make announce message in current Text Channel\n\n'
                 '**Member Control Commands**\n'

@@ -54,7 +54,7 @@
     <h3>Admin Commands</h3>
     <p>
         <b>Help Commands</b><br>
-            • <b>/adminhelp</b> <code>command</code> - The list of Parzibot admin commands<br><br>
+            • <b>/adminhelp</b> - The list of Parzibot admin commands<br><br>
         <b>Announce Commands</b><br>
             • <b>/announce</b> <code>title</code> <code>message</code> - Make announce message in current Text Channel<br><br>
         <b>Member Control Commands</b><br>
