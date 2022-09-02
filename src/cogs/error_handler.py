@@ -1,19 +1,18 @@
 import discord
-from discord import Embed, Colour
+from discord import app_commands, Embed, Colour
 from discord.ext import commands
 
 from message import Message
 
-
 class ErrorHandler(commands.Cog):
 
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot: commands.Bot) -> None:
+        self.bot = bot
 
     @commands.Cog.listener()
-    async def on_slash_command_error(self, ctx, error):
-        await Message.error(ctx, "Parzibot // Error", "Something went wrong! Try again")
+    async def on_command_error(self, ctx, error):
+        await Message.error_msg(ctx, "Parzibot // Error", "Something went wrong! Try again")
 
 
-def setup(client):
-    client.add_cog(ErrorHandler(client))
+async def setup(bot: commands.Bot) -> None:
+    await bot.add_cog(ErrorHandler(bot))

@@ -43,7 +43,7 @@
              • <b>/replay</b> - Replay song in Voice Channel<br>
              • <b>/pause</b> - Pause current song in Voice Channel<br>
              • <b>/resume</b> - Resume current song in Voice Channel<br>
-             • <b>/repeats</b> - Enable/Disable current song repeating<br>
+             • <b>/repeat</b> - Enable/Disable current song repeating<br>
              • <b>/next</b> - Play next song from Playlist<br><br>
         <b>Playlist commands</b><br>
              • <b>/playlist</b> - Show number of songs and songs titles in Playlist<br>
@@ -54,7 +54,7 @@
     <h3>Admin Commands</h3>
     <p>
         <b>Help Commands</b><br>
-            • <b>/adminhelp</b> <code>command</code> - The list of Parzibot admin commands<br><br>
+            • <b>/adminhelp</b> - The list of Parzibot admin commands<br><br>
         <b>Announce Commands</b><br>
             • <b>/announce</b> <code>title</code> <code>message</code> - Make announce message in current Text Channel<br><br>
         <b>Member Control Commands</b><br>

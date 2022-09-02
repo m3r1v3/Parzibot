@@ -27,26 +27,26 @@ class Message:
         return Embed(title=title, description=description, color=Colour(0xff6868)).set_thumbnail(url="attachment://ParzibotError.png")
 
     @staticmethod
-    async def msg(ctx, title: str, description: str):
+    async def basic_msg(ctx, title: str, description: str):
         await ctx.send(file=discord.File("src/images/Parzibot.png", filename="Parzibot.png"),
             embed=Message.get_embed(title, description))
 
     @staticmethod
-    async def games(ctx, title: str, description: str):
+    async def games_msg(ctx, title: str, description: str):
         await ctx.send(file=discord.File("src/images/ParzibotGames.png", filename="ParzibotGames.png"),
             embed=Message.get_games_embed(title, description))
 
     @staticmethod
-    async def music(ctx, title: str, description: str):
+    async def music_msg(ctx, title: str, description: str):
         await ctx.send(file=discord.File("src/images/ParzibotMusic.png", filename="ParzibotMusic.png"),
             embed=Message.get_music_embed(title, description))
 
     @staticmethod
-    async def admin(ctx, title: str, description: str):
+    async def admin_msg(ctx, title: str, description: str):
         await ctx.send(file=discord.File("src/images/ParzibotAdmin.png", filename="ParzibotAdmin.png"),
             embed=Message.get_admin_embed(title, description))
 
     @staticmethod
-    async def error(ctx, title: str, message: str):
+    async def error_msg(ctx, title: str, message: str):
         await ctx.send(file=discord.File("src/images/ParzibotError.png", filename="ParzibotError.png"),
             embed=Message.get_error_embed(title, message))
