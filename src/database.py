@@ -1,11 +1,12 @@
 import os
+import random
 
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine(os.environ.get('DATABASE_URL').replace("postgres://", "postgresql://"))
+engine = create_engine(os.environ.get('DATABASE_URL'))
 Base = declarative_base()
 
 Session = sessionmaker(bind=engine)
@@ -21,7 +22,7 @@ class Role(Base):
 
     @staticmethod
     def add(role: str, server: str):
-        session.add(Role(role=str(role), server=str(server)))
+        session.add(Role(id=random.randint(1, 2147483647), role=str(role), server=str(server)))
         session.commit()
 
     @staticmethod
