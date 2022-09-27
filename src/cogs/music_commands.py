@@ -272,4 +272,4 @@ class MusicCommands(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(MusicCommands(bot))
+    if int(os.environ.get('MUSIC_COMMANDS')): await bot.add_cog(MusicCommands(bot))

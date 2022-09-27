@@ -6,14 +6,11 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+
 class Bot(commands.Bot):
 
     def __init__(self):
-        super().__init__(
-            command_prefix='$',
-            intents = discord.Intents.all()
-            )
-
+        super().__init__(command_prefix='$', intents = discord.Intents.all())
         self.cogs_extensions = [f'cogs.{filename[:-3]}' for filename in os.listdir('src/cogs') if filename.endswith('.py')]
 
     async def setup_hook(self):
