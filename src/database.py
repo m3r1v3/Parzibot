@@ -27,8 +27,10 @@ class Role(Base):
 
     @staticmethod
     def get_role(server: str):
-        try: return session.query(Role).filter_by(server=str(server)).first().role
-        except AttributeError: return None
+        try:
+            return session.query(Role).filter_by(server=str(server)).first().role
+        except AttributeError:
+            return None
 
     @staticmethod
     def delete(server: str):
