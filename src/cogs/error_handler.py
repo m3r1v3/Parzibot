@@ -1,8 +1,7 @@
-import discord
-from discord import app_commands, Embed, Colour
 from discord.ext import commands
 
 from message import Message
+
 
 class ErrorHandler(commands.Cog):
 
