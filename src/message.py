@@ -30,11 +30,11 @@ class Message:
 
     @staticmethod
     def get_basic_msg(section, key):
-        return json.loads(open("message.json"))["basic"][section][key]
+        return json.loads(open("src/message.json"))["basic"][section][key]
 
     @staticmethod
     def get_error_msg(section, key):
-        return json.loads(open("message.json"))["error"][section][key]
+        return json.loads(open("src/message.json"))["error"][section][key]
 
     @staticmethod
     async def basic_msg(ctx, title: str, description: str):
