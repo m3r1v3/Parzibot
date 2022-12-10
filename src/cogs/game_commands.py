@@ -102,4 +102,4 @@ class GameCommands(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(GameCommands(bot))
+    if int(os.environ.get('GAME_COMMANDS')): await bot.add_cog(GameCommands(bot))

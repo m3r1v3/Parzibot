@@ -53,4 +53,4 @@ class BasicCommands(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(BasicCommands(bot))
+    if int(os.environ.get('BASIC_COMMANDS')): await bot.add_cog(BasicCommands(bot))

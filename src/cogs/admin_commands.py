@@ -130,4 +130,4 @@ class AdminCommands(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(AdminCommands(bot))
+    if int(os.environ.get('ADMIN_COMMANDS')): await bot.add_cog(AdminCommands(bot))
