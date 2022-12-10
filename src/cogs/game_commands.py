@@ -40,7 +40,7 @@ class GameCommands(commands.Cog):
             else: await Message.games_msg(ctx, Message.get_game_msg("titles", "dice"), Message.get_game_msg("messages", "dice-responses")[2].format(v1=v1, v2=v2))
         else: await Message.games_msg(ctx, Message.get_game_msg("titles", "dice"), Message.get_game_msg("messages", "dice-responses")[3].format(v1=v1, v2=v2))
 
-    @app_commands.command(name="gamehelp", description=description=Message.get_game_msg("descriptions", "help"))
+    @app_commands.command(name="gamehelp", description=Message.get_game_msg("descriptions", "help"))
     async def help(self, interaction: discord.Interaction):
         ctx: commands.Context = await self.bot.get_context(interaction)
         await Message.games_msg(ctx, Message.get_game_msg("titles", "help"), Message.get_game_msg("messages", "help"))
