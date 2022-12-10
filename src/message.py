@@ -33,6 +33,10 @@ class Message:
         return json.loads(open("src/message.json").read())["basic"][section][key]
 
     @staticmethod
+    def get_game_msg(section, key):
+        return json.loads(open("src/message.json").read())["game"][section][key]
+
+    @staticmethod
     def get_event_msg(section, key):
         return json.loads(open("src/message.json").read())["event"][section][key]
 
