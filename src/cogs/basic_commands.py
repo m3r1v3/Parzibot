@@ -23,8 +23,13 @@ class BasicCommands(commands.Cog):
     async def clear(self, interaction: discord.Interaction, number: int = 5):
         ctx: commands.Context = await self.bot.get_context(interaction)
         if number:
-            await interaction.channel.purge(limit=number)
-            await Message.basic_msg(ctx, Message.get_basic_msg("titles", "clear"), Message.get_basic_msg("messages", "clear").format(number=number))
+            count = len([message async for message in ctx.channel.history(limit=32)])
+            if number < count:
+                await interaction.channel.purge(limit=number)
+                await Message.basic_msg(ctx, Message.get_basic_msg("titles", "clear"), Message.get_basic_msg("messages", "clear").format(number=number))
+            else:
+                await interaction.channel.purge(limit=count)
+                await Message.basic_msg(ctx, Message.get_basic_msg("titles", "clear"), Message.get_basic_msg("messages", "clear").format(number=count))
         else:
             await Message.error_msg(ctx, Message.get_error_msg("titles", "error"), Message.get_error_msg("messages", "error-clear").format(number=number))
 
