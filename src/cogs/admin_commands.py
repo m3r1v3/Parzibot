@@ -1,3 +1,5 @@
+import os
+
 import discord
 from discord import app_commands, Colour
 from discord.ext import commands
