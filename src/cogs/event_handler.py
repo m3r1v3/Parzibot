@@ -25,13 +25,13 @@ class EventHandler(commands.Cog):
                 if i not in before.roles: 
                     await Message.basic_msg(before, 
                         Message.get_event_msg("titles", "receive"),
-                        Message.get_event_msg("messages", "receive-message"))
+                        Message.get_event_msg("messages", "receive-message").format(role=i))
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
                 if i not in after.roles: 
                     await Message.basic_msg(before,
                         Message.get_event_msg("titles", "deprive"),
-                        Message.get_event_msg("messages", "deprive-message"))
+                        Message.get_event_msg("messages", "deprive-message").format(role=i))
 
 
 async def setup(bot: commands.Bot) -> None:
