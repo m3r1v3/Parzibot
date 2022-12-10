@@ -43,7 +43,7 @@
     },
     "messages": {
       "error": "Something went wrong! Try again",
-      "error-clear": "Cannot clear **{number}** messages",
+      "error-clear": "Cannot clear **{number}** messages"
     }
   }
 }
