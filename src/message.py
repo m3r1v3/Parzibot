@@ -33,6 +33,10 @@ class Message:
         return json.loads(open("src/message.json").read())["basic"][section][key]
 
     @staticmethod
+    def get_event_msg(section, key):
+        return json.loads(open("src/message.json").read())["event"][section][key]
+
+    @staticmethod
     def get_error_msg(section, key):
         return json.loads(open("src/message.json").read())["error"][section][key]
 

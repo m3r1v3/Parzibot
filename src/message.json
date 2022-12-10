@@ -25,13 +25,25 @@
   "game": {},
   "music": {},
   "admin": {},
-  "event": {},
+  "event": {
+    "titles": {
+      "greeting": "Parzibot // Hey **{member}**!",
+      "receive": "Parzibot // Received role",
+      "deprive": "Parzibot // Deprived role"
+    },
+    "messages": {
+      "greeting-message": "White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command",
+      "receive-message": "You has been received **{role} Role**",
+      "deprive-message": "You has been deprived **{role} Role**"
+    }
+  },
   "error": {
     "titles": {
       "error": "Parzibot // Error"
     },
     "messages": {
-      "error-clear": "Cannot clear **{number}** messages"
+      "error": "Something went wrong! Try again",
+      "error-clear": "Cannot clear **{number}** messages",
     }
   }
 }
