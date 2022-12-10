@@ -63,7 +63,7 @@
         "You lose :( The values of dice is **{v1}** and **{v2}**",
         "You're predicting wrong value. The value should be between 2 and 12"
       ],
-      "help": "• **/8ball** `question` - The Ball of Predictions\n• **/coin** - The Heads or Tails Game\n• **/dice** `value` - The Dice Game\n• **/gamehelp** - The list of Parzibot game commands\n• **/getgame** - Advises to play a random game\n• **/whiteblack** `color` - The White/Black Game",
+      "help": "• **/8ball** `question` - The Ball of Predictions\n• **/coin** - The Heads or Tails Game\n• **/dice** `value` - The Dice Game\n• **/gamehelp** - The list of Parzibot game commands\n• **/gg** - Advises to play a random game\n• **/whiteblack** `color` - The White/Black Game",
       "gg": "I advise you to play **{game}**",
       "gg-responses": [
         "Animal Crossing: New Horizons", "Apex Legends",

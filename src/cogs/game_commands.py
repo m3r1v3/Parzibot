@@ -49,7 +49,7 @@ class GameCommands(commands.Cog):
     async def gg(self, interaction: discord.Interaction):
         ctx: commands.Context = await self.bot.get_context(interaction)
         await Message.games_msg(ctx, Message.get_game_msg("titles", "gg"), 
-            Message.get_game_msg("messages", "gg").format(question=question, answer=random.choice(Message.get_game_msg("messages", "gg-responses"))))
+            Message.get_game_msg("messages", "gg").format(game=random.choice(Message.get_game_msg("messages", "gg-responses"))))
 
     @app_commands.command(name="whiteblack", description=Message.get_game_msg("descriptions", "whiteblack"))
     @app_commands.describe(color=Message.get_game_msg("descriptions", "whiteblack-color"))
