@@ -41,7 +41,7 @@ class BasicCommands(commands.Cog):
     @app_commands.command(name="members", description=Message.get_basic_msg("descriptions", "members"))
     async def members(self, interaction: discord.Interaction):
         ctx: commands.Context = await self.bot.get_context(interaction)
-        await Message.basic_msg(ctx, Message.get_basic_msg("titles", "members"), "".join(f" • **{member}** ({member.status})\n" for member in interaction.channel.members))
+        await Message.basic_msg(ctx, Message.get_basic_msg("titles", "members"), "".join(f"• **{member}** ({member.status})\n" for member in interaction.channel.members))
 
 
 async def setup(bot: commands.Bot) -> None:
