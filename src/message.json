@@ -18,7 +18,7 @@
     "messages": {
       "ping": "Ping is `{latency}ms`",
       "about": "**Parzibot** is free open-source project, created by **merive_**\nYou can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n**Parzibot**, {year}",
-      "help": " \u2022 **/about** - Information about Parzibot\n \u2022 **/clear** `number` - Clear messages in current Text Channel\n \u2022 **/help** - The list of Parzibot basic commands\n \u2022 **/members** - Members of current Text Channel\n \u2022 **/ping** - Parzibot ping",
+      "help": "\u2022 **/about** - Information about Parzibot\n\u2022 **/clear** `number` - Clear messages in current Text Channel\n\u2022 **/help** - The list of Parzibot basic commands\n\u2022 **/members** - Members of current Text Channel\n\u2022 **/ping** - Parzibot ping",
       "clear": "Cleared **{number}** messages"
     }
   },
