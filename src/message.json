@@ -1,20 +1,47 @@
-[{
-	"basic": {
-		
-	},
-	"game": {
-
-	},
-	"music": {
-
-	},
-	"admin": {
-
-	},
-	"error": {
-
-	},
-	"event": {
-
-	}
-}]
+[
+  {
+    "basic":{
+      "titles":{
+        "about":"Parzibot // About",
+        "clear":"Parzibot // Clear",
+        "help":"Parzibot // Basic Commands",
+        "ping":"Parzibot // Ping",
+        "members":"Parzibot // Channel Members"
+      },
+      "descriptions":{
+        "about":"Information about Parzibot",
+        "clear":"Clear messages in Text Channel",
+        "clear-number":"Number of messages to be cleaned (Optional / Default 5)",
+        "help":"List of Parzibot basic commands",
+        "ping":"Parzibot ping",
+        "members":"Members of current Text Channel"
+      },
+      "message":{
+        "about":"**Parzibot** is free open-source project, created by **merive_**\nYou can find more information on [Parzibot Website](https://merive.herokuapp.com/Parzibot)\n**Parzibot**, {year}",
+        "clear":"Cleared **{number}** messages",
+        "help":" • **/about** - Information about Parzibot\n • **/clear** `number` - Clear messages in current Text Channel\n • **/help** - The list of Parzibot basic commands\n • **/members** - Members of current Text Channel\n • **/ping** - Parzibot ping",
+        "ping":"Ping is `{latency}ms`"
+      }
+    },
+    "game":{
+      
+    },
+    "music":{
+      
+    },
+    "admin":{
+      
+    },
+    "error":{
+      "titles":{
+        "error":"Parzibot // Error"
+      },
+      "messages":{
+        "error-clear":"Cannot clear **{number}** messages"
+      }
+    },
+    "event":{
+      
+    }
+  }
+]
