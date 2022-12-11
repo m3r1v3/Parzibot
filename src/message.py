@@ -65,7 +65,7 @@ class Message:
 
     @staticmethod
     async def mod_msg(ctx, title: str, description: str):
-        await ctx.send(file=discord.File("src/images/ParzibotAdmin.png", filename="ParzibotMod.png"),
+        await ctx.send(file=discord.File("src/images/ParzibotMod.png", filename="ParzibotMod.png"),
                        embed=Message().get_mod_embed(title, description))
 
     @staticmethod
