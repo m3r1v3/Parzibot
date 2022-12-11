@@ -57,7 +57,7 @@ class MusicCommands(commands.Cog):
             await voice.disconnect()
 
     @app_commands.command(name="play", description=Message.get_music_msg("descriptions", "play"))
-    @app_commands.describe(url=)
+    @app_commands.describe(url=Message.get_music_msg("descriptions", "play-url"))
     async def play(self, interaction: discord.Interaction, url: str):
         if isinstance(interaction.user.voice, type(None)):
             await Message.music_msg(ctx, Message.get_music_msg("titles", "connect"), Message.get_music_msg("messages", "connect")[0])
