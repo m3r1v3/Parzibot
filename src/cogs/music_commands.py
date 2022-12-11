@@ -203,7 +203,7 @@ class MusicCommands(commands.Cog):
             with youtube_dl.YoutubeDL({}) as ydl:
                 titles = [ydl.extract_info(song, download=False).get('title', None) for song in self.songs[:3]]
 
-            playlist = ''.join(f'• {title}\n' for title in titles)
+            playlist = ''.join(f'\u2022 {title}\n' for title in titles)
             if len(titles) >= 3: playlist = playlist + f'And {len(titles) - 2} more song(-s)'
             await Message.music_msg(ctx, Message.get_music_msg("titles", "playlist"), Message.get_music_msg("messages", "playlist")[1].format(count=len(self.songs), playlist=playlist))
         else: await Message.music_msg(ctx, Message.get_music_msg("titles", "playlist"), Message.get_music_msg("messages", "playlist")[0])
