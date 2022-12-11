@@ -66,7 +66,7 @@ class ModCommands(commands.Cog):
         ctx: commands.Context = await self.bot.get_context(interaction)
         if interaction.user.guild_permissions.manage_messages:
             await member.add_roles(role)
-            await Message.mod_msg(ctx, Message.get_mod_msg("titles", "giverole"), Message.get_mod_msg("messages", "role").format(role=role.name, member=member))
+            await Message.mod_msg(ctx, Message.get_mod_msg("titles", "giverole"), Message.get_mod_msg("messages", "giverole").format(role=role.name, member=member))
         else: await Message.error_msg(ctx, Message.get_error_msg("titles", "error"), Message.get_error_msg("messages", "error-mod"))
 
     @app_commands.command(name="nickname", description=Message.get_mod_msg("descriptions", "nickname"))

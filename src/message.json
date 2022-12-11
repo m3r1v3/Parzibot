@@ -121,7 +121,7 @@
       "defaultroleremove": "Remove default role what will be giving to new members of Server"
     },
     "messages": {
-      "help": "**Help Commands**\n• **/modhelp** - The list of Parzibot moderator commands\n\n**Announce Commands**\n• **/announce** `title` `message` - Make announce message in current Text Channel\n\n**Member Control Commands**\n• **/ban** `member` - Ban member on your Server\n• **/kick** `member` - Kick member on your Server\n• **/nickname** `member` `nickname` - Change nickname to Member on Server\n\n**Role Commands**\n• **/role** `name` `color` - Create role with default role permissions on Server\n• **/giverole** `member` `role` - Give role to Member on Server\n• **/defaultrole** `role` - Set default role what will be giving to new members of Server\n• **/defaultroleremove** - Remove default role what will be giving to new members of Server",
+      "help": "**Help Commands**\n• **/modhelp** - The list of Parzibot moderator commands\n\n**Announce Commands**\n• **/announce** `message` - Make announce message in current Text Channel\n\n**Member Control Commands**\n• **/ban** `member` - Ban member on your Server\n• **/kick** `member` - Kick member on your Server\n• **/nickname** `member` `nickname` - Change nickname to Member on Server\n\n**Role Commands**\n• **/role** `name` `color` - Create role with default role permissions on Server\n• **/giverole** `member` `role` - Give role to Member on Server\n• **/defaultrole** `role` - Set default role what will be giving to new members of Server\n• **/defaultroleremove** - Remove default role what will be giving to new members of Server",
       "ban": "**{member}** has been banned",
       "kick": "**{member}** has been kicked",
       "role": [
