@@ -89,9 +89,24 @@
     <p>
         In Parzibot Repository we're using the next version scheme - v<i>x.y.z</i>, where
         <table>
-            <tr><th>X</th><th>Major Update Version</th></tr>
-            <tr><td>Y</td><td>Minor Update Version</td></tr>
-            <tr><td>Z</td><td>Patch Update Version</td></tr>
+            <tr><th>X</th><th>Major Update Version (Global changes in root of project)</th></tr>
+            <tr><td>Y</td><td>Minor Update Version (Changes, what add big changes in project)</td></tr>
+            <tr><td>Z</td><td>Patch Update Version (Bug fix, typo fixes, etc.)</td></tr>
+        </table>
+    </p>
+</div>
+
+<div>
+    <h2>Environment Variables</h2>
+    <p>
+        In Parzibot Repository we're using some environment variables for correct work of Parzibot, where
+        <table>
+            <tr><th>BOT_TOKEN</th><th>Alphanumeric phrase that acts as the authorization code for the bot</th></tr>
+            <tr><td>DATABASE_URL</td><td>String that bot uses to connect to a database</td></tr>
+            <tr><td>BASIC_COMMANDS</td><td>Number that enables (1) or disables (0) Basic Commands</td></tr>
+            <tr><td>GAME_COMMANDS</td><td>Number that enables (1) or disables (0) Game Commands</td></tr>
+            <tr><td>MUSIC_COMMANDS</td><td>Number that enables (1) or disables (0) Music Commands</td></tr>
+            <tr><td>MOD_COMMANDS</td><td>Number that enables (1) or disables (0) Mod Commands</td></tr>
         </table>
     </p>
 </div>
@@ -101,6 +116,6 @@
 <div>
     <h2>More Inforamation on Website</h2>
     <p>
-        You can find more info on <a href="https://merive.herokuapp.com/Parzibot/">Parzibot</a> Website
+        You can find more info on <a href="https://merive.vercel.app/parzibot/">Parzibot</a> Website
     </p>
 </div>
