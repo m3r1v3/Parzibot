@@ -38,7 +38,7 @@ class Message:
 
     @staticmethod
     def get_music_msg(section, key):
-        return json.loads(open("src/message.json").read())["mod"][section][key]
+        return json.loads(open("src/message.json").read())["music"][section][key]
 
     @staticmethod
     def get_mod_msg(section, key):
