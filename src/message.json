@@ -87,7 +87,59 @@
     }
   },
   "music": {},
-  "admin": {},
+  "mod": {
+    "titles": {
+      "help": "Parzibot // Mod Commands",
+      "announce": "Parzibot // Announce",
+      "ban": "Parzibot // Ban",
+      "kick": "Parzibot // Kick",
+      "role": "Parzibot // Role",
+      "giverole": "Parzibot // Give Role",
+      "nickname": "Parzibot // Nickname Changed",
+      "defaultrole": "Parzibot // Default Role",
+      "defaultroleremove": "Parzibot // Default Role Remove"
+    },
+    "descriptions": {
+      "help": "The list of Parzibot moderator commands",
+      "announce": "Make announce message in current Text Channel",
+      "announce-message": "Text of announce message",
+      "ban": "Ban member on your Server",
+      "ban-member": "Member who will be banned",
+      "kick": "Kick member on your Server",
+      "kick-member": "Member who will be kicked",
+      "role": "Create role with default role permissions on Server",
+      "role-name": "Name of future role",
+      "role-color": "Role color code (hex color code)",
+      "giverole": "Give role to Member on Server",
+      "giverole-member": "Member who will receive Role",
+      "giverole-role": "Role that will be received by Member",
+      "nickname": "Change nickname to Member on Server",
+      "nickname-member": "Member to whom we will change nickname",
+      "nickname-nickname": "Member's future nickname",
+      "defaultrole": "Set default role what will be giving to new members of Server",
+      "defaultrole-role": "Role what will be set as default",
+      "defaultroleremove": "Remove default role what will be giving to new members of Server"
+    },
+    "messages": {
+      "help": "**Help Commands**\n• **/modhelp** - The list of Parzibot moderator commands\n\n**Announce Commands**\n• **/announce** `title` `message` - Make announce message in current Text Channel\n\n**Member Control Commands**\n• **/ban** `member` - Ban member on your Server\n• **/kick** `member` - Kick member on your Server\n• **/nickname** `member` `nickname` - Change nickname to Member on Server\n\n**Role Commands**\n• **/role** `name` `color` - Create role with default role permissions on Server\n• **/giverole** `member` `role` - Give role to Member on Server\n• **/defaultrole** `role` - Set default role what will be giving to new members of Server\n• **/defaultroleremove** - Remove default role what will be giving to new members of Server",
+      "ban": "**{member}** has been banned",
+      "kick": "**{member}** has been kicked",
+      "role": [
+        "**{name} Role** added on Server",
+        "Role hasn't set (**Default Role** should be set for using this command)"
+      ],
+      "giverole": "**{role} Role** has been given to **{member}**",
+      "nickname": "**{member}**'s nickname has been changed",
+      "defaultrole": [
+        "**Default Role** has been set ({role})",
+        "**Default Role** already had been set"
+      ],
+      "defaultroleremove": [
+        "**Default Role** has been removed",
+        "**Default Role** has not been installed (Default Role should be set for using this command)"
+      ]
+    }
+  },
   "event": {
     "titles": {
       "greeting": "Parzibot // Hey **{member}**!",
@@ -106,7 +158,8 @@
     },
     "messages": {
       "error": "Something went wrong! Try again",
-      "error-clear": "Cannot clear **{number}** messages"
+      "error-clear": "Cannot clear **{number}** messages",
+      "error-mod": "You doesn't have permissions for executing this command"
     }
   }
 }

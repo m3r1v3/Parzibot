@@ -30,8 +30,7 @@ class BasicCommands(commands.Cog):
             else:
                 await interaction.channel.purge(limit=count)
                 await Message.basic_msg(ctx, Message.get_basic_msg("titles", "clear"), Message.get_basic_msg("messages", "clear").format(number=count))
-        else:
-            await Message.error_msg(ctx, Message.get_error_msg("titles", "error"), Message.get_error_msg("messages", "error-clear").format(number=number))
+        else: await Message.error_msg(ctx, Message.get_error_msg("titles", "error"), Message.get_error_msg("messages", "error-clear").format(number=number))
 
     @app_commands.command(name="help", description=Message.get_basic_msg("descriptions", "help"))
     async def help(self, interaction: discord.Interaction):

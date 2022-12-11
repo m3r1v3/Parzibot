@@ -20,9 +20,9 @@ class Message:
         return Embed(title=title, description=description, color=Colour(0x68ff72)).set_thumbnail(
             url="attachment://ParzibotMusic.png")
 
-    def get_admin_embed(self, title: str, description: str):
+    def get_mod_embed(self, title: str, description: str):
         return Embed(title=title, description=description, color=Colour(0xffff68)).set_thumbnail(
-            url="attachment://ParzibotAdmin.png")
+            url="attachment://ParzibotMod.png")
 
     def get_error_embed(self, title: str, description: str):
         return Embed(title=title, description=description, color=Colour(0xff6868)).set_thumbnail(
@@ -35,6 +35,10 @@ class Message:
     @staticmethod
     def get_game_msg(section, key):
         return json.loads(open("src/message.json").read())["game"][section][key]
+
+    @staticmethod
+    def get_mod_msg(section, key):
+        return json.loads(open("src/message.json").read())["mod"][section][key]
 
     @staticmethod
     def get_event_msg(section, key):
@@ -60,9 +64,9 @@ class Message:
                        embed=Message().get_music_embed(title, description))
 
     @staticmethod
-    async def admin_msg(ctx, title: str, description: str):
-        await ctx.send(file=discord.File("src/images/ParzibotAdmin.png", filename="ParzibotAdmin.png"),
-                       embed=Message().get_admin_embed(title, description))
+    async def mod_msg(ctx, title: str, description: str):
+        await ctx.send(file=discord.File("src/images/ParzibotAdmin.png", filename="ParzibotMod.png"),
+                       embed=Message().get_mod_embed(title, description))
 
     @staticmethod
     async def error_msg(ctx, title: str, message: str):
