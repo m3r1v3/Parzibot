@@ -96,6 +96,8 @@
     </p>
 </div>
 
+<hr/>
+
 <div>
     <h2>Environment Variables</h2>
     <p>
