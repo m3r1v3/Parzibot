@@ -17,7 +17,7 @@ class BasicCommands(commands.Cog):
         self.bot = bot
 
     def get_version():
-        return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/link").text)["link"]
+        return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/version").text)["version"]
 
     def get_changelog():
         return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/changelog").text)["changelog"]
@@ -26,7 +26,7 @@ class BasicCommands(commands.Cog):
     async def about(self, interaction: discord.Interaction):
         ctx: commands.Context = await self.bot.get_context(interaction)
         await Message.basic_msg(ctx, Message.get_basic_msg("titles", "about"),
-            Message.get_basic_msg("messages", "about").format(year=datetime.datetime.now().year, changelog=get_changelog(), version=get_version()))
+            Message.get_basic_msg("messages", "about").format(year=datetime.datetime.now().year, changelog=BasicCommands.get_changelog(), version=BasicCommands.get_version()))
 
     @app_commands.command(name="clear", description=Message.get_basic_msg("descriptions", "clear"))
     @app_commands.describe(number=Message.get_basic_msg("descriptions", "clear-number"))
