@@ -105,6 +105,7 @@
         <table>
             <tr><th>BOT_TOKEN</th><th>Alphanumeric phrase that acts as the authorization code for the bot</th></tr>
             <tr><td>DATABASE_URL</td><td>String that bot uses to connect to a database</td></tr>
+            <tr><td>API_URL</td><td>Link on API of Parzibot</td></tr>
             <tr><td>BASIC_COMMANDS</td><td>Number that enables (1) or disables (0) Basic Commands</td></tr>
             <tr><td>GAME_COMMANDS</td><td>Number that enables (1) or disables (0) Game Commands</td></tr>
             <tr><td>MUSIC_COMMANDS</td><td>Number that enables (1) or disables (0) Music Commands</td></tr>

@@ -1,6 +1,9 @@
 import datetime
 import os
 
+import json
+import requests
+
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -13,10 +16,17 @@ class BasicCommands(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
 
+    def get_version():
+        return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/link").text)["link"]
+
+    def get_changelog():
+        return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/changelog").text)["changelog"]
+
     @app_commands.command(name="about", description=Message.get_basic_msg("descriptions", "about"))
     async def about(self, interaction: discord.Interaction):
         ctx: commands.Context = await self.bot.get_context(interaction)
-        await Message.basic_msg(ctx, Message.get_basic_msg("titles", "about"), Message.get_basic_msg("messages", "about").format(year=datetime.datetime.now().year))
+        await Message.basic_msg(ctx, Message.get_basic_msg("titles", "about"),
+            Message.get_basic_msg("messages", "about").format(year=datetime.datetime.now().year, changelog=get_changelog(), version=get_version()))
 
     @app_commands.command(name="clear", description=Message.get_basic_msg("descriptions", "clear"))
     @app_commands.describe(number=Message.get_basic_msg("descriptions", "clear-number"))
