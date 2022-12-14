@@ -24,7 +24,7 @@ class BasicCommands(commands.Cog):
         return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/version").text)["version"]
 
     def get_changelog():
-        return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/changelog").text)["changelog"]
+        return json.loads(requests.get(os.environ.get("API_URL") + "/parzibot/changelog").text)["changelog"].replace("\\n", "\n")
 
     @app_commands.command(name="about", description=Message.get_basic_msg("descriptions", "about"))
     async def about(self, interaction: discord.Interaction):
