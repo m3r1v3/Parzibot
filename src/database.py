@@ -22,19 +22,18 @@ class Role(Base):
 
     @staticmethod
     def add(role: str, server: str):
-        session.add(Role(id=random.randint(1, 2147483647), role=str(role), server=str(server)))
+        session.add(Role(id=random.randint(1, 2147483647), role=role, server=server))
         session.commit()
 
     @staticmethod
     def get_role(server: str):
         try:
-            return session.query(Role).filter_by(server=str(server)).first().role
-        except AttributeError:
-            return None
+            return session.query(Role).filter_by(server=server).first().role
+        except AttributeError: return None
 
     @staticmethod
     def delete(server: str):
-        session.delete(session.query(Role).filter_by(server=str(server)).first())
+        session.delete(session.query(Role).filter_by(server=server).first())
         session.commit()
 
     def __repr__(self):

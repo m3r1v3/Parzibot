@@ -15,20 +15,23 @@ class EventHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        await Message.basic_msg(member, f"Parzibot // Hey **{member}**!",
-                                "White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command")
+        await Message.basic_msg(member, Message.get_event_msg("titles", "greeting"), Message.get_event_msg("messages", "greeting-message"))
         await member.add_roles(discord.utils.get(member.guild.roles, id=int(Role().get_role(member.guild.id))))
 
     @commands.Cog.listener()
     async def on_member_update(self, before, after):
         if len(before.roles) < len(after.roles):
             for i in after.roles:
-                if i not in before.roles: await Message.basic_msg(before, "Parzibot // Received role",
-                                                                  f"You has been received **{i} Role**")
+                if i not in before.roles: 
+                    await Message.basic_msg(before, 
+                        Message.get_event_msg("titles", "receive"),
+                        Message.get_event_msg("messages", "receive-message").format(role=i))
         elif len(before.roles) > len(after.roles):
             for i in before.roles:
-                if i not in after.roles: await Message.basic_msg(before, "Parzibot // Deprived role",
-                                                                 f"You has been deprived **{i} Role**")
+                if i not in after.roles: 
+                    await Message.basic_msg(before,
+                        Message.get_event_msg("titles", "deprive"),
+                        Message.get_event_msg("messages", "deprive-message").format(role=i))
 
 
 async def setup(bot: commands.Bot) -> None:

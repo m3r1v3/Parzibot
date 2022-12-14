@@ -1,0 +1,255 @@
+{
+  "basic":{
+    "titles":{
+      "ping":"Parzibot // Ping",
+      "about":"Parzibot // About",
+      "members":"Parzibot // Channel Members",
+      "help":"Parzibot // Basic Commands",
+      "clear":"Parzibot // Clear"
+    },
+    "descriptions":{
+      "ping":"Parzibot ping",
+      "about":"Information about Parzibot",
+      "help":"List of Parzibot basic commands",
+      "clear-number":"Number of messages to be cleaned (Optional / Default 5)",
+      "members":"Members of current Text Channel",
+      "clear":"Clear messages in Text Channel"
+    },
+    "messages":{
+      "ping":"Ping is `{latency}ms`",
+      "about":"**Parzibot** is free open-source project, created by **merive_**\n\n**Changelog** ({version})\n{changelog}\n\nYou can find more information on [Parzibot Website](https://merive.vercel.app/parzibot)\n**Parzibot**, {year}",
+      "help":"\u2022 **/about** - Information about Parzibot\n\u2022 **/clear** `number` - Clear messages in current Text Channel\n\u2022 **/help** - The list of Parzibot basic commands\n\u2022 **/members** - Members of current Text Channel\n\u2022 **/ping** - Parzibot ping",
+      "clear":"Cleared **{number}** messages"
+    }
+  },
+  "game":{
+    "titles":{
+      "8ball":"Parzibot // The Ball of Predictions",
+      "coin":"Parzibot // Heads or Tails",
+      "dice":"Parzibot // The Dice",
+      "help":"Parzibot // Game Commands",
+      "gg":"Parzibot // GG",
+      "whiteblack":"Parzibot // White or Black"
+    },
+    "descriptions":{
+      "8ball":"The Ball of Predictions",
+      "8ball-question":"Your question to The Ball",
+      "coin":"The Heads or Tails Game",
+      "dice":"The Dice Game",
+      "dice-value":"The value what you're predicting (from 1 to 12)",
+      "help":"The list of Parzibot game commands",
+      "gg":"Advises to play a random game",
+      "whiteblack":"The White or Black Game",
+      "whiteblack-color":"The hidden color (White or Black)"
+    },
+    "messages":{
+      "8ball":"Question - **{question}**\nAnswer - **{answer}**",
+      "8ball-responses":[
+        "It is certain...",
+        "It is decidedly so...",
+        "Without a doubt...",
+        "Yes — definitely...",
+        "You may rely on it...",
+        "As I see it, yes...",
+        "Most likely...",
+        "Outlook good...",
+        "Signs point to yes...",
+        "Yes...",
+        "Reply hazy, try again...",
+        "Ask again later...",
+        "Better not tell you now...",
+        "Cannot predict now...",
+        "Concentrate and ask again...",
+        "Don’t count on it...",
+        "My reply is no...",
+        "My sources say no...",
+        "Outlook not so good...",
+        "Very doubtful..."
+      ],
+      "coin":"**{side}** has fell",
+      "dice-responses":[
+        "You won :D. The sum of values is **{v1 + v2}**. The values of dice is **{v1}** and **{v2}**",
+        "You guess value one of the dice :D The values of dice is **{v1}** and **{v2}**",
+        "You lose :( The values of dice is **{v1}** and **{v2}**",
+        "You're predicting wrong value. The value should be between 2 and 12"
+      ],
+      "help":"\u2022 **/8ball** `question` - The Ball of Predictions\n\u2022 **/coin** - The Heads or Tails Game\n\u2022 **/dice** `value` - The Dice Game\n\u2022 **/gamehelp** - The list of Parzibot game commands\n\u2022 **/gg** - Advises to play a random game\n\u2022 **/whiteblack** `color` - The White/Black Game",
+      "gg":"I advise you to play **{game}**",
+      "gg-responses":[
+        "Animal Crossing: New Horizons",
+        "Apex Legends",
+        "Assasin's Creed Valhalla",
+        "CS:GO",
+        "Call of Duty: Warzone",
+        "Control",
+        "Cyberpunk 2077",
+        "Dead by Daylight",
+        "Dota 2",
+        "Fall Guys",
+        "Fallout 76",
+        "Fortnite",
+        "Forza Horizon 4",
+        "GTA V",
+        "Genshin Impact",
+        "League of Legends",
+        "Minecraft",
+        "Overwatch",
+        "PUBG",
+        "RDR 2",
+        "Rainbow Six: Siege",
+        "Rocket League",
+        "Super Animal Royale",
+        "Terraria",
+        "The Elder Scrolls V: Skyrim",
+        "Valorant"
+      ],
+      "whiteblack":[
+        "You won :D Right color is **{color}**",
+        "You lose :( Right color is **{color}**"
+      ]
+    }
+  },
+  "music":{
+    "titles":{
+      "help":"Parzibot // Music Commands",
+      "connect":"Parzibot // Connect",
+      "disconnect":"Parzibot // Disconnect",
+      "play":"Parzibot // Play",
+      "replay":"Parzibot // Replay",
+      "pause":"Parzibot // Pause",
+      "resume":"Parzibot // Resume",
+      "repeat":"Parzibot // Repeat",
+      "playlist":"Parzibot // Playlist",
+      "playlistshuffle":"Parzibot // Shuffle"
+    },
+    "descriptions":{
+      "help":"The list of Parzibot music commands",
+      "connect":"Parzibot connects to Voice Channel",
+      "disconnect":"Parzibot disconnects from Voice Channel",
+      "play":"Play song in Voice Channel",
+      "play-url":"YouTube Video URL",
+      "replay":"Replay song in Voice Channel",
+      "pause":"Pause current song in Voice Channel",
+      "resume":"Resume current song in Voice Channel",
+      "repeat":"Enable/Disable current song repeating",
+      "next":"Play next song from Playlist",
+      "playlist":"Show number of songs and songs titles in Playlist",
+      "playlistadd":"Add song to Playlist",
+      "playlistclear":"Clear all songs from Playlist",
+      "playlistshuffle":"Enable/Disable Playlist shuffling"
+    },
+    "messages":{
+      "help":"**Help Commands**\n\u2022 **/musichelp** - The list of Parzibot music commands\n\n**Connect commands**\n\u2022 **/connect** - Parzibot connects to Voice Channel\n\u2022 **/disconnect** - Parzibot disconnects from Voice Channel\n\n**Playing commands**\n\u2022 **/play** `url` - Play song in Voice Channel\n\u2022 **/replay** - Replay song in Voice Channel\n\u2022 **/pause** - Pause current song in Voice Channel\n\u2022 **/resume** - Resume current song in Voice Channel\n\u2022 **/repeat** - Enable/Disable current song repeating\n\u2022 **/next** - Play next song from Playlist\n\n**Playlist commands**\n\u2022 **/playlist** - Show number of songs and songs titles in Playlist\n\u2022 **/playlistadd** `url` - Add song to Playlist\n\u2022 **/playlistclear** - Clear all songs from Playlist\n\u2022 **/playlistshuffle** - Enable/Disable Playlist shuffling",
+      "connect":[
+        "You're not connected to any **Voice Channel**",
+        "**Parzibot** has been connected to **Voice Channel**",
+        "**Parzibot** connected to another **Voice Channel**",
+        "**Parzibot** already connected to **Voice Channel**"
+      ],
+      "disconnect":[
+        "You're not connected to any **Voice Channel**",
+        "**Parzibot** isn't connected to **Voice Channel**",
+        "**Parzibot** connected to another **Voice Channel**",
+        "**Parzibot** has been disconnected from **Voice Channel**"
+      ],
+      "play":"**{title}** is playing now",
+      "pause":[
+        "**Song** has been paused",
+        "**Song** isn't playing right now"
+      ],
+      "resume":[
+        "**Song** has been resumed",
+        "**Song** isn't paused right now"
+      ],
+      "repeat":[
+        "**Song** repeating is enabled",
+        "**Song** repeating is disabled"
+      ],
+      "playlist":[
+        "**Playlist** is empty",
+        "**Playlist** contains about **{count}** song(-s)\n\n**Playlist**\n{playlist}",
+        "**{title}** added to **Playlist**",
+        "**Playlist** has been cleared"
+      ],
+      "playlistshuffle":[
+        "**Playlist** shuffling is enabled",
+        "**Playlist** shuffling is disabled"
+      ]
+    }
+  },
+  "mod":{
+    "titles":{
+      "help":"Parzibot // Mod Commands",
+      "announce":"Parzibot // Announce",
+      "ban":"Parzibot // Ban",
+      "kick":"Parzibot // Kick",
+      "role":"Parzibot // Role",
+      "giverole":"Parzibot // Give Role",
+      "nickname":"Parzibot // Nickname Changed",
+      "defaultrole":"Parzibot // Default Role",
+      "defaultroleremove":"Parzibot // Default Role Remove"
+    },
+    "descriptions":{
+      "help":"The list of Parzibot moderator commands",
+      "announce":"Make announce message in current Text Channel",
+      "announce-message":"Text of announce message",
+      "ban":"Ban member on your Server",
+      "ban-member":"Member who will be banned",
+      "kick":"Kick member on your Server",
+      "kick-member":"Member who will be kicked",
+      "role":"Create role with default role permissions on Server",
+      "role-name":"Name of future role",
+      "role-color":"Role color code (hex color code)",
+      "giverole":"Give role to Member on Server",
+      "giverole-member":"Member who will receive Role",
+      "giverole-role":"Role that will be received by Member",
+      "nickname":"Change nickname to Member on Server",
+      "nickname-member":"Member to whom we will change nickname",
+      "nickname-nickname":"Member's future nickname",
+      "defaultrole":"Set default role what will be giving to new members of Server",
+      "defaultrole-role":"Role what will be set as default",
+      "defaultroleremove":"Remove default role what will be giving to new members of Server"
+    },
+    "messages":{
+      "help":"**Help Commands**\n\u2022 **/modhelp** - The list of Parzibot moderator commands\n\n**Announce Commands**\n\u2022 **/announce** `message` - Make announce message in current Text Channel\n\n**Member Control Commands**\n\u2022 **/ban** `member` - Ban member on your Server\n\u2022 **/kick** `member` - Kick member on your Server\n\u2022 **/nickname** `member` `nickname` - Change nickname to Member on Server\n\n**Role Commands**\n\u2022 **/role** `name` `color` - Create role with default role permissions on Server\n\u2022 **/giverole** `member` `role` - Give role to Member on Server\n\u2022 **/defaultrole** `role` - Set default role what will be giving to new members of Server\n\u2022 **/defaultroleremove** - Remove default role what will be giving to new members of Server",
+      "ban":"**{member}** has been banned",
+      "kick":"**{member}** has been kicked",
+      "role":[
+        "**{name} Role** added on Server",
+        "Role hasn't set (**Default Role** should be set for using this command)"
+      ],
+      "giverole":"**{role} Role** has been given to **{member}**",
+      "nickname":"**{member}**'s nickname has been changed",
+      "defaultrole":[
+        "**Default Role** has been set ({role})",
+        "**Default Role** already had been set"
+      ],
+      "defaultroleremove":[
+        "**Default Role** has been removed",
+        "**Default Role** has not been installed (Default Role should be set for using this command)"
+      ]
+    }
+  },
+  "event":{
+    "titles":{
+      "greeting":"Parzibot // Hey **{member}**!",
+      "receive":"Parzibot // Received role",
+      "deprive":"Parzibot // Deprived role"
+    },
+    "messages":{
+      "greeting-message":"White **/help** to find out basic command, **/gamehelp** to find out game commands or **/musichelp** to find out music command",
+      "receive-message":"You has been received **{role} Role**",
+      "deprive-message":"You has been deprived **{role} Role**"
+    }
+  },
+  "error":{
+    "titles":{
+      "error":"Parzibot // Error"
+    },
+    "messages":{
+      "error":"Something went wrong! Try again",
+      "error-clear":"Cannot clear **{number}** messages",
+      "error-mod":"You doesn't have permissions for executing this command"
+    }
+  }
+}
