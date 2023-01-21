@@ -9,23 +9,23 @@ from discord.ext import commands
 class Message:
 
     def get_embed(self, title: str, description: str):
-        return Embed(title=title, description=description, color=Colour(0x68FFD9)).set_thumbnail(
+        return Embed(title=title, description=description, color=Colour(0x8ed9c6)).set_thumbnail(
             url="attachment://Parzibot.png")
 
     def get_games_embed(self, title: str, description: str):
-        return Embed(title=title, description=description, color=Colour(0x8168ff)).set_thumbnail(
+        return Embed(title=title, description=description, color=Colour(0x948ed9)).set_thumbnail(
             url="attachment://ParzibotGames.png")
 
     def get_music_embed(self, title: str, description: str):
-        return Embed(title=title, description=description, color=Colour(0x68ff72)).set_thumbnail(
+        return Embed(title=title, description=description, color=Colour(0xa1d98e)).set_thumbnail(
             url="attachment://ParzibotMusic.png")
 
     def get_mod_embed(self, title: str, description: str):
-        return Embed(title=title, description=description, color=Colour(0xffff68)).set_thumbnail(
+        return Embed(title=title, description=description, color=Colour(0xd9cd8e)).set_thumbnail(
             url="attachment://ParzibotMod.png")
 
     def get_error_embed(self, title: str, description: str):
-        return Embed(title=title, description=description, color=Colour(0xff6868)).set_thumbnail(
+        return Embed(title=title, description=description, color=Colour(0xd98e94)).set_thumbnail(
             url="attachment://ParzibotError.png")
 
     @staticmethod
