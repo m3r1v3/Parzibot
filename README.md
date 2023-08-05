@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/merive-inc/Parzibot/blob/main/assets/Parzibot.svg" width="64">
+    <img src="https://github.com/m3r1v3/Parzibot/blob/main/assets/Parzibot.svg" width="64">
     <h1 align="center">Parzibot</h1>
     <h2 align="center">Powerful and Useful Discord Bot on Python</h2>
     <p>
